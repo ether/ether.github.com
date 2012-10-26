@@ -70,15 +70,22 @@ div#header a.logo {
   width: 140px; height: 50px;
   margin: 10px 0;
 }
-div#header div#nav {
+div#header div#mobile-nav {
+  display: none; /* see below */
+}
+div#header div#nav,
+div#header div#mobile-nav {
   float: right;
   padding: 16px 0;
 }
-div#header div#nav li {
+div#header div#nav li,
+div#header div#mobile-nav li {
   display: inline-block;
 }
 div#header div#nav li a,
-div#header div#nav li a:active {
+div#header div#nav li a:active,
+div#header div#mobile-nav li a,
+div#header div#mobile-nav li a:active {
   -moz-transition: color 0.25s linear 0s;
   color: #fff;
   font-size: 0.6cm;
@@ -88,7 +95,9 @@ div#header div#nav li a:active {
 }
 
 div#header div#nav li a:hover,
-div#header div#nav li a:focus {
+div#header div#nav li a:focus,
+div#header div#mobile-nav li a:hover,
+div#header div#mobile-nav li a:focus {
   color: #5a5;
 }
 
@@ -264,7 +273,7 @@ div#footer {
 
 @media screen and (max-width: 19.5cm) {/* padding => 0.5cm; */
   .wrap {
-    width: 15cm;
+    width: 13.5cm;
   }
   
   div#header div#nav li a,
@@ -291,31 +300,36 @@ div#footer {
   }
 }
 
-@media screen and (max-width: 16.5cm) {/* padding => 0.5cm; */
+@media screen and (max-width: 15cm) {/* padding => 0.5cm; */
   .wrap {
     width: 8cm;
   }
   
   div#header {
-    height: 5.15cm;
+    height: 3.5cm;
   }
   
   a.scroll-point {
-    top: -5cm;
+    top: -2.5cm;
   }
   
   div#header + * {
-  padding-top: 5.5cm !important;
-}
+    padding-top: 4cm !important;
+  }
   
   div#header div#nav{
+    display: none;
+  }
+  
+  div#header div#mobile-nav {
+    display: block;
     padding-top: 0;
   }
   
-  div#header div#nav li a,
-  div#header div#nav li a:active {
-    font-size: 0.45cm;
-    padding: 10px;
+  div#header div#mobile-nav li a,
+  div#header div#mobile-nav li a:active {
+    font-size: 0.61cm;
+    padding: 12px;
   }
   
   div.showcase div#downloadbutton {
