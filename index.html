@@ -21,10 +21,26 @@ Thanks to Dave Gandy for his work on Font Awesome
 
 This iconic web font was used extensively around the site.
 -->
+
 <link rel="shortcut icon" href="favicon.ico" />
 <link type="text/css" rel="stylesheet" href="css/reset.css" />
 <link type="text/css" rel="stylesheet" href="css/font-awesome.css" />
 <link type="text/css" rel="stylesheet" href="css/index.css" />
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+$(function() {
+  /* jQuery awesome scroll */
+  var $html = $('html');
+  $('a[href^=#]').click(function(evt) {
+    var anchor = $(this).attr('href').substr(1);
+    var scrollPoint = anchor.length? $('[name='+anchor+']').position().top : 0;
+    $html.animate({scrollTop: scrollPoint}, 550);
+    evt.preventDefault();
+  })
+})
+</script>
+
 </head>
 <body>
   <div id="header">
