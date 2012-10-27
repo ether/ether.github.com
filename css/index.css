@@ -7,11 +7,11 @@
 /**/
 
 body {
-  font-family: Helvetica,Arial,sans-serif; /* Calibri,FreeSans,Tahoma, */
+  font-family: 'HelveticaNeue-Light',Helvetica,Arial,sans-serif; /* Calibri,FreeSans,Tahoma, */
 }
 
 h1,h2,h3,h4,h5,h6 {
-  font-family: Helvetica,Arial,sans-serif;
+  font-family: 'HelveticaNeue-Light',Helvetica,Arial,sans-serif;
   font-weight: normal;
   padding: 0.5cm 0;
 }
@@ -153,7 +153,7 @@ div.content {
   overflow: auto;
   
   background: none repeat scroll 0 0 #fff;
-  font-size: 0.5cm;
+  font-size: 0.485cm;
   line-height: 1.75;
 }
 
@@ -178,6 +178,7 @@ div.content a:hover {
 div.showcase {
   background: url('../img/linen.jpg');
   padding: 0.4cm 0;
+  font-size: 0.425cm
 }
 
 div.showcase h1 {
