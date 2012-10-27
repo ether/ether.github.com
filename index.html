@@ -38,6 +38,9 @@ $(function() {
     $html.animate({scrollTop: scrollPoint}, 550);
     evt.preventDefault();
   })
+  
+  /* Display chrome button, if javascript is disabled */
+  $('#paypal').hide()
 })
 </script>
 
@@ -114,6 +117,12 @@ $(function() {
       <li><a href="https://github.com/Pita/etherpad-lite/issues">Issue tracker<i class="icon-chevron-right"></i></a></li>
       <li><a href="https://github.com/Pita/etherpad-lite/wiki">Wiki<i class="icon-chevron-right"></i></a></li>
       <li><a href="#to-be-done--nothing-here-yet">Documentation<i class="icon-chevron-right"></i></a></li>
+      
+      <li></li>
+      
+      <li><a href="" onclick="document.getElementById('paypal').submit(); return false;">Donate on Paypal<img width="1" height="1" border="0" src="https://www.paypal.com/en_GB/i/scr/pixel.gif" alt=""><i class="icon-chevron-right"></i>
+      <form style="display:inline;" method="post" target="_blank" action="https://www.paypal.com/cgi-bin/webscr" id="paypal"><input type="hidden" value="_s-xclick" name="cmd"><input type="hidden" value="KD6H7D2V7Z8YQ" name="hosted_button_id"><input type="submit" value="Donate"/></form></a></li>
+      <li><a href="http://flattr.com/thing/71378/Etherpad-Foundation">Donate on flattr<i class="icon-chevron-right"></i></a></li>
     </ul>
   </div>
   
