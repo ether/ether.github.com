@@ -86,7 +86,7 @@ div#header div#nav li a,
 div#header div#nav li a:active,
 div#header div#mobile-nav li a,
 div#header div#mobile-nav li a:active {
-  -moz-transition: color 0.25s linear 0s;
+  transition: color 0.25s linear 0s;
   color: #fff;
   font-size: 0.6cm;
   line-height: 55px;
@@ -116,7 +116,7 @@ div#downloadbutton {
   padding: 0.7cm 20px 10px;
   margin: 0 15px 10px 0;
   
-  -moz-transition: background-color 0.25s linear 0s;
+  transition: background-color 0.25s linear 0s;
   background-color: #272;
   color: #fff;
   font-size: 0.35cm;
@@ -136,6 +136,11 @@ div#downloadbutton a:active {
 div#downloadbutton:hover,
 div#downloadbutton:focus {
   background-color: #050;
+}
+div#downloadbutton:active {
+  box-shadow: 2px 2px 3px #555555;
+  position: relative;
+  top: 1px; left: 1px;
 }
 div#downloadbutton a i.icon-download-alt{
   float: right;
