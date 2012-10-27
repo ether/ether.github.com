@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>HTTP API Etherpad-Lite Manual &amp; Documentation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="apidoc" id="api-section-http_api">
+  <header id="header">
+    <h1>Etherpad-Lite Manual &amp; Documentation</h1>
+  </header>
+
+  <div id="toc">
+    <h2>Table of Contents</h2>
+    <ul>
+<li><a href="#http_api_http_api">HTTP API</a><ul>
+<li><a href="#http_api_what_can_i_do_with_this_api">What can I do with this API?</a></li>
+<li><a href="#http_api_examples">Examples</a><ul>
+<li><a href="#http_api_example_1">Example 1</a></li>
+<li><a href="#http_api_example_2">Example 2</a></li>
+</ul>
+</li>
+<li><a href="#http_api_usage">Usage</a><ul>
+<li><a href="#http_api_request_format">Request Format</a></li>
+<li><a href="#http_api_response_format">Response Format</a></li>
+<li><a href="#http_api_overview">Overview</a></li>
+</ul>
+</li>
+<li><a href="#http_api_data_types">Data Types</a><ul>
+<li><a href="#http_api_authentication">Authentication</a></li>
+<li><a href="#http_api_node_interoperability">Node Interoperability</a></li>
+<li><a href="#http_api_jsonp">JSONP</a></li>
+</ul>
+</li>
+<li><a href="#http_api_api_methods">API Methods</a><ul>
+<li><a href="#http_api_groups">Groups</a></li>
+<li><a href="#http_api_author">Author</a></li>
+<li><a href="#http_api_session">Session</a></li>
+<li><a href="#http_api_pad_content">Pad Content</a></li>
+<li><a href="#http_api_pad">Pad</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+
+  <div id="apicontent">
+    <h1>HTTP API<span><a class="mark" href="#http_api_http_api" id="http_api_http_api">#</a></span></h1>
+<h2>What can I do with this API?<span><a class="mark" href="#http_api_what_can_i_do_with_this_api" id="http_api_what_can_i_do_with_this_api">#</a></span></h2>
+<p>The API gives another web application control of the pads. The basic functions are
+
+</p>
+<ul>
+<li>create/delete pads </li>
+<li>grant/forbid access to pads</li>
+<li>get/set pad content</li>
+</ul>
+<p>The API is designed in a way, so you can reuse your existing user system with their permissions, and map it to etherpad lite. Means: Your web application still has to do authentication, but you can tell etherpad lite via the api, which visitors should get which permissions. This allows etherpad lite to fit into any web application and extend it with real-time functionality. You can embed the pads via an iframe into your website.
+
+</p>
+<p>Take a look at <a href="https://github.com/Pita/etherpad-lite/wiki/HTTP-API-client-libraries">HTTP API client libraries</a> to see if a library in your favorite language.
+
+</p>
+<h2>Examples<span><a class="mark" href="#http_api_examples" id="http_api_examples">#</a></span></h2>
+<h3>Example 1<span><a class="mark" href="#http_api_example_1" id="http_api_example_1">#</a></span></h3>
+<p>A portal (such as WordPress) wants to give a user access to a new pad. Let&apos;s assume the user have the internal id 7 and his name is michael. 
+
+</p>
+<p>Portal maps the internal userid to an etherpad author. 
+
+</p>
+<blockquote>
+<p>Request: <code>http://pad.domain/api/1/createAuthorIfNotExistsFor?apikey=secret&amp;name=Michael&amp;authorMapper=7</code>
+
+</p>
+<p>Response: <code>{code: 0, message:&quot;ok&quot;, data: {authorID: &quot;a.s8oes9dhwrvt0zif&quot;}}</code>
+
+</p>
+</blockquote>
+<p>Portal maps the internal userid to an etherpad group:
+
+</p>
+<blockquote>
+<p>Request: <code>http://pad.domain/api/1/createGroupIfNotExistsFor?apikey=secret&amp;groupMapper=7</code>
+
+</p>
+<p>Response: <code>{code: 0, message:&quot;ok&quot;, data: {groupID: &quot;g.s8oes9dhwrvt0zif&quot;}}</code>
+
+</p>
+</blockquote>
+<p>Portal creates a pad in the userGroup
+
+</p>
+<blockquote>
+<p>Request: <code>http://pad.domain/api/1/createGroupPad?apikey=secret&amp;groupID=g.s8oes9dhwrvt0zif&amp;padName=samplePad&amp;text=This is the first sentence in the pad</code>
+
+</p>
+<p>Response: <code>{code: 0, message:&quot;ok&quot;, data: null}</code>
+
+</p>
+</blockquote>
+<p>Portal starts the session for the user on the group:
+
+</p>
+<blockquote>
+<p>Request: <code>http://pad.domain/api/1/createSession?apikey=secret&amp;groupID=g.s8oes9dhwrvt0zif&amp;authorID=a.s8oes9dhwrvt0zif&amp;validUntil=1312201246</code>
+
+</p>
+<p>Response: <code>{&quot;data&quot;:{&quot;sessionID&quot;: &quot;s.s8oes9dhwrvt0zif&quot;}}</code>
+
+</p>
+</blockquote>
+<p>Portal places the cookie &quot;sessionID&quot; with the given value on the client and creates an iframe including the pad.
+
+</p>
+<h3>Example 2<span><a class="mark" href="#http_api_example_2" id="http_api_example_2">#</a></span></h3>
+<p>A portal (such as WordPress) wants to transform the contents of a pad that multiple admins edited into a blog post.
+
+</p>
+<p>Portal retrieves the contents of the pad for entry into the db as a blog post:
+
+</p>
+<blockquote>
+<p>Request: <code>http://pad.domain/api/1/getText?apikey=secret&amp;padID=g.s8oes9dhwrvt0zif$123</code>
+
+</p>
+<p>Response: <code>{code: 0, message:&quot;ok&quot;, data: {text:&quot;Welcome Text&quot;}}</code>
+
+</p>
+</blockquote>
+<p>Portal submits content into new blog post
+
+</p>
+<blockquote>
+<p>Portal.AddNewBlog(content)
+
+
+</p>
+</blockquote>
+<h2>Usage<span><a class="mark" href="#http_api_usage" id="http_api_usage">#</a></span></h2>
+<h3>Request Format<span><a class="mark" href="#http_api_request_format" id="http_api_request_format">#</a></span></h3>
+<p>The API is accessible via HTTP. HTTP Requests are in the format /api/$APIVERSION/$FUNCTIONNAME. Parameters are transmitted via HTTP GET. $APIVERSION is 1
+
+</p>
+<h3>Response Format<span><a class="mark" href="#http_api_response_format" id="http_api_response_format">#</a></span></h3>
+<p>Responses are valid JSON in the following format:
+
+</p>
+<pre><code class="js">{
+  &quot;code&quot;: number,
+  &quot;message&quot;: string,
+  &quot;data&quot;: obj
+}</code></pre>
+<ul>
+<li><strong>code</strong> a return code<ul>
+<li><strong>0</strong> everything ok</li>
+<li><strong>1</strong> wrong parameters</li>
+<li><strong>2</strong> internal error</li>
+<li><strong>3</strong> no such function</li>
+<li><strong>4</strong> no or wrong API Key</li>
+</ul>
+</li>
+<li><strong>message</strong> a status message. Its ok if everything is fine, else it contains an error message</li>
+<li><strong>data</strong> the payload</li>
+</ul>
+<h3>Overview<span><a class="mark" href="#http_api_overview" id="http_api_overview">#</a></span></h3>
+<p><img src="http://i.imgur.com/d0nWp.png" alt="API Overview">
+
+</p>
+<h2>Data Types<span><a class="mark" href="#http_api_data_types" id="http_api_data_types">#</a></span></h2>
+<div class="signature"><ul>
+<li><strong>groupID</strong>  a string, the unique id of a group. Format is g.16RANDOMCHARS, for example g.s8oes9dhwrvt0zif</li>
+<li><strong>sessionID</strong> a string, the unique id of a session. Format is s.16RANDOMCHARS, for example s.s8oes9dhwrvt0zif</li>
+<li><strong>authorID</strong> a string, the unique id of an author. Format is a.16RANDOMCHARS, for example a.s8oes9dhwrvt0zif</li>
+<li><strong>readOnlyID</strong> a string, the unique id of an readonly relation to a pad. Format is r.16RANDOMCHARS, for example r.s8oes9dhwrvt0zif</li>
+<li><strong>padID</strong> a string, format is GROUPID$PADNAME, for example the pad test of group g.s8oes9dhwrvt0zif has padID g.s8oes9dhwrvt0zif$test</li>
+</div></ul>
+<h3>Authentication<span><a class="mark" href="#http_api_authentication" id="http_api_authentication">#</a></span></h3>
+<p>Authentication works via a token that is sent with each request as a post parameter.  There is a single token per Etherpad-Lite deployment.  This token will be random string, generated by Etherpad-Lite at the first start. It will be saved in APIKEY.txt in the root folder of Etherpad Lite. Only Etherpad Lite and the requesting application knows this key. Token management will not be exposed through this API. 
+
+</p>
+<h3>Node Interoperability<span><a class="mark" href="#http_api_node_interoperability" id="http_api_node_interoperability">#</a></span></h3>
+<p>All functions will also be available through a node module accessable from other node.js applications.
+
+</p>
+<h3>JSONP<span><a class="mark" href="#http_api_jsonp" id="http_api_jsonp">#</a></span></h3>
+<p>The API provides <em>JSONP</em> support to allow requests from a server in a different domain.
+Simply add <code>&amp;jsonp=?</code> to the API call.
+
+</p>
+<p>Example usage: <a href="http://api.jquery.com/jQuery.getJSON/">http://api.jquery.com/jQuery.getJSON/</a>
+
+</p>
+<h2>API Methods<span><a class="mark" href="#http_api_api_methods" id="http_api_api_methods">#</a></span></h2>
+<h3>Groups<span><a class="mark" href="#http_api_groups" id="http_api_groups">#</a></span></h3>
+<p>Pads can belong to a group. The padID of grouppads is starting with a groupID like g.asdfasdfasdfasdf$test
+
+</p>
+<ul>
+<li><strong>createGroup()</strong> creates a new group <br><br><em>Example returns:</em><ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {groupID: g.s8oes9dhwrvt0zif}}</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>createGroupIfNotExistsFor(groupMapper)</strong> this functions helps you to map your application group ids to etherpad lite group ids <br><br><em>Example returns:</em><ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {groupID: g.s8oes9dhwrvt0zif}}</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>deleteGroup(groupID)</strong> deletes a group <br><br><em>Example returns:</em><ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: null}</code></li>
+<li><code>{code: 1, message:&quot;groupID does not exist&quot;, data: null}</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>listPads(groupID)</strong> returns all pads of this group<br><br><em>Example returns:</em><ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {padIDs : [&quot;g.s8oes9dhwrvt0zif$test&quot;, &quot;g.s8oes9dhwrvt0zif$test2&quot;]}</code></li>
+<li><code>{code: 1, message:&quot;groupID does not exist&quot;, data: null}</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>createGroupPad(groupID, padName [, text])</strong> creates a new pad in this group <br><br><em>Example returns:</em><ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: null}</code></li>
+<li><code>{code: 1, message:&quot;pad does already exist&quot;, data: null}</code></li>
+<li><code>{code: 1, message:&quot;groupID does not exist&quot;, data: null}</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>listAllGroups()</strong> lists all existing groups<br><br><em>Example returns:</em><ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {groupIDs: [&quot;g.mKjkmnAbSMtCt8eL&quot;, &quot;g.3ADWx6sbGuAiUmCy&quot;]}}</code></li>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {groupIDs: []}}</code></li>
+</ul>
+</li>
+</ul>
+<h3>Author<span><a class="mark" href="#http_api_author" id="http_api_author">#</a></span></h3>
+<p>These authors are bound to the attributes the users choose (color and name). 
+
+</p>
+<ul>
+<li><strong>createAuthor([name])</strong> creates a new author <br><br><em>Example returns:</em><ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {authorID: &quot;a.s8oes9dhwrvt0zif&quot;}}</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>createAuthorIfNotExistsFor(authorMapper [, name])</strong> this functions helps you to map your application author ids to etherpad lite author ids <br><br><em>Example returns:</em><ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {authorID: &quot;a.s8oes9dhwrvt0zif&quot;}}</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>listPadsOfAuthor(authorID)</strong> returns an array of all pads this author contributed to<br><br><em>Example returns:</em><ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {padIDs: [&quot;g.s8oes9dhwrvt0zif$test&quot;, &quot;g.s8oejklhwrvt0zif$foo&quot;]}}</code></li>
+<li><code>{code: 1, message:&quot;authorID does not exist&quot;, data: null}</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>getAuthorName(authorID)</strong> Returns the Author Name of the author <br><br><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {authorName: &quot;John McLear&quot;}}</code></li>
+</ul>
+</li>
+<li><blockquote>
+<p>can&apos;t be deleted cause this would involve scanning all the pads where this author was</p>
+</blockquote>
+</li>
+</ul>
+<h3>Session<span><a class="mark" href="#http_api_session" id="http_api_session">#</a></span></h3>
+<p>Sessions can be created between a group and an author. This allows an author to access more than one group. The sessionID will be set as a cookie to the client and is valid until a certain date. The session cookie can also contain multiple comma-seperated sessionIDs, allowing a user to edit pads in different groups at the same time. Only users with a valid session for this group, can access group pads. You can create a session after you authenticated the user at your web application, to give them access to the pads. You should save the sessionID of this session and delete it after the user logged out.
+
+</p>
+<ul>
+<li><strong>createSession(groupID, authorID, validUntil)</strong> creates a new session. validUntil is an unix timestamp in seconds <br><br><em>Example returns:</em><ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {sessionID: &quot;s.s8oes9dhwrvt0zif&quot;}}</code></li>
+<li><code>{code: 1, message:&quot;groupID doesn&apos;t exist&quot;, data: null}</code></li>
+<li><code>{code: 1, message:&quot;authorID doesn&apos;t exist&quot;, data: null}</code></li>
+<li><code>{code: 1, message:&quot;validUntil is in the past&quot;, data: null}</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>deleteSession(sessionID)</strong> deletes a session <br><br><em>Example returns:</em><ul>
+<li><code>{code: 1, message:&quot;ok&quot;, data: null}</code></li>
+<li><code>{code: 1, message:&quot;sessionID does not exist&quot;, data: null}</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>getSessionInfo(sessionID)</strong> returns informations about a session <br><br><em>Example returns:</em><ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {authorID: &quot;a.s8oes9dhwrvt0zif&quot;, groupID: g.s8oes9dhwrvt0zif, validUntil: 1312201246}}</code></li>
+<li><code>{code: 1, message:&quot;sessionID does not exist&quot;, data: null}</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>listSessionsOfGroup(groupID)</strong> returns all sessions of a group <br><br><em>Example returns:</em><ul>
+<li><code>{&quot;code&quot;:0,&quot;message&quot;:&quot;ok&quot;,&quot;data&quot;:{&quot;s.oxf2ras6lvhv2132&quot;:{&quot;groupID&quot;:&quot;g.s8oes9dhwrvt0zif&quot;,&quot;authorID&quot;:&quot;a.akf8finncvomlqva&quot;,&quot;validUntil&quot;:2312905480}}}</code></li>
+<li><code>{code: 1, message:&quot;groupID does not exist&quot;, data: null}</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>listSessionsOfAuthor(authorID)</strong> returns all sessions of an author <br><br><em>Example returns:</em><ul>
+<li><code>{&quot;code&quot;:0,&quot;message&quot;:&quot;ok&quot;,&quot;data&quot;:{&quot;s.oxf2ras6lvhv2132&quot;:{&quot;groupID&quot;:&quot;g.s8oes9dhwrvt0zif&quot;,&quot;authorID&quot;:&quot;a.akf8finncvomlqva&quot;,&quot;validUntil&quot;:2312905480}}}</code></li>
+<li><code>{code: 1, message:&quot;authorID does not exist&quot;, data: null}</code></li>
+</ul>
+</li>
+</ul>
+<h3>Pad Content<span><a class="mark" href="#http_api_pad_content" id="http_api_pad_content">#</a></span></h3>
+<p>Pad content can be updated and retrieved through the API
+
+</p>
+<ul>
+<li><strong>getText(padID, [rev])</strong> returns the text of a pad <br><br><em>Example returns:</em><ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {text:&quot;Welcome Text&quot;}}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>setText(padID, text)</strong> sets the text of a pad <br><br><em>Example returns:</em><ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: null}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+<li><code>{code: 1, message:&quot;text too long&quot;, data: null}</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>getHTML(padID, [rev])</strong> returns the text of a pad formatted as HTML<br><br><em>Example returns:</em><ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {html:&quot;Welcome Text&lt;br&gt;More Text&quot;}}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+</ul>
+</li>
+</ul>
+<h3>Pad<span><a class="mark" href="#http_api_pad" id="http_api_pad">#</a></span></h3>
+<p>Group pads are normal pads, but with the name schema GROUPID$PADNAME. A security manager controls access of them and its forbidden for normal pads to include a $ in the name. 
+
+</p>
+<ul>
+<li><strong>createPad(padID [, text])</strong> creates a new (non-group) pad.  Note that if you need to create a group Pad, you should call <strong>createGroupPad</strong>.<br><br><em>Example returns:</em><ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: null}</code></li>
+<li><code>{code: 1, message:&quot;pad does already exist&quot;, data: null}</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>getRevisionsCount(padID)</strong> returns the number of revisions of this pad <br><br><em>Example returns:</em><ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {revisions: 56}}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>padUsersCount(padID)</strong> returns the number of user that are currently editing this pad <br><br><em>Example returns:</em><ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {padUsersCount: 5}}</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>padUsers(padID)</strong> returns the list of users that are currently editing this pad <br><br><em>Example returns:</em><ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {padUsers: [{colorId:&quot;#c1a9d9&quot;,&quot;name&quot;:&quot;username1&quot;,&quot;timestamp&quot;:1345228793126},{&quot;colorId&quot;:&quot;#d9a9cd&quot;,&quot;name&quot;:&quot;Hmmm&quot;,&quot;timestamp&quot;:1345228796042}]}}</code></li>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {padUsers: []}}</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>deletePad(padID)</strong> deletes a pad <br><br><em>Example returns:</em><ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: null}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>getReadOnlyID(padID)</strong> returns the read only link of a pad <br><br><em>Example returns:</em><ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {readOnlyID: &quot;r.s8oes9dhwrvt0zif&quot;}}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>setPublicStatus(padID, publicStatus)</strong> sets a boolean for the public status of a pad <br><br><em>Example returns:</em><ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: null}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>getPublicStatus(padID)</strong> return true of false <br><br><em>Example returns:</em><ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {publicStatus: true}}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>setPassword(padID, password)</strong> returns ok or a error message <br><br><em>Example returns:</em><ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: null}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>isPasswordProtected(padID)</strong> returns true or false <br><br><em>Example returns:</em><ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {passwordProtection: true}}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>listAuthorsOfPad(padID)</strong> returns an array of authors who contributed to this pad <br><br><em>Example returns:</em><ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {authorIDs : [&quot;a.s8oes9dhwrvt0zif&quot;, &quot;a.akf8finncvomlqva&quot;]}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>getLastEdited(padID)</strong> returns the timestamp of the last revision of the pad <br><br><em>Example returns:</em><ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {lastEdited: 1340815946602}}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>sendClientsMessage(padID, msg)</strong> sends a custom message of type <code>msg</code> to the pad <br><br><em>Example returns:</em><ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {}}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+
+</body>
+</html>
+

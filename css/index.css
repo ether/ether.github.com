@@ -36,6 +36,14 @@ h6 {
   font-size: 0.55cm;
 }
 
+small {
+  font-size: 0.5em;
+}
+big {
+  font-size: 1.5em;
+}
+
+
 /* middling everything */
 
 .wrap {
