@@ -196,6 +196,11 @@ div.showcase .feature  {
   height: 6.5cm;
 }
 
+div.showcase .feature>img {
+  width: 100%;
+  height: auto;
+}
+
 
 /* links */
 
@@ -253,9 +258,13 @@ div#footer {
     font-size: 0.6cm;
   }
   
-  div.showcase iframe.feature  {
+  div.showcase .feature  {
     width: 13cm;
     height: 8cm;
+  }
+  div.showcase .feature>img {
+    width: 100%;
+    height: auto;
   }
 }
 
@@ -271,7 +280,7 @@ div#footer {
   }
   
   div.showcase .feature  {
-    width: 8.2cm;
+    width: 8.3cm;
     height: 5.7cm;
   }
 }
@@ -292,8 +301,12 @@ div#footer {
   }
   
   div.showcase .feature  {
-    width: 8cm;
-    height: 5.5cm;
+    width: 6.4cm;
+    height: 3.9cm;
+  }
+  div.showcase .feature>img {
+    width: 100%;
+    height: auto;
   }
   
   div#downloadbutton a,
