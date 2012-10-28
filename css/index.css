@@ -96,8 +96,8 @@ div#header div#mobile-nav li a,
 div#header div#mobile-nav li a:active {
   transition: color 0.25s linear 0s;
   color: #fff;
-  font-size: 17pt;
-  line-height: 3.4pc;
+  font-size: 14pt;
+  line-height: 3.5pc;
   padding: 1pc;
   text-decoration: none;
 }
@@ -260,14 +260,14 @@ div#footer {
 -------------------------
 */
 
-@media screen and (min-width: 85pc) { /* padding => 0.5cm; */
+@media screen and (min-width: 87pc) {
   .wrap {
     width: 83pc;
   }
   
   div#header div#nav li a,
   div#header div#nav li a:active {
-    font-size: 17pt;
+    font-size: 15pt;
   }
   
   div.showcase .feature  {
@@ -280,32 +280,53 @@ div#footer {
   }
 }
 
-@media screen and (max-width: 64pc) {/* padding => 0.5cm; */
+@media screen and (max-width: 64pc) {
   .wrap {
     width: 42.5pc;
   }
   
   div#header div#nav li a,
   div#header div#nav li a:active {
-    font-size: 15pt;
     padding: 12pt 7.5pt;
   }
   
   div.showcase .feature  {
     width: 19.8pc;
-    height: 13.5pc;
+    height: 12.8pc;
+  }
+  div.showcase h1 {
+    font-size: 22pt;
+  }
+  
+  div#downloadbutton a,
+  div#downloadbutton a:active {
+    font-size: 17pt;
+  }
+  div#downloadbutton {
+    width: 15pc;
+    padding: 15pt 15pt 7.5pt;
   }
 }
 
-@media screen and (max-width: 46pc) {/* padding => 0.5cm; */
+@media screen and (max-width: 46pc) {
   .wrap {
     width: 32pc;
   }
   
+  div#header {
+    height:4.5pc;
+  }
+  a.scroll-point {
+    top: -4pc;
+  }
+  div#header + * {
+    padding-top: 5.8pc !important;
+  }
+  
   div#header div#nav li a,
   div#header div#nav li a:active {
-    font-size: 12.7pt;
-    padding: 12pt 3.75pt;
+    font-size: 12pt;
+    padding: 7.5pt 3.75pt;
   }
   
   div.showcase h1 {
@@ -327,12 +348,17 @@ div#footer {
   }
   div#downloadbutton {
     width: 15pc;
+    padding: 12pt 15pt 7.5pt;
   }
 }
 
-@media screen and (max-width: 35.5pc) {/* padding => 0.5cm; */
+/* Mobile view */
+@media screen and (max-width: 35.5pc) {
   .wrap {
-    width: 19pc;
+    width: auto;
+    min-width: 19pc;
+    max-width: 25pc;
+    margin: 0 4pc;
   }
   
   div#header {
