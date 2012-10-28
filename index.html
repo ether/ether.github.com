@@ -36,6 +36,7 @@ $(function() {
     var anchor = $(this).attr('href').substr(1);
     var scrollPoint = anchor.length? $('[name='+anchor+']').position().top : 0;
     $html.animate({scrollTop: scrollPoint}, 550);
+    document.location = '#'+anchor;
     evt.preventDefault();
   })
   
@@ -69,6 +70,7 @@ $(function() {
       </div>
     </div>
   </div>
+  <div class="header-pushdown"></div>
   <div class="content showcase">
     <div class="wrap">
       <div class="feature"><img src="img/screenshot.png" alt="" /></div>

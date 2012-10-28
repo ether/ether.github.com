@@ -81,8 +81,7 @@ div#header a.logo {
 div#header div#mobile-nav {
   display: none; /* see below */
 }
-div#header div#nav,
-div#header div#mobile-nav {
+div#header div#nav {
   float: right;
   padding: 1pc 0;
 }
@@ -109,9 +108,9 @@ div#header div#mobile-nav li a:focus {
   color: #5a5;
 }
 
-/* push anything right after the header */
-div#header + * {
-  padding-top: 7pc !important;
+/* push down anything right after the header */
+div#header + .header-pushdown {
+  padding-top: 5.5pc !important;
 }
 
 
@@ -188,7 +187,7 @@ div.content a:hover {
 
 div.showcase {
   background: url('../img/linen.jpg');
-  padding: 11pt 0;
+  padding: 3pc 0;
   font-size: 12pt;
 }
 
@@ -260,14 +259,18 @@ div#footer {
 -------------------------
 */
 
-@media screen and (min-width: 87pc) {
+@media screen and (min-width: 78pc) {
   .wrap {
-    width: 83pc;
+    width: 70pc;
   }
   
   div#header div#nav li a,
   div#header div#nav li a:active {
     font-size: 15pt;
+  }
+  
+  div.showcase {
+    padding: 5pc 0;
   }
   
   div.showcase .feature  {
@@ -280,9 +283,10 @@ div#footer {
   }
 }
 
-@media screen and (max-width: 64pc) {
+@media screen and (max-width: 65pc) {
   .wrap {
-    width: 42.5pc;
+    width: auto;
+    margin: 0 3pc;
   }
   
   div#header div#nav li a,
@@ -290,9 +294,11 @@ div#footer {
     padding: 12pt 7.5pt;
   }
   
+  div.showcase {
+    padding: 2.5pc 0;
+  }
   div.showcase .feature  {
-    width: 19.8pc;
-    height: 12.8pc;
+    width: 50%;
   }
   div.showcase h1 {
     font-size: 22pt;
@@ -308,9 +314,9 @@ div#footer {
   }
 }
 
-@media screen and (max-width: 46pc) {
+@media screen and (max-width: 48pc) {
   .wrap {
-    width: 32pc;
+    margin: 0 2pc;
   }
   
   div#header {
@@ -319,8 +325,8 @@ div#footer {
   a.scroll-point {
     top: -4pc;
   }
-  div#header + * {
-    padding-top: 5.8pc !important;
+  div#header + .header-pushdown {
+    padding-top: 4.5pc !important;
   }
   
   div#header div#nav li a,
@@ -329,13 +335,15 @@ div#footer {
     padding: 7.5pt 3.75pt;
   }
   
+  div.showcase {
+    padding: 3pc 0;
+  }
   div.showcase h1 {
     font-size: 20pt;
   }
-  
   div.showcase .feature  {
-    width: 15pc;
-    height: 9.2pc;
+    height: auto;
+    width: 50%;
   }
   div.showcase .feature>img {
     width: 100%;
@@ -347,7 +355,7 @@ div#footer {
     font-size: 17pt;
   }
   div#downloadbutton {
-    width: 15pc;
+    width: 17pc;
     padding: 12pt 15pt 7.5pt;
   }
 }
@@ -355,22 +363,23 @@ div#footer {
 /* Mobile view */
 @media screen and (max-width: 35.5pc) {
   .wrap {
-    width: auto;
     min-width: 19pc;
-    max-width: 25pc;
-    margin: 0 4pc;
+    margin: 0 2pc;
   }
   
   div#header {
     height: 8.2pc;
+  }
+  div#header a.logo {
+    float: none; /* force movile-nav to get wrapped to a new line*/
   }
   
   a.scroll-point {
     top: -6pc;
   }
   
-  div#header + * {
-    padding-top: 9.5pc !important;
+  div#header + .header-pushdown {
+    padding-top: 8.2pc !important;
   }
   
   div#header div#nav{
@@ -379,13 +388,18 @@ div#footer {
   
   div#header div#mobile-nav {
     display: block;
-    padding-top: 0;
+    padding-bottom: 1pc;
   }
   
   div#header div#mobile-nav li a,
   div#header div#mobile-nav li a:active {
     font-size: 17pt;
     padding:9pt;
+  }
+  
+  div.showcase .feature  {
+    height: auto;
+    width: 100%;
   }
   
   div.showcase div#downloadbutton {
