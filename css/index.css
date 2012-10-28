@@ -4,7 +4,7 @@
   vertical-align: middle;
 }
 
-/**/
+/* 1pc <- 0,423cm*/
 
 body {
   font-family: 'HelveticaNeue-Light',Helvetica,Arial,sans-serif; /* Calibri,FreeSans,Tahoma, */
@@ -13,27 +13,27 @@ body {
 h1,h2,h3,h4,h5,h6 {
   font-family: 'HelveticaNeue-Light',Helvetica,Arial,sans-serif;
   font-weight: normal;
-  padding: 0.5cm 0;
+  padding: 15pt 0;
 }
 
 h1 {
-  margin-top: 1cm;
-  font-size: 0.9cm;
+  margin-top: 28pt;
+  font-size: 25.5pt;
 }
 h2 {
-  font-size: 0.75cm;
+  font-size: 21pt;
 }
 h3 {
-  font-size: 0.7cm;
+  font-size: 19.5pt;
 }
 h4 {
-  font-size: 0.65cm;
+  font-size: 18.5pt;
 }
 h5 {
-  font-size: 0.6cm;
+  font-size: 17pt;
 }
 h6 {
-  font-size: 0.55cm;
+  font-size: 15.5pt;
 }
 
 small {
@@ -47,7 +47,7 @@ big {
 /* middling everything */
 
 .wrap {
-  width: 25.5cm;
+  width: 60pc;
   margin: 0 auto;
   position: relative;
 }
@@ -57,16 +57,16 @@ big {
 a.scroll-point {
   display: block;
   position: relative;
-  top: -2.3cm;
+  top: -5.4pc;
 }
 
 /* header */
 
 div#header {
   background: none repeat scroll 0 0 #333;
-  border-bottom: 3px solid #aaa;
+  border-bottom: 2.5pt solid #aaa;
   left: 0;
-  height: 2.3cm;
+  height: 5.4pc;
   position: fixed;
   right: 0;
   z-index: 10;
@@ -84,7 +84,7 @@ div#header div#mobile-nav {
 div#header div#nav,
 div#header div#mobile-nav {
   float: right;
-  padding: 16px 0;
+  padding: 1pc 0;
 }
 div#header div#nav li,
 div#header div#mobile-nav li {
@@ -96,9 +96,9 @@ div#header div#mobile-nav li a,
 div#header div#mobile-nav li a:active {
   transition: color 0.25s linear 0s;
   color: #fff;
-  font-size: 0.6cm;
-  line-height: 55px;
-  padding: 16px;
+  font-size: 17pt;
+  line-height: 3.4pc;
+  padding: 1pc;
   text-decoration: none;
 }
 
@@ -111,7 +111,7 @@ div#header div#mobile-nav li a:focus {
 
 /* push anything right after the header */
 div#header + * {
-  padding-top: 3cm !important;
+  padding-top: 7pc !important;
 }
 
 
@@ -120,24 +120,27 @@ div#header + * {
 div#downloadbutton {
   float: left;
   position: relative;
-  width: 8cm;
-  padding: 0.7cm 20px 10px;
-  margin: 0 15px 10px 0;
+  width: 19pc;
+  padding: 20pt 15pt 7.5pt;
+  margin: 0 11pt 7.5pt 0;
   
   transition: background-color 0.25s linear 0s;
   background-color: #272;
   color: #fff;
-  font-size: 0.35cm;
-  box-shadow: 3px 3px 3px #555555;
+  font-size: 10pt;
+  box-shadow: 2.5pt 2.5pt 1.5pt #555555;
 }
-div.showcase div#downloadbutton { float: right; margin: 15px;}
+div.showcase div#downloadbutton {
+  float: right;
+  margin: 11pt;
+}
 div#downloadbutton a,
 div#downloadbutton a:active {
   color: #fff;
   text-decoration: none;
-  font-size: 0.8cm;
+  font-size: 22.5pt;
   
-  padding: 3px 20px 0;
+  padding: 2.5pt 15pt 0;
   position: absolute;
   top:0; bottom:0; right:0; left:0;
 }
@@ -146,9 +149,9 @@ div#downloadbutton:focus {
   background-color: #050;
 }
 div#downloadbutton:active {
-  box-shadow: 2px 2px 3px #555555;
+  box-shadow: 1.5pt 1.5pt 2.5pt #555555;
   position: relative;
-  top: 1px; left: 1px;
+  top: 1.1pt; left: 1.1pt;
 }
 div#downloadbutton a i.icon-download-alt{
   float: right;
@@ -161,12 +164,12 @@ div.content {
   overflow: auto;
   
   background: none repeat scroll 0 0 #fff;
-  font-size: 0.485cm;
+  font-size: 13.75pt;
   line-height: 1.75;
 }
 
 div.content p {
-  margin-bottom: 0.4cm;
+  margin-bottom: 1pc;
 }
 
 div.content a,
@@ -185,24 +188,24 @@ div.content a:hover {
 
 div.showcase {
   background: url('../img/linen.jpg');
-  padding: 0.4cm 0;
-  font-size: 0.425cm
+  padding: 11pt 0;
+  font-size: 12pt;
 }
 
 div.showcase h1 {
   display: inline;
   line-height: 1.5;
-  padding: 2px;
-  font-size: 1cm;
+  padding: 1.5pt;
+  font-size: 28.3pt;
   background: #fff;
   color: #000;
 }
 
 div.showcase .feature  {
   float: left;
-  margin: 0 15px 10px 0;
-  width: 11cm;
-  height: 6.5cm;
+  margin: 0 11pt 7.5pt 0;
+  width: 26pc;
+  height: 15pc;
 }
 
 div.showcase .feature>img {
@@ -215,9 +218,9 @@ div.showcase .feature>img {
 
 ul.links li {
   display: block;
-  margin: 8px 0;
-  width: 12cm;
-  height: 1cm;
+  margin: 6pt 0;
+  width: 28.3pc;
+  height: 28.3pt;
 }
 
 ul.links li a [class^="icon-"] {
@@ -227,13 +230,13 @@ ul.links li a [class^="icon-"] {
   
   color: #fff;
   background-color: #5a5;
-  padding: 5px;
+  padding: 3.75pt;
 }
 ul.links li a,
 ul.links li a:active {
   display: block;
   position: relative;
-  padding: 5px;
+  padding: 3.75pt;
   -moz-transition: all 0.25s linear 0s;
   background-color: #fff;
   color: #000;
@@ -248,8 +251,8 @@ ul.links li a:focus {
 /* footer */
 
 div#footer {
-  padding-bottom: 40px;
-  padding-top: 60px;
+  padding-bottom: 30pt;
+  padding-top: 45pt;
   text-align: center;
 }
 
@@ -257,19 +260,19 @@ div#footer {
 -------------------------
 */
 
-@media screen and (min-width: 36cm) { /* padding => 0.5cm; */
+@media screen and (min-width: 85pc) { /* padding => 0.5cm; */
   .wrap {
-    width: 35cm;
+    width: 83pc;
   }
   
   div#header div#nav li a,
   div#header div#nav li a:active {
-    font-size: 0.6cm;
+    font-size: 17pt;
   }
   
   div.showcase .feature  {
-    width: 13cm;
-    height: 8cm;
+    width: 30.7pc;
+    height: 19pc;
   }
   div.showcase .feature>img {
     width: 100%;
@@ -277,41 +280,41 @@ div#footer {
   }
 }
 
-@media screen and (max-width: 27cm) {/* padding => 0.5cm; */
+@media screen and (max-width: 64pc) {/* padding => 0.5cm; */
   .wrap {
-    width: 18cm;
+    width: 42.5pc;
   }
   
   div#header div#nav li a,
   div#header div#nav li a:active {
-    font-size: 0.5cm;
-    padding: 16px 10px;
+    font-size: 15pt;
+    padding: 12pt 7.5pt;
   }
   
   div.showcase .feature  {
-    width: 8.3cm;
-    height: 5.7cm;
+    width: 20pc;
+    height: 13.5pc;
   }
 }
 
-@media screen and (max-width: 19.5cm) {/* padding => 0.5cm; */
+@media screen and (max-width: 46pc) {/* padding => 0.5cm; */
   .wrap {
-    width: 13.5cm;
+    width: 32pc;
   }
   
   div#header div#nav li a,
   div#header div#nav li a:active {
-    font-size: 0.45cm;
-    padding: 16px 5px;
+    font-size: 12.7pt;
+    padding: 12pt 3.75pt;
   }
   
   div.showcase h1 {
-    font-size: 0.7cm;
+    font-size: 20pt;
   }
   
   div.showcase .feature  {
-    width: 6.4cm;
-    height: 3.9cm;
+    width: 15pc;
+    height: 9.2pc;
   }
   div.showcase .feature>img {
     width: 100%;
@@ -320,28 +323,28 @@ div#footer {
   
   div#downloadbutton a,
   div#downloadbutton a:active {
-    font-size: 0.6cm;
+    font-size: 17pt;
   }
   div#downloadbutton {
-    width: 6.5cm;
+    width: 15pc;
   }
 }
 
-@media screen and (max-width: 15cm) {/* padding => 0.5cm; */
+@media screen and (max-width: 35.5pc) {/* padding => 0.5cm; */
   .wrap {
-    width: 8cm;
+    width: 19pc;
   }
   
   div#header {
-    height: 3.5cm;
+    height: 8.2pc;
   }
   
   a.scroll-point {
-    top: -2.5cm;
+    top: -6pc;
   }
   
   div#header + * {
-    padding-top: 4cm !important;
+    padding-top: 9.5pc !important;
   }
   
   div#header div#nav{
@@ -355,8 +358,8 @@ div#footer {
   
   div#header div#mobile-nav li a,
   div#header div#mobile-nav li a:active {
-    font-size: 0.61cm;
-    padding: 12px;
+    font-size: 17pt;
+    padding:9pt;
   }
   
   div.showcase div#downloadbutton {
@@ -364,11 +367,11 @@ div#footer {
     margin-left: 0;
   }
   div#downloadbutton {
-    width: 6.5cm;
+    width: 15pc;
   }
   
   ul.links li {
-    width: 8cm;
+    width: 19pc;
   }
 }
 
