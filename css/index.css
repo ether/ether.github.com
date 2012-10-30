@@ -172,6 +172,10 @@ div.content p {
   margin-bottom: 1pc;
 }
 
+div.content li {
+  margin-left: 1pc;
+}
+
 div.content a,
 div.content a:active {
   color: #272;
