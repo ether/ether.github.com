@@ -168,7 +168,8 @@ div.content {
   line-height: 1.75;
 }
 
-div.content p {
+div.content p,
+div.content ul {
   margin-bottom: 1pc;
 }
 
@@ -220,6 +221,10 @@ div.showcase .feature>img {
 
 /* links */
 
+ul.links {
+  margin-bottom: 0;
+}
+
 ul.links li {
   display: block;
   margin: 6pt 0;
@@ -255,8 +260,8 @@ ul.links li a:focus {
 /* footer */
 
 div#footer {
-  padding-bottom: 30pt;
-  padding-top: 45pt;
+  padding-bottom: 40pt;
+  padding-top: 60pt;
   text-align: center;
 }
 
