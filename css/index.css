@@ -225,6 +225,8 @@ div.showcase .feature  {
 div.showcase .feature>img {
   width: 100%;
   height: auto;
+  border: 0.5pt solid #777;
+  box-shadow: 1pt 1pt 3pt #777;
 }
 
 
