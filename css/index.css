@@ -208,16 +208,20 @@ div.showcase {
 
 div.showcase h1 {
   display: inline;
-  line-height: 1.5;
+  line-height: 1.45;
   padding: 1.5pt;
   font-size: 28.3pt;
   background: #fff;
   color: #000;
 }
+div.showcase h1>strong {
+  font-weight: 900;
+}
 
 div.showcase .feature  {
   float: left;
-  margin: 0 11pt 7.5pt 0;
+  margin-right: 11pt;
+  margin-bottom: 3pt;
   width: 26pc;
   height: 15pc;
 }
