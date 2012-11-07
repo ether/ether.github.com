@@ -202,8 +202,11 @@ div.content a:hover {
 
 div.showcase {
   background: url('../img/linen.jpg');
-  padding: 3pc 0;
+  padding: 2pc 0;
   font-size: 12pt;
+}
+div.primary.showcase {
+  padding: 5pc 0;
 }
 
 div.showcase h1 {
@@ -294,7 +297,7 @@ div#footer {
     font-size: 15pt;
   }
   
-  div.showcase {
+  div.primary.showcase {
     padding: 5pc 0;
   }
   
@@ -319,7 +322,7 @@ div#footer {
     padding: 12pt 7.5pt;
   }
   
-  div.showcase {
+  div.primary.showcase {
     padding: 2.5pc 0;
   }
   div.showcase .feature  {
@@ -360,7 +363,7 @@ div#footer {
     padding: 7.5pt 3.75pt;
   }
   
-  div.showcase {
+  div.primary.showcase {
     padding: 3pc 0;
   }
   div.showcase h1 {
