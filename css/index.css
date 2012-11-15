@@ -225,8 +225,8 @@ div.showcase .feature  {
   float: left;
   margin-right: 11pt;
   margin-bottom: 3pt;
-  width: 26pc;
-  height: 15pc;
+  width: 28.63pc;
+  height: auto;
 }
 
 div.showcase .feature>img {
@@ -302,8 +302,8 @@ div#footer {
   }
   
   div.showcase .feature  {
-    width: 30.7pc;
-    height: 19pc;
+    width: 31.8125pc;
+    height: auto;
   }
   div.showcase .feature>img {
     width: 100%;
