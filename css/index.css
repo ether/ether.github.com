@@ -204,6 +204,9 @@ div.showcase {
   background: url('../img/linen.jpg');
   padding: 2pc 0;
   font-size: 12pt;
+  -moz-box-shadow:    inset 0 0 10px #000000;
+  -webkit-box-shadow: inset 0 0 10px #000000;
+  box-shadow:         inset 0 0 10px #000000;
 }
 div.primary.showcase {
   padding: 5pc 0;
@@ -282,6 +285,10 @@ div#footer {
   padding-top: 60pt;
   text-align: center;
   line-height: 1.15;
+  background-color: #EBE8E9;
+  -moz-box-shadow:    inset 0 0 10px #000000;
+  -webkit-box-shadow: inset 0 0 10px #000000;
+  box-shadow:         inset 0 0 10px #000000;
 }
 
 /*
