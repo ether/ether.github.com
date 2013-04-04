@@ -281,11 +281,13 @@ ul.links li a:focus {
 /* footer */
 
 div#footer {
+  color: white;
   padding-bottom: 40pt;
   padding-top: 60pt;
   text-align: center;
   line-height: 1.15;
-  background-color: #EBE8E9;
+  background-color: #686860;
+  background-image: url("../img/linen-dark.png");
   -moz-box-shadow:    inset 0 0 10px #000000;
   -webkit-box-shadow: inset 0 0 10px #000000;
   box-shadow:         inset 0 0 10px #000000;
