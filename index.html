@@ -82,11 +82,12 @@ $(function() {
   <a class="scroll-point wrap" name="about"></a>
   <div class="content wrap">
     <h1><i class="icon-info-sign icon-large"></i> Collaborating in really real-time</h1>
-    <p>Etherpad allows you to edit documents collaboratively in real-time, much like a live multi-player online editor, allowing you to write articles, proposals, press releases and the like, together with your friends, your fellow students or your colleagues, working on the same document at the same time. It even supports rich text editing! Additionally, Etherpad provides access to all data through a well-documented HTTP API and supports import/export to many major data exchange formats. The built-in plugin system makes extending the core functionality a breeze, regardless of whether you're adding support for inserting images or videos or allowing users to collaborate on tables.</p>
+    <p>Etherpad allows you to edit documents collaboratively in real-time, much like a live multi-player editor that runs in your browser. Write articles, press releases, to-do lists, and the like together with your friends, your fellow students or your colleagues, all working on the same document at the same time. You no longer have to send your stuff back and forth via email, just set up a pad, share the link and start collaborating!</p>
     <iframe width="400" height="289" src="http://www.youtube.com/embed/X_SO7K6ef6g" frameborder="0" allowfullscreen style="float:right;margin:20px;"></iframe>
     <p>Try the <a href="http://beta.etherpad.org">live demo</a>!</p>
-    <p>The current version of Etherpad (previously known as Etherpad lite) is based entirely on node.js, allowing us to share code between the client and the server and taking advantage of node's non-blocking I/O. As a consequence, Etherpad-lite is much more lightweight and more stable (but not less complete!) than the original Etherpad. A smaller, manageable and well-documented code base makes it easier for developers to understand the code and improve the project with their contributions.</p>
-    <p></p>
+    <div id="downloadbutton"><a href="http://beta.etherpad.org"></a></i>Try it!</a></div>
+    <p>Additionally, Etherpad provides access to all data through a well-documented API and supports import/export to many major data exchange formats. And if the built-in feature set isn't enough for you, there's tons of plugins that allow you to customize your instance to suit your needs.</p>
+    <p>You don't need to set up a server and install Etherpad in order to use it. Just <a href="#links">pick</a> one of publicly available instances that friendly people from everywhere around the world have set up. Alternatively, you can set up your own instance by following our <a href="https://github.com/ether/etherpad-lite#installation">installation guide</a></p>
   </div>
   
   <a class="scroll-point wrap" name="download"></a>
@@ -123,6 +124,7 @@ $(function() {
       <li><a href="doc/v1.2.10/">Documentation <small>v1.2.10</small><i class="icon-chevron-right"></i></a></li>
       
       <li></li>
+      <li><a href="https://github.com/ether/etherpad-lite/wiki/Sites-that-run-Etherpad-Lite">List of public instances<i class="icon-chevron-right"></i></a></li>
       
       <li><a href="" onclick="document.getElementById('paypal').submit(); return false;">Donate on Paypal<img width="1" height="1" border="0" src="https://www.paypal.com/en_GB/i/scr/pixel.gif" alt=""><i class="icon-chevron-right"></i>
       <form style="display:inline;" method="post" target="_blank" action="https://www.paypal.com/cgi-bin/webscr" id="paypal"><input type="hidden" value="_s-xclick" name="cmd"><input type="hidden" value="KD6H7D2V7Z8YQ" name="hosted_button_id"><input type="submit" value="Donate"/></form></a></li>
