@@ -118,23 +118,28 @@ $(function() {
     <h1><i class="icon-external-link"></i> Links</h1>
   </div>
   <div class="content showcase">
-    <ul class="links wrap">
-      <li><a href="http://blog.etherpad.org" target="_blank">Blog<i class="icon-chevron-right"></i></a></li>
-      <li><a href="https://github.com/ether/etherpad-lite">GitHub repository<i class="icon-chevron-right"></i></a></li>
-      <li><a href="https://github.com/ether/etherpad-lite/issues">Issue tracker<i class="icon-chevron-right"></i></a></li>
-      <li><a href="https://github.com/ether/etherpad-lite/wiki">Wiki<i class="icon-chevron-right"></i></a></li>
-      <li><a href="doc/v1.2.10/">Documentation <small>v1.2.10</small><i class="icon-chevron-right"></i></a></li>
+    <div class="wrap">
+      <ul class="links column-2">
+        <li><a href="http://blog.etherpad.org" target="_blank">Blog<i class="icon-chevron-right"></i></a></li>
+        <li><a href="https://github.com/ether/etherpad-lite">GitHub repository<i class="icon-chevron-right"></i></a></li>
+        <li><a href="https://github.com/ether/etherpad-lite/wiki/Sites-that-run-Etherpad-Lite">List of public instances<i class="icon-chevron-right"></i></a></li>
+        
+        <li></li>
+        
+        <li><a href="https://github.com/ether/etherpad-lite/issues">Issue tracker<i class="icon-chevron-right"></i></a></li>
+        <li><a href="https://github.com/ether/etherpad-lite/wiki">Wiki<i class="icon-chevron-right"></i></a></li>
+        <li><a href="doc/v1.2.10/">Documentation <small>v1.2.10</small><i class="icon-chevron-right"></i></a></li>
+
+      </ul>
       
-      <li></li>
-      <li><a href="https://github.com/ether/etherpad-lite/wiki/Sites-that-run-Etherpad-Lite">List of public instances<i class="icon-chevron-right"></i></a></li>
-      <li></li>
+      <ul class="links column-2">
+        <li><a href="" onclick="document.getElementById('paypal').submit(); return false;">Donate on Paypal<img width="1" height="1" border="0" src="https://www.paypal.com/en_GB/i/scr/pixel.gif" alt=""><i class="icon-chevron-right"></i>
+        <form style="display:inline;" method="post" target="_blank" action="https://www.paypal.com/cgi-bin/webscr" id="paypal"><input type="hidden" value="_s-xclick" name="cmd"><input type="hidden" value="KD6H7D2V7Z8YQ" name="hosted_button_id"><input type="submit" value="Donate"/></form></a></li>
+        <li><a href="http://flattr.com/thing/71378/Etherpad-Foundation">Donate on flattr<i class="icon-chevron-right"></i></a></li>
+        <li><a target="_blank" href="https://coinbase.com/checkouts/1e572bf8a82e4663499f7f1f66c2d15a">Donate Bitcoins<i class="icon-chevron-right"></i></a></li>
 
-      <li><a href="" onclick="document.getElementById('paypal').submit(); return false;">Donate on Paypal<img width="1" height="1" border="0" src="https://www.paypal.com/en_GB/i/scr/pixel.gif" alt=""><i class="icon-chevron-right"></i>
-      <form style="display:inline;" method="post" target="_blank" action="https://www.paypal.com/cgi-bin/webscr" id="paypal"><input type="hidden" value="_s-xclick" name="cmd"><input type="hidden" value="KD6H7D2V7Z8YQ" name="hosted_button_id"><input type="submit" value="Donate"/></form></a></li>
-      <li><a href="http://flattr.com/thing/71378/Etherpad-Foundation">Donate on flattr<i class="icon-chevron-right"></i></a></li>
-      <li><a target="_blank" href="https://coinbase.com/checkouts/1e572bf8a82e4663499f7f1f66c2d15a">Donate Bitcoins<i class="icon-chevron-right"></i></a></li>
-
-    </ul>
+      </ul>
+    </div>
   </div>
 
   <a class="scroll-point wrap" name="contact"></a>

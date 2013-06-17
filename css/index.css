@@ -255,6 +255,12 @@ div.showcase .feature>img {
   box-shadow: 1pt 1pt 3pt #777;
 }
 
+div.showcase .column-2 {
+  float: left;
+  margin-right: 2.75%;
+  width: 28.3pc;
+}
+
 
 /* links */
 
@@ -265,8 +271,9 @@ ul.links {
 ul.links li {
   display: block;
   margin: 6pt 0;
-  width: 28.3pc;
+  width: 100%; max-width: 28.3pc;
   min-height: 28.3pt;
+  line-height: 1.75;
 }
 
 ul.links li a [class^="icon-"] {
@@ -332,6 +339,10 @@ div#footer {
   div.showcase .feature>img {
     width: 100%;
     height: auto;
+  }
+  
+  div.showcase .column-2 {
+    margin-right: 9%;
   }
 }
 
@@ -472,7 +483,7 @@ div#footer {
     max-width: 19pc;
   }
   
-  ul.links li {
+  div.showcase .column-2 {
     width: 100%;
   }
 }
