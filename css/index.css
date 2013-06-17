@@ -120,7 +120,7 @@ div#header div#mobile-nav li a:focus {
 
 /* push down anything right after the header */
 div#header + .header-pushdown {
-  padding-top: 5.5pc !important;
+  padding-top: 5.4pc !important; /* originally was 5.5pc, but that looked ugly with the inset shadows of .showcase*/
 }
 
 
