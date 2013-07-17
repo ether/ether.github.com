@@ -75,7 +75,7 @@ div#header {
   background: none repeat scroll 0 0 #fff;
   border-bottom: 1pt solid #aaa;
   left: 0;
-  height: 5.4pc;
+  height: 5.5pc;
   position: fixed;
   right: 0;
   z-index: 10;
@@ -94,7 +94,7 @@ div#header a.logo {
 }
 div#header a.logo:hover,
 div#header a.logo:focus {
-  background-color: #575;
+  background-color: #383;
 }
 div#header div#mobile-nav {
   display: none; /* see below */
@@ -323,7 +323,7 @@ div#footer {
 
 @media screen and (min-width: 78pc) {
   .wrap {
-    width: 70pc;
+    width: 69pc;
   }
   
   div#header div#nav li a,
@@ -386,7 +386,7 @@ div#footer {
   }
   
   div#header {
-    height:4.5pc;
+    height:5pc;
   }
   a.scroll-point {
     top: -4pc;
