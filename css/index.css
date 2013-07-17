@@ -13,24 +13,26 @@ body {
 h1,h2,h3,h4,h5,h6 {
   font-family: 'HelveticaNeue-Light',Helvetica,Arial,sans-serif;
   font-weight: normal;
-  margin: 15pt 0;
+  margin: 0;
+  margin-top: 15pt;
+  margin-bottom: 5pt;
 }
 
 h1 {
-  margin-top: 28pt;
+  margin-top: 3.5pc;
   font-size: 25.5pt;
 }
 h2 {
   font-size: 21pt;
 }
 h3 {
-  font-size: 19.5pt;
+  font-size: 19.3pt;
 }
 h4 {
   font-size: 18.5pt;
 }
 h5 {
-  font-size: 17pt;
+  font-size: 16.9pt;
 }
 h6 {
   font-size: 15.5pt;
@@ -111,7 +113,7 @@ div#header div#mobile-nav li a,
 div#header div#mobile-nav li a:active {
   transition: color 0.25s linear 0s;
   color: #555;
-  font-size: 14pt;
+  font-size: 13.1pt;
   line-height: 3.5pc;
   padding: 0 1pc;
   text-decoration: none;
@@ -143,7 +145,7 @@ div.button {
   background-color: #272;
   color: #fff !important;
   font-size: 10pt;
-  box-shadow: 2.5pt 2.5pt 1.5pt #555555;
+  box-shadow: 2.5pt 2.5pt 1.5pt #595959;
 }
 div.showcase div.button {
   float: right;
@@ -188,7 +190,7 @@ div.content {
   overflow: auto;
   
   background: none repeat scroll 0 0 #fff;
-  font-size: 13.75pt;
+  font-size: 13.1pt;
   line-height: 1.75;
 }
 
@@ -220,9 +222,9 @@ div.showcase {
   background: url('../img/linen.jpg');
   padding: 2pc 0;
   font-size: 12pt;
-  -moz-box-shadow:    inset 0 0 10px #000000;
-  -webkit-box-shadow: inset 0 0 10px #000000;
-  box-shadow:         inset 0 0 10px #000000;
+  -moz-box-shadow:    inset 0 0 1px #999;
+  -webkit-box-shadow: inset 0 0 1px #999;
+  box-shadow:         inset 0 0 1px #999;
 }
 div.primary.showcase {
   padding: 5pc 0;
@@ -242,7 +244,7 @@ div.showcase h1>strong {
 
 div.showcase .feature  {
   float: left;
-  margin-right: 11pt;
+  margin-right: 2.2pc;
   margin-bottom: 3pt;
   width: 28.63pc;
   height: auto;
@@ -304,14 +306,15 @@ ul.links li a:focus {
 /* footer */
 
 div#footer {
+  margin-top: 3pc;
   padding-bottom: 40pt;
   padding-top: 60pt;
-  text-align: center;
   line-height: 1.15;
-  background-color: #EBE8E9;
-  -moz-box-shadow:    inset 0 0 10px #000000;
-  -webkit-box-shadow: inset 0 0 10px #000000;
-  box-shadow:         inset 0 0 10px #000000;
+  font-size: 0.9em;
+  background-color: #EAE8E9;
+  -moz-box-shadow:    inset 0 0 1px #999;
+  -webkit-box-shadow: inset 0 0 1px #999;
+  box-shadow:         inset 0 0 1px #999;
 }
 
 /*
@@ -325,7 +328,7 @@ div#footer {
   
   div#header div#nav li a,
   div#header div#nav li a:active {
-    font-size: 15pt;
+    font-size: 13.1pt;
   }
   
   div.primary.showcase {
