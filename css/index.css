@@ -131,7 +131,6 @@ div#header + .header-pushdown {
   padding-top: 5.4pc !important; /* originally was 5.5pc, but that looked ugly with the inset shadows of .showcase*/
 }
 
-
 /* download button */
 
 div.button {
@@ -349,7 +348,7 @@ div#footer * {
   }
   
   div.showcase .column-2 {
-    margin-right: 9%;
+    margin-right: 8%;
   }
 }
 
