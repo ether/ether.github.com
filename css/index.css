@@ -66,7 +66,7 @@ big {
 a.scroll-point {
   display: block;
   position: relative;
-  top: -5.4pc;
+  top: -5.9pc;
 }
 
 /* header */
@@ -75,7 +75,7 @@ div#header {
   background: none repeat scroll 0 0 #fff;
   border-bottom: 1pt solid #aaa;
   left: 0;
-  height: 5.5pc;
+  height: 6pc;
   position: fixed;
   right: 0;
   z-index: 10;
@@ -323,10 +323,12 @@ div#footer a {
 }
 
 div#footer img.logo {
-  background-color: rgba(255, 255, 255, 0.4);
-  border-radius: 30px;
-  box-shadow: 0 0 10px #FFFFFF;
-  float: right;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 85px;
+    box-shadow: 0 0 10px #FFFFFF;
+    float:right;
+    padding: 10px;
+    margin-bottom; 5pc;
 }
 
 /*
@@ -358,6 +360,16 @@ div#footer img.logo {
   
   div.showcase .column-2 {
     margin-right: 8%;
+  }
+  
+  div#footer img.logo {
+    float: none;
+
+    height: 5pc;
+    padding: 45px;
+    position: absolute;
+    right: 0;
+    top: -32pt;
   }
 }
 
@@ -500,6 +512,10 @@ div#footer img.logo {
   
   div.showcase .column-2 {
     width: 100%;
+  }
+  
+  div#footer img.logo {
+    display: none;
   }
 }
 
