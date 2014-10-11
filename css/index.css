@@ -38,6 +38,9 @@ h6 {
   font-size: 15.5pt;
   line-height: 1.35em;
 }
+h1>i {
+  padding-left: 1px;
+}
 
 .subheading {
   padding-top: 0;
@@ -139,7 +142,7 @@ div.button {
   width: 19pc;
   padding: 20pt 15pt 7.5pt;
   margin: 0 11pt 7.5pt 0;
-  
+
   transition: background-color 0.25s linear 0s;
   background-color: #272;
   color: #fff !important;
@@ -155,7 +158,7 @@ div.button a:active {
   color: #fff !important;
   text-decoration: none;
   font-size: 22.5pt;
-  
+
   padding: 2.5pt 15pt 0;
   position: absolute;
   top:0; bottom:0; right:0; left:0;
@@ -187,7 +190,7 @@ div.button.small a {
 
 div.content {
   overflow: auto;
-  
+
   background: none repeat scroll 0 0 #fff;
   font-size: 13.1pt;
   line-height: 1.75;
@@ -281,7 +284,7 @@ ul.links li a [class^="icon-"] {
   display: block;
   position: absolute;
   top: 0; right: 0; bottom: 0;
-  
+
   color: #fff;
   background-color: #5a5;
   padding: 3.75pt;
@@ -339,16 +342,16 @@ div#footer img.logo {
   .wrap {
     width: 69pc;
   }
-  
+
   div#header div#nav li a,
   div#header div#nav li a:active {
     font-size: 13.1pt;
   }
-  
+
   div.primary.showcase {
     padding: 5pc 0;
   }
-  
+
   div.showcase .feature  {
     width: 31.8125pc;
     height: auto;
@@ -357,11 +360,11 @@ div#footer img.logo {
     width: 100%;
     height: auto;
   }
-  
+
   div.showcase .column-2 {
     margin-right: 8%;
   }
-  
+
   div#footer img.logo {
     float: none;
 
@@ -378,12 +381,12 @@ div#footer img.logo {
     width: auto;
     margin: 0 3pc;
   }
-  
+
   div#header div#nav li a,
   div#header div#nav li a:active {
     padding: 12pt 7.5pt;
   }
-  
+
   div.primary.showcase {
     padding: 2.5pc 0;
   }
@@ -393,7 +396,7 @@ div#footer img.logo {
   div.showcase h1 {
     font-size: 22pt;
   }
-  
+
   div.button a,
   div.button a:active {
     font-size: 17pt;
@@ -408,7 +411,7 @@ div#footer img.logo {
   .wrap {
     margin: 0 2pc;
   }
-  
+
   div#header {
     height:5pc;
   }
@@ -418,13 +421,13 @@ div#footer img.logo {
   div#header + .header-pushdown {
     padding-top: 4.5pc !important;
   }
-  
+
   div#header div#nav li a,
   div#header div#nav li a:active {
     font-size: 12pt;
     padding: 7.5pt 3.75pt;
   }
-  
+
   div.primary.showcase {
     padding: 3pc 0;
   }
@@ -439,7 +442,7 @@ div#footer img.logo {
     width: 100%;
     height: auto;
   }
-  
+
   div.button a,
   div.button a:active {
     font-size: 17pt;
@@ -463,11 +466,11 @@ div#footer img.logo {
   div#header div#nav {
     float: none; /* force movile-nav to get wrapped to a new line*/
   }
-  
+
   a.scroll-point {
     top: -5pc;
   }
-  
+
   div#header + .header-pushdown {
     padding-top: 7pc !important;
   }
@@ -477,11 +480,11 @@ div#footer img.logo {
   div#header .wrap {
     margin-right: 0;
   }
-  
+
   div#header div#nav{
     display: none;
   }
-  
+
   div#header div#mobile-nav {
     display: block;
     padding: 0.5pc 0;
@@ -495,12 +498,12 @@ div#footer img.logo {
     padding: 0;
     line-height: 2pc;
   }
-  
+
   div.showcase .feature  {
     height: auto;
     width: 100%;
   }
-  
+
   div.showcase div.button {
     float: left;
     margin-left: 0;
@@ -509,13 +512,12 @@ div#footer img.logo {
     width: 80%;
     max-width: 19pc;
   }
-  
+
   div.showcase .column-2 {
     width: 100%;
   }
-  
+
   div#footer img.logo {
     display: none;
   }
 }
-
