@@ -1,3 +1,5 @@
+// This script takes the npm cache and outputs etherpad plugins
+
 var npm = require("npm");
 
 /* 
