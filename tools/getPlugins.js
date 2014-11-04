@@ -24,6 +24,6 @@ npm.load({}, function (er) {
         // console.log("deleting", result);
       }
     };
-    console.log(plugins);
+    console.log(JSON.stringify(plugins));
   })
 });
