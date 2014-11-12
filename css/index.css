@@ -38,6 +38,9 @@ h6 {
   font-size: 15.5pt;
   line-height: 1.35em;
 }
+h1>i {
+  padding-left: 1px;
+}
 
 .subheading {
   padding-top: 0;
