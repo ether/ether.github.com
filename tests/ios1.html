@@ -1,6 +1,17 @@
 <html>
 <head>
 <style>
+* {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+input,
+textarea,
+[contenteditable] {
+    -webkit-user-select: text;
+    user-select: text;
+}
 #div1{
   -webkit-overflow-scrolling: touch;
   overflow-y: scroll;
