@@ -20,8 +20,8 @@ npm.load({}, function (er) {
     // console.log(results);
     for (result in results){
       // console.log(results[result].name.substring(0,3));
-      // Delete non plugins
-      if(results[result].name.substring(0,3) !== "ep_"){
+      // Delete non and unpublished plugins
+      if(results[result].name.substring(0,3) !== "ep_" || !results[result].description){
         delete plugins[result];
         // console.log("deleting", result);
       }
