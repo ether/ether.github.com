@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Editbar - Etherpad v1.5.4  Manual &amp; Documentation</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="apidoc" id="api-section-editbar">
+  <header id="header">
+    <h1>Etherpad v1.5.4  Manual &amp; Documentation</h1>
+  </header>
+
+  <div id="toc">
+    <h2>Table of Contents</h2>
+    <ul>
+<li><a href="#editbar_editbar">Editbar</a><ul>
+<li><a href="#editbar_isenabled">isEnabled()</a></li>
+<li><a href="#editbar_disable">disable()</a></li>
+<li><a href="#editbar_toggledropdown_dropdown_callback">toggleDropDown(dropdown, callback)</a></li>
+<li><a href="#editbar_registercommand_cmd_callback">registerCommand(cmd, callback)</a></li>
+<li><a href="#editbar_registeracecommand_cmd_callback">registerAceCommand(cmd, callback)</a></li>
+<li><a href="#editbar_registerdropdowncommand_cmd_dropdown">registerDropdownCommand(cmd, dropdown)</a></li>
+<li><a href="#editbar_triggercommand_cmd_item">triggerCommand(cmd[, item])</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+
+  <div id="apicontent">
+    <h1>Editbar<span><a class="mark" href="#editbar_editbar" id="editbar_editbar">#</a></span></h1>
+<p>srf/static/js/pad_editbar.js
+
+</p>
+<h2>isEnabled()<span><a class="mark" href="#editbar_isenabled" id="editbar_isenabled">#</a></span></h2>
+<h2>disable()<span><a class="mark" href="#editbar_disable" id="editbar_disable">#</a></span></h2>
+<h2>toggleDropDown(dropdown, callback)<span><a class="mark" href="#editbar_toggledropdown_dropdown_callback" id="editbar_toggledropdown_dropdown_callback">#</a></span></h2>
+<p>Shows the dropdown <code>div.popup</code> whose <code>id</code> equals <code>dropdown</code>.
+
+</p>
+<h2>registerCommand(cmd, callback)<span><a class="mark" href="#editbar_registercommand_cmd_callback" id="editbar_registercommand_cmd_callback">#</a></span></h2>
+<p>Register a handler for a specific command. Commands are fired if the corresponding button is clicked or the corresponding select is changed.
+
+</p>
+<h2>registerAceCommand(cmd, callback)<span><a class="mark" href="#editbar_registeracecommand_cmd_callback" id="editbar_registeracecommand_cmd_callback">#</a></span></h2>
+<p>Creates an ace callstack and calls the callback with an ace instance: <code>callback(cmd, ace)</code>.
+
+</p>
+<p>Example:
+</p>
+<pre><code>toolbar.registerAceCommand(&quot;insertorderedlist&quot;, function (cmd, ace) {
+  ace.ace_doInsertOrderedList();
+});</code></pre>
+<h2>registerDropdownCommand(cmd, dropdown)<span><a class="mark" href="#editbar_registerdropdowncommand_cmd_dropdown" id="editbar_registerdropdowncommand_cmd_dropdown">#</a></span></h2>
+<p>Ties a <code>div.popup</code> where <code>id</code> equals <code>dropdown</code> to a <code>command</code> fired by clicking a button.
+
+</p>
+<h2>triggerCommand(cmd[, item])<span><a class="mark" href="#editbar_triggercommand_cmd_item" id="editbar_triggercommand_cmd_item">#</a></span></h2>
+<p>Triggers a command (optionally with some internal representation of the toolbar item that triggered it).</p>
+
+  </div>
+
+</body>
+</html>
+
