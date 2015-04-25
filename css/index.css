@@ -152,6 +152,7 @@ div.button {
 div.showcase div.button {
   float: right;
   margin: 11pt;
+  clear: right;
 }
 div.button a,
 div.button a:active {
