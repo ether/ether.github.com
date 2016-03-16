@@ -305,8 +305,25 @@ ul.links li a:focus {
   color: #fff;
   background-color: #5a5;
 }
-ul.links li a.posttib {pointer-events: none;}
-ul.links li a.posttib [class^="icon-"]{background-color: #A7C7A7;}
+
+/* tibit */
+ul.links li.bd-tib-btn a {
+  cursor: pointer;
+}
+ul.links li.bd-tib-btn .posttib,
+ul.links li.bd-tib-btn.tibbed .pretib  {
+  display: none; 
+}
+ul.links li.bd-tib-btn.tibbed .posttib {
+  display: block;
+}
+ul.links li.bd-tib-btn.tibbed a {
+  pointer-events: none; 
+  cursor: auto;
+}
+ul.links li.bd-tib-btn.tibbed a [class^="icon-"]{
+  background-color: #A7C7A7;
+}
 
 /* footer */
 
