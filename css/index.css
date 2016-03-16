@@ -305,6 +305,8 @@ ul.links li a:focus {
   color: #fff;
   background-color: #5a5;
 }
+ul.links li a.posttib {pointer-events: none;}
+ul.links li a.posttib [class^="icon-"]{background-color: #A7C7A7;}
 
 /* footer */
 
