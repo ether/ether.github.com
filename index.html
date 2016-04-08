@@ -27,7 +27,13 @@ This iconic web font was used extensively around the site.
 <link type="text/css" rel="stylesheet" href="css/reset.css" />
 <link type="text/css" rel="stylesheet" href="css/font-awesome.css" />
 <link type="text/css" rel="stylesheet" href="css/index.css" />
-
+<script src='https://cdnjs.cloudflare.com/ajax/libs/script.js/2.5.8/script.min.js'></script>
+<script>
+  /* Initialising tibit */
+  $script('https://widget.tibdit.com/assets/js/tib-2.3.js', function() { 
+    tibInit( {'PAD' : '12kCgN2q24xd6ACcFZqsBa29veRqGKdMV5'});
+  }); 
+</script> 
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 $(function() {
@@ -39,11 +45,11 @@ $(function() {
     $html.animate({scrollTop: scrollPoint}, 550);
     document.location = '#'+anchor;
     evt.preventDefault();
-  })
+  });
   
   /* Display chrome button, if javascript is disabled */
-  $('#paypal').hide()
-})
+  $('#paypal').hide();
+});
 </script>
 <meta name="google-site-verification" content="bVuuj6GwPO2TG1ZmB67XFvKxM0YSMrQIw5rYcG5RwVw" />
 </head>
@@ -141,6 +147,10 @@ $(function() {
         <form style="display:inline;" method="post" target="_blank" action="https://www.paypal.com/cgi-bin/webscr" id="paypal"><input type="hidden" value="_s-xclick" name="cmd"><input type="hidden" value="KD6H7D2V7Z8YQ" name="hosted_button_id"><input type="submit" value="Donate"/></form></a></li>
         <li><a href="http://flattr.com/thing/71378/Etherpad-Foundation">Donate on flattr<i class="icon-chevron-right"></i></a></li>
         <li><a target="_blank" href="https://www.coinbase.com/checkouts/d7ccfc59bfe6c58f810009e6760551b6">Donate Bitcoins<i class="icon-chevron-right"></i></a></li>
+        <li class="bd-tib-btn" data-bd-SUB='website' data-bd-BTN="none" data-bd-TIB="etherpad.org"><a>
+          <span class="pretib">Show your appreciation with a tib</span>
+          <span class="posttib">We appreciate your tib</span><i class="icon-chevron-right"></i>
+        </a></li>
       </ul>
     </div>
   </div>
