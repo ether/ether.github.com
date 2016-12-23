@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Statistics - Etherpad v1.6.1  Manual &amp; Documentation</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="apidoc" id="api-section-stats">
+  <header id="header">
+    <h1>Etherpad v1.6.1  Manual &amp; Documentation</h1>
+  </header>
+
+  <div id="toc">
+    <h2>Table of Contents</h2>
+    <ul>
+<li><a href="#stats_statistics">Statistics</a></li>
+</ul>
+
+  </div>
+
+  <div id="apicontent">
+    <h1>Statistics<span><a class="mark" href="#stats_statistics" id="stats_statistics">#</a></span></h1>
+<p>Etherpad keeps track of the goings-on inside the edit machinery. If you&apos;d like to have a look at this, just point your browser to <code>/stats</code>.
+
+</p>
+<p>We currently measure:
+
+</p>
+<ul>
+<li>totalUsers (counter)</li>
+<li>connects (meter)</li>
+<li>disconnects (meter)</li>
+<li>pendingEdits (counter)</li>
+<li>edits (timer)</li>
+<li>failedChangesets (meter)</li>
+<li>httpRequests (timer)</li>
+<li>http500 (meter)</li>
+<li>memoryUsage (gauge)</li>
+</ul>
+<p>Under the hood, we are happy to rely on <a href="https://github.com/felixge/node-measured">measured</a> for all our metrics needs.
+
+</p>
+<p>To modify or simply access our stats in your plugin, simply <code>require(&apos;ep_etherpad-lite/stats&apos;)</code> which is a <code>measured.Collection</code>.</p>
+
+  </div>
+
+</body>
+</html>
+
