@@ -14,8 +14,6 @@ Thanks to Patrick Hoesly for his original artwork:
 
     http://www.flickr.com/photos/zooboing/4715048673/
 
-This fabulous linen texture was integrated into the site design.
-
 Thanks to Dave Gandy for his work on Font Awesome
 
     http://fortawesome.github.com/Font-Awesome
@@ -59,118 +57,136 @@ $(function() {
       </div>
       <div id="mobile-nav">
         <ul>
-          <li><a href="#about"><i class="icon-info-sign icon-large"></i></a></li>
-          <li><a href="#download"><i class="icon-download-alt"></i></a></li>
-          <li><a href="#contribute"><i class="icon-wrench"></i></a></li>
-          <li><a href="#links"><i class="icon-external-link"></i></a></li>
-          <li><a href="#contact"><i class="icon-envelope"></i></a></li>
+          <li><a href="#about"><i class="fa fa-info-circle large"></i></a></li>
+          <li><a href="#download"><i class="fa fa-download"></i></a></li>
+          <li><a href="#contribute"><i class="fa fa-wrench"></i></a></li>
+          <li><a href="#links"><i class="fa fa-external-link-square-alt"></i></a></li>
+          <li><a href="#contact"><i class="fa fa-envelope"></i></a></li>
        </ul>
       </div>
     </div>
   </div>
-  <div class="header-pushdown"></div>
-  <div class="content primary showcase">
-    <div class="wrap">
-      <div class="feature"><img src="img/screenshot.png" alt="" /></div>
-      <h1><strong>Etherpad</strong> is a highly customizable <strong>Open Source</strong> online editor providing collaborative editing in really <strong>real-time</strong>.</h1>
-      <div class="button"><a href="#download"><i class="icon-download-alt"></i>DOWNLOAD</a><br/><span>Version 1.8.0-beta.1</span></div>
+
+  <div class="main-container">
+
+    <div class="content primary showcase">
+      <div class="wrap">
+        <h1><strong>Etherpad</strong> is a highly customizable <strong>Open Source</strong> online editor providing collaborative editing in really <strong>real-time</strong>.</h1>
+      </div>
+
+      <div class="demo"><img src="img/etherpad_demo.gif" alt="" /></div>
+
+      <div class="button"><a href="#download"><i class="fa fa-download"></i>DOWNLOAD</a><br/><span>Version 1.8.0-beta.1</span></div>
     </div>
-  </div>
 
-  <a class="scroll-point wrap" name="about"></a>
-<div class="content wrap">
-    <h1><i class="icon-info-sign icon-large"></i> Collaborating in really real-time</h1>
+    <a class="scroll-point wrap" name="about"></a>
+    <div class="content wrap">
+      <h2>Collaborating in really real-time</h2>
 
-    <h5 class="subheading">No more sending your stuff back and forth via email, just set up a pad, share the link and start collaborating!</h5>
+      <h5 class="subheading">No more sending your stuff back and forth via email, just set up a pad, share the link and start collaborating!</h5>
 
-    <!-- <div class="button small" style="margin-bottom: 25pt; position:relative; top:-10pt;"><a target="_blank" href="https://beta.etherpad.org"><i class="icon-fire"></i>Try it now!</a><br></div> -->
+      <!-- <div class="button small" style="margin-bottom: 25pt; position:relative; top:-10pt;"><a target="_blank" href="https://beta.etherpad.org"><i class="fa fa-fire"></i>Try it now!</a><br></div> -->
 
-    <p>Etherpad allows you to edit documents collaboratively in real-time, much like a live multi-player editor that runs in your browser. Write articles, press releases, to-do lists, etc. together with your friends, fellow students or colleagues, all working on the same document at the same time.</p>
-    <p>All instances provide access to all data through a well-documented API and support import/export to many major data exchange formats. And if the built-in feature set isn't enough for you, there's tons of plugins that allow you to customize your instance to suit your needs.</p>
+      <p>Etherpad allows you to edit documents collaboratively in real-time, much like a live multi-player editor that runs in your browser. Write articles, press releases, to-do lists, etc. together with your friends, fellow students or colleagues, all working on the same document at the same time.</p>
+      <p>All instances provide access to all data through a well-documented API and support import/export to many major data exchange formats. And if the built-in feature set isn't enough for you, there's tons of plugins that allow you to customize your instance to suit your needs.</p>
 
-    <p>You don't need to set up a server and install Etherpad in order to use it. Just <a href="#links">pick</a> one of the publicly available instances that friendly people from everywhere around the world have set up. Alternatively, you can set up your own instance by following our <a href="https://github.com/ether/etherpad-lite#installation">installation guide</a>.</p>
-  </div>
+      <p>You don't need to set up a server and install Etherpad in order to use it. Just <a href="#links">pick</a> one of the publicly available instances that friendly people from everywhere around the world have set up. Alternatively, you can set up your own instance by following our <a href="https://github.com/ether/etherpad-lite#installation">installation guide</a>.</p>
+    </div>
 
-  <a class="scroll-point wrap" name="download"></a>
-  <div class="content wrap">
-    <h1><i class="icon-download-alt"></i> Download</h1>
-    <p>Also, see our <a href="https://github.com/ether/etherpad-lite#installation">installation instructions</a>.<p>
-    <div class="button"><a href="https://github.com/ether/etherpad-lite/archive/1.8.0-beta.1.zip"><i class="icon-download-alt"></i>Linux/Mac</a><br/><span>Version 1.8.0-beta.1</span></div>
-    <div class="button"><a href="https://etherpad.org/downloads/etherpad-lite-win-1.8.0-beta.1-503b11730c.zip"><i class="icon-download-alt"></i>Windows</a><br/><span>Version 1.8.0-beta.1</span></div>
-  </div>
+    <a class="scroll-point wrap" name="customize"></a>
+    <div class="content wrap">
+      <h2>Add Functionalities</h2>
+      Etherpad is very customizable through plugins. Instructions can be found in the <a href="https://github.com/ether/etherpad-lite/wiki/Available-Plugins" target="_blank">plugin wiki article</a>
+      <p class="full-features-demo">
+        <img src="img/etherpad_full_features.png"/>
+      </p>
+    </div>
 
-  <a class="scroll-point wrap" name="contribute"></a>
-  <div class="content wrap">
-    <h1><i class="icon-wrench"></i> Contribute</h1>
-    <p>Etherpad is an open source project. Lots of passionate, helpful individuals have joined and voluntarily contributed every single bit throughout this project: From this website through the documentation to the very core of the application. So, if you like Etherpad and would like to give back some love, we'd like to see <em>your</em> contributions! It doesn't matter how familiar you are with real-time applications, or whether you know how to write programs for Node.js. There are plenty of ways to be helpful!</p>
-    <p>One of the first things you should do is actually use Etherpad, and get to know it - read about it, evangelise it, and engage with the wider community. You can also translate the user interface to your mother tongue or learn how to write plugins. Be creative!</p>
-    <p>If you'd like to help, <a href="#contact">get in touch</a>! Also, <a href="https://github.com/ether/etherpad-lite/wiki">the wiki</a> is always a valuable resource.</p>
+    <a class="scroll-point wrap" name="download"></a>
+    <div class="content wrap">
+      <h2>Download Version 1.8.0-beta.1</h2>
+      <p>Also, see our <a href="https://github.com/ether/etherpad-lite#installation">installation instructions</a>.</p>
+      <a class="download-button" href="https://github.com/ether/etherpad-lite/archive/1.8.0-beta.1.zip"><i class="fa fa-download"></i>Linux/Mac</a>
+      <a class="download-button" href="https://etherpad.org/downloads/etherpad-lite-win-1.8.0-beta.1-503b11730c.zip"><i class="fa fa-download"></i>Windows</a>
+    </div>
 
-    <h5>Development workflow</h5>
-    <p>The main development happens on <a href="https://github.com/ether/etherpad-lite">GitHub</a>. To contribute, <a href="https://help.github.com/fork-a-repo/">fork</a> the <a href="https://github.com/ether/etherpad-lite">main repo</a>, branch off a <a href="https://www.google.com/search?q=git+feature+branches">feature branch</a> from <code>develop</code>, make your changes and <a href="https://git-scm.com/docs/git-commit">commit</a> them, <a href="https://git-scm.com/docs/git-push">push</a> to your fork and submit a <a href="https://help.github.com/send-pull-requests/">pull request</a> for <code>ether/develop</code>.</p>
-    <p>Once in a while we merge <code>develop</code> into <code>master</code>, which results in a new release. This means you will always find the latest stable version in the <code>master</code> branch.</p>
+    <a class="scroll-point wrap" name="contribute"></a>
+    <div class="content wrap">
+      <h2><i class="fa fa-wrench"></i> Contribute</h2>
+      <p>Etherpad is an open source project. Lots of passionate, helpful individuals have joined and voluntarily contributed every single bit throughout this project: From this website through the documentation to the very core of the application. So, if you like Etherpad and would like to give back some love, we'd like to see <em>your</em> contributions! It doesn't matter how familiar you are with real-time applications, or whether you know how to write programs for Node.js. There are plenty of ways to be helpful!</p>
+      <p>One of the first things you should do is actually use Etherpad, and get to know it - read about it, evangelise it, and engage with the wider community. You can also translate the user interface to your mother tongue or learn how to write plugins. Be creative!</p>
+      <p>If you'd like to help, <a href="#contact">get in touch</a>! Also, <a href="https://github.com/ether/etherpad-lite/wiki">the wiki</a> is always a valuable resource.</p>
 
-  </div>
+      <h5>Development workflow</h5>
+      <p>The main development happens on <a href="https://github.com/ether/etherpad-lite">GitHub</a>. To contribute, <a href="https://help.github.com/fork-a-repo/">fork</a> the <a href="https://github.com/ether/etherpad-lite">main repo</a>, branch off a <a href="https://www.google.com/search?q=git+feature+branches">feature branch</a> from <code>develop</code>, make your changes and <a href="https://git-scm.com/docs/git-commit">commit</a> them, <a href="https://git-scm.com/docs/git-push">push</a> to your fork and submit a <a href="https://help.github.com/send-pull-requests/">pull request</a> for <code>ether/develop</code>.</p>
+      <p>Once in a while we merge <code>develop</code> into <code>master</code>, which results in a new release. This means you will always find the latest stable version in the <code>master</code> branch.</p>
 
-  <a class="scroll-point wrap" name="links"></a>
-  <div class="content wrap">
-    <h1><i class="icon-external-link"></i> Links</h1>
-  </div>
-  <div class="content showcase">
-    <div class="wrap">
-      <ul class="links column-2">
-        <li><a href="https://blog.etherpad.org" target="_blank">Blog<i class="icon-chevron-right"></i></a></li>
-        <li><a href="https://github.com/ether/etherpad-lite">GitHub repository<i class="icon-chevron-right"></i></a></li>
-        <li><a href="https://github.com/ether/etherpad-lite/wiki/Sites-that-run-Etherpad-Lite">List of public instances<i class="icon-chevron-right"></i></a></li>
+    </div>
 
-        <li></li>
+    <div class="content wrap">
+      <h2><i class="fa fa-paint-brush"></i> Customize Apparence</h2>
+      <img class="skin-variant-demo" src="img/etherpad_skin_variants.gif"/>
+    </div>
 
-        <li><a href="https://github.com/ether/etherpad-lite/issues">Issue tracker<i class="icon-chevron-right"></i></a></li>
-        <li><a href="https://github.com/ether/etherpad-lite/wiki">Wiki<i class="icon-chevron-right"></i></a></li>
-        <li><a href="doc/v1.8.0-beta.1/">Documentation <small>v1.8.0-beta.1</small><i class="icon-chevron-right"></i></a></li>
+    <a class="scroll-point wrap" name="links"></a>
+    <div class="content wrap">
+      <h2><i class="fa fa-external-link-square-alt"></i> Links</h2>
+    </div>
+    <div class="content">
+      <div class="wrap">
+        <ul class="links">
+          <li><a href="https://blog.etherpad.org" target="_blank">Blog</a></li>
+          <li><a href="https://github.com/ether/etherpad-lite">GitHub repository</a></li>
+          <li><a href="https://github.com/ether/etherpad-lite/wiki/Sites-that-run-Etherpad-Lite">List of public instances</a></li>
+          <li><a href="https://github.com/ether/etherpad-lite/issues">Issue tracker</a></li>
+          <li><a href="https://github.com/ether/etherpad-lite/wiki">Wiki</a></li>
+          <li><a href="doc/v1.8.0-beta.1/">Documentation <small>v1.8.0-beta.1</small></a></li>
+        </ul>
+      </div>
+    </div>
 
+    <a class="scroll-point wrap" name="contact"></a>
+    <div class="content wrap">
+      <h2><i class="fa fa-envelope"></i> Get in touch</h2>
+    </div>
+    <div class="content">
+      <ul class="links wrap">
+        <li><a href="https://groups.google.com/group/etherpad-lite-dev">Mailing List</a></li>
+        <li><a href="https://webchat.freenode.net/?channels=#etherpad-lite-dev">IRC: #etherpad-lite-dev on freenode</a></li>
+        <li><a href="https://twitter.com/etherpadorg">Twitter: @EtherpadOrg</a></li>
       </ul>
     </div>
-  </div>
 
-  <a class="scroll-point wrap" name="contact"></a>
-  <div class="content wrap">
-    <h1><i class="icon-envelope"></i> Get in touch</h1>
-  </div>
-  <div class="content showcase">
-    <ul class="links wrap">
-      <li><a href="https://groups.google.com/group/etherpad-lite-dev">Mailing List<i class="icon-chevron-right"></i></a></li>
-      <li><a href="https://webchat.freenode.net/?channels=#etherpad-lite-dev">IRC: #etherpad-lite-dev on freenode<i class="icon-chevron-right"></i></a></li>
-      <li><a href="https://twitter.com/etherpadorg">Twitter: @EtherpadOrg<i class="icon-chevron-right"></i></a></li>
-    </ul>
-  </div>
+    <a class="scroll-point wrap" name="thanks"></a>
+    <div class="content wrap">
+      <h2><i class="fa fa-heart"></i> Thanks</h2>
+      <p>Many individuals, companies and organizations have contributed to Etherpad Lite. We'd like to thank them all!</p>
+      <ul>
+        <li><a href="https://primaryt.co.uk">Primary Technology</a> built Etherpad Lite in 2010 to build an educational product called <a href="https://primarypad.com">PrimaryPad</a></li>
+        <li><a href="https://mozilla.org">Mozilla</a> have made key contributions in nearly every area since 2012</li>
+        <li><a href="https://wikimedia.org">Wikimedia Foundation</a> as an early adopter of Etherpad Lite have contributed to various aspects of bug discovery and resolution</li>
+        <li><a href="https://google.com">Google</a> originally open-sourced the key libraries required to create Etherpad Lite after a purchase of Appjet</li>
+        <li><a href="https://www.piratpartiet.se/">PiratPartiet</a> have been vocal in promoting collaborative writing</li>
+        <li><a href="https://sfconservancy.org/">Software Freedom Conservancy</a> helps promote, improve, develop, and defend Free, Libre, and Open Source Software (FLOSS) projects. </li>
+        <li><a href="https://www.citizenos.com">CitizenOS</a> provide a tool for Collaborative decisions for teams and communities.</li>
+      </ul>
+      <p>Additionally, our thanks go out to the tens of thousands of developers and organizations who have created all the modules we depend on or contributed in some way to our ability to provide Etherpad Lite as open source.</p>
+      <p>We'd also like to thank you. You, who've been making Etherpad Lite what it is, if you've been developing awesome features or plugins, whether you're runnning an instance or you're just one of our diligent users.</p>
+      <p>Thank you!</p>
+    </div>
 
-  <a class="scroll-point wrap" name="thanks"></a>
-  <div class="content wrap">
-    <h1><i class="icon-heart"></i> Thanks</h1>
-    <p>Many individuals, companies and organizations have contributed to Etherpad Lite. We'd like to thank them all!</p>
-    <ul>
-      <li><a href="https://primaryt.co.uk">Primary Technology</a> built Etherpad Lite in 2010 to build an educational product called <a href="https://primarypad.com">PrimaryPad</a></li>
-      <li><a href="https://mozilla.org">Mozilla</a> have made key contributions in nearly every area since 2012</li>
-      <li><a href="https://wikimedia.org">Wikimedia Foundation</a> as an early adopter of Etherpad Lite have contributed to various aspects of bug discovery and resolution</li>
-      <li><a href="https://google.com">Google</a> originally open-sourced the key libraries required to create Etherpad Lite after a purchase of Appjet</li>
-      <li><a href="https://www.piratpartiet.se/">PiratPartiet</a> have been vocal in promoting collaborative writing</li>
-      <li><a href="https://sfconservancy.org/">Software Freedom Conservancy</a> helps promote, improve, develop, and defend Free, Libre, and Open Source Software (FLOSS) projects. </li>
-      <li><a href="https://www.citizenos.com">CitizenOS</a> provide a tool for Collaborative decisions for teams and communities.</li>
-    </ul>
-    <p>Additionally, our thanks go out to the tens of thousands of developers and organizations who have created all the modules we depend on or contributed in some way to our ability to provide Etherpad Lite as open source.</p>
-    <p>We'd also like to thank you. You, who've been making Etherpad Lite what it is, if you've been developing awesome features or plugins, whether you're runnning an instance or you're just one of our diligent users.</p>
-    <p>Thank you!</p>
-  </div>
+    <div id="footer">
+      <div class="wrap">
 
-  <div id="footer">
-  <div class="wrap">
-    <p><img class="logo" src="img/logo.svg"/></p>
-    <p>Copyright &copy; The&nbsp;Etherpad&nbsp;Foundation.</p>
-    <p>Design &copy; The Apache Software Foundation, adapted by Marcel Klehr — Licensed under the <a rel="license" href="https://www.apache.org/licenses/LICENSE-2.0
-">Apache License 2.0</a></p>
-    <p>The Etherpad logos by <span xmlns:cc="https://creativecommons.org/ns#" property="cc:attributionName">Marcel Klehr</span> are licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.</p>
-  </div>
+        <div class="footer-content">
+          <p>Copyright &copy; The&nbsp;Etherpad&nbsp;Foundation.</p>
+          <p>Design &copy; The Apache Software Foundation, adapted by Marcel Klehr — Licensed under the <a rel="license" href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a></p>
+          <p>The Etherpad logos by <span xmlns:cc="https://creativecommons.org/ns#" property="cc:attributionName">Marcel Klehr</span> are licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.</p>
+        </div>
+
+        <img class="logo" src="img/logo.svg"/>
+      </div>
+    </div>
   </div>
 
 <script type="text/javascript">
