@@ -162,6 +162,15 @@ div.content a:hover {
   color: #65d09b;
 }
 
+.highlight {
+  background-color: #f0f2f2;
+  padding: 3rem 0 4rem 0;
+  margin-top: 3rem;
+}
+.highlight h2 {
+  margin-top: 0;
+}
+
 
 /* show case */
 
