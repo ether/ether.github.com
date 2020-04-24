@@ -18,6 +18,7 @@ html, body {
   color: #313b4a;
   height: 100%;
   width: 100%;
+  font-size: 17px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -26,20 +27,20 @@ html, body {
 h1,h2,h3,h4,h5,h6 {
   font-weight: normal;
   margin: 0;
-  margin-top: 15pt;
-  margin-bottom: 5pt;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 h1 {
-  margin-top: 3.5pc;
-  font-size: 25.5pt;
+  margin-top: 4rem;
+  font-size: 2.1rem;
 }
 h2 {
-  font-size: 28pt;
+  font-size: 2rem;
   color: #65d09b;
   font-weight: bold;
-  margin-bottom: 10pt;
-  margin-top: 55pt;
+  margin-bottom: 1rem;
+  margin-top: 4rem;
   display: flex;
   align-items: center;
 }
@@ -47,47 +48,26 @@ h2 i {
   font-size: .8em;
   margin-right: 1rem;
 }
-h3 {
-  font-size: 19.3pt;
-}
-h4 {
-  font-size: 18.5pt;
-}
 h5 {
-  font-size: 15pt;
+  font-size: 1.2rem;
   font-weight: bold;
-  margin-bottom: 15pt;
-}
-h6 {
-  font-size: 15.5pt;
-  line-height: 1.35em;
-}
-h1>i {
-  padding-left: 1px;
+  margin-bottom: 1.2rem;
 }
 
 small {
-  font-size: 0.5em;
-}
-big {
-  font-size: 1.5em;
+  font-size: 0.7em;
 }
 
 
 /* middling everything */
 
 .wrap {
-  width: 60pc;
+  width: 100%;
+  max-width: 1000px;
+  box-sizing: border-box;
+  padding: 0 1rem;
   margin: 0 auto;
   position: relative;
-}
-
-/* scroll points */
-
-a.scroll-point {
-  display: block;
-  position: relative;
-  top: -5.9pc;
 }
 
 /* header */
@@ -95,43 +75,52 @@ a.scroll-point {
 div#header {
   background-color: white;
   border-bottom: 1pt solid #efefef;
-  height: 6pc;
+  padding: 1rem;
 }
-div#header .wrap {
-  padding-top: 1pc;
-}
-div#header a.logo {
+#header .logo {
   background: url("../img/brand.png") no-repeat scroll 0 0 #555;
   transition: background-color .1s;
   display: block;
   float: left;
-  width: 140px; height: 50px;
-  margin-left: 6pt;
+  width: 140px;
+  height: 50px;
+  background-size: cover;
+}
+#header .wrap {
+  display: flex;
+  align-items: center;
 }
 div#header a.logo:hover,
 div#header a.logo:focus {
   background-color: #65d09b;
 }
-div#header div#mobile-nav {
-  display: none; /* see below */
+#header #mobile-nav {
+  display: none;
 }
-div#header div#nav {
-  float: right;
-  padding: 0.5pc 0;
+#header #mobile-nav,
+#header #nav {
+  flex: 1 auto;
+  text-align: right;
 }
 div#header div#nav li,
 div#header div#mobile-nav li {
   display: inline-block;
 }
 div#header div#nav li a,
-div#header div#nav li a:active,
+div#header div#nav li a:active {
+  transition: color .1s;
+  color: #555;
+  font-size: 1rem;
+  line-height: 2rem;
+  padding: 0 1pc;
+  text-decoration: none;
+}
 div#header div#mobile-nav li a,
 div#header div#mobile-nav li a:active {
   transition: color .1s;
   color: #555;
-  font-size: 13.1pt;
-  line-height: 3.5pc;
-  padding: 0 1pc;
+  font-size: 1.3rem;
+  margin-left: 1.3rem;
   text-decoration: none;
 }
 
@@ -142,88 +131,24 @@ div#header div#mobile-nav li a:focus {
   color: #9bc1e3;
 }
 
-/* download button */
-
-div.button {
-  position: relative;
-  padding: 1rem;
-  transition: background-color .1s;
-  color: #fff;
-  background-color: #9bc1e3;
-  font-size: 10pt;
-  cursor: pointer;
-}
-div.button:after {
-  content: "";
-  background-color: #9bc1e3;
-}
-div.button:before {
-  content: "";
-  background-color: #9bc1e3;
-}
-div.button a,
-div.button a:active {
-  color: #fff !important;
-  text-decoration: none;
-  font-size: 22.5pt;
-  padding: 2.5pt 15pt 0;
-}
-div.button:hover,
-div.button:focus {
-  background-color: #83a8ca;
-}
-div.button.small {
-  float: none;
-  width: 15em;
-}
-div.button.small a {
-  padding-top: 8pt;
-  font-size: 16.5pt;
-}
-div.button i {
-  margin-right: 1rem;
-}
-a.download-button {
-  color: #f0f2f2 !important;
-  background-color: #596473;
-  padding: 6px 20px;
-  font-weight: bold;
-  border-radius: 4px;
-  margin-right: 10px;
-  margin-top: 6px;
-  display: inline-block;
-  text-decoration: none;
-}
-.download-button i {
-  margin-right: 1rem;
-}
 /* content */
 .main-container {
   flex: 1 auto;
   overflow: auto;
 }
-.showcase {
-  background-color: #f0f2f2;
-  padding-bottom: 0 !important;
-  margin-bottom: 3pc;
-}
-.showcase h1 {
-  margin-top: 0;
-  margin-bottom: 45px;
-}
 div.content {
-  font-size: 13.1pt;
+  font-size: 1rem;
   line-height: 1.75;
 }
 
 div.content p,
 div.content ul {
-  margin-bottom: 1pc;
+  margin-bottom: 1rem;
   line-height: 1.5;
 }
 
 div.content li {
-  margin-left: 1pc;
+  margin-left: 1.1rem;
 }
 
 div.content a,
@@ -241,22 +166,47 @@ div.content a:hover {
 /* show case */
 
 div.showcase {
-  padding: 2pc 0;
-  font-size: 12pt;
+  padding: 2rem 0;
   text-align: center;
+  background-color: #f0f2f2;
+  padding-bottom: 0 !important;
+  margin-bottom: 3rem;
 }
 div.content img {
   max-width: 100%;
 }
-
 div.showcase h1 {
   line-height: 1.45;
-  padding: 1.5pt;
-  font-size: 28.3pt;
+  margin-top: 0;
+  margin-bottom: 3rem;
 }
 div.showcase h1 > strong {
   font-weight: 900;
 }
+.showcase .overview-bar {
+  position: relative;
+  padding: 1rem;
+  margin-top: -10px;
+  color: #fff;
+  background-color: #9bc1e3;
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 1.2rem;
+  font-weight: bold;
+  flex-wrap: wrap;
+}
+.showcase .overview-bar .item {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+}
+.showcase .overview-bar .item i {
+  margin-right: .8rem;
+  opacity: .8;
+  font-size: .8em;
+}
+
+/* other sections */
 
 .full-features-demo {
   margin-top: 2rem;
@@ -298,15 +248,31 @@ ul.links li.bd-tib-btn.tibbed a [class^="icon-"]{
   background-color: #A7C7A7;
 }
 
+a.download-button {
+  color: #f0f2f2 !important;
+  background-color: #596473;
+  padding: 6px 20px;
+  font-weight: bold;
+  border-radius: 4px;
+  margin-right: 10px;
+  margin-top: 6px;
+  display: inline-block;
+  text-decoration: none;
+}
+.download-button i {
+  margin-right: 1rem;
+}
+
 /* footer */
 
 div#footer {
-  margin-top: 5pc;
+  margin-top: 5rem;
   color: white;
-  padding: 20pt 0;
+  padding: 2.5rem 0;
   line-height: 2rem;
   overflow: hidden;
   background-color: #9bc1e3;
+  font-size: .85rem;
 }
 
 #footer .wrap {
@@ -324,7 +290,7 @@ div#footer a {
 div#footer img.logo {
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 50%;
-  padding: 10px;
+  padding: .8rem;
   margin-left: 2rem;
 }
 
@@ -332,147 +298,26 @@ div#footer img.logo {
 -------------------------
 */
 
-@media screen and (min-width: 78pc) {
-  .wrap {
-    width: 69pc;
+@media screen and (max-width: 800px) {
+  html, body {
+    font-size: 13px;
+  }
+  h1 {
+    font-size: 1.5rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+    margin-top: 2rem;
   }
 
-  div#header div#nav li a,
-  div#header div#nav li a:active {
-    font-size: 13.1pt;
-  }
-
-  div.showcase .feature  {
-    width: 31.8125pc;
-    height: auto;
-  }
-  div.showcase .feature>img {
-    width: 100%;
-    height: auto;
-  }
-
-  div.showcase .column-2 {
-    margin-right: 8%;
-  }
-
-  div#footer img.logo {
-    height: 5pc;
-    padding: 45px;
-  }
-}
-
-@media screen and (max-width: 65pc) {
-  .wrap {
-    width: auto;
-    margin: 0 3pc;
-  }
-
-  div#header div#nav li a,
-  div#header div#nav li a:active {
-    padding: 12pt 7.5pt;
-  }
-
-  div.showcase .feature  {
-    width: 50%;
-  }
-  div.showcase h1 {
-    font-size: 22pt;
-  }
-
-  div.button a,
-  div.button a:active {
-    font-size: 17pt;
-  }
-}
-
-@media screen and (max-width: 48pc) {
-  .wrap {
-    margin: 0 2pc;
-  }
-
-  div#header {
-    height:5pc;
-  }
-  a.scroll-point {
-    top: -4pc;
-  }
-
-  div#header div#nav li a,
-  div#header div#nav li a:active {
-    font-size: 12pt;
-    padding: 7.5pt 3.75pt;
-  }
-
-  div.showcase h1 {
-    font-size: 20pt;
-  }
-  div.showcase .feature  {
-    height: auto;
-    width: 50%;
-  }
-  div.showcase .feature>img {
-    width: 100%;
-    height: auto;
-  }
-
-  div.button a,
-  div.button a:active {
-    font-size: 17pt;
-  }
-}
-
-/* Mobile view */
-@media screen and (max-width: 36pc) {
-  .wrap {
-    margin: 0 2pc;
-  }
-  div#header {
-    height: auto;
-    min-height: 7pc;
-  }
-  div#header a.logo,
-  div#header div#nav {
-    float: none; /* force movile-nav to get wrapped to a new line*/
-  }
-
-  a.scroll-point {
-    top: -5pc;
-  }
-}
-
-@media screen and (max-width: 30pc) {
-  div#header .wrap {
-    margin-right: 0;
-  }
-
-  div#header div#nav{
+  #header #nav {
     display: none;
   }
-
-  div#header div#mobile-nav {
-    display: block;
-    padding: 0.5pc 0;
+  #header #mobile-nav {
+    display: inline-block;
   }
-  div#header div#mobile-nav li {
-    margin-right: 7%;
-  }
-  div#header div#mobile-nav li a,
-  div#header div#mobile-nav li a:active {
-    font-size: 17pt;
-    padding: 0;
-    line-height: 2pc;
-  }
-
-  div.showcase .feature  {
-    height: auto;
-    width: 100%;
-  }
-
-  div.showcase .column-2 {
-    width: 100%;
-  }
-
-  div#footer img.logo {
-    display: none;
+  #header .logo {
+    width: 85px;
+    height: 30px;
   }
 }
