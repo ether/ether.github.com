@@ -25,21 +25,7 @@ This iconic web font was used extensively around the site.
 <link type="text/css" rel="stylesheet" href="css/reset.css" />
 <link type="text/css" rel="stylesheet" href="css/font-awesome.css" />
 <link type="text/css" rel="stylesheet" href="css/index.css" />
-<script src='https://cdnjs.cloudflare.com/ajax/libs/script.js/2.5.8/script.min.js'></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript">
-$(function() {
-  /* jQuery awesome scroll */
-  var $html = $('html');
-  $('a[href^=#]').click(function(evt) {
-    var anchor = $(this).attr('href').substr(1);
-    var scrollPoint = anchor.length? $('[name='+anchor+']').position().top : 0;
-    $html.animate({scrollTop: scrollPoint}, 550);
-    document.location = '#'+anchor;
-    evt.preventDefault();
-  });
-});
-</script>
+
 <meta name="google-site-verification" content="bVuuj6GwPO2TG1ZmB67XFvKxM0YSMrQIw5rYcG5RwVw" />
 </head>
 <body>
@@ -81,10 +67,10 @@ $(function() {
         <div class="item"><i class="fa fa-language"></i>105 Languages</div>
         <div class="item"><i class="fa fa-server"></i>Hundreds of Instances</div>
         <div class="item"><i class="fa fa-users"></i>Millions of users</div>
-    </div>
+      </div>
     </div>
 
-    <a class="scroll-point wrap" name="about"></a>
+    <a class="scroll-point" name="about"></a>
     <div class="content wrap">
       <h2>Collaborating in really real-time</h2>
 
@@ -98,7 +84,7 @@ $(function() {
       <p>You don't need to set up a server and install Etherpad in order to use it. Just <a href="#links">pick</a> one of the publicly available instances that friendly people from everywhere around the world have set up. Alternatively, you can set up your own instance by following our <a href="https://github.com/ether/etherpad-lite#installation">installation guide</a>.</p>
     </div>
 
-    <a class="scroll-point wrap" name="customize"></a>
+    <a class="scroll-point" name="customize"></a>
     <div class="content wrap">
       <h2>Add Functionalities</h2>
       Etherpad is very customizable through plugins. Instructions can be found in the <a href="https://github.com/ether/etherpad-lite/wiki/Available-Plugins" target="_blank">plugin wiki article</a>
@@ -107,7 +93,7 @@ $(function() {
       </p>
     </div>
 
-    <a class="scroll-point wrap" name="download"></a>
+    <a class="scroll-point" name="download"></a>
     <div class="content wrap">
       <h2>Download Version 1.8.0-beta.1</h2>
       <p>Also, see our <a href="https://github.com/ether/etherpad-lite#installation">installation instructions</a>.</p>
@@ -115,7 +101,7 @@ $(function() {
       <a class="download-button" href="https://etherpad.org/downloads/etherpad-lite-win-1.8.0-beta.1-503b11730c.zip"><i class="fa fa-download"></i>Windows</a>
     </div>
 
-    <a class="scroll-point wrap" name="contribute"></a>
+    <a class="scroll-point" name="contribute"></a>
     <div class="content wrap">
       <h2><i class="fa fa-wrench"></i> Contribute</h2>
       <p>Etherpad is an open source project. Lots of passionate, helpful individuals have joined and voluntarily contributed every single bit throughout this project: From this website through the documentation to the very core of the application. So, if you like Etherpad and would like to give back some love, we'd like to see <em>your</em> contributions! It doesn't matter how familiar you are with real-time applications, or whether you know how to write programs for Node.js. There are plenty of ways to be helpful!</p>
@@ -133,7 +119,7 @@ $(function() {
       <img class="skin-variant-demo" src="img/etherpad_skin_variants.gif"/>
     </div>
 
-    <a class="scroll-point wrap" name="links"></a>
+    <a class="scroll-point" name="links"></a>
     <div class="content wrap">
       <h2><i class="fa fa-external-link-square-alt"></i> Links</h2>
     </div>
@@ -150,7 +136,7 @@ $(function() {
       </div>
     </div>
 
-    <a class="scroll-point wrap" name="contact"></a>
+    <a class="scroll-point" name="contact"></a>
     <div class="content wrap">
       <h2><i class="fa fa-envelope"></i> Get in touch</h2>
     </div>
@@ -161,7 +147,7 @@ $(function() {
       </ul>
     </div>
 
-    <a class="scroll-point wrap" name="thanks"></a>
+    <a class="scroll-point" name="thanks"></a>
     <div class="content wrap">
       <h2><i class="fa fa-heart"></i> Thanks</h2>
       <p>Many individuals, companies and organizations have contributed to Etherpad Lite. We'd like to thank them all!</p>
