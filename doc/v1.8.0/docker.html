@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Docker - Etherpad v1.8.0 Manual &amp; Documentation</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="apidoc" id="api-section-docker">
+  <header id="header">
+    <h1>Etherpad v1.8.0 Manual &amp; Documentation</h1>
+  </header>
+
+  <div id="toc">
+    <h2>Table of Contents</h2>
+    <ul>
+<li><a href="#docker_docker">Docker</a><ul>
+<li><a href="#docker_downloading_from_docker_hub">Downloading from Docker Hub</a></li>
+<li><a href="#docker_build_a_personalized_container">Build a personalized container</a><ul>
+<li><a href="#docker_rebuilding_with_custom_settings">Rebuilding with custom settings</a></li>
+<li><a href="#docker_rebuilding_including_some_plugins">Rebuilding including some plugins</a></li>
+<li><a href="#docker_examples">Examples</a></li>
+</ul>
+</li>
+<li><a href="#docker_running_your_instance">Running your instance:</a></li>
+<li><a href="#docker_options_available_by_default">Options available by default</a><ul>
+<li><a href="#docker_examples_1">Examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+
+  <div id="apicontent">
+    <h1>Docker<span><a class="mark" href="#docker_docker" id="docker_docker">#</a></span></h1>
+<p>The official Docker image is available on <a href="https://hub.docker.com/r/etherpad/etherpad">https://hub.docker.com/r/etherpad/etherpad</a>.
+
+</p>
+<h2>Downloading from Docker Hub<span><a class="mark" href="#docker_downloading_from_docker_hub" id="docker_downloading_from_docker_hub">#</a></span></h2>
+<p>If you are ok downloading a <a href="https://hub.docker.com/r/etherpad/etherpad">prebuilt image from Docker Hub</a>, these are the commands:
+</p>
+<pre><code class="bash"># gets the latest published version
+docker pull etherpad/etherpad
+
+# gets a specific version
+docker pull etherpad/etherpad:1.8.0</code></pre>
+<h2>Build a personalized container<span><a class="mark" href="#docker_build_a_personalized_container" id="docker_build_a_personalized_container">#</a></span></h2>
+<p>If you want to use a personalized settings file, <strong>you will have to rebuild your image</strong>.
+All of the following instructions are as a member of the <code>docker</code> group.
+
+</p>
+<h3>Rebuilding with custom settings<span><a class="mark" href="#docker_rebuilding_with_custom_settings" id="docker_rebuilding_with_custom_settings">#</a></span></h3>
+<p>Edit <code>&lt;BASEDIR&gt;/settings.json.docker</code> at your will. When rebuilding the image, this file will be copied inside your image and renamed to <code>setting.json</code>.
+
+</p>
+<p><strong>Each configuration parameter can also be set via an environment variable</strong>, using the syntax <code>&quot;${ENV_VAR}&quot;</code> or <code>&quot;${ENV_VAR:default_value}&quot;</code>. For details, refer to <code>settings.json.template</code>.
+
+</p>
+<h3>Rebuilding including some plugins<span><a class="mark" href="#docker_rebuilding_including_some_plugins" id="docker_rebuilding_including_some_plugins">#</a></span></h3>
+<p>If you want to install some plugins in your container, it is sufficient to list them in the ETHERPAD_PLUGINS build variable.
+The variable value has to be a space separated, double quoted list of plugin names (see examples).
+
+</p>
+<p>Some plugins will need personalized settings. Just refer to the previous section, and include them in your custom <code>settings.json.docker</code>.
+
+</p>
+<h3>Examples<span><a class="mark" href="#docker_examples" id="docker_examples">#</a></span></h3>
+<p>Build a Docker image from the currently checked-out code:
+</p>
+<pre><code class="bash">docker build --tag &lt;YOUR_USERNAME&gt;/etherpad .</code></pre>
+<p>Include two plugins in the container:
+</p>
+<pre><code class="bash">docker build --build-arg ETHERPAD_PLUGINS=&quot;ep_codepad ep_author_neat&quot; --tag &lt;YOUR_USERNAME&gt;/etherpad .</code></pre>
+<h2>Running your instance:<span><a class="mark" href="#docker_running_your_instance" id="docker_running_your_instance">#</a></span></h2>
+<p>To run your instance:
+</p>
+<pre><code class="bash">docker run --detach --publish &lt;DESIRED_PORT&gt;:9001 &lt;YOUR_USERNAME&gt;/etherpad</code></pre>
+<p>And point your browser to <code>http://&lt;YOUR_IP&gt;:&lt;DESIRED_PORT&gt;</code>
+
+</p>
+<h2>Options available by default<span><a class="mark" href="#docker_options_available_by_default" id="docker_options_available_by_default">#</a></span></h2>
+<p>The <code>settings.json.docker</code> available by default enables some configuration to be set from the environment.
+
+</p>
+<p>Available options:
+
+</p>
+<ul>
+<li><code>TITLE</code>: The name of the instance</li>
+<li><code>FAVICON</code>: favicon default name, or a fully specified URL to your own favicon</li>
+<li><code>SKIN_NAME</code>: either <code>no-skin</code>, <code>colibris</code> or an existing directory under <code>src/static/skins</code>.</li>
+<li><code>IP</code>: IP which etherpad should bind at. Change to <code>::</code> for IPv6</li>
+<li><code>PORT</code>: port which etherpad should bind at</li>
+<li><code>SHOW_SETTINGS_IN_ADMIN_PAGE</code>: hide/show the settings.json in admin page</li>
+<li><code>DB_TYPE</code>: a database supported by <a href="https://www.npmjs.com/package/ueberdb2">https://www.npmjs.com/package/ueberdb2</a></li>
+<li><code>DB_HOST</code>: the host of the database</li>
+<li><code>DB_PORT</code>: the port of the database</li>
+<li><code>DB_NAME</code>: the database name</li>
+<li><code>DB_USER</code>: a database user with sufficient permissions to create tables</li>
+<li><code>DB_PASS</code>: the password for the database username</li>
+<li><code>DB_CHARSET</code>: the character set for the tables (only required for MySQL)</li>
+<li><code>DB_FILENAME</code>: in case <code>DB_TYPE</code> is <code>DirtyDB</code>, the database filename. Default: <code>var/dirty.db</code></li>
+<li><code>ADMIN_PASSWORD</code>: the password for the <code>admin</code> user (leave unspecified if you do not want to create it)</li>
+<li><code>USER_PASSWORD</code>: the password for the first user <code>user</code> (leave unspecified if you do not want to create it)</li>
+<li><code>TRUST_PROXY</code>: set to <code>true</code> if you are using a reverse proxy in front of Etherpad (for example: Traefik for SSL termination via Let&apos;s Encrypt). This will affect security and correctness of the logs if not done</li>
+<li><code>LOGLEVEL</code>: valid values are <code>DEBUG</code>, <code>INFO</code>, <code>WARN</code> and <code>ERROR</code></li>
+</ul>
+<h3>Examples<span><a class="mark" href="#docker_examples_1" id="docker_examples_1">#</a></span></h3>
+<p>Use a Postgres database, no admin user enabled:
+
+</p>
+<pre><code class="shell">docker run -d \
+    --name etherpad         \
+    -p 9001:9001            \
+    -e &apos;DB_TYPE=postgres&apos;   \
+    -e &apos;DB_HOST=db.local&apos;   \
+    -e &apos;DB_PORT=4321&apos;       \
+    -e &apos;DB_NAME=etherpad&apos;   \
+    -e &apos;DB_USER=dbusername&apos; \
+    -e &apos;DB_PASS=mypassword&apos; \
+    etherpad/etherpad</code></pre>
+<p>Run enabling the administrative user <code>admin</code>:
+
+</p>
+<pre><code class="shell">docker run -d \
+    --name etherpad \
+    -p 9001:9001 \
+    -e &apos;ADMIN_PASSWORD=supersecret&apos; \
+    etherpad/etherpad</code></pre>
+
+  </div>
+
+</body>
+</html>
+
