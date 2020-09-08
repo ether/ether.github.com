@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Hooks - Etherpad v1.8.5 Manual &amp; Documentation</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="apidoc" id="api-section-hooks_overview">
+  <header id="header">
+    <h1>Etherpad v1.8.5 Manual &amp; Documentation</h1>
+  </header>
+
+  <div id="toc">
+    <h2>Table of Contents</h2>
+    <ul>
+<li><a href="#hooks_overview_hooks">Hooks</a><ul>
+<li><a href="#hooks_overview_return_values">Return values</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+
+  <div id="apicontent">
+    <h1 id="hooks">Hooks<span><a class="mark" href="#hooks_overview_hooks" id="hooks_overview_hooks">#</a></span></h1>
+<p>A hook function is registered with a hook via the plugin&#39;s <code>ep.json</code> file. See
+the Plugins section for details. A hook may have many registered functions from
+different plugins.</p>
+<p>When a hook is invoked, its registered functions are called with three
+arguments:</p>
+<ol>
+<li>hookName - The name of the hook being invoked.</li>
+<li>context - An object with some relevant information about the context of the
+call. See the hook-specific documentation for details.</li>
+<li>callback - Function to call when done. This callback takes a single argument,
+the meaning of which depends on the hook. See the &quot;Return values&quot; section for
+general information that applies to most hooks. The value returned by this
+callback must be returned by the hook function unless otherwise specified.</li>
+</ol>
+<h2 id="return-values">Return values<span><a class="mark" href="#hooks_overview_return_values" id="hooks_overview_return_values">#</a></span></h2>
+<p>Note: This section applies to every hook unless the hook-specific documentation
+says otherwise.</p>
+<p>Hook functions return zero or more values to Etherpad by passing an array to the
+provided callback. Hook functions typically provide a single value (array of
+length one). If the function does not want to or need to provide a value, it may
+pass an empty array or <code>undefined</code> (which is treated the same as an empty
+array). Hook functions may also provide more than one value (array of length two
+or more).</p>
+<p>Some hooks concatenate the arrays provided by its registered functions. For
+example, if a hook&#39;s registered functions pass <code>[1, 2]</code>, <code>undefined</code>, <code>[3, 4]</code>,
+<code>[]</code>, and <code>[5]</code> to the provided callback, then the hook&#39;s return value is <code>[1,
+2, 3, 4, 5]</code>.</p>
+<p>Other hooks only use the first non-empty array provided by a registered
+function. In this case, each of the hook&#39;s registered functions is called one at
+a time until one provides a non-empty array. The remaining functions are
+skipped. If none of the functions provide a non-empty array, or there are no
+registered functions, the hook&#39;s return value is <code>[]</code>.</p>
+<p>Example:</p>
+<pre><code>exports.abstractHook = (hookName, context, callback) =&gt; {
+  if (notApplicableToThisPlugin(context)) {
+    return callback();
+  }
+  const value = doSomeProcessing(context);
+  return callback([value]);
+};</code></pre>
+  </div>
+
+</body>
+</html>
+
