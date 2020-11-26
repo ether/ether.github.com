@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1701px" height="371px" viewBox="0 0 1701 371" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group 10</title>
+    <defs>
+        <linearGradient x1="50%" y1="-53.318164%" x2="50%" y2="109.654497%" id="linearGradient-1">
+            <stop stop-color="#65D09B" offset="0%"></stop>
+            <stop stop-color="#4DB38E" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-2" x="45" y="170" width="184" height="29" rx="14.5"></rect>
+        <filter x="-8.7%" y="-27.6%" width="117.4%" height="210.3%" filterUnits="objectBoundingBox" id="filter-3">
+            <feOffset dx="0" dy="8" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="4" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.0568181818 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <rect id="path-4" x="45" y="108" width="155" height="27" rx="13.5"></rect>
+        <filter x="-10.3%" y="-29.6%" width="120.6%" height="218.5%" filterUnits="objectBoundingBox" id="filter-5">
+            <feOffset dx="0" dy="8" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="4" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.0568181818 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <rect id="path-6" x="45" y="234" width="115" height="27" rx="13.5"></rect>
+        <filter x="-13.9%" y="-29.6%" width="127.8%" height="218.5%" filterUnits="objectBoundingBox" id="filter-7">
+            <feOffset dx="0" dy="8" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="4" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.0568181818 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-5-Copy-2" transform="translate(-366.000000, -348.000000)">
+            <g id="Group-10" transform="translate(366.000000, 348.000000)">
+                <g id="Group-9" transform="translate(0.000000, 13.000000)">
+                    <rect id="Rectangle-Copy-54" fill="url(#linearGradient-1)" x="0" y="0" width="358" height="358" rx="70"></rect>
+                    <path d="M260.014924,137.898625 C256.92943,134.780359 251.932519,134.777891 248.847024,137.898625 C245.761529,141.019358 245.761529,146.075805 248.847024,149.196538 C257.158292,157.602726 261.736516,168.741222 261.736516,180.558352 C261.736516,192.375483 257.158292,203.513978 248.847024,211.923128 C245.761529,215.041394 245.761529,220.100308 248.847024,223.218573 C250.390015,224.778693 252.409275,225.559 254.430974,225.559 C256.450234,225.559 258.471933,224.778693 260.014924,223.218573 C271.311651,211.79283 277.532903,196.644219 277.532903,180.558352 C277.532903,164.472979 271.311651,149.324368 260.014924,137.898625 Z" id="Path-Copy-26" fill-opacity="0.170481862" fill="#000000" fill-rule="nonzero" opacity="0.754065225"></path>
+                    <path d="M291.164142,111.898923 C288.044497,108.779026 282.992281,108.779026 279.872636,111.898923 C276.752992,115.021289 276.752992,120.083344 279.872636,123.202747 C311.468722,154.828862 311.468722,206.289878 279.872636,237.915994 C276.752992,241.035891 276.752992,246.097452 279.872636,249.217349 C281.432706,250.778779 283.474314,251.559 285.518389,251.559 C287.562465,251.559 289.604073,250.778285 291.164142,249.214386 C328.989156,211.357365 328.989156,149.756931 291.164142,111.898923 Z" id="Path-Copy-27" fill-opacity="0.290564904" fill="#131514" fill-rule="nonzero" opacity="0.754065225"></path>
+                    <g id="Rectangle-Copy-55">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-2"></use>
+                        <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-2"></use>
+                    </g>
+                    <g id="Rectangle-Copy-56">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-5)" xlink:href="#path-4"></use>
+                        <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-4"></use>
+                    </g>
+                    <g id="Rectangle-Copy-57">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-7)" xlink:href="#path-6"></use>
+                        <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-6"></use>
+                    </g>
+                </g>
+                <text id="etherpad" font-family="PulpDisplay-Medium, Pulp Display" font-size="300" font-weight="400" letter-spacing="1.5" fill="#44B392">
+                    <tspan x="469" y="300">etherpad</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>
