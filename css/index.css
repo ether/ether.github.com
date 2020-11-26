@@ -37,7 +37,7 @@ h1 {
 }
 h2 {
   font-size: 2rem;
-  color: #65d09b;
+  color: #44b492;
   font-weight: bold;
   margin-bottom: 1rem;
   margin-top: 4rem;
@@ -78,22 +78,13 @@ div#header {
   padding: 1rem;
 }
 #header .logo {
-  background: url("../img/brand.png") no-repeat scroll 0 0 #555;
-  transition: background-color .1s;
-  display: block;
-  float: left;
-  width: 140px;
-  height: 50px;
-  background-size: cover;
+  height: 35px;
 }
 #header .wrap {
   display: flex;
   align-items: center;
 }
-div#header a.logo:hover,
-div#header a.logo:focus {
-  background-color: #65d09b;
-}
+
 #header #mobile-nav {
   display: none;
 }
@@ -128,7 +119,7 @@ div#header div#nav li a:hover,
 div#header div#nav li a:focus,
 div#header div#mobile-nav li a:hover,
 div#header div#mobile-nav li a:focus {
-  color: #9bc1e3;
+  color: #65d09b;
 }
 
 /* content */
@@ -154,12 +145,12 @@ div.content li {
 div.content a,
 div.content a:active {
   transition: color 0.1s;
-  color: #1a76bf;
+  color: #44b492;
 }
 
 div.content a:focus,
 div.content a:hover {
-  color: #65d09b;
+  color: #44b492;
 }
 
 .highlight {
@@ -175,14 +166,15 @@ div.content a:hover {
 /* show case */
 
 div.showcase {
-  padding: 2rem 0;
+  padding: 4rem 0;
   text-align: center;
-  background-color: #f0f2f2;
   padding-bottom: 0 !important;
   margin-bottom: 3rem;
 }
 div.content img {
   max-width: 100%;
+  border-radius: 4px;
+  box-shadow: 0 0 15px 3px #54545433;
 }
 div.showcase h1 {
   line-height: 1.45;
@@ -192,16 +184,18 @@ div.showcase h1 {
 div.showcase h1 > strong {
   font-weight: 900;
 }
+div.showcase h1 > strong:nth-last-child(-n+3) {
+  color: #44b492;
+}
 .showcase .overview-bar {
   position: relative;
   padding: 1rem;
   margin-top: -10px;
-  color: #fff;
-  background-color: #9bc1e3;
+  color: #282d28;
+  background-color: #f2f2f2;
   display: flex;
   justify-content: space-evenly;
   font-size: 1.2rem;
-  font-weight: bold;
   flex-wrap: wrap;
 }
 .showcase .overview-bar .item {
@@ -213,7 +207,13 @@ div.showcase h1 > strong {
   margin-right: .8rem;
   opacity: .8;
   font-size: .8em;
+  text-decoration: none;
 }
+.showcase .overview-bar .item:first-child {
+  color: #44b492;
+}
+
+
 
 /* other sections */
 
@@ -280,7 +280,7 @@ div#footer {
   padding: 2.5rem 0;
   line-height: 2rem;
   overflow: hidden;
-  background-color: #9bc1e3;
+  background-color: #2d7962;
   font-size: .85rem;
 }
 
@@ -311,6 +311,9 @@ div#footer img.logo {
   html, body {
     font-size: 13px;
   }
+  .wrap {
+    padding: 0 0s;
+  }
   h1 {
     font-size: 1.5rem;
   }
@@ -326,7 +329,7 @@ div#footer img.logo {
     display: inline-block;
   }
   #header .logo {
-    width: 85px;
+    width: 110px;
     height: 30px;
   }
 }
