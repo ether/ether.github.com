@@ -1,0 +1,2361 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Embed parameters - Etherpad v1.8.8 Manual &amp; Documentation</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="apidoc" id="api-section-api">
+  <header id="header">
+    <h1>Etherpad v1.8.8 Manual &amp; Documentation</h1>
+  </header>
+
+  <div id="toc">
+    <h2>Table of Contents</h2>
+    <ul>
+<li><a href="#api_embed_parameters">Embed parameters</a><ul>
+<li><a href="#api_showlinenumbers">showLineNumbers</a></li>
+<li><a href="#api_showcontrols">showControls</a></li>
+<li><a href="#api_showchat">showChat</a></li>
+<li><a href="#api_usemonospacefont">useMonospaceFont</a></li>
+<li><a href="#api_username">userName</a></li>
+<li><a href="#api_usercolor">userColor</a></li>
+<li><a href="#api_nocolors">noColors</a></li>
+<li><a href="#api_alwaysshowchat">alwaysShowChat</a></li>
+<li><a href="#api_lang">lang</a></li>
+<li><a href="#api_rtl">rtl</a></li>
+<li><a href="#api_l">#L</a></li>
+</ul>
+</li>
+<li><a href="#api_http_api">HTTP API</a><ul>
+<li><a href="#api_what_can_i_do_with_this_api">What can I do with this API?</a><ul>
+<li><a href="#api_openapi">OpenAPI</a></li>
+</ul>
+</li>
+<li><a href="#api_examples">Examples</a><ul>
+<li><a href="#api_example_1">Example 1</a></li>
+<li><a href="#api_example_2">Example 2</a></li>
+</ul>
+</li>
+<li><a href="#api_usage">Usage</a><ul>
+<li><a href="#api_api_version">API version</a></li>
+<li><a href="#api_request_format">Request Format</a></li>
+<li><a href="#api_response_format">Response Format</a></li>
+<li><a href="#api_overview">Overview</a></li>
+</ul>
+</li>
+<li><a href="#api_data_types">Data Types</a><ul>
+<li><a href="#api_authentication">Authentication</a></li>
+<li><a href="#api_node_interoperability">Node Interoperability</a></li>
+<li><a href="#api_jsonp">JSONP</a></li>
+</ul>
+</li>
+<li><a href="#api_api_methods">API Methods</a><ul>
+<li><a href="#api_groups">Groups</a><ul>
+<li><a href="#api_creategroup">createGroup()</a></li>
+<li><a href="#api_creategroupifnotexistsfor_groupmapper">createGroupIfNotExistsFor(groupMapper)</a></li>
+<li><a href="#api_deletegroup_groupid">deleteGroup(groupID)</a></li>
+<li><a href="#api_listpads_groupid">listPads(groupID)</a></li>
+<li><a href="#api_creategrouppad_groupid_padname_text">createGroupPad(groupID, padName [, text])</a></li>
+<li><a href="#api_listallgroups">listAllGroups()</a></li>
+</ul>
+</li>
+<li><a href="#api_author">Author</a><ul>
+<li><a href="#api_createauthor_name">createAuthor([name])</a></li>
+<li><a href="#api_createauthorifnotexistsfor_authormapper_name">createAuthorIfNotExistsFor(authorMapper [, name])</a></li>
+<li><a href="#api_listpadsofauthor_authorid">listPadsOfAuthor(authorID)</a></li>
+<li><a href="#api_getauthorname_authorid">getAuthorName(authorID)</a></li>
+</ul>
+</li>
+<li><a href="#api_session">Session</a><ul>
+<li><a href="#api_createsession_groupid_authorid_validuntil">createSession(groupID, authorID, validUntil)</a></li>
+<li><a href="#api_deletesession_sessionid">deleteSession(sessionID)</a></li>
+<li><a href="#api_getsessioninfo_sessionid">getSessionInfo(sessionID)</a></li>
+<li><a href="#api_listsessionsofgroup_groupid">listSessionsOfGroup(groupID)</a></li>
+<li><a href="#api_listsessionsofauthor_authorid">listSessionsOfAuthor(authorID)</a></li>
+</ul>
+</li>
+<li><a href="#api_pad_content">Pad Content</a><ul>
+<li><a href="#api_gettext_padid_rev">getText(padID, [rev])</a></li>
+<li><a href="#api_settext_padid_text">setText(padID, text)</a></li>
+<li><a href="#api_appendtext_padid_text">appendText(padID, text)</a></li>
+<li><a href="#api_gethtml_padid_rev">getHTML(padID, [rev])</a></li>
+<li><a href="#api_sethtml_padid_html">setHTML(padID, html)</a></li>
+<li><a href="#api_getattributepool_padid">getAttributePool(padID)</a></li>
+<li><a href="#api_getrevisionchangeset_padid_rev">getRevisionChangeset(padID, [rev])</a></li>
+<li><a href="#api_creatediffhtml_padid_startrev_endrev">createDiffHTML(padID, startRev, endRev)</a></li>
+<li><a href="#api_restorerevision_padid_rev">restoreRevision(padId, rev)</a></li>
+</ul>
+</li>
+<li><a href="#api_chat">Chat</a><ul>
+<li><a href="#api_getchathistory_padid_start_end">getChatHistory(padID, [start, end])</a></li>
+<li><a href="#api_getchathead_padid">getChatHead(padID)</a></li>
+<li><a href="#api_appendchatmessage_padid_text_authorid_time">appendChatMessage(padID, text, authorID [, time])</a></li>
+</ul>
+</li>
+<li><a href="#api_pad">Pad</a><ul>
+<li><a href="#api_createpad_padid_text">createPad(padID [, text])</a></li>
+<li><a href="#api_getrevisionscount_padid">getRevisionsCount(padID)</a></li>
+<li><a href="#api_getsavedrevisionscount_padid">getSavedRevisionsCount(padID)</a></li>
+<li><a href="#api_listsavedrevisions_padid">listSavedRevisions(padID)</a></li>
+<li><a href="#api_saverevision_padid_rev">saveRevision(padID [, rev])</a></li>
+<li><a href="#api_paduserscount_padid">padUsersCount(padID)</a></li>
+<li><a href="#api_padusers_padid">padUsers(padID)</a></li>
+<li><a href="#api_deletepad_padid">deletePad(padID)</a></li>
+<li><a href="#api_copypad_sourceid_destinationid_force_false">copyPad(sourceID, destinationID[, force=false])</a></li>
+<li><a href="#api_copypadwithouthistory_sourceid_destinationid_force_false">copyPadWithoutHistory(sourceID, destinationID[, force=false])</a></li>
+<li><a href="#api_movepad_sourceid_destinationid_force_false">movePad(sourceID, destinationID[, force=false])</a></li>
+<li><a href="#api_getreadonlyid_padid">getReadOnlyID(padID)</a></li>
+<li><a href="#api_getpadid_readonlyid">getPadID(readOnlyID)</a></li>
+<li><a href="#api_setpublicstatus_padid_publicstatus">setPublicStatus(padID, publicStatus)</a></li>
+<li><a href="#api_getpublicstatus_padid">getPublicStatus(padID)</a></li>
+<li><a href="#api_listauthorsofpad_padid">listAuthorsOfPad(padID)</a></li>
+<li><a href="#api_getlastedited_padid">getLastEdited(padID)</a></li>
+<li><a href="#api_sendclientsmessage_padid_msg">sendClientsMessage(padID, msg)</a></li>
+<li><a href="#api_checktoken">checkToken()</a></li>
+</ul>
+</li>
+<li><a href="#api_pads">Pads</a><ul>
+<li><a href="#api_listallpads">listAllPads()</a></li>
+</ul>
+</li>
+<li><a href="#api_global">Global</a><ul>
+<li><a href="#api_getstats">getStats()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#api_hooks">Hooks</a><ul>
+<li><a href="#api_registered_hook_functions">Registered hook functions</a><ul>
+<li><a href="#api_arguments">Arguments</a></li>
+<li><a href="#api_expected_behavior">Expected behavior</a></li>
+<li><a href="#api_return_values">Return values</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#api_client_side_hooks">Client-side hooks</a><ul>
+<li><a href="#api_documentready">documentReady</a></li>
+<li><a href="#api_acedomlinepreprocesslineattributes">aceDomLinePreProcessLineAttributes</a></li>
+<li><a href="#api_acedomlineprocesslineattributes">aceDomLineProcessLineAttributes</a></li>
+<li><a href="#api_acecreatedomline">aceCreateDomLine</a></li>
+<li><a href="#api_acepostwritedomlinehtml">acePostWriteDomLineHTML</a></li>
+<li><a href="#api_aceattribstoclasses">aceAttribsToClasses</a></li>
+<li><a href="#api_aceattribclasses">aceAttribClasses</a></li>
+<li><a href="#api_acegetfilterstack">aceGetFilterStack</a></li>
+<li><a href="#api_aceeditorcss">aceEditorCSS</a></li>
+<li><a href="#api_aceinitinnerdocbodyhead">aceInitInnerdocbodyHead</a></li>
+<li><a href="#api_aceeditevent">aceEditEvent</a></li>
+<li><a href="#api_aceregisternonscrollableeditevents">aceRegisterNonScrollableEditEvents</a></li>
+<li><a href="#api_aceregisterblockelements">aceRegisterBlockElements</a></li>
+<li><a href="#api_aceinitialized">aceInitialized</a></li>
+<li><a href="#api_postaceinit">postAceInit</a></li>
+<li><a href="#api_posttoolbarinit">postToolbarInit</a></li>
+<li><a href="#api_posttimesliderinit">postTimesliderInit</a></li>
+<li><a href="#api_gotorevisionevent">goToRevisionEvent</a></li>
+<li><a href="#api_userjoinorupdate">userJoinOrUpdate</a></li>
+<li><a href="#api_chatnewmessage">chatNewMessage</a></li>
+<li><a href="#api_collectcontentpre">collectContentPre</a></li>
+<li><a href="#api_collectcontentimage">collectContentImage</a></li>
+<li><a href="#api_collectcontentpost">collectContentPost</a></li>
+<li><a href="#api_handleclientmessage_name">handleClientMessage_<code>name</code></a></li>
+<li><a href="#api_acestartlineandcharforpoint_aceendlineandcharforpoint">aceStartLineAndCharForPoint-aceEndLineAndCharForPoint</a></li>
+<li><a href="#api_acekeyevent">aceKeyEvent</a></li>
+<li><a href="#api_collectcontentlinetext">collectContentLineText</a></li>
+<li><a href="#api_collectcontentlinebreak">collectContentLineBreak</a></li>
+<li><a href="#api_disableauthorcolorsforthisline">disableAuthorColorsForThisLine</a></li>
+<li><a href="#api_acesetauthorstyle">aceSetAuthorStyle</a></li>
+<li><a href="#api_aceselectionchanged">aceSelectionChanged</a></li>
+</ul>
+</li>
+<li><a href="#api_server_side_hooks">Server-side hooks</a><ul>
+<li><a href="#api_loadsettings">loadSettings</a></li>
+<li><a href="#api_shutdown">shutdown</a></li>
+<li><a href="#api_pluginuninstall">pluginUninstall</a></li>
+<li><a href="#api_plugininstall">pluginInstall</a></li>
+<li><a href="#api_init_plugin_name">init_<code>&lt;plugin name&gt;</code></a></li>
+<li><a href="#api_expressconfigure">expressConfigure</a></li>
+<li><a href="#api_expresscreateserver">expressCreateServer</a></li>
+<li><a href="#api_expresscloseserver">expressCloseServer</a></li>
+<li><a href="#api_eejsblock_name">eejsBlock_<code>&lt;name&gt;</code></a></li>
+<li><a href="#api_padinittoolbar">padInitToolbar</a></li>
+<li><a href="#api_onaccesscheck">onAccessCheck</a></li>
+<li><a href="#api_padcreate">padCreate</a></li>
+<li><a href="#api_padload">padLoad</a></li>
+<li><a href="#api_padupdate">padUpdate</a></li>
+<li><a href="#api_padcopy">padCopy</a></li>
+<li><a href="#api_padremove">padRemove</a></li>
+<li><a href="#api_socketio">socketio</a></li>
+<li><a href="#api_preauthorize">preAuthorize</a></li>
+<li><a href="#api_authorize">authorize</a></li>
+<li><a href="#api_authenticate">authenticate</a></li>
+<li><a href="#api_authfailure">authFailure</a></li>
+<li><a href="#api_preauthzfailure">preAuthzFailure</a></li>
+<li><a href="#api_authnfailure">authnFailure</a></li>
+<li><a href="#api_authzfailure">authzFailure</a></li>
+<li><a href="#api_handlemessage">handleMessage</a></li>
+<li><a href="#api_handlemessagesecurity">handleMessageSecurity</a></li>
+<li><a href="#api_clientvars">clientVars</a></li>
+<li><a href="#api_getlinehtmlforexport">getLineHTMLForExport</a></li>
+<li><a href="#api_exporthtmladditionalcontent">exportHTMLAdditionalContent</a></li>
+<li><a href="#api_stylesforexport">stylesForExport</a></li>
+<li><a href="#api_aceattribclasses_1">aceAttribClasses</a></li>
+<li><a href="#api_exportfilename">exportFileName</a></li>
+<li><a href="#api_exporthtmladditionaltags">exportHtmlAdditionalTags</a></li>
+<li><a href="#api_exporthtmladditionaltagswithdata">exportHtmlAdditionalTagsWithData</a></li>
+<li><a href="#api_exportetherpadadditionalcontent">exportEtherpadAdditionalContent</a></li>
+<li><a href="#api_userleave">userLeave</a><ul>
+<li><a href="#api_clientready">clientReady</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#api_editorinfo">editorInfo</a><ul>
+<li><a href="#api_editorinfo_ace_replacerange_start_end_text">editorInfo.ace_replaceRange(start, end, text)</a></li>
+<li><a href="#api_editorinfo_ace_getrep">editorInfo.ace_getRep()</a></li>
+<li><a href="#api_editorinfo_ace_getauthor">editorInfo.ace_getAuthor()</a></li>
+<li><a href="#api_editorinfo_ace_incallstack">editorInfo.ace_inCallStack()</a></li>
+<li><a href="#api_editorinfo_ace_incallstackifnecessary">editorInfo.ace_inCallStackIfNecessary(?)</a></li>
+<li><a href="#api_editorinfo_ace_focus">editorInfo.ace_focus(?)</a></li>
+<li><a href="#api_editorinfo_ace_importtext">editorInfo.ace_importText(?)</a></li>
+<li><a href="#api_editorinfo_ace_importatext">editorInfo.ace_importAText(?)</a></li>
+<li><a href="#api_editorinfo_ace_exporttext">editorInfo.ace_exportText(?)</a></li>
+<li><a href="#api_editorinfo_ace_editorchangedsize">editorInfo.ace_editorChangedSize(?)</a></li>
+<li><a href="#api_editorinfo_ace_setonkeypress">editorInfo.ace_setOnKeyPress(?)</a></li>
+<li><a href="#api_editorinfo_ace_setonkeydown">editorInfo.ace_setOnKeyDown(?)</a></li>
+<li><a href="#api_editorinfo_ace_setnotifydirty">editorInfo.ace_setNotifyDirty(?)</a></li>
+<li><a href="#api_editorinfo_ace_dispose">editorInfo.ace_dispose(?)</a></li>
+<li><a href="#api_editorinfo_ace_getformattedcode">editorInfo.ace_getFormattedCode(?)</a></li>
+<li><a href="#api_editorinfo_ace_seteditable_bool">editorInfo.ace_setEditable(bool)</a></li>
+<li><a href="#api_editorinfo_ace_execcommand">editorInfo.ace_execCommand(?)</a></li>
+<li><a href="#api_editorinfo_ace_callwithace_fn_callstack_normalize">editorInfo.ace_callWithAce(fn, callStack, normalize)</a></li>
+<li><a href="#api_editorinfo_ace_setproperty_key_value">editorInfo.ace_setProperty(key, value)</a></li>
+<li><a href="#api_editorinfo_ace_setbasetext_txt">editorInfo.ace_setBaseText(txt)</a></li>
+<li><a href="#api_editorinfo_ace_setbaseattributedtext_atxt_apooljsonobj">editorInfo.ace_setBaseAttributedText(atxt, apoolJsonObj)</a></li>
+<li><a href="#api_editorinfo_ace_applychangestobase_c_optauthor_apooljsonobj">editorInfo.ace_applyChangesToBase(c, optAuthor, apoolJsonObj)</a></li>
+<li><a href="#api_editorinfo_ace_prepareuserchangeset">editorInfo.ace_prepareUserChangeset()</a></li>
+<li><a href="#api_editorinfo_ace_applypreparedchangesettobase">editorInfo.ace_applyPreparedChangesetToBase()</a></li>
+<li><a href="#api_editorinfo_ace_setuserchangenotificationcallback_f">editorInfo.ace_setUserChangeNotificationCallback(f)</a></li>
+<li><a href="#api_editorinfo_ace_setauthorinfo_author_info">editorInfo.ace_setAuthorInfo(author, info)</a></li>
+<li><a href="#api_editorinfo_ace_setauthorselectionrange_author_start_end">editorInfo.ace_setAuthorSelectionRange(author, start, end)</a></li>
+<li><a href="#api_editorinfo_ace_getunhandlederrors">editorInfo.ace_getUnhandledErrors()</a></li>
+<li><a href="#api_editorinfo_ace_getdebugproperty_prop">editorInfo.ace_getDebugProperty(prop)</a></li>
+<li><a href="#api_editorinfo_ace_fastincorp">editorInfo.ace_fastIncorp(?)</a></li>
+<li><a href="#api_editorinfo_ace_iscaret">editorInfo.ace_isCaret(?)</a></li>
+<li><a href="#api_editorinfo_ace_getlineandcharforpoint">editorInfo.ace_getLineAndCharForPoint(?)</a></li>
+<li><a href="#api_editorinfo_ace_performdocumentapplyattributestocharrange">editorInfo.ace_performDocumentApplyAttributesToCharRange(?)</a></li>
+<li><a href="#api_editorinfo_ace_setattributeonselection_attribute_enabled">editorInfo.ace_setAttributeOnSelection(attribute, enabled)</a></li>
+<li><a href="#api_editorinfo_ace_toggleattributeonselection">editorInfo.ace_toggleAttributeOnSelection(?)</a></li>
+<li><a href="#api_editorinfo_ace_getattributeonselection_attribute_prevchar">editorInfo.ace_getAttributeOnSelection(attribute, prevChar)</a></li>
+<li><a href="#api_editorinfo_ace_performselectionchange">editorInfo.ace_performSelectionChange(?)</a></li>
+<li><a href="#api_editorinfo_ace_doindentoutdent">editorInfo.ace_doIndentOutdent(?)</a></li>
+<li><a href="#api_editorinfo_ace_doundoredo">editorInfo.ace_doUndoRedo(?)</a></li>
+<li><a href="#api_editorinfo_ace_doinsertunorderedlist">editorInfo.ace_doInsertUnorderedList(?)</a></li>
+<li><a href="#api_editorinfo_ace_doinsertorderedlist">editorInfo.ace_doInsertOrderedList(?)</a></li>
+<li><a href="#api_editorinfo_ace_performdocumentapplyattributestorange">editorInfo.ace_performDocumentApplyAttributesToRange()</a></li>
+<li><a href="#api_editorinfo_ace_getauthorinfos">editorInfo.ace_getAuthorInfos()</a></li>
+<li><a href="#api_editorinfo_ace_performdocumentreplacerange_start_end_newtext">editorInfo.ace_performDocumentReplaceRange(start, end, newText)</a></li>
+<li><a href="#api_editorinfo_ace_performdocumentreplacecharrange_startchar_endchar_newtext">editorInfo.ace_performDocumentReplaceCharRange(startChar, endChar, newText)</a></li>
+<li><a href="#api_editorinfo_ace_renumberlist_linenum">editorInfo.ace_renumberList(lineNum)</a></li>
+<li><a href="#api_editorinfo_ace_doreturnkey">editorInfo.ace_doReturnKey()</a></li>
+<li><a href="#api_editorinfo_ace_isblockelement_element">editorInfo.ace_isBlockElement(element)</a></li>
+<li><a href="#api_editorinfo_ace_getlinelisttype_linenum">editorInfo.ace_getLineListType(lineNum)</a></li>
+<li><a href="#api_editorinfo_ace_caretline">editorInfo.ace_caretLine()</a></li>
+<li><a href="#api_editorinfo_ace_caretcolumn">editorInfo.ace_caretColumn()</a></li>
+<li><a href="#api_editorinfo_ace_caretdocchar">editorInfo.ace_caretDocChar()</a></li>
+<li><a href="#api_editorinfo_ace_iswordchar">editorInfo.ace_isWordChar(?)</a></li>
+</ul>
+</li>
+<li><a href="#api_changeset_library">Changeset Library</a><ul>
+<li><a href="#api_changeset_unpack_changeset">Changeset.unpack(changeset)</a></li>
+<li><a href="#api_changeset_opiterator_ops">Changeset.opIterator(ops)</a></li>
+<li><a href="#api_the_operator_object">The Operator object</a><ul>
+<li><a href="#api_example">Example</a></li>
+</ul>
+</li>
+<li><a href="#api_apool">APool</a></li>
+<li><a href="#api_atext">AText</a></li>
+</ul>
+</li>
+<li><a href="#api_plugin_framework">Plugin Framework</a><ul>
+<li><a href="#api_plugins_update">plugins.update</a></li>
+<li><a href="#api_hooks_callall">hooks.callAll</a></li>
+<li><a href="#api_hooks_acallall">hooks.aCallAll</a></li>
+<li><a href="#api">...</a></li>
+</ul>
+</li>
+<li><a href="#api_toolbar_controller">Toolbar controller</a><ul>
+<li><a href="#api_button_opts">button(opts)</a></li>
+<li><a href="#api_selectbutton_opts">selectButton(opts)</a></li>
+<li><a href="#api_selectbutton_addoption_value_text_attributes">SelectButton.addOption(value, text, attributes)</a></li>
+<li><a href="#api_registerbutton_name_item">registerButton(name, item)</a></li>
+</ul>
+</li>
+<li><a href="#api_editbar">Editbar</a><ul>
+<li><a href="#api_isenabled">isEnabled()</a></li>
+<li><a href="#api_disable">disable()</a></li>
+<li><a href="#api_toggledropdown_dropdown_callback">toggleDropDown(dropdown, callback)</a></li>
+<li><a href="#api_registercommand_cmd_callback">registerCommand(cmd, callback)</a></li>
+<li><a href="#api_registeracecommand_cmd_callback">registerAceCommand(cmd, callback)</a></li>
+<li><a href="#api_registerdropdowncommand_cmd_dropdown">registerDropdownCommand(cmd, dropdown)</a></li>
+<li><a href="#api_triggercommand_cmd_item">triggerCommand(cmd[, item])</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+
+  <div id="apicontent">
+    <h1 id="embed-parameters">Embed parameters<span><a class="mark" href="#api_embed_parameters" id="api_embed_parameters">#</a></span></h1>
+<p>You can easily embed your etherpad-lite into any webpage by using iframes. You can configure the embedded pad using embed parameters.</p>
+<p>Example:</p>
+<p>Cut and paste the following code into any webpage to embed a pad. The parameters below will hide the chat and the line numbers and will auto-focus on Line 4.</p>
+<pre><code>&lt;iframe src=&#39;http://pad.test.de/p/PAD_NAME#L4?showChat=false&amp;showLineNumbers=false&#39; width=600 height=400&gt;&lt;/iframe&gt;</code></pre><h2 id="showlinenumbers">showLineNumbers<span><a class="mark" href="#api_showlinenumbers" id="api_showlinenumbers">#</a></span></h2>
+<div class="signature"><ul>
+<li>Boolean</li>
+</div></ul>
+<p>Default: true</p>
+<h2 id="showcontrols">showControls<span><a class="mark" href="#api_showcontrols" id="api_showcontrols">#</a></span></h2>
+<div class="signature"><ul>
+<li>Boolean</li>
+</div></ul>
+<p>Default: true</p>
+<h2 id="showchat">showChat<span><a class="mark" href="#api_showchat" id="api_showchat">#</a></span></h2>
+<div class="signature"><ul>
+<li>Boolean</li>
+</div></ul>
+<p>Default: true</p>
+<h2 id="usemonospacefont">useMonospaceFont<span><a class="mark" href="#api_usemonospacefont" id="api_usemonospacefont">#</a></span></h2>
+<div class="signature"><ul>
+<li>Boolean</li>
+</div></ul>
+<p>Default: false</p>
+<h2 id="username">userName<span><a class="mark" href="#api_username" id="api_username">#</a></span></h2>
+<div class="signature"><ul>
+<li>String</li>
+</div></ul>
+<p>Default: &quot;unnamed&quot;</p>
+<p>Example: <code>userName=Etherpad%20User</code></p>
+<h2 id="usercolor">userColor<span><a class="mark" href="#api_usercolor" id="api_usercolor">#</a></span></h2>
+<div class="signature"><ul>
+<li>String (css hex color value)</li>
+</div></ul>
+<p>Default: randomly chosen by pad server</p>
+<p>Example: <code>userColor=%23ff9900</code></p>
+<h2 id="nocolors">noColors<span><a class="mark" href="#api_nocolors" id="api_nocolors">#</a></span></h2>
+<div class="signature"><ul>
+<li>Boolean</li>
+</div></ul>
+<p>Default: false</p>
+<h2 id="alwaysshowchat">alwaysShowChat<span><a class="mark" href="#api_alwaysshowchat" id="api_alwaysshowchat">#</a></span></h2>
+<div class="signature"><ul>
+<li>Boolean</li>
+</div></ul>
+<p>Default: false</p>
+<h2 id="lang">lang<span><a class="mark" href="#api_lang" id="api_lang">#</a></span></h2>
+<div class="signature"><ul>
+<li>String</li>
+</div></ul>
+<p>Default: en</p>
+<p>Example: <code>lang=ar</code> (translates the interface into Arabic)</p>
+<h2 id="rtl">rtl<span><a class="mark" href="#api_rtl" id="api_rtl">#</a></span></h2>
+<div class="signature"><ul>
+<li>Boolean</li>
+</div></ul>
+<p>Default: true
+Displays pad text from right to left.</p>
+<h2 id="l">#L<span><a class="mark" href="#api_l" id="api_l">#</a></span></h2>
+<div class="signature"><ul>
+<li>Int</li>
+</div></ul>
+<p>Default: 0
+Focuses pad at specific line number and places caret at beginning of this line
+Special note: Is not a URL parameter but instead of a Hash value</p>
+<h1 id="http-api">HTTP API<span><a class="mark" href="#api_http_api" id="api_http_api">#</a></span></h1>
+<h2 id="what-can-i-do-with-this-api">What can I do with this API?<span><a class="mark" href="#api_what_can_i_do_with_this_api" id="api_what_can_i_do_with_this_api">#</a></span></h2>
+<p>The API gives another web application control of the pads. The basic functions are</p>
+<ul>
+<li>create/delete pads</li>
+<li>grant/forbid access to pads</li>
+<li>get/set pad content</li>
+</ul>
+<p>The API is designed in a way, so you can reuse your existing user system with their permissions, and map it to Etherpad. Means: Your web application still has to do authentication, but you can tell Etherpad via the api, which visitors should get which permissions. This allows Etherpad to fit into any web application and extend it with real-time functionality. You can embed the pads via an iframe into your website.</p>
+<p>Take a look at <a href="https://github.com/ether/etherpad-lite/wiki/HTTP-API-client-libraries">HTTP API client libraries</a> to check if a library in your favorite programming language is available.</p>
+<h3 id="openapi">OpenAPI<span><a class="mark" href="#api_openapi" id="api_openapi">#</a></span></h3>
+<p>OpenAPI (formerly swagger) definitions are exposed under <code>/api/openapi.json</code> (latest) and <code>/api/{version}/openapi.json</code>. You can use official tools like <a href="https://editor.swagger.io/">Swagger Editor</a> to view and explore them.</p>
+<h2 id="examples">Examples<span><a class="mark" href="#api_examples" id="api_examples">#</a></span></h2>
+<h3 id="example-1">Example 1<span><a class="mark" href="#api_example_1" id="api_example_1">#</a></span></h3>
+<p>A portal (such as WordPress) wants to give a user access to a new pad. Let&#39;s assume the user have the internal id 7 and his name is michael.</p>
+<p>Portal maps the internal userid to an etherpad author.</p>
+<blockquote>
+<p>Request: <code>http://pad.domain/api/1/createAuthorIfNotExistsFor?apikey=secret&amp;name=Michael&amp;authorMapper=7</code></p>
+<p>Response: <code>{code: 0, message:&quot;ok&quot;, data: {authorID: &quot;a.s8oes9dhwrvt0zif&quot;}}</code></p>
+</blockquote>
+<p>Portal maps the internal userid to an etherpad group:</p>
+<blockquote>
+<p>Request: <code>http://pad.domain/api/1/createGroupIfNotExistsFor?apikey=secret&amp;groupMapper=7</code></p>
+<p>Response: <code>{code: 0, message:&quot;ok&quot;, data: {groupID: &quot;g.s8oes9dhwrvt0zif&quot;}}</code></p>
+</blockquote>
+<p>Portal creates a pad in the userGroup</p>
+<blockquote>
+<p>Request: <code>http://pad.domain/api/1/createGroupPad?apikey=secret&amp;groupID=g.s8oes9dhwrvt0zif&amp;padName=samplePad&amp;text=This is the first sentence in the pad</code></p>
+<p>Response: <code>{code: 0, message:&quot;ok&quot;, data: null}</code></p>
+</blockquote>
+<p>Portal starts the session for the user on the group:</p>
+<blockquote>
+<p>Request: <code>http://pad.domain/api/1/createSession?apikey=secret&amp;groupID=g.s8oes9dhwrvt0zif&amp;authorID=a.s8oes9dhwrvt0zif&amp;validUntil=1312201246</code></p>
+<p>Response: <code>{&quot;data&quot;:{&quot;sessionID&quot;: &quot;s.s8oes9dhwrvt0zif&quot;}}</code></p>
+</blockquote>
+<p>Portal places the cookie &quot;sessionID&quot; with the given value on the client and creates an iframe including the pad.</p>
+<h3 id="example-2">Example 2<span><a class="mark" href="#api_example_2" id="api_example_2">#</a></span></h3>
+<p>A portal (such as WordPress) wants to transform the contents of a pad that multiple admins edited into a blog post.</p>
+<p>Portal retrieves the contents of the pad for entry into the db as a blog post:</p>
+<blockquote>
+<p>Request: <code>http://pad.domain/api/1/getText?apikey=secret&amp;padID=g.s8oes9dhwrvt0zif$123</code></p>
+<p>Response: <code>{code: 0, message:&quot;ok&quot;, data: {text:&quot;Welcome Text&quot;}}</code></p>
+</blockquote>
+<p>Portal submits content into new blog post</p>
+<blockquote>
+<p>Portal.AddNewBlog(content)</p>
+</blockquote>
+<h2 id="usage">Usage<span><a class="mark" href="#api_usage" id="api_usage">#</a></span></h2>
+<h3 id="api-version">API version<span><a class="mark" href="#api_api_version" id="api_api_version">#</a></span></h3>
+<p>The latest version is <code>1.2.14</code></p>
+<p>The current version can be queried via /api.</p>
+<h3 id="request-format">Request Format<span><a class="mark" href="#api_request_format" id="api_request_format">#</a></span></h3>
+<p>The API is accessible via HTTP. Starting from <strong>1.8</strong>, API endpoints can be invoked indifferently via GET or POST.</p>
+<p>The URL of the HTTP request is of the form: <code>/api/$APIVERSION/$FUNCTIONNAME</code>. $APIVERSION depends on the endpoint you want to use. Depending on the verb you use (GET or POST) <strong>parameters</strong> can be passed differently.</p>
+<p>When invoking via GET (mandatory until <strong>1.7.5</strong> included), parameters must be included in the query string (example: <code>/api/$APIVERSION/$FUNCTIONNAME?apikey=&lt;APIKEY&gt;&amp;param1=value1</code>). Please note that starting with nodejs 8.14+ the total size of HTTP request headers has been capped to 8192 bytes. This limits the quantity of data that can be sent in an API request.</p>
+<p>Starting from Etherpad <strong>1.8</strong> it is also possible to invoke the HTTP API via POST. In this case, querystring parameters will still be accepted, but <strong>any parameter with the same name sent via POST will take precedence</strong>. If you need to send large chunks of text (for example, for <code>setText()</code>) it is advisable to invoke via POST.</p>
+<p>Example with cURL using GET (toy example, no encoding):</p>
+<pre><code>curl &quot;http://pad.domain/api/1/setText?apikey=secret&amp;padID=padname&amp;text=this_text_will_NOT_be_encoded_by_curl_use_next_example&quot;</code></pre><p>Example with cURL using GET (better example, encodes text):</p>
+<pre><code>curl &quot;http://pad.domain/api/1/setText?apikey=secret&amp;padID=padname&quot; --get --data-urlencode &quot;text=Text sent via GET with proper encoding. For big documents, please use POST&quot;</code></pre><p>Example with cURL using POST:</p>
+<pre><code>curl &quot;http://pad.domain/api/1/setText?apikey=secret&amp;padID=padname&quot; --data-urlencode &quot;text=Text sent via POST with proper encoding. For big texts (&gt;8 KB), use this method&quot;</code></pre><h3 id="response-format">Response Format<span><a class="mark" href="#api_response_format" id="api_response_format">#</a></span></h3>
+<p>Responses are valid JSON in the following format:</p>
+<pre><code class="language-json">{
+  &quot;code&quot;: number,
+  &quot;message&quot;: string,
+  &quot;data&quot;: obj
+}</code></pre>
+<ul>
+<li><strong>code</strong> a return code<ul>
+<li><strong>0</strong> everything ok</li>
+<li><strong>1</strong> wrong parameters</li>
+<li><strong>2</strong> internal error</li>
+<li><strong>3</strong> no such function</li>
+<li><strong>4</strong> no or wrong API Key</li>
+</ul>
+</li>
+<li><strong>message</strong> a status message. It&#39;s ok if everything is fine, else it contains an error message</li>
+<li><strong>data</strong> the payload</li>
+</ul>
+<h3 id="overview">Overview<span><a class="mark" href="#api_overview" id="api_overview">#</a></span></h3>
+<p><img src="https://i.imgur.com/d0nWp.png" alt="API Overview"></p>
+<h2 id="data-types">Data Types<span><a class="mark" href="#api_data_types" id="api_data_types">#</a></span></h2>
+<div class="signature"><ul>
+<li><strong>groupID</strong>  a string, the unique id of a group. Format is g.16RANDOMCHARS, for example g.s8oes9dhwrvt0zif</li>
+<li><strong>sessionID</strong> a string, the unique id of a session. Format is s.16RANDOMCHARS, for example s.s8oes9dhwrvt0zif</li>
+<li><strong>authorID</strong> a string, the unique id of an author. Format is a.16RANDOMCHARS, for example a.s8oes9dhwrvt0zif</li>
+<li><strong>readOnlyID</strong> a string, the unique id of a readonly relation to a pad. Format is r.16RANDOMCHARS, for example r.s8oes9dhwrvt0zif</li>
+<li><strong>padID</strong> a string, format is GROUPID$PADNAME, for example the pad test of group g.s8oes9dhwrvt0zif has padID g.s8oes9dhwrvt0zif$test</li>
+</div></ul>
+<h3 id="authentication">Authentication<span><a class="mark" href="#api_authentication" id="api_authentication">#</a></span></h3>
+<p>Authentication works via a token that is sent with each request as a post parameter.  There is a single token per Etherpad deployment.  This token will be random string, generated by Etherpad at the first start. It will be saved in APIKEY.txt in the root folder of Etherpad. Only Etherpad and the requesting application knows this key. Token management will not be exposed through this API.</p>
+<h3 id="node-interoperability">Node Interoperability<span><a class="mark" href="#api_node_interoperability" id="api_node_interoperability">#</a></span></h3>
+<p>All functions will also be available through a node module accessible from other node.js applications.</p>
+<h3 id="jsonp">JSONP<span><a class="mark" href="#api_jsonp" id="api_jsonp">#</a></span></h3>
+<p>The API provides <em>JSONP</em> support to allow requests from a server in a different domain.
+Simply add <code>&amp;jsonp=?</code> to the API call.</p>
+<p>Example usage: <a href="https://api.jquery.com/jQuery.getJSON/">https://api.jquery.com/jQuery.getJSON/</a></p>
+<h2 id="api-methods">API Methods<span><a class="mark" href="#api_api_methods" id="api_api_methods">#</a></span></h2>
+<h3 id="groups">Groups<span><a class="mark" href="#api_groups" id="api_groups">#</a></span></h3>
+<p>Pads can belong to a group. The padID of grouppads is starting with a groupID like g.asdfasdfasdfasdf$test</p>
+<h4 id="creategroup">createGroup()<span><a class="mark" href="#api_creategroup" id="api_creategroup">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1</li>
+</div></ul>
+<p>creates a new group</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {groupID: g.s8oes9dhwrvt0zif}}</code></li>
+</ul>
+<h4 id="creategroupifnotexistsforgroupmapper">createGroupIfNotExistsFor(groupMapper)<span><a class="mark" href="#api_creategroupifnotexistsfor_groupmapper" id="api_creategroupifnotexistsfor_groupmapper">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1</li>
+</div></ul>
+<p>this functions helps you to map your application group ids to Etherpad group ids</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {groupID: g.s8oes9dhwrvt0zif}}</code></li>
+</ul>
+<h4 id="deletegroupgroupid">deleteGroup(groupID)<span><a class="mark" href="#api_deletegroup_groupid" id="api_deletegroup_groupid">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1</li>
+</div></ul>
+<p>deletes a group</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: null}</code></li>
+<li><code>{code: 1, message:&quot;groupID does not exist&quot;, data: null}</code></li>
+</ul>
+<h4 id="listpadsgroupid">listPads(groupID)<span><a class="mark" href="#api_listpads_groupid" id="api_listpads_groupid">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1</li>
+</div></ul>
+<p>returns all pads of this group</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {padIDs : [&quot;g.s8oes9dhwrvt0zif$test&quot;, &quot;g.s8oes9dhwrvt0zif$test2&quot;]}</code></li>
+<li><code>{code: 1, message:&quot;groupID does not exist&quot;, data: null}</code></li>
+</ul>
+<h4 id="creategrouppadgroupid-padname--text">createGroupPad(groupID, padName [, text])<span><a class="mark" href="#api_creategrouppad_groupid_padname_text" id="api_creategrouppad_groupid_padname_text">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1</li>
+</div></ul>
+<p>creates a new pad in this group</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: null}</code></li>
+<li><code>{code: 1, message:&quot;pad does already exist&quot;, data: null}</code></li>
+<li><code>{code: 1, message:&quot;groupID does not exist&quot;, data: null}</code></li>
+</ul>
+<h4 id="listallgroups">listAllGroups()<span><a class="mark" href="#api_listallgroups" id="api_listallgroups">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1.1</li>
+</div></ul>
+<p>lists all existing groups</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {groupIDs: [&quot;g.mKjkmnAbSMtCt8eL&quot;, &quot;g.3ADWx6sbGuAiUmCy&quot;]}}</code></li>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {groupIDs: []}}</code></li>
+</ul>
+<h3 id="author">Author<span><a class="mark" href="#api_author" id="api_author">#</a></span></h3>
+<p>These authors are bound to the attributes the users choose (color and name).</p>
+<h4 id="createauthorname">createAuthor([name])<span><a class="mark" href="#api_createauthor_name" id="api_createauthor_name">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1</li>
+</div></ul>
+<p>creates a new author</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {authorID: &quot;a.s8oes9dhwrvt0zif&quot;}}</code></li>
+</ul>
+<h4 id="createauthorifnotexistsforauthormapper--name">createAuthorIfNotExistsFor(authorMapper [, name])<span><a class="mark" href="#api_createauthorifnotexistsfor_authormapper_name" id="api_createauthorifnotexistsfor_authormapper_name">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1</li>
+</div></ul>
+<p>this functions helps you to map your application author ids to Etherpad author ids</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {authorID: &quot;a.s8oes9dhwrvt0zif&quot;}}</code></li>
+</ul>
+<h4 id="listpadsofauthorauthorid">listPadsOfAuthor(authorID)<span><a class="mark" href="#api_listpadsofauthor_authorid" id="api_listpadsofauthor_authorid">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1</li>
+</div></ul>
+<p>returns an array of all pads this author contributed to</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {padIDs: [&quot;g.s8oes9dhwrvt0zif$test&quot;, &quot;g.s8oejklhwrvt0zif$foo&quot;]}}</code></li>
+<li><code>{code: 1, message:&quot;authorID does not exist&quot;, data: null}</code></li>
+</ul>
+<h4 id="getauthornameauthorid">getAuthorName(authorID)<span><a class="mark" href="#api_getauthorname_authorid" id="api_getauthorname_authorid">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1.1</li>
+</div></ul>
+<p>Returns the Author Name of the author</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {authorName: &quot;John McLear&quot;}}</code></li>
+</ul>
+<p>-&gt; can&#39;t be deleted cause this would involve scanning all the pads where this author was</p>
+<h3 id="session">Session<span><a class="mark" href="#api_session" id="api_session">#</a></span></h3>
+<p>Sessions can be created between a group and an author. This allows an author to access more than one group. The sessionID will be set as a cookie to the client and is valid until a certain date. The session cookie can also contain multiple comma-separated sessionIDs, allowing a user to edit pads in different groups at the same time. Only users with a valid session for this group, can access group pads. You can create a session after you authenticated the user at your web application, to give them access to the pads. You should save the sessionID of this session and delete it after the user logged out.</p>
+<h4 id="createsessiongroupid-authorid-validuntil">createSession(groupID, authorID, validUntil)<span><a class="mark" href="#api_createsession_groupid_authorid_validuntil" id="api_createsession_groupid_authorid_validuntil">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1</li>
+</div></ul>
+<p>creates a new session. validUntil is an unix timestamp in seconds</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {sessionID: &quot;s.s8oes9dhwrvt0zif&quot;}}</code></li>
+<li><code>{code: 1, message:&quot;groupID doesn&#39;t exist&quot;, data: null}</code></li>
+<li><code>{code: 1, message:&quot;authorID doesn&#39;t exist&quot;, data: null}</code></li>
+<li><code>{code: 1, message:&quot;validUntil is in the past&quot;, data: null}</code></li>
+</ul>
+<h4 id="deletesessionsessionid">deleteSession(sessionID)<span><a class="mark" href="#api_deletesession_sessionid" id="api_deletesession_sessionid">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1</li>
+</div></ul>
+<p>deletes a session</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: null}</code></li>
+<li><code>{code: 1, message:&quot;sessionID does not exist&quot;, data: null}</code></li>
+</ul>
+<h4 id="getsessioninfosessionid">getSessionInfo(sessionID)<span><a class="mark" href="#api_getsessioninfo_sessionid" id="api_getsessioninfo_sessionid">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1</li>
+</div></ul>
+<p>returns information about a session</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {authorID: &quot;a.s8oes9dhwrvt0zif&quot;, groupID: g.s8oes9dhwrvt0zif, validUntil: 1312201246}}</code></li>
+<li><code>{code: 1, message:&quot;sessionID does not exist&quot;, data: null}</code></li>
+</ul>
+<h4 id="listsessionsofgroupgroupid">listSessionsOfGroup(groupID)<span><a class="mark" href="#api_listsessionsofgroup_groupid" id="api_listsessionsofgroup_groupid">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1</li>
+</div></ul>
+<p>returns all sessions of a group</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{&quot;code&quot;:0,&quot;message&quot;:&quot;ok&quot;,&quot;data&quot;:{&quot;s.oxf2ras6lvhv2132&quot;:{&quot;groupID&quot;:&quot;g.s8oes9dhwrvt0zif&quot;,&quot;authorID&quot;:&quot;a.akf8finncvomlqva&quot;,&quot;validUntil&quot;:2312905480}}}</code></li>
+<li><code>{code: 1, message:&quot;groupID does not exist&quot;, data: null}</code></li>
+</ul>
+<h4 id="listsessionsofauthorauthorid">listSessionsOfAuthor(authorID)<span><a class="mark" href="#api_listsessionsofauthor_authorid" id="api_listsessionsofauthor_authorid">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1</li>
+</div></ul>
+<p>returns all sessions of an author</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{&quot;code&quot;:0,&quot;message&quot;:&quot;ok&quot;,&quot;data&quot;:{&quot;s.oxf2ras6lvhv2132&quot;:{&quot;groupID&quot;:&quot;g.s8oes9dhwrvt0zif&quot;,&quot;authorID&quot;:&quot;a.akf8finncvomlqva&quot;,&quot;validUntil&quot;:2312905480}}}</code></li>
+<li><code>{code: 1, message:&quot;authorID does not exist&quot;, data: null}</code></li>
+</ul>
+<h3 id="pad-content">Pad Content<span><a class="mark" href="#api_pad_content" id="api_pad_content">#</a></span></h3>
+<p>Pad content can be updated and retrieved through the API</p>
+<h4 id="gettextpadid-rev">getText(padID, [rev])<span><a class="mark" href="#api_gettext_padid_rev" id="api_gettext_padid_rev">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1</li>
+</div></ul>
+<p>returns the text of a pad</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {text:&quot;Welcome Text&quot;}}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+</ul>
+<h4 id="settextpadid-text">setText(padID, text)<span><a class="mark" href="#api_settext_padid_text" id="api_settext_padid_text">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1</li>
+</div></ul>
+<p>Sets the text of a pad.</p>
+<p>If your text is long (&gt;8 KB), please invoke via POST and include <code>text</code> parameter in the body of the request, not in the URL (since Etherpad <strong>1.8</strong>).</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: null}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+<li><code>{code: 1, message:&quot;text too long&quot;, data: null}</code></li>
+</ul>
+<h4 id="appendtextpadid-text">appendText(padID, text)<span><a class="mark" href="#api_appendtext_padid_text" id="api_appendtext_padid_text">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1.2.13</li>
+</div></ul>
+<p>Appends text to a pad.</p>
+<p>If your text is long (&gt;8 KB), please invoke via POST and include <code>text</code> parameter in the body of the request, not in the URL (since Etherpad <strong>1.8</strong>).</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: null}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+<li><code>{code: 1, message:&quot;text too long&quot;, data: null}</code></li>
+</ul>
+<h4 id="gethtmlpadid-rev">getHTML(padID, [rev])<span><a class="mark" href="#api_gethtml_padid_rev" id="api_gethtml_padid_rev">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1</li>
+</div></ul>
+<p>returns the text of a pad formatted as HTML</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {html:&quot;Welcome Text&lt;br&gt;More Text&quot;}}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+</ul>
+<h4 id="sethtmlpadid-html">setHTML(padID, html)<span><a class="mark" href="#api_sethtml_padid_html" id="api_sethtml_padid_html">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1</li>
+</div></ul>
+<p>sets the text of a pad based on HTML, HTML must be well-formed. Malformed HTML will send a warning to the API log.</p>
+<p>If <code>html</code> is long (&gt;8 KB), please invoke via POST and include <code>html</code> parameter in the body of the request, not in the URL (since Etherpad <strong>1.8</strong>).</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: null}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+</ul>
+<h4 id="getattributepoolpadid">getAttributePool(padID)<span><a class="mark" href="#api_getattributepool_padid" id="api_getattributepool_padid">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1.2.8</li>
+</div></ul>
+<p>returns the attribute pool of a pad</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li>`{ &quot;code&quot;:0,
+   &quot;message&quot;:&quot;ok&quot;,
+   &quot;data&quot;: {<pre><code> &quot;pool&quot;:{
+   &quot;numToAttrib&quot;:{
+     &quot;0&quot;:[&quot;author&quot;,&quot;a.X4m8bBWJBZJnWGSh&quot;],
+     &quot;1&quot;:[&quot;author&quot;,&quot;a.TotfBPzov54ihMdH&quot;],
+     &quot;2&quot;:[&quot;author&quot;,&quot;a.StiblqrzgeNTbK05&quot;],
+     &quot;3&quot;:[&quot;bold&quot;,&quot;true&quot;]
+   },
+   &quot;attribToNum&quot;:{
+     &quot;author,a.X4m8bBWJBZJnWGSh&quot;:0,
+     &quot;author,a.TotfBPzov54ihMdH&quot;:1,
+     &quot;author,a.StiblqrzgeNTbK05&quot;:2,
+     &quot;bold,true&quot;:3
+   },
+   &quot;nextNum&quot;:4
+ }</code></pre>   }
+ }`</li>
+<li><code>{&quot;code&quot;:1,&quot;message&quot;:&quot;padID does not exist&quot;,&quot;data&quot;:null}</code></li>
+</ul>
+<h4 id="getrevisionchangesetpadid-rev">getRevisionChangeset(padID, [rev])<span><a class="mark" href="#api_getrevisionchangeset_padid_rev" id="api_getrevisionchangeset_padid_rev">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1.2.8</li>
+</div></ul>
+<p>get the changeset at a given revision, or last revision if &#39;rev&#39; is not defined.</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{ &quot;code&quot; : 0,
+   &quot;message&quot; : &quot;ok&quot;,
+   &quot;data&quot; : &quot;Z:1&gt;6b|5+6b$Welcome to Etherpad!\n\nThis pad text is synchronized as you type, so that everyone viewing this page sees the same text. This allows you to collaborate seamlessly on documents!\n\nGet involved with Etherpad at https://etherpad.org\n&quot;
+ }</code></li>
+<li><code>{&quot;code&quot;:1,&quot;message&quot;:&quot;padID does not exist&quot;,&quot;data&quot;:null}</code></li>
+<li><code>{&quot;code&quot;:1,&quot;message&quot;:&quot;rev is higher than the head revision of the pad&quot;,&quot;data&quot;:null}</code></li>
+</ul>
+<h4 id="creatediffhtmlpadid-startrev-endrev">createDiffHTML(padID, startRev, endRev)<span><a class="mark" href="#api_creatediffhtml_padid_startrev_endrev" id="api_creatediffhtml_padid_startrev_endrev">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1.2.7</li>
+</div></ul>
+<p>returns an object of diffs from 2 points in a pad</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{&quot;code&quot;:0,&quot;message&quot;:&quot;ok&quot;,&quot;data&quot;:{&quot;html&quot;:&quot;&lt;style&gt;\n.authora_HKIv23mEbachFYfH {background-color: #a979d9}\n.authora_n4gEeMLsv1GivNeh {background-color: #a9b5d9}\n.removed {text-decoration: line-through; -ms-filter:&#39;progid:DXImageTransform.Microsoft.Alpha(Opacity=80)&#39;; filter: alpha(opacity=80); opacity: 0.8; }\n&lt;/style&gt;Welcome to Etherpad!&lt;br&gt;&lt;br&gt;This pad text is synchronized as you type, so that everyone viewing this page sees the same text. This allows you to collaborate seamlessly on documents!&lt;br&gt;&lt;br&gt;Get involved with Etherpad at &lt;a href=\&quot;http&amp;#x3a;&amp;#x2F;&amp;#x2F;etherpad&amp;#x2e;org\&quot;&gt;http:&amp;#x2F;&amp;#x2F;etherpad.org&lt;/a&gt;&lt;br&gt;&lt;span class=\&quot;authora_HKIv23mEbachFYfH\&quot;&gt;aw&lt;/span&gt;&lt;br&gt;&lt;br&gt;&quot;,&quot;authors&quot;:[&quot;a.HKIv23mEbachFYfH&quot;,&quot;&quot;]}}</code></li>
+<li><code>{&quot;code&quot;:4,&quot;message&quot;:&quot;no or wrong API Key&quot;,&quot;data&quot;:null}</code></li>
+</ul>
+<h4 id="restorerevisionpadid-rev">restoreRevision(padId, rev)<span><a class="mark" href="#api_restorerevision_padid_rev" id="api_restorerevision_padid_rev">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1.2.11</li>
+</div></ul>
+<p>Restores revision from past as new changeset</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li>{code:0, message:&quot;ok&quot;, data:null}</li>
+<li>{code: 1, message:&quot;padID does not exist&quot;, data: null}</li>
+</ul>
+<h3 id="chat">Chat<span><a class="mark" href="#api_chat" id="api_chat">#</a></span></h3>
+<h4 id="getchathistorypadid-start-end">getChatHistory(padID, [start, end])<span><a class="mark" href="#api_getchathistory_padid_start_end" id="api_getchathistory_padid_start_end">#</a></span></h4>
+<ul>
+<li>API &gt;= 1.2.7</li>
+</ul>
+<p>returns</p>
+<ul>
+<li>a part of the chat history, when <code>start</code> and <code>end</code> are given</li>
+<li>the whole chat history, when no extra parameters are given</li>
+</ul>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{&quot;code&quot;:0,&quot;message&quot;:&quot;ok&quot;,&quot;data&quot;:{&quot;messages&quot;:[{&quot;text&quot;:&quot;foo&quot;,&quot;userId&quot;:&quot;a.foo&quot;,&quot;time&quot;:1359199533759,&quot;userName&quot;:&quot;test&quot;},{&quot;text&quot;:&quot;bar&quot;,&quot;userId&quot;:&quot;a.foo&quot;,&quot;time&quot;:1359199534622,&quot;userName&quot;:&quot;test&quot;}]}}</code></li>
+<li><code>{code: 1, message:&quot;start is higher or equal to the current chatHead&quot;, data: null}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+</ul>
+<h4 id="getchatheadpadid">getChatHead(padID)<span><a class="mark" href="#api_getchathead_padid" id="api_getchathead_padid">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1.2.7</li>
+</div></ul>
+<p>returns the chatHead (last number of the last chat-message) of the pad</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {chatHead: 42}}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+</ul>
+<h4 id="appendchatmessagepadid-text-authorid--time">appendChatMessage(padID, text, authorID [, time])<span><a class="mark" href="#api_appendchatmessage_padid_text_authorid_time" id="api_appendchatmessage_padid_text_authorid_time">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1.2.12</li>
+</div></ul>
+<p>creates a chat message, saves it to the database and sends it to all connected clients of this pad</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: null}</code></li>
+<li><code>{code: 1, message:&quot;text is no string&quot;, data: null}</code></li>
+</ul>
+<h3 id="pad">Pad<span><a class="mark" href="#api_pad" id="api_pad">#</a></span></h3>
+<p>Group pads are normal pads, but with the name schema GROUPID$PADNAME. A security manager controls access of them and it&#39;s forbidden for normal pads to include a $ in the name.</p>
+<h4 id="createpadpadid--text">createPad(padID [, text])<span><a class="mark" href="#api_createpad_padid_text" id="api_createpad_padid_text">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1</li>
+</div></ul>
+<p>creates a new (non-group) pad.  Note that if you need to create a group Pad, you should call <strong>createGroupPad</strong>.
+You get an error message if you use one of the following characters in the padID: &quot;/&quot;, &quot;?&quot;, &quot;&amp;&quot; or &quot;#&quot;.</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: null}</code></li>
+<li><code>{code: 1, message:&quot;padID does already exist&quot;, data: null}</code></li>
+<li><code>{code: 1, message:&quot;malformed padID: Remove special characters&quot;, data: null}</code></li>
+</ul>
+<h4 id="getrevisionscountpadid">getRevisionsCount(padID)<span><a class="mark" href="#api_getrevisionscount_padid" id="api_getrevisionscount_padid">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1</li>
+</div></ul>
+<p>returns the number of revisions of this pad</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {revisions: 56}}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+</ul>
+<h4 id="getsavedrevisionscountpadid">getSavedRevisionsCount(padID)<span><a class="mark" href="#api_getsavedrevisionscount_padid" id="api_getsavedrevisionscount_padid">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1.2.11</li>
+</div></ul>
+<p>returns the number of saved revisions of this pad</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {savedRevisions: 42}}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+</ul>
+<h4 id="listsavedrevisionspadid">listSavedRevisions(padID)<span><a class="mark" href="#api_listsavedrevisions_padid" id="api_listsavedrevisions_padid">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1.2.11</li>
+</div></ul>
+<p>returns the list of saved revisions of this pad</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {savedRevisions: [2, 42, 1337]}}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+</ul>
+<h4 id="saverevisionpadid--rev">saveRevision(padID [, rev])<span><a class="mark" href="#api_saverevision_padid_rev" id="api_saverevision_padid_rev">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1.2.11</li>
+</div></ul>
+<p>saves a revision</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: null}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+</ul>
+<h4 id="paduserscountpadid">padUsersCount(padID)<span><a class="mark" href="#api_paduserscount_padid" id="api_paduserscount_padid">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1</li>
+</div></ul>
+<p>returns the number of user that are currently editing this pad</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {padUsersCount: 5}}</code></li>
+</ul>
+<h4 id="paduserspadid">padUsers(padID)<span><a class="mark" href="#api_padusers_padid" id="api_padusers_padid">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1.1</li>
+</div></ul>
+<p>returns the list of users that are currently editing this pad</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {padUsers: [{colorId:&quot;#c1a9d9&quot;,&quot;name&quot;:&quot;username1&quot;,&quot;timestamp&quot;:1345228793126,&quot;id&quot;:&quot;a.n4gEeMLsvg12452n&quot;},{&quot;colorId&quot;:&quot;#d9a9cd&quot;,&quot;name&quot;:&quot;Hmmm&quot;,&quot;timestamp&quot;:1345228796042,&quot;id&quot;:&quot;a.n4gEeMLsvg12452n&quot;}]}}</code></li>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {padUsers: []}}</code></li>
+</ul>
+<h4 id="deletepadpadid">deletePad(padID)<span><a class="mark" href="#api_deletepad_padid" id="api_deletepad_padid">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1</li>
+</div></ul>
+<p>deletes a pad</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: null}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+</ul>
+<h4 id="copypadsourceid-destinationid-forcefalse">copyPad(sourceID, destinationID[, force=false])<span><a class="mark" href="#api_copypad_sourceid_destinationid_force_false" id="api_copypad_sourceid_destinationid_force_false">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1.2.8</li>
+</div></ul>
+<p>copies a pad with full history and chat. If force is true and the destination pad exists, it will be overwritten.</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: null}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+</ul>
+<h4 id="copypadwithouthistorysourceid-destinationid-forcefalse">copyPadWithoutHistory(sourceID, destinationID[, force=false])<span><a class="mark" href="#api_copypadwithouthistory_sourceid_destinationid_force_false" id="api_copypadwithouthistory_sourceid_destinationid_force_false">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1.2.15</li>
+</div></ul>
+<p>copies a pad without copying the history and chat. If force is true and the destination pad exists, it will be overwritten.
+Note that all the revisions will be lost! In most of the cases one should use <code>copyPad</code> API instead.</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: null}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+</ul>
+<h4 id="movepadsourceid-destinationid-forcefalse">movePad(sourceID, destinationID[, force=false])<span><a class="mark" href="#api_movepad_sourceid_destinationid_force_false" id="api_movepad_sourceid_destinationid_force_false">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1.2.8</li>
+</div></ul>
+<p>moves a pad. If force is true and the destination pad exists, it will be overwritten.</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: null}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+</ul>
+<h4 id="getreadonlyidpadid">getReadOnlyID(padID)<span><a class="mark" href="#api_getreadonlyid_padid" id="api_getreadonlyid_padid">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1</li>
+</div></ul>
+<p>returns the read only link of a pad</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {readOnlyID: &quot;r.s8oes9dhwrvt0zif&quot;}}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+</ul>
+<h4 id="getpadidreadonlyid">getPadID(readOnlyID)<span><a class="mark" href="#api_getpadid_readonlyid" id="api_getpadid_readonlyid">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1.2.10</li>
+</div></ul>
+<p>returns the id of a pad which is assigned to the readOnlyID</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {padID: &quot;p.s8oes9dhwrvt0zif&quot;}}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+</ul>
+<h4 id="setpublicstatuspadid-publicstatus">setPublicStatus(padID, publicStatus)<span><a class="mark" href="#api_setpublicstatus_padid_publicstatus" id="api_setpublicstatus_padid_publicstatus">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1</li>
+</div></ul>
+<p>sets a boolean for the public status of a pad</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: null}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+</ul>
+<h4 id="getpublicstatuspadid">getPublicStatus(padID)<span><a class="mark" href="#api_getpublicstatus_padid" id="api_getpublicstatus_padid">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1</li>
+</div></ul>
+<p>return true of false</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {publicStatus: true}}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+</ul>
+<h4 id="listauthorsofpadpadid">listAuthorsOfPad(padID)<span><a class="mark" href="#api_listauthorsofpad_padid" id="api_listauthorsofpad_padid">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1</li>
+</div></ul>
+<p>returns an array of authors who contributed to this pad</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {authorIDs : [&quot;a.s8oes9dhwrvt0zif&quot;, &quot;a.akf8finncvomlqva&quot;]}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+</ul>
+<h4 id="getlasteditedpadid">getLastEdited(padID)<span><a class="mark" href="#api_getlastedited_padid" id="api_getlastedited_padid">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1</li>
+</div></ul>
+<p>returns the timestamp of the last revision of the pad</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {lastEdited: 1340815946602}}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+</ul>
+<h4 id="sendclientsmessagepadid-msg">sendClientsMessage(padID, msg)<span><a class="mark" href="#api_sendclientsmessage_padid_msg" id="api_sendclientsmessage_padid_msg">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1.1</li>
+</div></ul>
+<p>sends a custom message of type <code>msg</code> to the pad</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {}}</code></li>
+<li><code>{code: 1, message:&quot;padID does not exist&quot;, data: null}</code></li>
+</ul>
+<h4 id="checktoken">checkToken()<span><a class="mark" href="#api_checktoken" id="api_checktoken">#</a></span></h4>
+<div class="signature"><ul>
+<li>API &gt;= 1.2</li>
+</div></ul>
+<p>returns ok when the current api token is valid</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{&quot;code&quot;:0,&quot;message&quot;:&quot;ok&quot;,&quot;data&quot;:null}</code></li>
+<li><code>{&quot;code&quot;:4,&quot;message&quot;:&quot;no or wrong API Key&quot;,&quot;data&quot;:null}</code></li>
+</ul>
+<h3 id="pads">Pads<span><a class="mark" href="#api_pads" id="api_pads">#</a></span></h3>
+<h4 id="listallpads">listAllPads()<span><a class="mark" href="#api_listallpads" id="api_listallpads">#</a></span></h4>
+<ul>
+<li>API &gt;= 1.2.1</li>
+</ul>
+<p>lists all pads on this epl instance</p>
+<p><em>Example returns:</em></p>
+<ul>
+<li><code>{code: 0, message:&quot;ok&quot;, data: {padIDs: [&quot;testPad&quot;, &quot;thePadsOfTheOthers&quot;]}}</code></li>
+</ul>
+<h3 id="global">Global<span><a class="mark" href="#api_global" id="api_global">#</a></span></h3>
+<h4 id="getstats">getStats()<span><a class="mark" href="#api_getstats" id="api_getstats">#</a></span></h4>
+<ul>
+<li>API &gt;= 1.2.14</li>
+</ul>
+<p>get stats of the etherpad instance</p>
+<p><em>Example returns</em></p>
+<ul>
+<li><code>{&quot;code&quot;:0,&quot;message&quot;:&quot;ok&quot;,&quot;data&quot;:{&quot;totalPads&quot;:3,&quot;totalSessions&quot;: 2,&quot;totalActivePads&quot;: 1}}</code></li>
+</ul>
+<h1 id="hooks">Hooks<span><a class="mark" href="#api_hooks" id="api_hooks">#</a></span></h1>
+<p>A hook function is registered with a hook via the plugin&#39;s <code>ep.json</code> file. See
+the Plugins section for details. A hook may have many registered functions from
+different plugins.</p>
+<p>Some hooks call their registered functions one at a time until one of them
+returns a value. Others always call all of their registered functions and
+combine the results (if applicable).</p>
+<h2 id="registered-hook-functions">Registered hook functions<span><a class="mark" href="#api_registered_hook_functions" id="api_registered_hook_functions">#</a></span></h2>
+<p>Note: The documentation in this section applies to every hook unless the
+hook-specific documentation says otherwise.</p>
+<h3 id="arguments">Arguments<span><a class="mark" href="#api_arguments" id="api_arguments">#</a></span></h3>
+<p>Hook functions are called with three arguments:</p>
+<ol>
+<li><code>hookName</code> - The name of the hook being invoked.</li>
+<li><code>context</code> - An object with some relevant information about the context of the
+call. See the hook-specific documentation for details.</li>
+<li><code>cb</code> - For asynchronous operations this callback can be called to signal
+completion and optionally provide a return value. The callback takes a single
+argument, the meaning of which depends on the hook (see the &quot;Return values&quot;
+section for general information that applies to most hooks). This callback
+always returns <code>undefined</code>.</li>
+</ol>
+<h3 id="expected-behavior">Expected behavior<span><a class="mark" href="#api_expected_behavior" id="api_expected_behavior">#</a></span></h3>
+<p>The presence of a callback parameter suggests that every hook function can run
+asynchronously. While that is the eventual goal, there are some legacy hooks
+that expect their hook functions to provide a value synchronously. For such
+hooks, the hook functions must do one of the following:</p>
+<ul>
+<li>Call the callback with a non-Promise value (<code>undefined</code> is acceptable) and
+return <code>undefined</code>, in that order.</li>
+<li>Return a non-Promise value other than <code>undefined</code> (<code>null</code> is acceptable) and
+never call the callback. Note that <code>async</code> functions <em>always</em> return a
+Promise, so they must never be used for synchronous hooks.</li>
+<li>Only have two parameters (<code>hookName</code> and <code>context</code>) and return any non-Promise
+value (<code>undefined</code> is acceptable).</li>
+</ul>
+<p>For hooks that permit asynchronous behavior, the hook functions must do one or
+more of the following:</p>
+<ul>
+<li>Return <code>undefined</code> and call the callback, in either order.</li>
+<li>Return something other than <code>undefined</code> (<code>null</code> is acceptable) and never call
+the callback. Note that <code>async</code> functions <em>always</em> return a Promise, so they
+must never call the callback.</li>
+<li>Only have two parameters (<code>hookName</code> and <code>context</code>).</li>
+</ul>
+<p>Note that the acceptable behaviors for asynchronous hook functions is a superset
+of the acceptable behaviors for synchronous hook functions.</p>
+<p>WARNING: The number of parameters is determined by examining
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/length">Function.length</a>,
+which does not count <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters">default
+parameters</a>
+or <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters">&quot;rest&quot;
+parameters</a>.
+To avoid problems, do not use default or rest parameters when defining hook
+functions.</p>
+<h3 id="return-values">Return values<span><a class="mark" href="#api_return_values" id="api_return_values">#</a></span></h3>
+<p>A hook function can provide a value to Etherpad in one of the following ways:</p>
+<ul>
+<li>Pass the desired value as the first argument to the callback.</li>
+<li>Return the desired value directly. The value must not be <code>undefined</code> unless
+the hook function only has two parameters. (Hook functions with three
+parameters that want to provide <code>undefined</code> should instead use the callback.)</li>
+<li>For hooks that permit asynchronous behavior, return a Promise that resolves to
+the desired value.</li>
+<li>For hooks that permit asynchronous behavior, pass a Promise that resolves to
+the desired value as the first argument to the callback.</li>
+</ul>
+<p>Examples:</p>
+<pre><code class="language-javascript">exports.exampleOne = (hookName, context, callback) =&gt; {
+  return &#39;valueOne&#39;;
+};
+
+exports.exampleTwo = (hookName, context, callback) =&gt; {
+  callback(&#39;valueTwo&#39;);
+  return;
+};
+
+// ONLY FOR HOOKS THAT PERMIT ASYNCHRONOUS BEHAVIOR
+exports.exampleThree = (hookName, context, callback) =&gt; {
+  return new Promise(&#39;valueThree&#39;);
+};
+
+// ONLY FOR HOOKS THAT PERMIT ASYNCHRONOUS BEHAVIOR
+exports.exampleFour = (hookName, context, callback) =&gt; {
+  callback(new Promise(&#39;valueFour&#39;));
+  return;
+};
+
+// ONLY FOR HOOKS THAT PERMIT ASYNCHRONOUS BEHAVIOR
+exports.exampleFive = async (hookName, context) =&gt; {
+  // Note that this function is async, so it actually returns a Promise that
+  // is resolved to &#39;valueFive&#39;.
+  return &#39;valueFive&#39;;
+};</code></pre>
+<p>Etherpad collects the values provided by the hook functions into an array,
+filters out all <code>undefined</code> values, then flattens the array one level.
+Flattening one level makes it possible for a hook function to behave as if it
+were multiple separate hook functions.</p>
+<p>For example: Suppose a hook has eight registered functions that return the
+following values: <code>1</code>, <code>[2]</code>, <code>[&#39;3a&#39;, &#39;3b&#39;]</code> <code>[[4]]</code>, <code>undefined</code>,
+<code>[undefined]</code>, <code>[]</code>, and <code>null</code>. The value returned to the caller of the hook is
+<code>[1, 2, &#39;3a&#39;, &#39;3b&#39;, [4], undefined, null]</code>.</p>
+<h1 id="client-side-hooks">Client-side hooks<span><a class="mark" href="#api_client_side_hooks" id="api_client_side_hooks">#</a></span></h1>
+<p>Most of these hooks are called during or in order to set up the formatting
+process.</p>
+<h2 id="documentready">documentReady<span><a class="mark" href="#api_documentready" id="api_documentready">#</a></span></h2>
+<p>Called from: src/templates/pad.html</p>
+<p>Things in context:</p>
+<p>nothing</p>
+<p>This hook proxies the functionality of jQuery&#39;s <code>$(document).ready</code> event.</p>
+<h2 id="acedomlinepreprocesslineattributes">aceDomLinePreProcessLineAttributes<span><a class="mark" href="#api_acedomlinepreprocesslineattributes" id="api_acedomlinepreprocesslineattributes">#</a></span></h2>
+<p>Called from: src/static/js/domline.js</p>
+<p>Things in context:</p>
+<ol>
+<li>domline - The current DOM line being processed</li>
+<li>cls - The class of the current block element (useful for styling)</li>
+</ol>
+<p>This hook is called for elements in the DOM that have the &quot;lineMarkerAttribute&quot;
+set. You can add elements into this category with the aceRegisterBlockElements
+hook above. This hook is run BEFORE the numbered and ordered lists logic is
+applied.</p>
+<p>The return value of this hook should have the following structure:</p>
+<p><code>{ preHtml: String, postHtml: String, processedMarker: Boolean }</code></p>
+<p>The preHtml and postHtml values will be added to the HTML display of the
+element, and if processedMarker is true, the engine won&#39;t try to process it any
+more.</p>
+<h2 id="acedomlineprocesslineattributes">aceDomLineProcessLineAttributes<span><a class="mark" href="#api_acedomlineprocesslineattributes" id="api_acedomlineprocesslineattributes">#</a></span></h2>
+<p>Called from: src/static/js/domline.js</p>
+<p>Things in context:</p>
+<ol>
+<li>domline - The current DOM line being processed</li>
+<li>cls - The class of the current block element (useful for styling)</li>
+</ol>
+<p>This hook is called for elements in the DOM that have the &quot;lineMarkerAttribute&quot;
+set. You can add elements into this category with the aceRegisterBlockElements
+hook above. This hook is run AFTER the ordered and numbered lists logic is
+applied.</p>
+<p>The return value of this hook should have the following structure:</p>
+<p><code>{ preHtml: String, postHtml: String, processedMarker: Boolean }</code></p>
+<p>The preHtml and postHtml values will be added to the HTML display of the
+element, and if processedMarker is true, the engine won&#39;t try to process it any
+more.</p>
+<h2 id="acecreatedomline">aceCreateDomLine<span><a class="mark" href="#api_acecreatedomline" id="api_acecreatedomline">#</a></span></h2>
+<p>Called from: src/static/js/domline.js</p>
+<p>Things in context:</p>
+<ol>
+<li>domline - the current DOM line being processed</li>
+<li>cls - The class of the current element (useful for styling)</li>
+</ol>
+<p>This hook is called for any line being processed by the formatting engine,
+unless the aceDomLineProcessLineAttributes hook from above returned true, in
+which case this hook is skipped.</p>
+<p>The return value of this hook should have the following structure:</p>
+<p><code>{ extraOpenTags: String, extraCloseTags: String, cls: String }</code></p>
+<p>extraOpenTags and extraCloseTags will be added before and after the element in
+question, and cls will be the new class of the element going forward.</p>
+<h2 id="acepostwritedomlinehtml">acePostWriteDomLineHTML<span><a class="mark" href="#api_acepostwritedomlinehtml" id="api_acepostwritedomlinehtml">#</a></span></h2>
+<p>Called from: src/static/js/domline.js</p>
+<p>Things in context:</p>
+<ol>
+<li>node - the DOM node that just got written to the page</li>
+</ol>
+<p>This hook is for right after a node has been fully formatted and written to the
+page.</p>
+<h2 id="aceattribstoclasses">aceAttribsToClasses<span><a class="mark" href="#api_aceattribstoclasses" id="api_aceattribstoclasses">#</a></span></h2>
+<p>Called from: src/static/js/linestylefilter.js</p>
+<p>Things in context:</p>
+<ol>
+<li>linestylefilter - the JavaScript object that&#39;s currently processing the ace
+attributes</li>
+<li>key - the current attribute being processed</li>
+<li>value - the value of the attribute being processed</li>
+</ol>
+<p>This hook is called during the attribute processing procedure, and should be
+used to translate key, value pairs into valid HTML classes that can be inserted
+into the DOM.</p>
+<p>The return value for this function should be a list of classes, which will then
+be parsed into a valid class string.</p>
+<h2 id="aceattribclasses">aceAttribClasses<span><a class="mark" href="#api_aceattribclasses" id="api_aceattribclasses">#</a></span></h2>
+<p>Called from: src/static/js/linestylefilter.js</p>
+<p>Things in context:</p>
+<ol>
+<li>Attributes - Object of Attributes</li>
+</ol>
+<p>This hook is called when attributes are investigated on a line. It is useful if
+you want to add another attribute type or property type to a pad.</p>
+<p>Example:</p>
+<pre><code>exports.aceAttribClasses = function(hook_name, attr, cb){
+  attr.sub = &#39;tag:sub&#39;;
+  cb(attr);
+}</code></pre><h2 id="acegetfilterstack">aceGetFilterStack<span><a class="mark" href="#api_acegetfilterstack" id="api_acegetfilterstack">#</a></span></h2>
+<p>Called from: src/static/js/linestylefilter.js</p>
+<p>Things in context:</p>
+<ol>
+<li>linestylefilter - the JavaScript object that&#39;s currently processing the ace
+attributes</li>
+<li>browser - an object indicating which browser is accessing the page</li>
+</ol>
+<p>This hook is called to apply custom regular expression filters to a set of
+styles. The one example available is the ep_linkify plugin, which adds internal
+links. They use it to find the telltale <code>[[ ]]</code> syntax that signifies internal
+links, and finding that syntax, they add in the internalHref attribute to be
+later used by the aceCreateDomLine hook (documented above).</p>
+<h2 id="aceeditorcss">aceEditorCSS<span><a class="mark" href="#api_aceeditorcss" id="api_aceeditorcss">#</a></span></h2>
+<p>Called from: src/static/js/ace.js</p>
+<p>Things in context: None</p>
+<p>This hook is provided to allow custom CSS files to be loaded. The return value
+should be an array of resource urls or paths relative to the plugins directory.</p>
+<h2 id="aceinitinnerdocbodyhead">aceInitInnerdocbodyHead<span><a class="mark" href="#api_aceinitinnerdocbodyhead" id="api_aceinitinnerdocbodyhead">#</a></span></h2>
+<p>Called from: src/static/js/ace.js</p>
+<p>Things in context:</p>
+<ol>
+<li>iframeHTML - the HTML of the editor iframe up to this point, in array format</li>
+</ol>
+<p>This hook is called during the creation of the editor HTML. The array should
+have lines of HTML added to it, giving the plugin author a chance to add in
+meta, script, link, and other tags that go into the <code>&lt;head&gt;</code> element of the
+editor HTML document.</p>
+<h2 id="aceeditevent">aceEditEvent<span><a class="mark" href="#api_aceeditevent" id="api_aceeditevent">#</a></span></h2>
+<p>Called from: src/static/js/ace2_inner.js</p>
+<p>Things in context:</p>
+<ol>
+<li>callstack - a bunch of information about the current action</li>
+<li>editorInfo - information about the user who is making the change</li>
+<li>rep - information about where the change is being made</li>
+<li>documentAttributeManager - information about attributes in the document (this
+is a mystery to me)</li>
+</ol>
+<p>This hook is made available to edit the edit events that might occur when
+changes are made. Currently you can change the editor information, some of the
+meanings of the edit, and so on. You can also make internal changes (internal to
+your plugin) that use the information provided by the edit event.</p>
+<h2 id="aceregisternonscrollableeditevents">aceRegisterNonScrollableEditEvents<span><a class="mark" href="#api_aceregisternonscrollableeditevents" id="api_aceregisternonscrollableeditevents">#</a></span></h2>
+<p>Called from: src/static/js/ace2_inner.js</p>
+<p>Things in context: None</p>
+<p>When aceEditEvent (documented above) finishes processing the event, it scrolls
+the viewport to make caret visible to the user, but if you don&#39;t want that
+behavior to happen you can use this hook to register which edit events should
+not scroll viewport. The return value of this hook should be a list of event
+names.</p>
+<p>Example:</p>
+<pre><code>exports.aceRegisterNonScrollableEditEvents = function(){
+  return [ &#39;repaginate&#39;, &#39;updatePageCount&#39; ];
+}</code></pre><h2 id="aceregisterblockelements">aceRegisterBlockElements<span><a class="mark" href="#api_aceregisterblockelements" id="api_aceregisterblockelements">#</a></span></h2>
+<p>Called from: src/static/js/ace2_inner.js</p>
+<p>Things in context: None</p>
+<p>The return value of this hook will add elements into the &quot;lineMarkerAttribute&quot;
+category, making the aceDomLineProcessLineAttributes hook (documented below)
+call for those elements.</p>
+<h2 id="aceinitialized">aceInitialized<span><a class="mark" href="#api_aceinitialized" id="api_aceinitialized">#</a></span></h2>
+<p>Called from: src/static/js/ace2_inner.js</p>
+<p>Things in context:</p>
+<ol>
+<li>editorInfo - information about the user who will be making changes through
+the interface, and a way to insert functions into the main ace object (see
+ep_headings)</li>
+<li>rep - information about where the user&#39;s cursor is</li>
+<li>documentAttributeManager - some kind of magic</li>
+</ol>
+<p>This hook is for inserting further information into the ace engine, for later
+use in formatting hooks.</p>
+<h2 id="postaceinit">postAceInit<span><a class="mark" href="#api_postaceinit" id="api_postaceinit">#</a></span></h2>
+<p>Called from: src/static/js/pad.js</p>
+<p>Things in context:</p>
+<ol>
+<li>ace - the ace object that is applied to this editor.</li>
+<li>pad - the pad object of the current pad.</li>
+</ol>
+<h2 id="posttoolbarinit">postToolbarInit<span><a class="mark" href="#api_posttoolbarinit" id="api_posttoolbarinit">#</a></span></h2>
+<p>Called from: src/static/js/pad_editbar.js</p>
+<p>Things in context:</p>
+<ol>
+<li>ace - the ace object that is applied to this editor.</li>
+<li>toolbar - Editbar instance. See below for the Editbar documentation.</li>
+</ol>
+<p>Can be used to register custom actions to the toolbar.</p>
+<p>Usage examples:</p>
+<ul>
+<li><a href="">https://github.com/tiblu/ep_authorship_toggle</a></li>
+</ul>
+<h2 id="posttimesliderinit">postTimesliderInit<span><a class="mark" href="#api_posttimesliderinit" id="api_posttimesliderinit">#</a></span></h2>
+<p>Called from: src/static/js/timeslider.js</p>
+<p>There doesn&#39;t appear to be any example available of this particular hook being
+used, but it gets fired after the timeslider is all set up.</p>
+<h2 id="gotorevisionevent">goToRevisionEvent<span><a class="mark" href="#api_gotorevisionevent" id="api_gotorevisionevent">#</a></span></h2>
+<p>Called from: src/static/js/broadcast.js</p>
+<p>Things in context:</p>
+<ol>
+<li>rev - The newRevision</li>
+</ol>
+<p>This hook gets fired both on timeslider load (as timeslider shows a new
+revision) and when the new revision is showed to a user. There doesn&#39;t appear to
+be any example available of this particular hook being used.</p>
+<h2 id="userjoinorupdate">userJoinOrUpdate<span><a class="mark" href="#api_userjoinorupdate" id="api_userjoinorupdate">#</a></span></h2>
+<p>Called from: src/static/js/pad_userlist.js</p>
+<p>Things in context:</p>
+<ol>
+<li>info - the user information</li>
+</ol>
+<p>This hook is called on the client side whenever a user joins or changes. This
+can be used to create notifications or an alternate user list.</p>
+<h2 id="chatnewmessage">chatNewMessage<span><a class="mark" href="#api_chatnewmessage" id="api_chatnewmessage">#</a></span></h2>
+<p>Called from: src/static/js/chat.js</p>
+<p>Things in context:</p>
+<ol>
+<li>authorName - The user that wrote this message</li>
+<li>author - The authorID of the user that wrote the message</li>
+<li>text - the message text</li>
+<li>sticky (boolean) - if you want the gritter notification bubble to fade out on
+its own or just sit there</li>
+<li>timestamp - the timestamp of the chat message</li>
+<li>timeStr - the timestamp as a formatted string</li>
+<li>duration - for how long in milliseconds should the gritter notification
+appear (0 to disable)</li>
+</ol>
+<p>This hook is called on the client side whenever a chat message is received from
+the server. It can be used to create different notifications for chat messages.</p>
+<h2 id="collectcontentpre">collectContentPre<span><a class="mark" href="#api_collectcontentpre" id="api_collectcontentpre">#</a></span></h2>
+<p>Called from: src/static/js/contentcollector.js</p>
+<p>Things in context:</p>
+<ol>
+<li>cc - the contentcollector object</li>
+<li>state - the current state of the change being made</li>
+<li>tname - the tag name of this node currently being processed</li>
+<li>styl - the style applied to the node (probably CSS) -- Note the typo</li>
+<li>cls - the HTML class string of the node</li>
+</ol>
+<p>This hook is called before the content of a node is collected by the usual
+methods. The cc object can be used to do a bunch of things that modify the
+content of the pad. See, for example, the heading1 plugin for etherpad original.</p>
+<p>E.g. if you need to apply an attribute to newly inserted characters, call
+cc.doAttrib(state, &quot;attributeName&quot;) which results in an attribute
+attributeName=true.</p>
+<p>If you want to specify also a value, call cc.doAttrib(state,
+&quot;attributeName::value&quot;) which results in an attribute attributeName=value.</p>
+<h2 id="collectcontentimage">collectContentImage<span><a class="mark" href="#api_collectcontentimage" id="api_collectcontentimage">#</a></span></h2>
+<p>Called from: src/static/js/contentcollector.js</p>
+<p>Things in context:</p>
+<ol>
+<li>cc - the contentcollector object</li>
+<li>state - the current state of the change being made</li>
+<li>tname - the tag name of this node currently being processed</li>
+<li>style - the style applied to the node (probably CSS)</li>
+<li>cls - the HTML class string of the node</li>
+<li>node - the node being modified</li>
+</ol>
+<p>This hook is called before the content of an image node is collected by the
+usual methods. The cc object can be used to do a bunch of things that modify the
+content of the pad.</p>
+<p>Example:</p>
+<pre><code>exports.collectContentImage = function(name, context){
+  context.state.lineAttributes.img = context.node.outerHTML;
+}
+</code></pre><h2 id="collectcontentpost">collectContentPost<span><a class="mark" href="#api_collectcontentpost" id="api_collectcontentpost">#</a></span></h2>
+<p>Called from: src/static/js/contentcollector.js</p>
+<p>Things in context:</p>
+<ol>
+<li>cc - the contentcollector object</li>
+<li>state - the current state of the change being made</li>
+<li>tname - the tag name of this node currently being processed</li>
+<li>style - the style applied to the node (probably CSS)</li>
+<li>cls - the HTML class string of the node</li>
+</ol>
+<p>This hook is called after the content of a node is collected by the usual
+methods. The cc object can be used to do a bunch of things that modify the
+content of the pad. See, for example, the heading1 plugin for etherpad original.</p>
+<h2 id="handleclientmessage_name">handleClientMessage_<code>name</code><span><a class="mark" href="#api_handleclientmessage_name" id="api_handleclientmessage_name">#</a></span></h2>
+<p>Called from: <code>src/static/js/collab_client.js</code></p>
+<p>Things in context:</p>
+<ol>
+<li>payload - the data that got sent with the message (use it for custom message
+content)</li>
+</ol>
+<p>This hook gets called every time the client receives a message of type <code>name</code>.
+This can most notably be used with the new HTTP API call, &quot;sendClientsMessage&quot;,
+which sends a custom message type to all clients connected to a pad. You can
+also use this to handle existing types.</p>
+<p><code>collab_client.js</code> has a pretty extensive list of message types, if you want to
+take a look.</p>
+<h2 id="acestartlineandcharforpoint-aceendlineandcharforpoint">aceStartLineAndCharForPoint-aceEndLineAndCharForPoint<span><a class="mark" href="#api_acestartlineandcharforpoint_aceendlineandcharforpoint" id="api_acestartlineandcharforpoint_aceendlineandcharforpoint">#</a></span></h2>
+<p>Called from: src/static/js/ace2_inner.js</p>
+<p>Things in context:</p>
+<ol>
+<li>callstack - a bunch of information about the current action</li>
+<li>editorInfo - information about the user who is making the change</li>
+<li>rep - information about where the change is being made</li>
+<li>root - the span element of the current line</li>
+<li>point - the starting/ending element where the cursor highlights</li>
+<li>documentAttributeManager - information about attributes in the document</li>
+</ol>
+<p>This hook is provided to allow a plugin to turn DOM node selection into
+[line,char] selection. The return value should be an array of [line,char]</p>
+<h2 id="acekeyevent">aceKeyEvent<span><a class="mark" href="#api_acekeyevent" id="api_acekeyevent">#</a></span></h2>
+<p>Called from: src/static/js/ace2_inner.js</p>
+<p>Things in context:</p>
+<ol>
+<li>callstack - a bunch of information about the current action</li>
+<li>editorInfo - information about the user who is making the change</li>
+<li>rep - information about where the change is being made</li>
+<li>documentAttributeManager - information about attributes in the document</li>
+<li>evt - the fired event</li>
+</ol>
+<p>This hook is provided to allow a plugin to handle key events.
+The return value should be true if you have handled the event.</p>
+<h2 id="collectcontentlinetext">collectContentLineText<span><a class="mark" href="#api_collectcontentlinetext" id="api_collectcontentlinetext">#</a></span></h2>
+<p>Called from: src/static/js/contentcollector.js</p>
+<p>Things in context:</p>
+<ol>
+<li>cc - the contentcollector object</li>
+<li>state - the current state of the change being made</li>
+<li>tname - the tag name of this node currently being processed</li>
+<li>text - the text for that line</li>
+</ol>
+<p>This hook allows you to validate/manipulate the text before it&#39;s sent to the
+server side. To change the text, either:</p>
+<ul>
+<li>Set the <code>text</code> context property to the desired value and return <code>undefined</code>.</li>
+<li>(Deprecated) Return a string. If a hook function changes the <code>text</code> context
+property, the return value is ignored. If no hook function changes <code>text</code> but
+multiple hook functions return a string, the first one wins.</li>
+</ul>
+<p>Example:</p>
+<pre><code>exports.collectContentLineText = (hookName, context) =&gt; {
+  context.text = tweakText(context.text);
+};</code></pre><h2 id="collectcontentlinebreak">collectContentLineBreak<span><a class="mark" href="#api_collectcontentlinebreak" id="api_collectcontentlinebreak">#</a></span></h2>
+<p>Called from: src/static/js/contentcollector.js</p>
+<p>Things in context:</p>
+<ol>
+<li>cc - the contentcollector object</li>
+<li>state - the current state of the change being made</li>
+<li>tname - the tag name of this node currently being processed</li>
+</ol>
+<p>This hook is provided to allow whether the br tag should induce a new magic
+domline or not. The return value should be either true(break the line) or false.</p>
+<h2 id="disableauthorcolorsforthisline">disableAuthorColorsForThisLine<span><a class="mark" href="#api_disableauthorcolorsforthisline" id="api_disableauthorcolorsforthisline">#</a></span></h2>
+<p>Called from: src/static/js/linestylefilter.js</p>
+<p>Things in context:</p>
+<ol>
+<li>linestylefilter - the JavaScript object that&#39;s currently processing the ace
+attributes</li>
+<li>text - the line text</li>
+<li>class - line class</li>
+</ol>
+<p>This hook is provided to allow whether a given line should be deliniated with
+multiple authors. Multiple authors in one line cause the creation of magic span
+lines. This might not suit you and now you can disable it and handle your own
+deliniation. The return value should be either true(disable) or false.</p>
+<h2 id="acesetauthorstyle">aceSetAuthorStyle<span><a class="mark" href="#api_acesetauthorstyle" id="api_acesetauthorstyle">#</a></span></h2>
+<p>Called from: src/static/js/ace2_inner.js</p>
+<p>Things in context:</p>
+<ol>
+<li>dynamicCSS - css manager for inner ace</li>
+<li>outerDynamicCSS - css manager for outer ace</li>
+<li>parentDynamicCSS - css manager for parent document</li>
+<li>info - author style info</li>
+<li>author - author info</li>
+<li>authorSelector - css selector for author span in inner ace</li>
+</ol>
+<p>This hook is provided to allow author highlight style to be modified. Registered
+hooks should return 1 if the plugin handles highlighting. If no plugin returns
+1, the core will use the default background-based highlighting.</p>
+<h2 id="aceselectionchanged">aceSelectionChanged<span><a class="mark" href="#api_aceselectionchanged" id="api_aceselectionchanged">#</a></span></h2>
+<p>Called from: src/static/js/ace2_inner.js</p>
+<p>Things in context:</p>
+<ol>
+<li>rep - information about where the user&#39;s cursor is</li>
+<li>documentAttributeManager - information about attributes in the document</li>
+</ol>
+<p>This hook allows a plugin to react to a cursor or selection change,
+perhaps to update a UI element based on the style at the cursor location.</p>
+<h1 id="server-side-hooks">Server-side hooks<span><a class="mark" href="#api_server_side_hooks" id="api_server_side_hooks">#</a></span></h1>
+<p>These hooks are called on server-side.</p>
+<h2 id="loadsettings">loadSettings<span><a class="mark" href="#api_loadsettings" id="api_loadsettings">#</a></span></h2>
+<p>Called from: src/node/server.js</p>
+<p>Things in context:</p>
+<ol>
+<li>settings - the settings object</li>
+</ol>
+<p>Use this hook to receive the global settings in your plugin.</p>
+<h2 id="shutdown">shutdown<span><a class="mark" href="#api_shutdown" id="api_shutdown">#</a></span></h2>
+<p>Called from: src/node/server.js</p>
+<p>Things in context: None</p>
+<p>This hook runs before shutdown. Use it to stop timers, close sockets and files,
+flush buffers, etc. The database is not available while this hook is running.
+The shutdown function must not block for long because there is a short timeout
+before the process is forcibly terminated.</p>
+<p>The shutdown function must return a Promise, which must resolve to <code>undefined</code>.
+Returning <code>callback(value)</code> will return a Promise that is resolved to <code>value</code>.</p>
+<p>Example:</p>
+<pre><code>// using an async function
+exports.shutdown = async (hookName, context) =&gt; {
+  await flushBuffers();
+};</code></pre><h2 id="pluginuninstall">pluginUninstall<span><a class="mark" href="#api_pluginuninstall" id="api_pluginuninstall">#</a></span></h2>
+<p>Called from: src/static/js/pluginfw/installer.js</p>
+<p>Things in context:</p>
+<ol>
+<li>plugin_name - self-explanatory</li>
+</ol>
+<p>If this hook returns an error, the callback to the uninstall function gets an error as well. This mostly seems useful for handling additional features added in based on the installation of other plugins, which is pretty cool!</p>
+<h2 id="plugininstall">pluginInstall<span><a class="mark" href="#api_plugininstall" id="api_plugininstall">#</a></span></h2>
+<p>Called from: src/static/js/pluginfw/installer.js</p>
+<p>Things in context:</p>
+<ol>
+<li>plugin_name - self-explanatory</li>
+</ol>
+<p>If this hook returns an error, the callback to the install function gets an error, too. This seems useful for adding in features when a particular plugin is installed.</p>
+<h2 id="init_plugin-name">init_<code>&lt;plugin name&gt;</code><span><a class="mark" href="#api_init_plugin_name" id="api_init_plugin_name">#</a></span></h2>
+<p>Called from: src/static/js/pluginfw/plugins.js</p>
+<p>Things in context: None</p>
+<p>This function is called after a specific plugin is initialized. This would probably be more useful than the previous two functions if you only wanted to add in features to one specific plugin.</p>
+<h2 id="expressconfigure">expressConfigure<span><a class="mark" href="#api_expressconfigure" id="api_expressconfigure">#</a></span></h2>
+<p>Called from: src/node/hooks/express.js</p>
+<p>Things in context:</p>
+<ol>
+<li>app - the main application object</li>
+</ol>
+<p>This is a helpful hook for changing the behavior and configuration of the application. It&#39;s called right after the application gets configured.</p>
+<h2 id="expresscreateserver">expressCreateServer<span><a class="mark" href="#api_expresscreateserver" id="api_expresscreateserver">#</a></span></h2>
+<p>Called from: src/node/hooks/express.js</p>
+<p>Things in context:</p>
+<ol>
+<li>app - the main express application object (helpful for adding new paths and such)</li>
+<li>server - the http server object</li>
+</ol>
+<p>This hook gets called after the application object has been created, but before it starts listening. This is similar to the expressConfigure hook, but it&#39;s not guaranteed that the application object will have all relevant configuration variables.</p>
+<h2 id="expresscloseserver">expressCloseServer<span><a class="mark" href="#api_expresscloseserver" id="api_expresscloseserver">#</a></span></h2>
+<p>Called from: src/node/hooks/express.js</p>
+<p>Things in context: Nothing</p>
+<p>This hook is called when the HTTP server is closing, which happens during
+shutdown (see the shutdown hook) and when the server restarts (e.g., when a
+plugin is installed via the <code>/admin/plugins</code> page). The HTTP server may or may
+not already be closed when this hook executes.</p>
+<p>Example:</p>
+<pre><code>exports.expressCloseServer = async () =&gt; {
+  await doSomeCleanup();
+};</code></pre><h2 id="eejsblock_name">eejsBlock_<code>&lt;name&gt;</code><span><a class="mark" href="#api_eejsblock_name" id="api_eejsblock_name">#</a></span></h2>
+<p>Called from: src/node/eejs/index.js</p>
+<p>Things in context:</p>
+<ol>
+<li>content - the content of the block</li>
+</ol>
+<p>This hook gets called upon the rendering of an ejs template block. For any specific kind of block, you can change how that block gets rendered by modifying the content object passed in.</p>
+<p>Available blocks in <code>pad.html</code> are:</p>
+<ul>
+<li><code>htmlHead</code> - after <code>&lt;html&gt;</code> and immediately before the title tag</li>
+<li><code>styles</code> - the style <code>&lt;link&gt;</code>s</li>
+<li><code>body</code> - the contents of the body tag</li>
+<li><code>editbarMenuLeft</code> - the left tool bar (consider using the toolbar controller instead of manually adding html here)</li>
+<li><code>editbarMenuRight</code> - right tool bar</li>
+<li><code>afterEditbar</code> - allows you to add stuff immediately after the toolbar</li>
+<li><code>userlist</code> - the contents of the userlist dropdown</li>
+<li><code>loading</code> - the initial loading message</li>
+<li><code>mySettings</code> - the left column of the settings dropdown (&quot;My view&quot;); intended for adding checkboxes only</li>
+<li><code>mySettings.dropdowns</code> - add your dropdown settings here</li>
+<li><code>globalSettings</code> - the right column of the settings dropdown (&quot;Global view&quot;)</li>
+<li><code>importColumn</code> - import form</li>
+<li><code>exportColumn</code> - export form</li>
+<li><code>modals</code> - Contains all connectivity messages</li>
+<li><code>embedPopup</code> - the embed dropdown</li>
+<li><code>scripts</code> - Add your script tags here, if you really have to (consider use client-side hooks instead)</li>
+</ul>
+<p><code>timeslider.html</code> blocks:</p>
+<ul>
+<li><code>timesliderStyles</code></li>
+<li><code>timesliderScripts</code></li>
+<li><code>timesliderBody</code></li>
+<li><code>timesliderTop</code></li>
+<li><code>timesliderEditbarRight</code></li>
+<li><code>modals</code></li>
+</ul>
+<p><code>index.html</code> blocks:</p>
+<ul>
+<li><code>indexCustomStyles</code> - contains the <code>index.css</code> <code>&lt;link&gt;</code> tag, allows you to add your own or to customize the one provided by the active skin</li>
+<li><code>indexWrapper</code> - contains the form for creating new pads</li>
+<li><code>indexCustomScripts</code> - contains the <code>index.js</code> <code>&lt;script&gt;</code> tag, allows you to add your own or to customize the one provided by the active skin</li>
+</ul>
+<h2 id="padinittoolbar">padInitToolbar<span><a class="mark" href="#api_padinittoolbar" id="api_padinittoolbar">#</a></span></h2>
+<p>Called from: src/node/hooks/express/specialpages.js</p>
+<p>Things in context:</p>
+<ol>
+<li>toolbar - the toolbar controller that will render the toolbar eventually</li>
+</ol>
+<p>Here you can add custom toolbar items that will be available in the toolbar config in <code>settings.json</code>. For more about the toolbar controller see the API section.</p>
+<p>Usage examples:</p>
+<ul>
+<li><a href="https://github.com/tiblu/ep_authorship_toggle">https://github.com/tiblu/ep_authorship_toggle</a></li>
+</ul>
+<h2 id="onaccesscheck">onAccessCheck<span><a class="mark" href="#api_onaccesscheck" id="api_onaccesscheck">#</a></span></h2>
+<p>Called from: src/node/db/SecurityManager.js</p>
+<p>Things in context:</p>
+<ol>
+<li>padID - the pad the user wants to access</li>
+<li>token - the token of the author</li>
+<li>sessionCookie - the session the use has</li>
+</ol>
+<p>This hook gets called when the access to the concrete pad is being checked. Return <code>false</code> to deny access.</p>
+<h2 id="padcreate">padCreate<span><a class="mark" href="#api_padcreate" id="api_padcreate">#</a></span></h2>
+<p>Called from: src/node/db/Pad.js</p>
+<p>Things in context:</p>
+<ol>
+<li>pad - the pad instance</li>
+<li>author - the id of the author who created the pad</li>
+</ol>
+<p>This hook gets called when a new pad was created.</p>
+<h2 id="padload">padLoad<span><a class="mark" href="#api_padload" id="api_padload">#</a></span></h2>
+<p>Called from: src/node/db/Pad.js</p>
+<p>Things in context:</p>
+<ol>
+<li>pad - the pad instance</li>
+</ol>
+<p>This hook gets called when a pad was loaded. If a new pad was created and loaded this event will be emitted too.</p>
+<h2 id="padupdate">padUpdate<span><a class="mark" href="#api_padupdate" id="api_padupdate">#</a></span></h2>
+<p>Called from: src/node/db/Pad.js</p>
+<p>Things in context:</p>
+<ol>
+<li>pad - the pad instance</li>
+<li>author - the id of the author who updated the pad</li>
+<li>revs - the index of the new revision</li>
+<li>changeset - the changeset of this revision (see <a href="#index_changeset_library">Changeset Library</a>)</li>
+</ol>
+<p>This hook gets called when an existing pad was updated.</p>
+<h2 id="padcopy">padCopy<span><a class="mark" href="#api_padcopy" id="api_padcopy">#</a></span></h2>
+<p>Called from: src/node/db/Pad.js</p>
+<p>Things in context:</p>
+<ol>
+<li>originalPad - the source pad instance</li>
+<li>destinationID - the id of the pad copied from originalPad</li>
+</ol>
+<p>This hook gets called when an existing pad was copied.</p>
+<p>Usage examples:</p>
+<ul>
+<li><a href="https://github.com/ether/ep_comments">https://github.com/ether/ep_comments</a></li>
+</ul>
+<h2 id="padremove">padRemove<span><a class="mark" href="#api_padremove" id="api_padremove">#</a></span></h2>
+<p>Called from: src/node/db/Pad.js</p>
+<p>Things in context:</p>
+<ol>
+<li>padID</li>
+</ol>
+<p>This hook gets called when an existing pad was removed/deleted.</p>
+<p>Usage examples:</p>
+<ul>
+<li><a href="https://github.com/ether/ep_comments">https://github.com/ether/ep_comments</a></li>
+</ul>
+<h2 id="socketio">socketio<span><a class="mark" href="#api_socketio" id="api_socketio">#</a></span></h2>
+<p>Called from: src/node/hooks/express/socketio.js</p>
+<p>Things in context:</p>
+<ol>
+<li>app - the application object</li>
+<li>io - the socketio object</li>
+<li>server - the http server object</li>
+</ol>
+<p>I have no idea what this is useful for, someone else will have to add this description.</p>
+<h2 id="preauthorize">preAuthorize<span><a class="mark" href="#api_preauthorize" id="api_preauthorize">#</a></span></h2>
+<p>Called from: src/node/hooks/express/webaccess.js</p>
+<p>Things in context:</p>
+<ol>
+<li>req - the request object</li>
+<li>res - the response object</li>
+<li>next - bypass callback. If this is called instead of the normal callback then
+all remaining access checks are skipped.</li>
+</ol>
+<p>This hook is called for each HTTP request before any authentication checks are
+performed. Example uses:</p>
+<ul>
+<li>Always grant access to static content.</li>
+<li>Process an OAuth callback.</li>
+<li>Drop requests from IP addresses that have failed N authentication checks
+within the past X minutes.</li>
+</ul>
+<p>A preAuthorize function is always called for each request unless a preAuthorize
+function from another plugin (if any) has already explicitly granted or denied
+the request.</p>
+<p>You can pass the following values to the provided callback:</p>
+<ul>
+<li><code>[]</code> defers the access decision to the normal authentication and authorization
+checks (or to a preAuthorize function from another plugin, if one exists).</li>
+<li><code>[true]</code> immediately grants access to the requested resource, unless the
+request is for an <code>/admin</code> page in which case it is treated the same as <code>[]</code>.
+(This prevents buggy plugins from accidentally granting admin access to the
+general public.)</li>
+<li><code>[false]</code> immediately denies the request. The preAuthnFailure hook will be
+called to handle the failure.</li>
+</ul>
+<p>Example:</p>
+<pre><code>exports.preAuthorize = (hookName, context, cb) =&gt; {
+  if (ipAddressIsFirewalled(context.req)) return cb([false]);
+  if (requestIsForStaticContent(context.req)) return cb([true]);
+  if (requestIsForOAuthCallback(context.req)) return cb([true]);
+  return cb([]);
+};</code></pre><h2 id="authorize">authorize<span><a class="mark" href="#api_authorize" id="api_authorize">#</a></span></h2>
+<p>Called from: src/node/hooks/express/webaccess.js</p>
+<p>Things in context:</p>
+<ol>
+<li>req - the request object</li>
+<li>res - the response object</li>
+<li>next - ?</li>
+<li>resource - the path being accessed</li>
+</ol>
+<p>This hook is called to handle authorization. It is especially useful for
+controlling access to specific paths.</p>
+<p>A plugin&#39;s authorize function is only called if all of the following are true:</p>
+<ul>
+<li>The request is not for static content or an API endpoint. (Requests for static
+content and API endpoints are always authorized, even if unauthenticated.)</li>
+<li>The <code>requireAuthentication</code> and <code>requireAuthorization</code> settings are both true.</li>
+<li>The user has already successfully authenticated.</li>
+<li>The user is not an admin (admin users are always authorized).</li>
+<li>The path being accessed is not an <code>/admin</code> path (<code>/admin</code> paths can only be
+accessed by admin users, and admin users are always authorized).</li>
+<li>An authorize function from a different plugin has not already caused
+authorization to pass or fail.</li>
+</ul>
+<p>Note that the authorize hook cannot grant access to <code>/admin</code> pages. If admin
+access is desired, the <code>is_admin</code> user setting must be set to true. This can be
+set in the settings file or by the authenticate hook.</p>
+<p>You can pass the following values to the provided callback:</p>
+<ul>
+<li><code>[true]</code> or <code>[&#39;create&#39;]</code> will grant access to modify or create the pad if the
+request is for a pad, otherwise access is simply granted. Access to a pad will
+be downgraded to modify-only if <code>settings.editOnly</code> is true or the user&#39;s
+<code>canCreate</code> setting is set to <code>false</code>, and downgraded to read-only if the
+user&#39;s <code>readOnly</code> setting is <code>true</code>.</li>
+<li><code>[&#39;modify&#39;]</code> will grant access to modify but not create the pad if the request
+is for a pad, otherwise access is simply granted. Access to a pad will be
+downgraded to read-only if the user&#39;s <code>readOnly</code> setting is <code>true</code>.</li>
+<li><code>[&#39;readOnly&#39;]</code> will grant read-only access.</li>
+<li><code>[false]</code> will deny access.</li>
+<li><code>[]</code> or <code>undefined</code> will defer the authorization decision to the next
+authorization plugin (if any, otherwise deny).</li>
+</ul>
+<p>Example:</p>
+<pre><code>exports.authorize = (hookName, context, cb) =&gt; {
+  const user = context.req.session.user;
+  const path = context.req.path;  // or context.resource
+  if (isExplicitlyProhibited(user, path)) return cb([false]);
+  if (isExplicitlyAllowed(user, path)) return cb([true]);
+  return cb([]);  // Let the next authorization plugin decide
+};</code></pre><h2 id="authenticate">authenticate<span><a class="mark" href="#api_authenticate" id="api_authenticate">#</a></span></h2>
+<p>Called from: src/node/hooks/express/webaccess.js</p>
+<p>Things in context:</p>
+<ol>
+<li>req - the request object</li>
+<li>res - the response object</li>
+<li>users - the users object from settings.json (possibly modified by plugins)</li>
+<li>next - ?</li>
+<li>username - the username used (optional)</li>
+<li>password - the password used (optional)</li>
+</ol>
+<p>This hook is called to handle authentication.</p>
+<p>Plugins that supply an authenticate function should probably also supply an
+authnFailure function unless falling back to HTTP basic authentication is
+appropriate upon authentication failure.</p>
+<p>This hook is only called if either the <code>requireAuthentication</code> setting is true
+or the request is for an <code>/admin</code> page.</p>
+<p>Calling the provided callback with <code>[true]</code> or <code>[false]</code> will cause
+authentication to succeed or fail, respectively. Calling the callback with <code>[]</code>
+or <code>undefined</code> will defer the authentication decision to the next authentication
+plugin (if any, otherwise fall back to HTTP basic authentication).</p>
+<p>If you wish to provide a mix of restricted and anonymous access (e.g., some pads
+are private, others are public), you can &quot;authenticate&quot; (as a guest account)
+users that have not yet logged in, and rely on other hooks (e.g., authorize,
+onAccessCheck, handleMessageSecurity) to authorize specific privileged actions.</p>
+<p>If authentication is successful, the authenticate function MUST set
+<code>context.req.session.user</code> to the user&#39;s settings object. The <code>username</code>
+property of this object should be set to the user&#39;s username. The settings
+object should come from global settings (<code>context.users[username]</code>).</p>
+<p>Example:</p>
+<pre><code>exports.authenticate = (hook_name, context, cb) =&gt; {
+  if (notApplicableToThisPlugin(context)) {
+    return cb([]);  // Let the next authentication plugin decide
+  }
+  const username = authenticate(context);
+  if (!username) {
+    console.warn(`ep_myplugin.authenticate: Failed authentication from IP ${context.req.ip}`);
+    return cb([false]);
+  }
+  console.info(`ep_myplugin.authenticate: Successful authentication from IP ${context.req.ip} for user ${username}`);
+  const users = context.users;
+  if (!(username in users)) users[username] = {};
+  users[username].username = username;
+  context.req.session.user = users[username];
+  return cb([true]);
+};</code></pre><h2 id="authfailure">authFailure<span><a class="mark" href="#api_authfailure" id="api_authfailure">#</a></span></h2>
+<p>Called from: src/node/hooks/express/webaccess.js</p>
+<p>Things in context:</p>
+<ol>
+<li>req - the request object</li>
+<li>res - the response object</li>
+<li>next - ?</li>
+</ol>
+<p><strong>DEPRECATED:</strong> Use authnFailure or authzFailure instead.</p>
+<p>This hook is called to handle an authentication or authorization failure.</p>
+<p>Plugins that supply an authenticate function should probably also supply an
+authnFailure function unless falling back to HTTP basic authentication is
+appropriate upon authentication failure.</p>
+<p>A plugin&#39;s authFailure function is only called if all of the following are true:</p>
+<ul>
+<li>There was an authentication or authorization failure.</li>
+<li>The failure was not already handled by an authFailure function from another
+plugin.</li>
+<li>For authentication failures: The failure was not already handled by the
+authnFailure hook.</li>
+<li>For authorization failures: The failure was not already handled by the
+authzFailure hook.</li>
+</ul>
+<p>Calling the provided callback with <code>[true]</code> tells Etherpad that the failure was
+handled and no further error handling is required. Calling the callback with
+<code>[]</code> or <code>undefined</code> defers error handling to the next authFailure plugin (if
+any, otherwise fall back to HTTP basic authentication for an authentication
+failure or a generic 403 page for an authorization failure).</p>
+<p>Example:</p>
+<pre><code>exports.authFailure = (hookName, context, cb) =&gt; {
+  if (notApplicableToThisPlugin(context)) {
+    return cb([]);  // Let the next plugin handle the error
+  }
+  context.res.redirect(makeLoginURL(context.req));
+  return cb([true]);
+};</code></pre><h2 id="preauthzfailure">preAuthzFailure<span><a class="mark" href="#api_preauthzfailure" id="api_preauthzfailure">#</a></span></h2>
+<p>Called from: src/node/hooks/express/webaccess.js</p>
+<p>Things in context:</p>
+<ol>
+<li>req - the request object</li>
+<li>res - the response object</li>
+</ol>
+<p>This hook is called to handle a pre-authentication authorization failure.</p>
+<p>A plugin&#39;s preAuthzFailure function is only called if the pre-authentication
+authorization failure was not already handled by a preAuthzFailure function from
+another plugin.</p>
+<p>Calling the provided callback with <code>[true]</code> tells Etherpad that the failure was
+handled and no further error handling is required. Calling the callback with
+<code>[]</code> or <code>undefined</code> defers error handling to a preAuthzFailure function from
+another plugin (if any, otherwise fall back to a generic 403 error page).</p>
+<p>Example:</p>
+<pre><code>exports.preAuthzFailure = (hookName, context, cb) =&gt; {
+  if (notApplicableToThisPlugin(context)) return cb([]);
+  context.res.status(403).send(renderFancy403Page(context.req));
+  return cb([true]);
+};</code></pre><h2 id="authnfailure">authnFailure<span><a class="mark" href="#api_authnfailure" id="api_authnfailure">#</a></span></h2>
+<p>Called from: src/node/hooks/express/webaccess.js</p>
+<p>Things in context:</p>
+<ol>
+<li>req - the request object</li>
+<li>res - the response object</li>
+</ol>
+<p>This hook is called to handle an authentication failure.</p>
+<p>Plugins that supply an authenticate function should probably also supply an
+authnFailure function unless falling back to HTTP basic authentication is
+appropriate upon authentication failure.</p>
+<p>A plugin&#39;s authnFailure function is only called if the authentication failure
+was not already handled by an authnFailure function from another plugin.</p>
+<p>Calling the provided callback with <code>[true]</code> tells Etherpad that the failure was
+handled and no further error handling is required. Calling the callback with
+<code>[]</code> or <code>undefined</code> defers error handling to an authnFailure function from
+another plugin (if any, otherwise fall back to the deprecated authFailure hook).</p>
+<p>Example:</p>
+<pre><code>exports.authnFailure = (hookName, context, cb) =&gt; {
+  if (notApplicableToThisPlugin(context)) return cb([]);
+  context.res.redirect(makeLoginURL(context.req));
+  return cb([true]);
+};</code></pre><h2 id="authzfailure">authzFailure<span><a class="mark" href="#api_authzfailure" id="api_authzfailure">#</a></span></h2>
+<p>Called from: src/node/hooks/express/webaccess.js</p>
+<p>Things in context:</p>
+<ol>
+<li>req - the request object</li>
+<li>res - the response object</li>
+</ol>
+<p>This hook is called to handle a post-authentication authorization failure.</p>
+<p>A plugin&#39;s authzFailure function is only called if the authorization failure was
+not already handled by an authzFailure function from another plugin.</p>
+<p>Calling the provided callback with <code>[true]</code> tells Etherpad that the failure was
+handled and no further error handling is required. Calling the callback with
+<code>[]</code> or <code>undefined</code> defers error handling to an authzFailure function from
+another plugin (if any, otherwise fall back to the deprecated authFailure hook).</p>
+<p>Example:</p>
+<pre><code>exports.authzFailure = (hookName, context, cb) =&gt; {
+  if (notApplicableToThisPlugin(context)) return cb([]);
+  if (needsPremiumAccount(context.req) &amp;&amp; !context.req.session.user.premium) {
+    context.res.status(200).send(makeUpgradeToPremiumAccountPage(context.req));
+    return cb([true]);
+  }
+  // Use the generic 403 forbidden response.
+  return cb([]);
+};</code></pre><h2 id="handlemessage">handleMessage<span><a class="mark" href="#api_handlemessage" id="api_handlemessage">#</a></span></h2>
+<p>Called from: src/node/handler/PadMessageHandler.js</p>
+<p>Things in context:</p>
+<ol>
+<li>message - the message being handled</li>
+<li>socket - the socket.io Socket object</li>
+<li>client - <strong>deprecated</strong> synonym of socket</li>
+</ol>
+<p>This hook allows plugins to drop or modify incoming socket.io messages from
+clients, before Etherpad processes them.</p>
+<p>The handleMessage function must return a Promise. If the Promise resolves to
+<code>null</code>, the message is dropped. Returning <code>callback(value)</code> will return a
+Promise that is resolved to <code>value</code>.</p>
+<p>Examples:</p>
+<pre><code>// Using an async function:
+exports.handleMessage = async (hookName, {message, socket}) =&gt; {
+  if (message.type === &#39;USERINFO_UPDATE&#39;) {
+    // Force the display name to the name associated with the account.
+    const user = socket.client.request.session.user || {};
+    if (user.name) message.data.userInfo.name = user.name;
+  }
+};
+
+// Using a regular function:
+exports.handleMessage = (hookName, {message, socket}, callback) =&gt; {
+  if (message.type === &#39;USERINFO_UPDATE&#39;) {
+    // Force the display name to the name associated with the account.
+    const user = socket.client.request.session.user || {};
+    if (user.name) message.data.userInfo.name = user.name;
+  }
+  return callback();
+};</code></pre><h2 id="handlemessagesecurity">handleMessageSecurity<span><a class="mark" href="#api_handlemessagesecurity" id="api_handlemessagesecurity">#</a></span></h2>
+<p>Called from: src/node/handler/PadMessageHandler.js</p>
+<p>Things in context:</p>
+<ol>
+<li>message - the message being handled</li>
+<li>socket - the socket.io Socket object</li>
+<li>client - <strong>deprecated</strong> synonym of socket</li>
+</ol>
+<p>This hook allows plugins to grant temporary write access to a pad. It is called
+for each incoming message from a client. If write access is granted, it applies
+to the current message and all future messages from the same socket.io
+connection until the next <code>CLIENT_READY</code> or <code>SWITCH_TO_PAD</code> message. Read-only
+access is reset <strong>after</strong> each <code>CLIENT_READY</code> or <code>SWITCH_TO_PAD</code> message, so
+granting write access has no effect for those message types.</p>
+<p>The handleMessageSecurity function must return a Promise. If the Promise
+resolves to <code>true</code>, write access is granted as described above. Returning
+<code>callback(value)</code> will return a Promise that is resolved to <code>value</code>.</p>
+<p>Examples:</p>
+<pre><code>// Using an async function:
+exports.handleMessageSecurity = async (hookName, {message, socket}) =&gt; {
+  if (shouldGrantWriteAccess(message, socket)) return true;
+  return;
+};
+
+// Using a regular function:
+exports.handleMessageSecurity = (hookName, {message, socket}, callback) =&gt; {
+  if (shouldGrantWriteAccess(message, socket)) return callback(true);
+  return callback();
+};</code></pre><h2 id="clientvars">clientVars<span><a class="mark" href="#api_clientvars" id="api_clientvars">#</a></span></h2>
+<p>Called from: src/node/handler/PadMessageHandler.js</p>
+<p>Things in context:</p>
+<ol>
+<li>clientVars - the basic <code>clientVars</code> built by the core</li>
+<li>pad - the pad this session is about</li>
+<li>socket - the socket.io Socket object</li>
+</ol>
+<p>This hook is called after a client connects but before the initial configuration
+is sent to the client. Plugins can use this hook to manipulate the
+configuration. (Example: Add a tracking ID for an external analytics tool that
+is used client-side.)</p>
+<p>The clientVars function must return a Promise that resolves to an object (or
+null/undefined) whose properties will be merged into <code>context.clientVars</code>.
+Returning <code>callback(value)</code> will return a Promise that is resolved to <code>value</code>.</p>
+<p>You can modify <code>context.clientVars</code> to change the values sent to the client, but
+beware: async functions from other clientVars plugins might also be reading or
+manipulating the same <code>context.clientVars</code> object. For this reason it is
+recommended you return an object rather than modify <code>context.clientVars</code>.</p>
+<p>If needed, you can access the user&#39;s account information (if authenticated) via
+<code>context.socket.client.request.session.user</code>.</p>
+<p>Examples:</p>
+<pre><code>// Using an async function
+exports.clientVars = async (hookName, context) =&gt; {
+  const user = context.socket.client.request.session.user || {};
+  return {&#39;accountUsername&#39;: user.username || &#39;&lt;unknown&gt;&#39;}
+};
+
+// Using a regular function
+exports.clientVars = (hookName, context, callback) =&gt; {
+  const user = context.socket.client.request.session.user || {};
+  return callback({&#39;accountUsername&#39;: user.username || &#39;&lt;unknown&gt;&#39;});
+};</code></pre><p>This can be accessed on the client-side using <code>clientVars.currentYear</code>.</p>
+<h2 id="getlinehtmlforexport">getLineHTMLForExport<span><a class="mark" href="#api_getlinehtmlforexport" id="api_getlinehtmlforexport">#</a></span></h2>
+<p>Called from: src/node/utils/ExportHtml.js</p>
+<p>Things in context:</p>
+<ol>
+<li>apool - pool object</li>
+<li>attribLine - line attributes</li>
+<li>text - line text</li>
+</ol>
+<p>This hook will allow a plug-in developer to re-write each line when exporting to HTML.</p>
+<p>Example:</p>
+<pre><code>var Changeset = require(&quot;ep_etherpad-lite/static/js/Changeset&quot;);
+
+exports.getLineHTMLForExport = function (hook, context) {
+  var header = _analyzeLine(context.attribLine, context.apool);
+  if (header) {
+    return &quot;&lt;&quot; + header + &quot;&gt;&quot; + context.lineContent + &quot;&lt;/&quot; + header + &quot;&gt;&quot;;
+  }
+}
+
+function _analyzeLine(alineAttrs, apool) {
+  var header = null;
+  if (alineAttrs) {
+    var opIter = Changeset.opIterator(alineAttrs);
+    if (opIter.hasNext()) {
+      var op = opIter.next();
+      header = Changeset.opAttributeValue(op, &#39;heading&#39;, apool);
+    }
+  }
+  return header;
+}</code></pre><h2 id="exporthtmladditionalcontent">exportHTMLAdditionalContent<span><a class="mark" href="#api_exporthtmladditionalcontent" id="api_exporthtmladditionalcontent">#</a></span></h2>
+<p>Called from: src/node/utils/ExportHtml.js</p>
+<p>Things in context:</p>
+<ol>
+<li>padId</li>
+</ol>
+<p>This hook will allow a plug-in developer to include additional HTML content in
+the body of the exported HTML.</p>
+<p>Example:</p>
+<pre><code>exports.exportHTMLAdditionalContent = async (hookName, {padId}) =&gt; {
+  return &#39;I am groot in &#39; + padId;
+};</code></pre><h2 id="stylesforexport">stylesForExport<span><a class="mark" href="#api_stylesforexport" id="api_stylesforexport">#</a></span></h2>
+<p>Called from: src/node/utils/ExportHtml.js</p>
+<p>Things in context:</p>
+<ol>
+<li>padId - The Pad Id</li>
+</ol>
+<p>This hook will allow a plug-in developer to append Styles to the Exported HTML.</p>
+<p>Example:</p>
+<pre><code>exports.stylesForExport = function(hook, padId, cb){
+  cb(&quot;body{font-size:13.37em !important}&quot;);
+}</code></pre><h2 id="aceattribclasses-1">aceAttribClasses<span><a class="mark" href="#api_aceattribclasses_1" id="api_aceattribclasses_1">#</a></span></h2>
+<p>Called from: src/static/js/linestylefilter.js</p>
+<p>This hook is called when attributes are investigated on a line. It is useful if
+you want to add another attribute type or property type to a pad.</p>
+<p>An attributes object is passed to the aceAttribClasses hook functions instead of
+the usual context object. A hook function can either modify this object directly
+or provide an object whose properties will be assigned to the attributes object.</p>
+<p>Example:</p>
+<pre><code>exports.aceAttribClasses = (hookName, attrs, cb) =&gt; {
+  return cb([{
+    sub: &#39;tag:sub&#39;,
+  }]);
+};</code></pre><h2 id="exportfilename">exportFileName<span><a class="mark" href="#api_exportfilename" id="api_exportfilename">#</a></span></h2>
+<p>Called from src/node/handler/ExportHandler.js</p>
+<p>Things in context:</p>
+<ol>
+<li>padId</li>
+</ol>
+<p>This hook will allow a plug-in developer to modify the file name of an exported pad.  This is useful if you want to export a pad under another name and/or hide the padId under export.  Note that the doctype or file extension cannot be modified for security reasons.</p>
+<p>Example:</p>
+<pre><code>exports.exportFileName = function(hook, padId, callback){
+  callback(&quot;newFileName&quot;+padId);
+}</code></pre><h2 id="exporthtmladditionaltags">exportHtmlAdditionalTags<span><a class="mark" href="#api_exporthtmladditionaltags" id="api_exporthtmladditionaltags">#</a></span></h2>
+<p>Called from src/node/utils/ExportHtml.js</p>
+<p>Things in context:</p>
+<ol>
+<li>Pad object</li>
+</ol>
+<p>This hook will allow a plug-in developer to include more properties and attributes to support during HTML Export. If tags are stored as <code>[&#39;color&#39;, &#39;red&#39;]</code> on the attribute pool, use <code>exportHtmlAdditionalTagsWithData</code> instead. An Array should be returned.</p>
+<p>Example:</p>
+<pre><code>// Add the props to be supported in export
+exports.exportHtmlAdditionalTags = function(hook, pad, cb){
+  var padId = pad.id;
+  cb([&quot;massive&quot;,&quot;jugs&quot;]);
+};</code></pre><h2 id="exporthtmladditionaltagswithdata">exportHtmlAdditionalTagsWithData<span><a class="mark" href="#api_exporthtmladditionaltagswithdata" id="api_exporthtmladditionaltagswithdata">#</a></span></h2>
+<p>Called from src/node/utils/ExportHtml.js</p>
+<p>Things in context:</p>
+<ol>
+<li>Pad object</li>
+</ol>
+<p>Identical to <code>exportHtmlAdditionalTags</code>, but for tags that are stored with a specific value (not simply <code>true</code>) on the attribute pool. For example <code>[&#39;color&#39;, &#39;red&#39;]</code>, instead of <code>[&#39;bold&#39;, true]</code>. This hook will allow a plug-in developer to include more properties and attributes to support during HTML Export. An Array of arrays should be returned. The exported HTML will contain tags like <code>&lt;span data-color=&quot;red&quot;&gt;</code> for the content where attributes are <code>[&#39;color&#39;, &#39;red&#39;]</code>.</p>
+<p>Example:</p>
+<pre><code>// Add the props to be supported in export
+exports.exportHtmlAdditionalTagsWithData = function(hook, pad, cb){
+  var padId = pad.id;
+  cb([[&quot;color&quot;, &quot;red&quot;], [&quot;color&quot;, &quot;blue&quot;]]);
+};</code></pre><h2 id="exportetherpadadditionalcontent">exportEtherpadAdditionalContent<span><a class="mark" href="#api_exportetherpadadditionalcontent" id="api_exportetherpadadditionalcontent">#</a></span></h2>
+<p>Called from src/node/utils/ExportEtherpad.js and
+src/node/utils/ImportEtherpad.js</p>
+<p>Things in context: Nothing</p>
+<p>Useful for exporting and importing pad metadata that is stored in the database
+but not in the pad&#39;s content or attributes. For example, in ep_comments_page the
+comments are stored as <code>comments:padId:uniqueIdOfComment</code> so a complete export
+of all pad data to an <code>.etherpad</code> file must include the <code>comments:padId:*</code>
+records.</p>
+<p>Example:</p>
+<pre><code>// Add support for exporting comments metadata
+exports.exportEtherpadAdditionalContent = () =&gt; [&#39;comments&#39;];</code></pre><h2 id="userleave">userLeave<span><a class="mark" href="#api_userleave" id="api_userleave">#</a></span></h2>
+<p>Called from src/node/handler/PadMessageHandler.js</p>
+<p>This in context:</p>
+<ol>
+<li>session (including the pad id and author id)</li>
+</ol>
+<p>This hook gets called when an author leaves a pad. This is useful if you want to perform certain actions after a pad has been edited</p>
+<p>Example:</p>
+<pre><code>exports.userLeave = function(hook, session, callback) {
+  console.log(&#39;%s left pad %s&#39;, session.author, session.padId);
+};</code></pre><h3 id="clientready">clientReady<span><a class="mark" href="#api_clientready" id="api_clientready">#</a></span></h3>
+<p>Called from src/node/handler/PadMessageHandler.js</p>
+<p>This in context:</p>
+<ol>
+<li>message</li>
+</ol>
+<p>This hook gets called when handling a CLIENT_READY which is the first message from the client to the server.</p>
+<p>Example:</p>
+<pre><code>exports.clientReady = function(hook, message) {
+  console.log(&#39;Client has entered the pad&#39; + message.padId);
+};</code></pre><h1 id="editorinfo">editorInfo<span><a class="mark" href="#api_editorinfo" id="api_editorinfo">#</a></span></h1>
+<h2 id="editorinfoace_replacerangestart-end-text">editorInfo.ace_replaceRange(start, end, text)<span><a class="mark" href="#api_editorinfo_ace_replacerange_start_end_text" id="api_editorinfo_ace_replacerange_start_end_text">#</a></span></h2>
+<p>This function replaces a range (from <code>start</code> to <code>end</code>) with <code>text</code>.</p>
+<h2 id="editorinfoace_getrep">editorInfo.ace_getRep()<span><a class="mark" href="#api_editorinfo_ace_getrep" id="api_editorinfo_ace_getrep">#</a></span></h2>
+<p>Returns the <code>rep</code> object.</p>
+<h2 id="editorinfoace_getauthor">editorInfo.ace_getAuthor()<span><a class="mark" href="#api_editorinfo_ace_getauthor" id="api_editorinfo_ace_getauthor">#</a></span></h2>
+<h2 id="editorinfoace_incallstack">editorInfo.ace_inCallStack()<span><a class="mark" href="#api_editorinfo_ace_incallstack" id="api_editorinfo_ace_incallstack">#</a></span></h2>
+<h2 id="editorinfoace_incallstackifnecessary">editorInfo.ace_inCallStackIfNecessary(?)<span><a class="mark" href="#api_editorinfo_ace_incallstackifnecessary" id="api_editorinfo_ace_incallstackifnecessary">#</a></span></h2>
+<h2 id="editorinfoace_focus">editorInfo.ace_focus(?)<span><a class="mark" href="#api_editorinfo_ace_focus" id="api_editorinfo_ace_focus">#</a></span></h2>
+<h2 id="editorinfoace_importtext">editorInfo.ace_importText(?)<span><a class="mark" href="#api_editorinfo_ace_importtext" id="api_editorinfo_ace_importtext">#</a></span></h2>
+<h2 id="editorinfoace_importatext">editorInfo.ace_importAText(?)<span><a class="mark" href="#api_editorinfo_ace_importatext" id="api_editorinfo_ace_importatext">#</a></span></h2>
+<h2 id="editorinfoace_exporttext">editorInfo.ace_exportText(?)<span><a class="mark" href="#api_editorinfo_ace_exporttext" id="api_editorinfo_ace_exporttext">#</a></span></h2>
+<h2 id="editorinfoace_editorchangedsize">editorInfo.ace_editorChangedSize(?)<span><a class="mark" href="#api_editorinfo_ace_editorchangedsize" id="api_editorinfo_ace_editorchangedsize">#</a></span></h2>
+<h2 id="editorinfoace_setonkeypress">editorInfo.ace_setOnKeyPress(?)<span><a class="mark" href="#api_editorinfo_ace_setonkeypress" id="api_editorinfo_ace_setonkeypress">#</a></span></h2>
+<h2 id="editorinfoace_setonkeydown">editorInfo.ace_setOnKeyDown(?)<span><a class="mark" href="#api_editorinfo_ace_setonkeydown" id="api_editorinfo_ace_setonkeydown">#</a></span></h2>
+<h2 id="editorinfoace_setnotifydirty">editorInfo.ace_setNotifyDirty(?)<span><a class="mark" href="#api_editorinfo_ace_setnotifydirty" id="api_editorinfo_ace_setnotifydirty">#</a></span></h2>
+<h2 id="editorinfoace_dispose">editorInfo.ace_dispose(?)<span><a class="mark" href="#api_editorinfo_ace_dispose" id="api_editorinfo_ace_dispose">#</a></span></h2>
+<h2 id="editorinfoace_getformattedcode">editorInfo.ace_getFormattedCode(?)<span><a class="mark" href="#api_editorinfo_ace_getformattedcode" id="api_editorinfo_ace_getformattedcode">#</a></span></h2>
+<h2 id="editorinfoace_seteditablebool">editorInfo.ace_setEditable(bool)<span><a class="mark" href="#api_editorinfo_ace_seteditable_bool" id="api_editorinfo_ace_seteditable_bool">#</a></span></h2>
+<h2 id="editorinfoace_execcommand">editorInfo.ace_execCommand(?)<span><a class="mark" href="#api_editorinfo_ace_execcommand" id="api_editorinfo_ace_execcommand">#</a></span></h2>
+<h2 id="editorinfoace_callwithacefn-callstack-normalize">editorInfo.ace_callWithAce(fn, callStack, normalize)<span><a class="mark" href="#api_editorinfo_ace_callwithace_fn_callstack_normalize" id="api_editorinfo_ace_callwithace_fn_callstack_normalize">#</a></span></h2>
+<h2 id="editorinfoace_setpropertykey-value">editorInfo.ace_setProperty(key, value)<span><a class="mark" href="#api_editorinfo_ace_setproperty_key_value" id="api_editorinfo_ace_setproperty_key_value">#</a></span></h2>
+<h2 id="editorinfoace_setbasetexttxt">editorInfo.ace_setBaseText(txt)<span><a class="mark" href="#api_editorinfo_ace_setbasetext_txt" id="api_editorinfo_ace_setbasetext_txt">#</a></span></h2>
+<h2 id="editorinfoace_setbaseattributedtextatxt-apooljsonobj">editorInfo.ace_setBaseAttributedText(atxt, apoolJsonObj)<span><a class="mark" href="#api_editorinfo_ace_setbaseattributedtext_atxt_apooljsonobj" id="api_editorinfo_ace_setbaseattributedtext_atxt_apooljsonobj">#</a></span></h2>
+<h2 id="editorinfoace_applychangestobasec-optauthor-apooljsonobj">editorInfo.ace_applyChangesToBase(c, optAuthor, apoolJsonObj)<span><a class="mark" href="#api_editorinfo_ace_applychangestobase_c_optauthor_apooljsonobj" id="api_editorinfo_ace_applychangestobase_c_optauthor_apooljsonobj">#</a></span></h2>
+<h2 id="editorinfoace_prepareuserchangeset">editorInfo.ace_prepareUserChangeset()<span><a class="mark" href="#api_editorinfo_ace_prepareuserchangeset" id="api_editorinfo_ace_prepareuserchangeset">#</a></span></h2>
+<h2 id="editorinfoace_applypreparedchangesettobase">editorInfo.ace_applyPreparedChangesetToBase()<span><a class="mark" href="#api_editorinfo_ace_applypreparedchangesettobase" id="api_editorinfo_ace_applypreparedchangesettobase">#</a></span></h2>
+<h2 id="editorinfoace_setuserchangenotificationcallbackf">editorInfo.ace_setUserChangeNotificationCallback(f)<span><a class="mark" href="#api_editorinfo_ace_setuserchangenotificationcallback_f" id="api_editorinfo_ace_setuserchangenotificationcallback_f">#</a></span></h2>
+<h2 id="editorinfoace_setauthorinfoauthor-info">editorInfo.ace_setAuthorInfo(author, info)<span><a class="mark" href="#api_editorinfo_ace_setauthorinfo_author_info" id="api_editorinfo_ace_setauthorinfo_author_info">#</a></span></h2>
+<h2 id="editorinfoace_setauthorselectionrangeauthor-start-end">editorInfo.ace_setAuthorSelectionRange(author, start, end)<span><a class="mark" href="#api_editorinfo_ace_setauthorselectionrange_author_start_end" id="api_editorinfo_ace_setauthorselectionrange_author_start_end">#</a></span></h2>
+<h2 id="editorinfoace_getunhandlederrors">editorInfo.ace_getUnhandledErrors()<span><a class="mark" href="#api_editorinfo_ace_getunhandlederrors" id="api_editorinfo_ace_getunhandlederrors">#</a></span></h2>
+<h2 id="editorinfoace_getdebugpropertyprop">editorInfo.ace_getDebugProperty(prop)<span><a class="mark" href="#api_editorinfo_ace_getdebugproperty_prop" id="api_editorinfo_ace_getdebugproperty_prop">#</a></span></h2>
+<h2 id="editorinfoace_fastincorp">editorInfo.ace_fastIncorp(?)<span><a class="mark" href="#api_editorinfo_ace_fastincorp" id="api_editorinfo_ace_fastincorp">#</a></span></h2>
+<h2 id="editorinfoace_iscaret">editorInfo.ace_isCaret(?)<span><a class="mark" href="#api_editorinfo_ace_iscaret" id="api_editorinfo_ace_iscaret">#</a></span></h2>
+<h2 id="editorinfoace_getlineandcharforpoint">editorInfo.ace_getLineAndCharForPoint(?)<span><a class="mark" href="#api_editorinfo_ace_getlineandcharforpoint" id="api_editorinfo_ace_getlineandcharforpoint">#</a></span></h2>
+<h2 id="editorinfoace_performdocumentapplyattributestocharrange">editorInfo.ace_performDocumentApplyAttributesToCharRange(?)<span><a class="mark" href="#api_editorinfo_ace_performdocumentapplyattributestocharrange" id="api_editorinfo_ace_performdocumentapplyattributestocharrange">#</a></span></h2>
+<h2 id="editorinfoace_setattributeonselectionattribute-enabled">editorInfo.ace_setAttributeOnSelection(attribute, enabled)<span><a class="mark" href="#api_editorinfo_ace_setattributeonselection_attribute_enabled" id="api_editorinfo_ace_setattributeonselection_attribute_enabled">#</a></span></h2>
+<p>Sets an attribute on current range.
+Example: `call.editorInfo.ace_setAttributeOnSelection(&quot;turkey::balls&quot;, true); // turkey is the attribute here, balls is the value
+Notes: to remove the attribute pass enabled as false</p>
+<h2 id="editorinfoace_toggleattributeonselection">editorInfo.ace_toggleAttributeOnSelection(?)<span><a class="mark" href="#api_editorinfo_ace_toggleattributeonselection" id="api_editorinfo_ace_toggleattributeonselection">#</a></span></h2>
+<h2 id="editorinfoace_getattributeonselectionattribute-prevchar">editorInfo.ace_getAttributeOnSelection(attribute, prevChar)<span><a class="mark" href="#api_editorinfo_ace_getattributeonselection_attribute_prevchar" id="api_editorinfo_ace_getattributeonselection_attribute_prevchar">#</a></span></h2>
+<p>Returns a boolean if an attribute exists on a selected range.
+prevChar value should be true if you want to get the previous Character attribute instead of the current selection for example
+if the caret is at position 0,1 (after first character) it&#39;s probable you want the attributes on the character at 0,0
+The attribute should be the string name of the attribute applied to the selection IE subscript
+Example usage: Apply the activeButton Class to a button if an attribute is on a highlighted/selected caret position or range.
+Example <code>var isItThere = documentAttributeManager.getAttributeOnSelection(&quot;turkey::balls&quot;, true);</code></p>
+<p>See the ep_subscript plugin for an example of this function in action.
+Notes: Does not work on first or last character of a line.  Suffers from a race condition if called with aceEditEvent.</p>
+<h2 id="editorinfoace_performselectionchange">editorInfo.ace_performSelectionChange(?)<span><a class="mark" href="#api_editorinfo_ace_performselectionchange" id="api_editorinfo_ace_performselectionchange">#</a></span></h2>
+<h2 id="editorinfoace_doindentoutdent">editorInfo.ace_doIndentOutdent(?)<span><a class="mark" href="#api_editorinfo_ace_doindentoutdent" id="api_editorinfo_ace_doindentoutdent">#</a></span></h2>
+<h2 id="editorinfoace_doundoredo">editorInfo.ace_doUndoRedo(?)<span><a class="mark" href="#api_editorinfo_ace_doundoredo" id="api_editorinfo_ace_doundoredo">#</a></span></h2>
+<h2 id="editorinfoace_doinsertunorderedlist">editorInfo.ace_doInsertUnorderedList(?)<span><a class="mark" href="#api_editorinfo_ace_doinsertunorderedlist" id="api_editorinfo_ace_doinsertunorderedlist">#</a></span></h2>
+<h2 id="editorinfoace_doinsertorderedlist">editorInfo.ace_doInsertOrderedList(?)<span><a class="mark" href="#api_editorinfo_ace_doinsertorderedlist" id="api_editorinfo_ace_doinsertorderedlist">#</a></span></h2>
+<h2 id="editorinfoace_performdocumentapplyattributestorange">editorInfo.ace_performDocumentApplyAttributesToRange()<span><a class="mark" href="#api_editorinfo_ace_performdocumentapplyattributestorange" id="api_editorinfo_ace_performdocumentapplyattributestorange">#</a></span></h2>
+<h2 id="editorinfoace_getauthorinfos">editorInfo.ace_getAuthorInfos()<span><a class="mark" href="#api_editorinfo_ace_getauthorinfos" id="api_editorinfo_ace_getauthorinfos">#</a></span></h2>
+<p>Returns an info object about the author. Object key = author_id and info includes author&#39;s bg color value.
+Use to define your own authorship.</p>
+<h2 id="editorinfoace_performdocumentreplacerangestart-end-newtext">editorInfo.ace_performDocumentReplaceRange(start, end, newText)<span><a class="mark" href="#api_editorinfo_ace_performdocumentreplacerange_start_end_newtext" id="api_editorinfo_ace_performdocumentreplacerange_start_end_newtext">#</a></span></h2>
+<p>This function replaces a range (from [x1,y1] to [x2,y2]) with <code>newText</code>.</p>
+<h2 id="editorinfoace_performdocumentreplacecharrangestartchar-endchar-newtext">editorInfo.ace_performDocumentReplaceCharRange(startChar, endChar, newText)<span><a class="mark" href="#api_editorinfo_ace_performdocumentreplacecharrange_startchar_endchar_newtext" id="api_editorinfo_ace_performdocumentreplacecharrange_startchar_endchar_newtext">#</a></span></h2>
+<p>This function replaces a range (from y1 to y2) with <code>newText</code>.</p>
+<h2 id="editorinfoace_renumberlistlinenum">editorInfo.ace_renumberList(lineNum)<span><a class="mark" href="#api_editorinfo_ace_renumberlist_linenum" id="api_editorinfo_ace_renumberlist_linenum">#</a></span></h2>
+<p>If you delete a line, calling this method will fix the line numbering.</p>
+<h2 id="editorinfoace_doreturnkey">editorInfo.ace_doReturnKey()<span><a class="mark" href="#api_editorinfo_ace_doreturnkey" id="api_editorinfo_ace_doreturnkey">#</a></span></h2>
+<p>Forces a return key at the current caret position.</p>
+<h2 id="editorinfoace_isblockelementelement">editorInfo.ace_isBlockElement(element)<span><a class="mark" href="#api_editorinfo_ace_isblockelement_element" id="api_editorinfo_ace_isblockelement_element">#</a></span></h2>
+<p>Returns true if your passed element is registered as a block element</p>
+<h2 id="editorinfoace_getlinelisttypelinenum">editorInfo.ace_getLineListType(lineNum)<span><a class="mark" href="#api_editorinfo_ace_getlinelisttype_linenum" id="api_editorinfo_ace_getlinelisttype_linenum">#</a></span></h2>
+<p>Returns the line&#39;s html list type.</p>
+<h2 id="editorinfoace_caretline">editorInfo.ace_caretLine()<span><a class="mark" href="#api_editorinfo_ace_caretline" id="api_editorinfo_ace_caretline">#</a></span></h2>
+<p>Returns X position of the caret.</p>
+<h2 id="editorinfoace_caretcolumn">editorInfo.ace_caretColumn()<span><a class="mark" href="#api_editorinfo_ace_caretcolumn" id="api_editorinfo_ace_caretcolumn">#</a></span></h2>
+<p>Returns Y position of the caret.</p>
+<h2 id="editorinfoace_caretdocchar">editorInfo.ace_caretDocChar()<span><a class="mark" href="#api_editorinfo_ace_caretdocchar" id="api_editorinfo_ace_caretdocchar">#</a></span></h2>
+<p>Returns the Y offset starting from [x=0,y=0]</p>
+<h2 id="editorinfoace_iswordchar">editorInfo.ace_isWordChar(?)<span><a class="mark" href="#api_editorinfo_ace_iswordchar" id="api_editorinfo_ace_iswordchar">#</a></span></h2>
+<h1 id="changeset-library">Changeset Library<span><a class="mark" href="#api_changeset_library" id="api_changeset_library">#</a></span></h1>
+<pre><code>&quot;Z:z&gt;1|2=m=b*0|1+1$\n&quot;</code></pre><p>This is a Changeset. It&#39;s just a string and it&#39;s very difficult to read in this form. But the Changeset Library gives us some tools to read it.</p>
+<p>A changeset describes the diff between two revisions of the document. The Browser sends changesets to the server and the server sends them to the clients to update them. These Changesets also get saved into the history of a pad. This allows us to go back to every revision from the past.</p>
+<h2 id="changesetunpackchangeset">Changeset.unpack(changeset)<span><a class="mark" href="#api_changeset_unpack_changeset" id="api_changeset_unpack_changeset">#</a></span></h2>
+<div class="signature"><ul>
+<li><code>changeset</code> <span class="type">String</span></li>
+</div></ul>
+<p>This function returns an object representation of the changeset, similar to this:</p>
+<pre><code>{ oldLen: 35, newLen: 36, ops: &#39;|2=m=b*0|1+1&#39;, charBank: &#39;\n&#39; }</code></pre><ul>
+<li><code>oldLen</code> {Number} the original length of the document.</li>
+<li><code>newLen</code> {Number} the length of the document after the changeset is applied.</li>
+<li><code>ops</code> {String} the actual changes, introduced by this changeset.</li>
+<li><code>charBank</code> {String} All characters that are added by this changeset.</li>
+</ul>
+<h2 id="changesetopiteratorops">Changeset.opIterator(ops)<span><a class="mark" href="#api_changeset_opiterator_ops" id="api_changeset_opiterator_ops">#</a></span></h2>
+<div class="signature"><ul>
+<li><code>ops</code> <span class="type">String</span> The operators, returned by <code>Changeset.unpack()</code></li>
+</div></ul>
+<p>Returns an operator iterator. This iterator allows us to iterate over all operators that are in the changeset.</p>
+<p>You can iterate with an opIterator using its <code>next()</code> and <code>hasNext()</code> methods. Next returns the <code>next()</code> operator object and <code>hasNext()</code> indicates, whether there are any operators left.</p>
+<h2 id="the-operator-object">The Operator object<span><a class="mark" href="#api_the_operator_object" id="api_the_operator_object">#</a></span></h2>
+<p>There are 3 types of operators: <code>+</code>,<code>-</code> and <code>=</code>. These operators describe different changes to the document, beginning with the first character of the document. A <code>=</code> operator doesn&#39;t change the text, but it may add or remove text attributes. A <code>-</code> operator removes text. And a <code>+</code> Operator adds text and optionally adds some attributes to it.</p>
+<ul>
+<li><code>opcode</code> {String} the operator type</li>
+<li><code>chars</code> {Number} the length of the text changed by this operator.</li>
+<li><code>lines</code> {Number} the number of lines changed by this operator.</li>
+<li><code>attribs</code> {attribs} attributes set on this text.</li>
+</ul>
+<h3 id="example">Example<span><a class="mark" href="#api_example" id="api_example">#</a></span></h3>
+<pre><code>{ opcode: &#39;+&#39;,
+  chars: 1,
+  lines: 1,
+  attribs: &#39;*0&#39; }</code></pre><h2 id="apool">APool<span><a class="mark" href="#api_apool" id="api_apool">#</a></span></h2>
+<pre><code>&gt; var AttributePoolFactory = require(&quot;./utils/AttributePoolFactory&quot;);
+&gt; var apool = AttributePoolFactory.createAttributePool();
+&gt; console.log(apool)
+{ numToAttrib: {},
+  attribToNum: {},
+  nextNum: 0,
+  putAttrib: [Function],
+  getAttrib: [Function],
+  getAttribKey: [Function],
+  getAttribValue: [Function],
+  eachAttrib: [Function],
+  toJsonable: [Function],
+  fromJsonable: [Function] }</code></pre><p>This creates an empty apool. An apool saves which attributes were used during the history of a pad. There is one apool for each pad. It only saves the attributes that were really used, it doesn&#39;t save unused attributes. Let&#39;s fill this apool with some values</p>
+<pre><code>&gt; apool.fromJsonable({&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;a.kVnWeomPADAT2pn9&quot;],&quot;1&quot;:[&quot;bold&quot;,&quot;true&quot;],&quot;2&quot;:[&quot;italic&quot;,&quot;true&quot;]},&quot;nextNum&quot;:3});
+&gt; console.log(apool)
+{ numToAttrib:
+   { &#39;0&#39;: [ &#39;author&#39;, &#39;a.kVnWeomPADAT2pn9&#39; ],
+     &#39;1&#39;: [ &#39;bold&#39;, &#39;true&#39; ],
+     &#39;2&#39;: [ &#39;italic&#39;, &#39;true&#39; ] },
+  attribToNum:
+   { &#39;author,a.kVnWeomPADAT2pn9&#39;: 0,
+     &#39;bold,true&#39;: 1,
+     &#39;italic,true&#39;: 2 },
+  nextNum: 3,
+  putAttrib: [Function],
+  getAttrib: [Function],
+  getAttribKey: [Function],
+  getAttribValue: [Function],
+  eachAttrib: [Function],
+  toJsonable: [Function],
+  fromJsonable: [Function] }</code></pre><p>We used the fromJsonable function to fill the empty apool with values. the fromJsonable and toJsonable functions are used to serialize and deserialize an apool. You can see that it stores the relation between numbers and attributes. So for example the attribute 1 is the attribute bold and vise versa. An attribute is always a key value pair. For stuff like bold and italic it&#39;s just  &#39;italic&#39;:&#39;true&#39;. For authors it&#39;s author:$AUTHORID. So a character can be bold and italic. But it can&#39;t belong to multiple authors</p>
+<pre><code>&gt; apool.getAttrib(1)
+[ &#39;bold&#39;, &#39;true&#39; ]</code></pre><p>Simple example of how to get the key value pair for the attribute 1</p>
+<h2 id="atext">AText<span><a class="mark" href="#api_atext" id="api_atext">#</a></span></h2>
+<pre><code>&gt; var atext = {&quot;text&quot;:&quot;bold text\nitalic text\nnormal text\n\n&quot;,&quot;attribs&quot;:&quot;*0*1+9*0|1+1*0*1*2+b|1+1*0+b|2+2&quot;};
+&gt; console.log(atext)
+{ text: &#39;bold text\nitalic text\nnormal text\n\n&#39;,
+  attribs: &#39;*0*1+9*0|1+1*0*1*2+b|1+1*0+b|2+2&#39; }</code></pre><p>This is an atext. An atext has two parts: text and attribs. The text is just the text of the pad as a string. We will look closer at the attribs at the next steps</p>
+<pre><code>&gt; var opiterator = Changeset.opIterator(atext.attribs)
+&gt; console.log(opiterator)
+{ next: [Function: next],
+  hasNext: [Function: hasNext],
+  lastIndex: [Function: lastIndex] }
+&gt; opiterator.next()
+{ opcode: &#39;+&#39;,
+  chars: 9,
+  lines: 0,
+  attribs: &#39;*0*1&#39; }
+&gt; opiterator.next()
+{ opcode: &#39;+&#39;,
+  chars: 1,
+  lines: 1,
+  attribs: &#39;*0&#39; }
+&gt; opiterator.next()
+{ opcode: &#39;+&#39;,
+  chars: 11,
+  lines: 0,
+  attribs: &#39;*0*1*2&#39; }
+&gt; opiterator.next()
+{ opcode: &#39;+&#39;,
+  chars: 1,
+  lines: 1,
+  attribs: &#39;&#39; }
+&gt; opiterator.next()
+{ opcode: &#39;+&#39;,
+  chars: 11,
+  lines: 0,
+  attribs: &#39;*0&#39; }
+&gt; opiterator.next()
+{ opcode: &#39;+&#39;,
+  chars: 2,
+  lines: 2,
+  attribs: &#39;&#39; }</code></pre><p>The attribs are again a bunch of operators like .ops in the changeset was. But these operators are only + operators. They describe which part of the text has which attributes</p>
+<p>For more information see /doc/easysync/easysync-notes.txt in the source.</p>
+<h1 id="plugin-framework">Plugin Framework<span><a class="mark" href="#api_plugin_framework" id="api_plugin_framework">#</a></span></h1>
+<p><code>require(&quot;ep_etherpad-lite/static/js/plugingfw/plugins&quot;)</code></p>
+<h2 id="pluginsupdate">plugins.update<span><a class="mark" href="#api_plugins_update" id="api_plugins_update">#</a></span></h2>
+<p><code>require(&quot;ep_etherpad-lite/static/js/plugingfw/plugins&quot;).update()</code> will use npm
+to list all installed modules and read their ep.json files, registering the
+contained hooks. A hook registration is a pair of a hook name and a function
+reference (filename for require() plus function name)</p>
+<h2 id="hookscallall">hooks.callAll<span><a class="mark" href="#api_hooks_callall" id="api_hooks_callall">#</a></span></h2>
+<p><code>require(&quot;ep_etherpad-lite/static/js/plugingfw/hooks&quot;).callAll(&quot;hook_name&quot;,
+{argname:value})</code> will call all hook functions registered for <code>hook_name</code> with
+<code>{argname:value}</code>.</p>
+<h2 id="hooksacallall">hooks.aCallAll<span><a class="mark" href="#api_hooks_acallall" id="api_hooks_acallall">#</a></span></h2>
+<p>?</p>
+<h2 id="">...<span><a class="mark" href="#api" id="api">#</a></span></h2>
+<h1 id="toolbar-controller">Toolbar controller<span><a class="mark" href="#api_toolbar_controller" id="api_toolbar_controller">#</a></span></h1>
+<p>src/node/utils/toolbar.js</p>
+<h2 id="buttonopts">button(opts)<span><a class="mark" href="#api_button_opts" id="api_button_opts">#</a></span></h2>
+<div class="signature"><ul>
+<li><span class="type">Object</span> <code>opts</code><ul>
+<li><code>command</code> - this command fill be fired on the editbar on click</li>
+<li><code>localizationId</code> - will be set as <code>data-l10-id</code></li>
+<li><code>class</code> - here you can add additional classes to the button</li>
+</ul>
+</li>
+</div></ul>
+<p>Returns: {Button}</p>
+<p>Example:</p>
+<pre><code>var orderedlist = toolbar.button({
+  command: &quot;insertorderedlist&quot;,
+  localizationId: &quot;pad.toolbar.ol.title&quot;,
+  class: &quot;buttonicon buttonicon-insertorderedlist&quot;
+})</code></pre><p>You can also create buttons with text:</p>
+<pre><code>var myButton = toolbar.button({
+  command: &quot;myButton&quot;,
+  localizationId: &quot;myPlugin.toolbar.myButton&quot;,
+  class: &quot;buttontext&quot;
+})</code></pre><h2 id="selectbuttonopts">selectButton(opts)<span><a class="mark" href="#api_selectbutton_opts" id="api_selectbutton_opts">#</a></span></h2>
+<div class="signature"><ul>
+<li><span class="type">Object</span> <code>opts</code><ul>
+<li><code>id</code> - id of the menu item</li>
+<li><code>selectId</code> - id of the select element</li>
+<li><code>command</code> - this command fill be fired on the editbar on change</li>
+</ul>
+</li>
+</div></ul>
+<p>Returns: {SelectButton}</p>
+<h2 id="selectbuttonaddoptionvalue-text-attributes">SelectButton.addOption(value, text, attributes)<span><a class="mark" href="#api_selectbutton_addoption_value_text_attributes" id="api_selectbutton_addoption_value_text_attributes">#</a></span></h2>
+<div class="signature"><ul>
+<li><span class="type">String</span> value - The value of this option</li>
+<li><span class="type">String</span> text - the label text used for this option</li>
+<li><span class="type">Object</span> attributes - any additional html attributes go here (e.g. <code>data-l10n-id</code>)</li>
+</div></ul>
+<h2 id="registerbuttonname-item">registerButton(name, item)<span><a class="mark" href="#api_registerbutton_name_item" id="api_registerbutton_name_item">#</a></span></h2>
+<div class="signature"><ul>
+<li><span class="type">String</span> name - used to reference the item in the toolbar config in settings.json</li>
+<li><span class="type">Button|SelectButton</span> item - the button to add<h1 id="editbar">Editbar<span><a class="mark" href="#api_editbar" id="api_editbar">#</a></span></h1>
+src/static/js/pad_editbar.js</li>
+</div></ul>
+<h2 id="isenabled">isEnabled()<span><a class="mark" href="#api_isenabled" id="api_isenabled">#</a></span></h2>
+<h2 id="disable">disable()<span><a class="mark" href="#api_disable" id="api_disable">#</a></span></h2>
+<h2 id="toggledropdowndropdown-callback">toggleDropDown(dropdown, callback)<span><a class="mark" href="#api_toggledropdown_dropdown_callback" id="api_toggledropdown_dropdown_callback">#</a></span></h2>
+<p>Shows the dropdown <code>div.popup</code> whose <code>id</code> equals <code>dropdown</code>.</p>
+<h2 id="registercommandcmd-callback">registerCommand(cmd, callback)<span><a class="mark" href="#api_registercommand_cmd_callback" id="api_registercommand_cmd_callback">#</a></span></h2>
+<p>Register a handler for a specific command. Commands are fired if the corresponding button is clicked or the corresponding select is changed.</p>
+<h2 id="registeracecommandcmd-callback">registerAceCommand(cmd, callback)<span><a class="mark" href="#api_registeracecommand_cmd_callback" id="api_registeracecommand_cmd_callback">#</a></span></h2>
+<p>Creates an ace callstack and calls the callback with an ace instance (and a toolbar item, if applicable): <code>callback(cmd, ace, item)</code>.</p>
+<p>Example:</p>
+<pre><code>toolbar.registerAceCommand(&quot;insertorderedlist&quot;, function (cmd, ace) {
+  ace.ace_doInsertOrderedList();
+});</code></pre><h2 id="registerdropdowncommandcmd-dropdown">registerDropdownCommand(cmd, dropdown)<span><a class="mark" href="#api_registerdropdowncommand_cmd_dropdown" id="api_registerdropdowncommand_cmd_dropdown">#</a></span></h2>
+<p>Ties a <code>div.popup</code> where <code>id</code> equals <code>dropdown</code> to a <code>command</code> fired by clicking a button.</p>
+<h2 id="triggercommandcmd-item">triggerCommand(cmd[, item])<span><a class="mark" href="#api_triggercommand_cmd_item" id="api_triggercommand_cmd_item">#</a></span></h2>
+<p>Triggers a command (optionally with some internal representation of the toolbar item that triggered it).</p>
+
+  </div>
+
+</body>
+</html>
+
