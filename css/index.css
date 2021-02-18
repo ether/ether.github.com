@@ -130,6 +130,7 @@ div#header div#mobile-nav li a:focus {
 div.content {
   font-size: 1rem;
   line-height: 1.75;
+  padding: 20px;
 }
 
 div.content p,
