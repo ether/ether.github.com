@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Toolbar controller - Etherpad v1.8.9 Manual &amp; Documentation</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="apidoc" id="api-section-toolbar">
+  <header id="header">
+    <h1>Etherpad v1.8.9 Manual &amp; Documentation</h1>
+  </header>
+
+  <div id="toc">
+    <h2>Table of Contents</h2>
+    <ul>
+<li><a href="#toolbar_toolbar_controller">Toolbar controller</a><ul>
+<li><a href="#toolbar_button_opts">button(opts)</a></li>
+<li><a href="#toolbar_selectbutton_opts">selectButton(opts)</a></li>
+<li><a href="#toolbar_selectbutton_addoption_value_text_attributes">SelectButton.addOption(value, text, attributes)</a></li>
+<li><a href="#toolbar_registerbutton_name_item">registerButton(name, item)</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+
+  <div id="apicontent">
+    <h1 id="toolbar-controller">Toolbar controller</h1>
+<p>src/node/utils/toolbar.js</p>
+<h2 id="buttonopts">button(opts)</h2>
+<ul>
+<li>{Object} <code>opts</code><ul>
+<li><code>command</code> - this command fill be fired on the editbar on click</li>
+<li><code>localizationId</code> - will be set as <code>data-l10-id</code></li>
+<li><code>class</code> - here you can add additional classes to the button</li>
+</ul>
+</li>
+</ul>
+<p>Returns: {Button}</p>
+<p>Example:</p>
+<pre><code>var orderedlist = toolbar.button({
+  command: &quot;insertorderedlist&quot;,
+  localizationId: &quot;pad.toolbar.ol.title&quot;,
+  class: &quot;buttonicon buttonicon-insertorderedlist&quot;
+})</code></pre>
+<p>You can also create buttons with text:</p>
+<pre><code>var myButton = toolbar.button({
+  command: &quot;myButton&quot;,
+  localizationId: &quot;myPlugin.toolbar.myButton&quot;,
+  class: &quot;buttontext&quot;
+})</code></pre>
+<h2 id="selectbuttonopts">selectButton(opts)</h2>
+<ul>
+<li>{Object} <code>opts</code><ul>
+<li><code>id</code> - id of the menu item</li>
+<li><code>selectId</code> - id of the select element</li>
+<li><code>command</code> - this command fill be fired on the editbar on change</li>
+</ul>
+</li>
+</ul>
+<p>Returns: {SelectButton}</p>
+<h2 id="selectbuttonaddoptionvalue-text-attributes">SelectButton.addOption(value, text, attributes)</h2>
+<ul>
+<li>{String} value - The value of this option</li>
+<li>{String} text - the label text used for this option</li>
+<li>{Object} attributes - any additional html attributes go here (e.g. <code>data-l10n-id</code>)</li>
+</ul>
+<h2 id="registerbuttonname-item">registerButton(name, item)</h2>
+<ul>
+<li>{String} name - used to reference the item in the toolbar config in settings.json</li>
+<li>{Button|SelectButton} item - the button to add</li>
+</ul>
+
+  </div>
+
+</body>
+</html>
+
