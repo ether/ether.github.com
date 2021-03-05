@@ -1,0 +1,744 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Server-side hooks - Etherpad v1.8.9 Manual &amp; Documentation</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="apidoc" id="api-section-hooks_server-side">
+  <header id="header">
+    <h1>Etherpad v1.8.9 Manual &amp; Documentation</h1>
+  </header>
+
+  <div id="toc">
+    <h2>Table of Contents</h2>
+    <ul>
+<li><a href="#hooks_server_side_server_side_hooks">Server-side hooks</a><ul>
+<li><a href="#hooks_server_side_loadsettings">loadSettings</a></li>
+<li><a href="#hooks_server_side_shutdown">shutdown</a></li>
+<li><a href="#hooks_server_side_pluginuninstall">pluginUninstall</a></li>
+<li><a href="#hooks_server_side_plugininstall">pluginInstall</a></li>
+<li><a href="#hooks_server_side_init_plugin_name">init_<code>&lt;plugin name&gt;</code></a></li>
+<li><a href="#hooks_server_side_expressconfigure">expressConfigure</a></li>
+<li><a href="#hooks_server_side_expresscreateserver">expressCreateServer</a></li>
+<li><a href="#hooks_server_side_expresscloseserver">expressCloseServer</a></li>
+<li><a href="#hooks_server_side_eejsblock_name">eejsBlock_<code>&lt;name&gt;</code></a></li>
+<li><a href="#hooks_server_side_padinittoolbar">padInitToolbar</a></li>
+<li><a href="#hooks_server_side_onaccesscheck">onAccessCheck</a></li>
+<li><a href="#hooks_server_side_padcreate">padCreate</a></li>
+<li><a href="#hooks_server_side_padload">padLoad</a></li>
+<li><a href="#hooks_server_side_padupdate">padUpdate</a></li>
+<li><a href="#hooks_server_side_padcopy">padCopy</a></li>
+<li><a href="#hooks_server_side_padremove">padRemove</a></li>
+<li><a href="#hooks_server_side_socketio">socketio</a></li>
+<li><a href="#hooks_server_side_preauthorize">preAuthorize</a></li>
+<li><a href="#hooks_server_side_authorize">authorize</a></li>
+<li><a href="#hooks_server_side_authenticate">authenticate</a></li>
+<li><a href="#hooks_server_side_authfailure">authFailure</a></li>
+<li><a href="#hooks_server_side_preauthzfailure">preAuthzFailure</a></li>
+<li><a href="#hooks_server_side_authnfailure">authnFailure</a></li>
+<li><a href="#hooks_server_side_authzfailure">authzFailure</a></li>
+<li><a href="#hooks_server_side_handlemessage">handleMessage</a></li>
+<li><a href="#hooks_server_side_handlemessagesecurity">handleMessageSecurity</a></li>
+<li><a href="#hooks_server_side_clientvars">clientVars</a></li>
+<li><a href="#hooks_server_side_getlinehtmlforexport">getLineHTMLForExport</a></li>
+<li><a href="#hooks_server_side_exporthtmladditionalcontent">exportHTMLAdditionalContent</a></li>
+<li><a href="#hooks_server_side_stylesforexport">stylesForExport</a></li>
+<li><a href="#hooks_server_side_aceattribclasses">aceAttribClasses</a></li>
+<li><a href="#hooks_server_side_exportfilename">exportFileName</a></li>
+<li><a href="#hooks_server_side_exporthtmladditionaltags">exportHtmlAdditionalTags</a></li>
+<li><a href="#hooks_server_side_exporthtmladditionaltagswithdata">exportHtmlAdditionalTagsWithData</a></li>
+<li><a href="#hooks_server_side_exportetherpadadditionalcontent">exportEtherpadAdditionalContent</a></li>
+<li><a href="#hooks_server_side_userleave">userLeave</a><ul>
+<li><a href="#hooks_server_side_clientready">clientReady</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+
+  <div id="apicontent">
+    <h1 id="server-side-hooks">Server-side hooks</h1>
+<p>These hooks are called on server-side.</p>
+<h2 id="loadsettings">loadSettings</h2>
+<p>Called from: src/node/server.js</p>
+<p>Things in context:</p>
+<ol>
+<li>settings - the settings object</li>
+</ol>
+<p>Use this hook to receive the global settings in your plugin.</p>
+<h2 id="shutdown">shutdown</h2>
+<p>Called from: src/node/server.js</p>
+<p>Things in context: None</p>
+<p>This hook runs before shutdown. Use it to stop timers, close sockets and files,
+flush buffers, etc. The database is not available while this hook is running.
+The shutdown function must not block for long because there is a short timeout
+before the process is forcibly terminated.</p>
+<p>The shutdown function must return a Promise, which must resolve to <code>undefined</code>.
+Returning <code>callback(value)</code> will return a Promise that is resolved to <code>value</code>.</p>
+<p>Example:</p>
+<pre><code>// using an async function
+exports.shutdown = async (hookName, context) =&gt; {
+  await flushBuffers();
+};
+</code></pre>
+<h2 id="pluginuninstall">pluginUninstall</h2>
+<p>Called from: src/static/js/pluginfw/installer.js</p>
+<p>Things in context:</p>
+<ol>
+<li>plugin_name - self-explanatory</li>
+</ol>
+<p>If this hook returns an error, the callback to the uninstall function gets an error as well. This mostly seems useful for handling additional features added in based on the installation of other plugins, which is pretty cool!</p>
+<h2 id="plugininstall">pluginInstall</h2>
+<p>Called from: src/static/js/pluginfw/installer.js</p>
+<p>Things in context:</p>
+<ol>
+<li>plugin_name - self-explanatory</li>
+</ol>
+<p>If this hook returns an error, the callback to the install function gets an error, too. This seems useful for adding in features when a particular plugin is installed.</p>
+<h2 id="init_plugin-name">init_<code>&lt;plugin name&gt;</code></h2>
+<p>Called from: src/static/js/pluginfw/plugins.js</p>
+<p>Things in context: None</p>
+<p>This function is called after a specific plugin is initialized. This would probably be more useful than the previous two functions if you only wanted to add in features to one specific plugin.</p>
+<h2 id="expressconfigure">expressConfigure</h2>
+<p>Called from: src/node/hooks/express.js</p>
+<p>Things in context:</p>
+<ol>
+<li>app - the main application object</li>
+</ol>
+<p>This is a helpful hook for changing the behavior and configuration of the application. It&#39;s called right after the application gets configured.</p>
+<h2 id="expresscreateserver">expressCreateServer</h2>
+<p>Called from: src/node/hooks/express.js</p>
+<p>Things in context:</p>
+<ol>
+<li>app - the main express application object (helpful for adding new paths and such)</li>
+<li>server - the http server object</li>
+</ol>
+<p>This hook gets called after the application object has been created, but before it starts listening. This is similar to the expressConfigure hook, but it&#39;s not guaranteed that the application object will have all relevant configuration variables.</p>
+<h2 id="expresscloseserver">expressCloseServer</h2>
+<p>Called from: src/node/hooks/express.js</p>
+<p>Things in context: Nothing</p>
+<p>This hook is called when the HTTP server is closing, which happens during
+shutdown (see the shutdown hook) and when the server restarts (e.g., when a
+plugin is installed via the <code>/admin/plugins</code> page). The HTTP server may or may
+not already be closed when this hook executes.</p>
+<p>Example:</p>
+<pre><code>exports.expressCloseServer = async () =&gt; {
+  await doSomeCleanup();
+};
+</code></pre>
+<h2 id="eejsblock_name">eejsBlock_<code>&lt;name&gt;</code></h2>
+<p>Called from: src/node/eejs/index.js</p>
+<p>Things in context:</p>
+<ol>
+<li>content - the content of the block</li>
+</ol>
+<p>This hook gets called upon the rendering of an ejs template block. For any specific kind of block, you can change how that block gets rendered by modifying the content object passed in.</p>
+<p>Available blocks in <code>pad.html</code> are:</p>
+<ul>
+<li><code>htmlHead</code> - after <code>&lt;html&gt;</code> and immediately before the title tag</li>
+<li><code>styles</code> - the style <code>&lt;link&gt;</code>s</li>
+<li><code>body</code> - the contents of the body tag</li>
+<li><code>editbarMenuLeft</code> - the left tool bar (consider using the toolbar controller instead of manually adding html here)</li>
+<li><code>editbarMenuRight</code> - right tool bar</li>
+<li><code>afterEditbar</code> - allows you to add stuff immediately after the toolbar</li>
+<li><code>userlist</code> - the contents of the userlist dropdown</li>
+<li><code>loading</code> - the initial loading message</li>
+<li><code>mySettings</code> - the left column of the settings dropdown (&quot;My view&quot;); intended for adding checkboxes only</li>
+<li><code>mySettings.dropdowns</code> - add your dropdown settings here</li>
+<li><code>globalSettings</code> - the right column of the settings dropdown (&quot;Global view&quot;)</li>
+<li><code>importColumn</code> - import form</li>
+<li><code>exportColumn</code> - export form</li>
+<li><code>modals</code> - Contains all connectivity messages</li>
+<li><code>embedPopup</code> - the embed dropdown</li>
+<li><code>scripts</code> - Add your script tags here, if you really have to (consider use client-side hooks instead)</li>
+</ul>
+<p><code>timeslider.html</code> blocks:</p>
+<ul>
+<li><code>timesliderStyles</code></li>
+<li><code>timesliderScripts</code></li>
+<li><code>timesliderBody</code></li>
+<li><code>timesliderTop</code></li>
+<li><code>timesliderEditbarRight</code></li>
+<li><code>modals</code></li>
+</ul>
+<p><code>index.html</code> blocks:</p>
+<ul>
+<li><code>indexCustomStyles</code> - contains the <code>index.css</code> <code>&lt;link&gt;</code> tag, allows you to add your own or to customize the one provided by the active skin</li>
+<li><code>indexWrapper</code> - contains the form for creating new pads</li>
+<li><code>indexCustomScripts</code> - contains the <code>index.js</code> <code>&lt;script&gt;</code> tag, allows you to add your own or to customize the one provided by the active skin</li>
+</ul>
+<h2 id="padinittoolbar">padInitToolbar</h2>
+<p>Called from: src/node/hooks/express/specialpages.js</p>
+<p>Things in context:</p>
+<ol>
+<li>toolbar - the toolbar controller that will render the toolbar eventually</li>
+</ol>
+<p>Here you can add custom toolbar items that will be available in the toolbar config in <code>settings.json</code>. For more about the toolbar controller see the API section.</p>
+<p>Usage examples:</p>
+<ul>
+<li><a href="https://github.com/tiblu/ep_authorship_toggle">https://github.com/tiblu/ep_authorship_toggle</a></li>
+</ul>
+<h2 id="onaccesscheck">onAccessCheck</h2>
+<p>Called from: src/node/db/SecurityManager.js</p>
+<p>Things in context:</p>
+<ol>
+<li>padID - the pad the user wants to access</li>
+<li>token - the token of the author</li>
+<li>sessionCookie - the session the use has</li>
+</ol>
+<p>This hook gets called when the access to the concrete pad is being checked. Return <code>false</code> to deny access.</p>
+<h2 id="padcreate">padCreate</h2>
+<p>Called from: src/node/db/Pad.js</p>
+<p>Things in context:</p>
+<ol>
+<li>pad - the pad instance</li>
+<li>author - the id of the author who created the pad</li>
+</ol>
+<p>This hook gets called when a new pad was created.</p>
+<h2 id="padload">padLoad</h2>
+<p>Called from: src/node/db/Pad.js</p>
+<p>Things in context:</p>
+<ol>
+<li>pad - the pad instance</li>
+</ol>
+<p>This hook gets called when a pad was loaded. If a new pad was created and loaded this event will be emitted too.</p>
+<h2 id="padupdate">padUpdate</h2>
+<p>Called from: src/node/db/Pad.js</p>
+<p>Things in context:</p>
+<ol>
+<li>pad - the pad instance</li>
+<li>author - the id of the author who updated the pad</li>
+<li>revs - the index of the new revision</li>
+<li>changeset - the changeset of this revision (see <a href="#index_changeset_library">Changeset Library</a>)</li>
+</ol>
+<p>This hook gets called when an existing pad was updated.</p>
+<h2 id="padcopy">padCopy</h2>
+<p>Called from: src/node/db/Pad.js</p>
+<p>Things in context:</p>
+<ol>
+<li>originalPad - the source pad instance</li>
+<li>destinationID - the id of the pad copied from originalPad</li>
+</ol>
+<p>This hook gets called when an existing pad was copied.</p>
+<p>Usage examples:</p>
+<ul>
+<li><a href="https://github.com/ether/ep_comments">https://github.com/ether/ep_comments</a></li>
+</ul>
+<h2 id="padremove">padRemove</h2>
+<p>Called from: src/node/db/Pad.js</p>
+<p>Things in context:</p>
+<ol>
+<li>padID</li>
+</ol>
+<p>This hook gets called when an existing pad was removed/deleted.</p>
+<p>Usage examples:</p>
+<ul>
+<li><a href="https://github.com/ether/ep_comments">https://github.com/ether/ep_comments</a></li>
+</ul>
+<h2 id="socketio">socketio</h2>
+<p>Called from: src/node/hooks/express/socketio.js</p>
+<p>Things in context:</p>
+<ol>
+<li>app - the application object</li>
+<li>io - the socketio object</li>
+<li>server - the http server object</li>
+</ol>
+<p>I have no idea what this is useful for, someone else will have to add this description.</p>
+<h2 id="preauthorize">preAuthorize</h2>
+<p>Called from: src/node/hooks/express/webaccess.js</p>
+<p>Things in context:</p>
+<ol>
+<li>req - the request object</li>
+<li>res - the response object</li>
+<li>next - bypass callback. If this is called instead of the normal callback then
+all remaining access checks are skipped.</li>
+</ol>
+<p>This hook is called for each HTTP request before any authentication checks are
+performed. Example uses:</p>
+<ul>
+<li>Always grant access to static content.</li>
+<li>Process an OAuth callback.</li>
+<li>Drop requests from IP addresses that have failed N authentication checks
+within the past X minutes.</li>
+</ul>
+<p>A preAuthorize function is always called for each request unless a preAuthorize
+function from another plugin (if any) has already explicitly granted or denied
+the request.</p>
+<p>You can pass the following values to the provided callback:</p>
+<ul>
+<li><code>[]</code> defers the access decision to the normal authentication and authorization
+checks (or to a preAuthorize function from another plugin, if one exists).</li>
+<li><code>[true]</code> immediately grants access to the requested resource, unless the
+request is for an <code>/admin</code> page in which case it is treated the same as <code>[]</code>.
+(This prevents buggy plugins from accidentally granting admin access to the
+general public.)</li>
+<li><code>[false]</code> immediately denies the request. The preAuthnFailure hook will be
+called to handle the failure.</li>
+</ul>
+<p>Example:</p>
+<pre><code>exports.preAuthorize = (hookName, context, cb) =&gt; {
+  if (ipAddressIsFirewalled(context.req)) return cb([false]);
+  if (requestIsForStaticContent(context.req)) return cb([true]);
+  if (requestIsForOAuthCallback(context.req)) return cb([true]);
+  return cb([]);
+};
+</code></pre>
+<h2 id="authorize">authorize</h2>
+<p>Called from: src/node/hooks/express/webaccess.js</p>
+<p>Things in context:</p>
+<ol>
+<li>req - the request object</li>
+<li>res - the response object</li>
+<li>next - ?</li>
+<li>resource - the path being accessed</li>
+</ol>
+<p>This hook is called to handle authorization. It is especially useful for
+controlling access to specific paths.</p>
+<p>A plugin&#39;s authorize function is only called if all of the following are true:</p>
+<ul>
+<li>The request is not for static content or an API endpoint. (Requests for static
+content and API endpoints are always authorized, even if unauthenticated.)</li>
+<li>The <code>requireAuthentication</code> and <code>requireAuthorization</code> settings are both true.</li>
+<li>The user has already successfully authenticated.</li>
+<li>The user is not an admin (admin users are always authorized).</li>
+<li>The path being accessed is not an <code>/admin</code> path (<code>/admin</code> paths can only be
+accessed by admin users, and admin users are always authorized).</li>
+<li>An authorize function from a different plugin has not already caused
+authorization to pass or fail.</li>
+</ul>
+<p>Note that the authorize hook cannot grant access to <code>/admin</code> pages. If admin
+access is desired, the <code>is_admin</code> user setting must be set to true. This can be
+set in the settings file or by the authenticate hook.</p>
+<p>You can pass the following values to the provided callback:</p>
+<ul>
+<li><code>[true]</code> or <code>[&#39;create&#39;]</code> will grant access to modify or create the pad if the
+request is for a pad, otherwise access is simply granted. Access to a pad will
+be downgraded to modify-only if <code>settings.editOnly</code> is true or the user&#39;s
+<code>canCreate</code> setting is set to <code>false</code>, and downgraded to read-only if the
+user&#39;s <code>readOnly</code> setting is <code>true</code>.</li>
+<li><code>[&#39;modify&#39;]</code> will grant access to modify but not create the pad if the request
+is for a pad, otherwise access is simply granted. Access to a pad will be
+downgraded to read-only if the user&#39;s <code>readOnly</code> setting is <code>true</code>.</li>
+<li><code>[&#39;readOnly&#39;]</code> will grant read-only access.</li>
+<li><code>[false]</code> will deny access.</li>
+<li><code>[]</code> or <code>undefined</code> will defer the authorization decision to the next
+authorization plugin (if any, otherwise deny).</li>
+</ul>
+<p>Example:</p>
+<pre><code>exports.authorize = (hookName, context, cb) =&gt; {
+  const user = context.req.session.user;
+  const path = context.req.path;  // or context.resource
+  if (isExplicitlyProhibited(user, path)) return cb([false]);
+  if (isExplicitlyAllowed(user, path)) return cb([true]);
+  return cb([]);  // Let the next authorization plugin decide
+};
+</code></pre>
+<h2 id="authenticate">authenticate</h2>
+<p>Called from: src/node/hooks/express/webaccess.js</p>
+<p>Things in context:</p>
+<ol>
+<li>req - the request object</li>
+<li>res - the response object</li>
+<li>users - the users object from settings.json (possibly modified by plugins)</li>
+<li>next - ?</li>
+<li>username - the username used (optional)</li>
+<li>password - the password used (optional)</li>
+</ol>
+<p>This hook is called to handle authentication.</p>
+<p>Plugins that supply an authenticate function should probably also supply an
+authnFailure function unless falling back to HTTP basic authentication is
+appropriate upon authentication failure.</p>
+<p>This hook is only called if either the <code>requireAuthentication</code> setting is true
+or the request is for an <code>/admin</code> page.</p>
+<p>Calling the provided callback with <code>[true]</code> or <code>[false]</code> will cause
+authentication to succeed or fail, respectively. Calling the callback with <code>[]</code>
+or <code>undefined</code> will defer the authentication decision to the next authentication
+plugin (if any, otherwise fall back to HTTP basic authentication).</p>
+<p>If you wish to provide a mix of restricted and anonymous access (e.g., some pads
+are private, others are public), you can &quot;authenticate&quot; (as a guest account)
+users that have not yet logged in, and rely on other hooks (e.g., authorize,
+onAccessCheck, handleMessageSecurity) to authorize specific privileged actions.</p>
+<p>If authentication is successful, the authenticate function MUST set
+<code>context.req.session.user</code> to the user&#39;s settings object. The <code>username</code>
+property of this object should be set to the user&#39;s username. The settings
+object should come from global settings (<code>context.users[username]</code>).</p>
+<p>Example:</p>
+<pre><code>exports.authenticate = (hook_name, context, cb) =&gt; {
+  if (notApplicableToThisPlugin(context)) {
+    return cb([]);  // Let the next authentication plugin decide
+  }
+  const username = authenticate(context);
+  if (!username) {
+    console.warn(`ep_myplugin.authenticate: Failed authentication from IP ${context.req.ip}`);
+    return cb([false]);
+  }
+  console.info(`ep_myplugin.authenticate: Successful authentication from IP ${context.req.ip} for user ${username}`);
+  const users = context.users;
+  if (!(username in users)) users[username] = {};
+  users[username].username = username;
+  context.req.session.user = users[username];
+  return cb([true]);
+};
+</code></pre>
+<h2 id="authfailure">authFailure</h2>
+<p>Called from: src/node/hooks/express/webaccess.js</p>
+<p>Things in context:</p>
+<ol>
+<li>req - the request object</li>
+<li>res - the response object</li>
+<li>next - ?</li>
+</ol>
+<p><strong>DEPRECATED:</strong> Use authnFailure or authzFailure instead.</p>
+<p>This hook is called to handle an authentication or authorization failure.</p>
+<p>Plugins that supply an authenticate function should probably also supply an
+authnFailure function unless falling back to HTTP basic authentication is
+appropriate upon authentication failure.</p>
+<p>A plugin&#39;s authFailure function is only called if all of the following are true:</p>
+<ul>
+<li>There was an authentication or authorization failure.</li>
+<li>The failure was not already handled by an authFailure function from another
+plugin.</li>
+<li>For authentication failures: The failure was not already handled by the
+authnFailure hook.</li>
+<li>For authorization failures: The failure was not already handled by the
+authzFailure hook.</li>
+</ul>
+<p>Calling the provided callback with <code>[true]</code> tells Etherpad that the failure was
+handled and no further error handling is required. Calling the callback with
+<code>[]</code> or <code>undefined</code> defers error handling to the next authFailure plugin (if
+any, otherwise fall back to HTTP basic authentication for an authentication
+failure or a generic 403 page for an authorization failure).</p>
+<p>Example:</p>
+<pre><code>exports.authFailure = (hookName, context, cb) =&gt; {
+  if (notApplicableToThisPlugin(context)) {
+    return cb([]);  // Let the next plugin handle the error
+  }
+  context.res.redirect(makeLoginURL(context.req));
+  return cb([true]);
+};
+</code></pre>
+<h2 id="preauthzfailure">preAuthzFailure</h2>
+<p>Called from: src/node/hooks/express/webaccess.js</p>
+<p>Things in context:</p>
+<ol>
+<li>req - the request object</li>
+<li>res - the response object</li>
+</ol>
+<p>This hook is called to handle a pre-authentication authorization failure.</p>
+<p>A plugin&#39;s preAuthzFailure function is only called if the pre-authentication
+authorization failure was not already handled by a preAuthzFailure function from
+another plugin.</p>
+<p>Calling the provided callback with <code>[true]</code> tells Etherpad that the failure was
+handled and no further error handling is required. Calling the callback with
+<code>[]</code> or <code>undefined</code> defers error handling to a preAuthzFailure function from
+another plugin (if any, otherwise fall back to a generic 403 error page).</p>
+<p>Example:</p>
+<pre><code>exports.preAuthzFailure = (hookName, context, cb) =&gt; {
+  if (notApplicableToThisPlugin(context)) return cb([]);
+  context.res.status(403).send(renderFancy403Page(context.req));
+  return cb([true]);
+};
+</code></pre>
+<h2 id="authnfailure">authnFailure</h2>
+<p>Called from: src/node/hooks/express/webaccess.js</p>
+<p>Things in context:</p>
+<ol>
+<li>req - the request object</li>
+<li>res - the response object</li>
+</ol>
+<p>This hook is called to handle an authentication failure.</p>
+<p>Plugins that supply an authenticate function should probably also supply an
+authnFailure function unless falling back to HTTP basic authentication is
+appropriate upon authentication failure.</p>
+<p>A plugin&#39;s authnFailure function is only called if the authentication failure
+was not already handled by an authnFailure function from another plugin.</p>
+<p>Calling the provided callback with <code>[true]</code> tells Etherpad that the failure was
+handled and no further error handling is required. Calling the callback with
+<code>[]</code> or <code>undefined</code> defers error handling to an authnFailure function from
+another plugin (if any, otherwise fall back to the deprecated authFailure hook).</p>
+<p>Example:</p>
+<pre><code>exports.authnFailure = (hookName, context, cb) =&gt; {
+  if (notApplicableToThisPlugin(context)) return cb([]);
+  context.res.redirect(makeLoginURL(context.req));
+  return cb([true]);
+};
+</code></pre>
+<h2 id="authzfailure">authzFailure</h2>
+<p>Called from: src/node/hooks/express/webaccess.js</p>
+<p>Things in context:</p>
+<ol>
+<li>req - the request object</li>
+<li>res - the response object</li>
+</ol>
+<p>This hook is called to handle a post-authentication authorization failure.</p>
+<p>A plugin&#39;s authzFailure function is only called if the authorization failure was
+not already handled by an authzFailure function from another plugin.</p>
+<p>Calling the provided callback with <code>[true]</code> tells Etherpad that the failure was
+handled and no further error handling is required. Calling the callback with
+<code>[]</code> or <code>undefined</code> defers error handling to an authzFailure function from
+another plugin (if any, otherwise fall back to the deprecated authFailure hook).</p>
+<p>Example:</p>
+<pre><code>exports.authzFailure = (hookName, context, cb) =&gt; {
+  if (notApplicableToThisPlugin(context)) return cb([]);
+  if (needsPremiumAccount(context.req) &amp;&amp; !context.req.session.user.premium) {
+    context.res.status(200).send(makeUpgradeToPremiumAccountPage(context.req));
+    return cb([true]);
+  }
+  // Use the generic 403 forbidden response.
+  return cb([]);
+};
+</code></pre>
+<h2 id="handlemessage">handleMessage</h2>
+<p>Called from: src/node/handler/PadMessageHandler.js</p>
+<p>Things in context:</p>
+<ol>
+<li>message - the message being handled</li>
+<li>socket - the socket.io Socket object</li>
+<li>client - <strong>deprecated</strong> synonym of socket</li>
+</ol>
+<p>This hook allows plugins to drop or modify incoming socket.io messages from
+clients, before Etherpad processes them.</p>
+<p>The handleMessage function must return a Promise. If the Promise resolves to
+<code>null</code>, the message is dropped. Returning <code>callback(value)</code> will return a
+Promise that is resolved to <code>value</code>.</p>
+<p>Examples:</p>
+<pre><code>// Using an async function:
+exports.handleMessage = async (hookName, {message, socket}) =&gt; {
+  if (message.type === &#39;USERINFO_UPDATE&#39;) {
+    // Force the display name to the name associated with the account.
+    const user = socket.client.request.session.user || {};
+    if (user.name) message.data.userInfo.name = user.name;
+  }
+};
+
+// Using a regular function:
+exports.handleMessage = (hookName, {message, socket}, callback) =&gt; {
+  if (message.type === &#39;USERINFO_UPDATE&#39;) {
+    // Force the display name to the name associated with the account.
+    const user = socket.client.request.session.user || {};
+    if (user.name) message.data.userInfo.name = user.name;
+  }
+  return callback();
+};
+</code></pre>
+<h2 id="handlemessagesecurity">handleMessageSecurity</h2>
+<p>Called from: src/node/handler/PadMessageHandler.js</p>
+<p>Things in context:</p>
+<ol>
+<li>message - the message being handled</li>
+<li>socket - the socket.io Socket object</li>
+<li>client - <strong>deprecated</strong> synonym of socket</li>
+</ol>
+<p>This hook allows plugins to grant temporary write access to a pad. It is called
+for each incoming message from a client. If write access is granted, it applies
+to the current message and all future messages from the same socket.io
+connection until the next <code>CLIENT_READY</code> or <code>SWITCH_TO_PAD</code> message. Read-only
+access is reset <strong>after</strong> each <code>CLIENT_READY</code> or <code>SWITCH_TO_PAD</code> message, so
+granting write access has no effect for those message types.</p>
+<p>The handleMessageSecurity function must return a Promise. If the Promise
+resolves to <code>true</code>, write access is granted as described above. Returning
+<code>callback(value)</code> will return a Promise that is resolved to <code>value</code>.</p>
+<p>Examples:</p>
+<pre><code>// Using an async function:
+exports.handleMessageSecurity = async (hookName, {message, socket}) =&gt; {
+  if (shouldGrantWriteAccess(message, socket)) return true;
+  return;
+};
+
+// Using a regular function:
+exports.handleMessageSecurity = (hookName, {message, socket}, callback) =&gt; {
+  if (shouldGrantWriteAccess(message, socket)) return callback(true);
+  return callback();
+};
+</code></pre>
+<h2 id="clientvars">clientVars</h2>
+<p>Called from: src/node/handler/PadMessageHandler.js</p>
+<p>Things in context:</p>
+<ol>
+<li>clientVars - the basic <code>clientVars</code> built by the core</li>
+<li>pad - the pad this session is about</li>
+<li>socket - the socket.io Socket object</li>
+</ol>
+<p>This hook is called after a client connects but before the initial configuration
+is sent to the client. Plugins can use this hook to manipulate the
+configuration. (Example: Add a tracking ID for an external analytics tool that
+is used client-side.)</p>
+<p>The clientVars function must return a Promise that resolves to an object (or
+null/undefined) whose properties will be merged into <code>context.clientVars</code>.
+Returning <code>callback(value)</code> will return a Promise that is resolved to <code>value</code>.</p>
+<p>You can modify <code>context.clientVars</code> to change the values sent to the client, but
+beware: async functions from other clientVars plugins might also be reading or
+manipulating the same <code>context.clientVars</code> object. For this reason it is
+recommended you return an object rather than modify <code>context.clientVars</code>.</p>
+<p>If needed, you can access the user&#39;s account information (if authenticated) via
+<code>context.socket.client.request.session.user</code>.</p>
+<p>Examples:</p>
+<pre><code>// Using an async function
+exports.clientVars = async (hookName, context) =&gt; {
+  const user = context.socket.client.request.session.user || {};
+  return {&#39;accountUsername&#39;: user.username || &#39;&lt;unknown&gt;&#39;}
+};
+
+// Using a regular function
+exports.clientVars = (hookName, context, callback) =&gt; {
+  const user = context.socket.client.request.session.user || {};
+  return callback({&#39;accountUsername&#39;: user.username || &#39;&lt;unknown&gt;&#39;});
+};
+</code></pre>
+<p>This can be accessed on the client-side using <code>clientVars.currentYear</code>.</p>
+<h2 id="getlinehtmlforexport">getLineHTMLForExport</h2>
+<p>Called from: src/node/utils/ExportHtml.js</p>
+<p>Things in context:</p>
+<ol>
+<li>apool - pool object</li>
+<li>attribLine - line attributes</li>
+<li>text - line text</li>
+</ol>
+<p>This hook will allow a plug-in developer to re-write each line when exporting to HTML.</p>
+<p>Example:</p>
+<pre><code>var Changeset = require(&quot;ep_etherpad-lite/static/js/Changeset&quot;);
+
+exports.getLineHTMLForExport = function (hook, context) {
+  var header = _analyzeLine(context.attribLine, context.apool);
+  if (header) {
+    return &quot;&lt;&quot; + header + &quot;&gt;&quot; + context.lineContent + &quot;&lt;/&quot; + header + &quot;&gt;&quot;;
+  }
+}
+
+function _analyzeLine(alineAttrs, apool) {
+  var header = null;
+  if (alineAttrs) {
+    var opIter = Changeset.opIterator(alineAttrs);
+    if (opIter.hasNext()) {
+      var op = opIter.next();
+      header = Changeset.opAttributeValue(op, &#39;heading&#39;, apool);
+    }
+  }
+  return header;
+}
+</code></pre>
+<h2 id="exporthtmladditionalcontent">exportHTMLAdditionalContent</h2>
+<p>Called from: src/node/utils/ExportHtml.js</p>
+<p>Things in context:</p>
+<ol>
+<li>padId</li>
+</ol>
+<p>This hook will allow a plug-in developer to include additional HTML content in
+the body of the exported HTML.</p>
+<p>Example:</p>
+<pre><code>exports.exportHTMLAdditionalContent = async (hookName, {padId}) =&gt; {
+  return &#39;I am groot in &#39; + padId;
+};
+</code></pre>
+<h2 id="stylesforexport">stylesForExport</h2>
+<p>Called from: src/node/utils/ExportHtml.js</p>
+<p>Things in context:</p>
+<ol>
+<li>padId - The Pad Id</li>
+</ol>
+<p>This hook will allow a plug-in developer to append Styles to the Exported HTML.</p>
+<p>Example:</p>
+<pre><code>exports.stylesForExport = function(hook, padId, cb){
+  cb(&quot;body{font-size:13.37em !important}&quot;);
+}
+</code></pre>
+<h2 id="aceattribclasses">aceAttribClasses</h2>
+<p>Called from: src/static/js/linestylefilter.js</p>
+<p>This hook is called when attributes are investigated on a line. It is useful if
+you want to add another attribute type or property type to a pad.</p>
+<p>An attributes object is passed to the aceAttribClasses hook functions instead of
+the usual context object. A hook function can either modify this object directly
+or provide an object whose properties will be assigned to the attributes object.</p>
+<p>Example:</p>
+<pre><code>exports.aceAttribClasses = (hookName, attrs, cb) =&gt; {
+  return cb([{
+    sub: &#39;tag:sub&#39;,
+  }]);
+};
+</code></pre>
+<h2 id="exportfilename">exportFileName</h2>
+<p>Called from src/node/handler/ExportHandler.js</p>
+<p>Things in context:</p>
+<ol>
+<li>padId</li>
+</ol>
+<p>This hook will allow a plug-in developer to modify the file name of an exported pad.  This is useful if you want to export a pad under another name and/or hide the padId under export.  Note that the doctype or file extension cannot be modified for security reasons.</p>
+<p>Example:</p>
+<pre><code>exports.exportFileName = function(hook, padId, callback){
+  callback(&quot;newFileName&quot;+padId);
+}
+</code></pre>
+<h2 id="exporthtmladditionaltags">exportHtmlAdditionalTags</h2>
+<p>Called from src/node/utils/ExportHtml.js</p>
+<p>Things in context:</p>
+<ol>
+<li>Pad object</li>
+</ol>
+<p>This hook will allow a plug-in developer to include more properties and attributes to support during HTML Export. If tags are stored as <code>[&#39;color&#39;, &#39;red&#39;]</code> on the attribute pool, use <code>exportHtmlAdditionalTagsWithData</code> instead. An Array should be returned.</p>
+<p>Example:</p>
+<pre><code>// Add the props to be supported in export
+exports.exportHtmlAdditionalTags = function(hook, pad, cb){
+  var padId = pad.id;
+  cb([&quot;massive&quot;,&quot;jugs&quot;]);
+};
+</code></pre>
+<h2 id="exporthtmladditionaltagswithdata">exportHtmlAdditionalTagsWithData</h2>
+<p>Called from src/node/utils/ExportHtml.js</p>
+<p>Things in context:</p>
+<ol>
+<li>Pad object</li>
+</ol>
+<p>Identical to <code>exportHtmlAdditionalTags</code>, but for tags that are stored with a specific value (not simply <code>true</code>) on the attribute pool. For example <code>[&#39;color&#39;, &#39;red&#39;]</code>, instead of <code>[&#39;bold&#39;, true]</code>. This hook will allow a plug-in developer to include more properties and attributes to support during HTML Export. An Array of arrays should be returned. The exported HTML will contain tags like <code>&lt;span data-color=&quot;red&quot;&gt;</code> for the content where attributes are <code>[&#39;color&#39;, &#39;red&#39;]</code>.</p>
+<p>Example:</p>
+<pre><code>// Add the props to be supported in export
+exports.exportHtmlAdditionalTagsWithData = function(hook, pad, cb){
+  var padId = pad.id;
+  cb([[&quot;color&quot;, &quot;red&quot;], [&quot;color&quot;, &quot;blue&quot;]]);
+};
+</code></pre>
+<h2 id="exportetherpadadditionalcontent">exportEtherpadAdditionalContent</h2>
+<p>Called from src/node/utils/ExportEtherpad.js and
+src/node/utils/ImportEtherpad.js</p>
+<p>Things in context: Nothing</p>
+<p>Useful for exporting and importing pad metadata that is stored in the database
+but not in the pad&#39;s content or attributes. For example, in ep_comments_page the
+comments are stored as <code>comments:padId:uniqueIdOfComment</code> so a complete export
+of all pad data to an <code>.etherpad</code> file must include the <code>comments:padId:*</code>
+records.</p>
+<p>Example:</p>
+<pre><code>// Add support for exporting comments metadata
+exports.exportEtherpadAdditionalContent = () =&gt; [&#39;comments&#39;];
+</code></pre>
+<h2 id="userleave">userLeave</h2>
+<p>Called from src/node/handler/PadMessageHandler.js</p>
+<p>This in context:</p>
+<ol>
+<li>session (including the pad id and author id)</li>
+</ol>
+<p>This hook gets called when an author leaves a pad. This is useful if you want to perform certain actions after a pad has been edited</p>
+<p>Example:</p>
+<pre><code>exports.userLeave = function(hook, session, callback) {
+  console.log(&#39;%s left pad %s&#39;, session.author, session.padId);
+};
+</code></pre>
+<h3 id="clientready">clientReady</h3>
+<p>Called from src/node/handler/PadMessageHandler.js</p>
+<p>This in context:</p>
+<ol>
+<li>message</li>
+</ol>
+<p>This hook gets called when handling a CLIENT_READY which is the first message from the client to the server.</p>
+<p>Example:</p>
+<pre><code>exports.clientReady = function(hook, message) {
+  console.log(&#39;Client has entered the pad&#39; + message.padId);
+};
+</code></pre>
+
+  </div>
+
+</body>
+</html>
+
