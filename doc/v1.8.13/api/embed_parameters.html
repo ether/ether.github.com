@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Embed parameters - Etherpad v1.8.13 Manual &amp; Documentation</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="apidoc" id="api-section-embed_parameters">
+  <header id="header">
+    <h1>Etherpad v1.8.13 Manual &amp; Documentation</h1>
+  </header>
+
+  <div id="toc">
+    <h2>Table of Contents</h2>
+    <ul>
+<li><a href="#embed_parameters_embed_parameters">Embed parameters</a><ul>
+<li><a href="#embed_parameters_showlinenumbers">showLineNumbers</a></li>
+<li><a href="#embed_parameters_showcontrols">showControls</a></li>
+<li><a href="#embed_parameters_showchat">showChat</a></li>
+<li><a href="#embed_parameters_usemonospacefont">useMonospaceFont</a></li>
+<li><a href="#embed_parameters_username">userName</a></li>
+<li><a href="#embed_parameters_usercolor">userColor</a></li>
+<li><a href="#embed_parameters_nocolors">noColors</a></li>
+<li><a href="#embed_parameters_alwaysshowchat">alwaysShowChat</a></li>
+<li><a href="#embed_parameters_lang">lang</a></li>
+<li><a href="#embed_parameters_rtl">rtl</a></li>
+<li><a href="#embed_parameters_l">#L</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+
+  <div id="apicontent">
+    <h1 id="embed_parameters_embed-parameters">Embed parameters</h1>
+<p>You can easily embed your etherpad-lite into any webpage by using iframes. You can configure the embedded pad using embed parameters.</p>
+<p>Example:</p>
+<p>Cut and paste the following code into any webpage to embed a pad. The parameters below will hide the chat and the line numbers and will auto-focus on Line 4.</p>
+<pre><code>&lt;iframe src=&#39;http://pad.test.de/p/PAD_NAME#L4?showChat=false&amp;showLineNumbers=false&#39; width=600 height=400&gt;&lt;/iframe&gt;
+</code></pre>
+<h2 id="embed_parameters_showlinenumbers">showLineNumbers</h2>
+<ul>
+<li>Boolean</li>
+</ul>
+<p>Default: true</p>
+<h2 id="embed_parameters_showcontrols">showControls</h2>
+<ul>
+<li>Boolean</li>
+</ul>
+<p>Default: true</p>
+<h2 id="embed_parameters_showchat">showChat</h2>
+<ul>
+<li>Boolean</li>
+</ul>
+<p>Default: true</p>
+<h2 id="embed_parameters_usemonospacefont">useMonospaceFont</h2>
+<ul>
+<li>Boolean</li>
+</ul>
+<p>Default: false</p>
+<h2 id="embed_parameters_username">userName</h2>
+<ul>
+<li>String</li>
+</ul>
+<p>Default: &quot;unnamed&quot;</p>
+<p>Example: <code>userName=Etherpad%20User</code></p>
+<h2 id="embed_parameters_usercolor">userColor</h2>
+<ul>
+<li>String (css hex color value)</li>
+</ul>
+<p>Default: randomly chosen by pad server</p>
+<p>Example: <code>userColor=%23ff9900</code></p>
+<h2 id="embed_parameters_nocolors">noColors</h2>
+<ul>
+<li>Boolean</li>
+</ul>
+<p>Default: false</p>
+<h2 id="embed_parameters_alwaysshowchat">alwaysShowChat</h2>
+<ul>
+<li>Boolean</li>
+</ul>
+<p>Default: false</p>
+<h2 id="embed_parameters_lang">lang</h2>
+<ul>
+<li>String</li>
+</ul>
+<p>Default: en</p>
+<p>Example: <code>lang=ar</code> (translates the interface into Arabic)</p>
+<h2 id="embed_parameters_rtl">rtl</h2>
+<ul>
+<li>Boolean</li>
+</ul>
+<p>Default: true
+Displays pad text from right to left.</p>
+<h2 id="embed_parameters_l">#L</h2>
+<ul>
+<li>Int</li>
+</ul>
+<p>Default: 0
+Focuses pad at specific line number and places caret at beginning of this line
+Special note: Is not a URL parameter but instead of a Hash value</p>
+
+  </div>
+
+</body>
+</html>
+
