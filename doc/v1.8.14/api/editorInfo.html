@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>editorInfo - Etherpad v1.8.14 Manual &amp; Documentation</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="apidoc" id="api-section-editorInfo">
+  <header id="header">
+    <h1>Etherpad v1.8.14 Manual &amp; Documentation</h1>
+  </header>
+
+  <div id="toc">
+    <h2>Table of Contents</h2>
+    <ul>
+<li><a href="#editorinfo_editorinfo">editorInfo</a><ul>
+<li><a href="#editorinfo_editorinfoace_replacerangestart-end-text">editorInfo.ace_replaceRange(start, end, text)</a></li>
+<li><a href="#editorinfo_editorinfoace_getrep">editorInfo.ace_getRep()</a></li>
+<li><a href="#editorinfo_editorinfoace_getauthor">editorInfo.ace_getAuthor()</a></li>
+<li><a href="#editorinfo_editorinfoace_incallstack">editorInfo.ace_inCallStack()</a></li>
+<li><a href="#editorinfo_editorinfoace_incallstackifnecessary">editorInfo.ace_inCallStackIfNecessary(?)</a></li>
+<li><a href="#editorinfo_editorinfoace_focus">editorInfo.ace_focus(?)</a></li>
+<li><a href="#editorinfo_editorinfoace_importtext">editorInfo.ace_importText(?)</a></li>
+<li><a href="#editorinfo_editorinfoace_importatext">editorInfo.ace_importAText(?)</a></li>
+<li><a href="#editorinfo_editorinfoace_exporttext">editorInfo.ace_exportText(?)</a></li>
+<li><a href="#editorinfo_editorinfoace_editorchangedsize">editorInfo.ace_editorChangedSize(?)</a></li>
+<li><a href="#editorinfo_editorinfoace_setonkeypress">editorInfo.ace_setOnKeyPress(?)</a></li>
+<li><a href="#editorinfo_editorinfoace_setonkeydown">editorInfo.ace_setOnKeyDown(?)</a></li>
+<li><a href="#editorinfo_editorinfoace_setnotifydirty">editorInfo.ace_setNotifyDirty(?)</a></li>
+<li><a href="#editorinfo_editorinfoace_dispose">editorInfo.ace_dispose(?)</a></li>
+<li><a href="#editorinfo_editorinfoace_getformattedcode">editorInfo.ace_getFormattedCode(?)</a></li>
+<li><a href="#editorinfo_editorinfoace_seteditablebool">editorInfo.ace_setEditable(bool)</a></li>
+<li><a href="#editorinfo_editorinfoace_execcommand">editorInfo.ace_execCommand(?)</a></li>
+<li><a href="#editorinfo_editorinfoace_callwithacefn-callstack-normalize">editorInfo.ace_callWithAce(fn, callStack, normalize)</a></li>
+<li><a href="#editorinfo_editorinfoace_setpropertykey-value">editorInfo.ace_setProperty(key, value)</a></li>
+<li><a href="#editorinfo_editorinfoace_setbasetexttxt">editorInfo.ace_setBaseText(txt)</a></li>
+<li><a href="#editorinfo_editorinfoace_setbaseattributedtextatxt-apooljsonobj">editorInfo.ace_setBaseAttributedText(atxt, apoolJsonObj)</a></li>
+<li><a href="#editorinfo_editorinfoace_applychangestobasec-optauthor-apooljsonobj">editorInfo.ace_applyChangesToBase(c, optAuthor, apoolJsonObj)</a></li>
+<li><a href="#editorinfo_editorinfoace_prepareuserchangeset">editorInfo.ace_prepareUserChangeset()</a></li>
+<li><a href="#editorinfo_editorinfoace_applypreparedchangesettobase">editorInfo.ace_applyPreparedChangesetToBase()</a></li>
+<li><a href="#editorinfo_editorinfoace_setuserchangenotificationcallbackf">editorInfo.ace_setUserChangeNotificationCallback(f)</a></li>
+<li><a href="#editorinfo_editorinfoace_setauthorinfoauthor-info">editorInfo.ace_setAuthorInfo(author, info)</a></li>
+<li><a href="#editorinfo_editorinfoace_setauthorselectionrangeauthor-start-end">editorInfo.ace_setAuthorSelectionRange(author, start, end)</a></li>
+<li><a href="#editorinfo_editorinfoace_getunhandlederrors">editorInfo.ace_getUnhandledErrors()</a></li>
+<li><a href="#editorinfo_editorinfoace_getdebugpropertyprop">editorInfo.ace_getDebugProperty(prop)</a></li>
+<li><a href="#editorinfo_editorinfoace_fastincorp">editorInfo.ace_fastIncorp(?)</a></li>
+<li><a href="#editorinfo_editorinfoace_iscaret">editorInfo.ace_isCaret(?)</a></li>
+<li><a href="#editorinfo_editorinfoace_getlineandcharforpoint">editorInfo.ace_getLineAndCharForPoint(?)</a></li>
+<li><a href="#editorinfo_editorinfoace_performdocumentapplyattributestocharrange">editorInfo.ace_performDocumentApplyAttributesToCharRange(?)</a></li>
+<li><a href="#editorinfo_editorinfoace_setattributeonselectionattribute-enabled">editorInfo.ace_setAttributeOnSelection(attribute, enabled)</a></li>
+<li><a href="#editorinfo_editorinfoace_toggleattributeonselection">editorInfo.ace_toggleAttributeOnSelection(?)</a></li>
+<li><a href="#editorinfo_editorinfoace_getattributeonselectionattribute-prevchar">editorInfo.ace_getAttributeOnSelection(attribute, prevChar)</a></li>
+<li><a href="#editorinfo_editorinfoace_performselectionchange">editorInfo.ace_performSelectionChange(?)</a></li>
+<li><a href="#editorinfo_editorinfoace_doindentoutdent">editorInfo.ace_doIndentOutdent(?)</a></li>
+<li><a href="#editorinfo_editorinfoace_doundoredo">editorInfo.ace_doUndoRedo(?)</a></li>
+<li><a href="#editorinfo_editorinfoace_doinsertunorderedlist">editorInfo.ace_doInsertUnorderedList(?)</a></li>
+<li><a href="#editorinfo_editorinfoace_doinsertorderedlist">editorInfo.ace_doInsertOrderedList(?)</a></li>
+<li><a href="#editorinfo_editorinfoace_performdocumentapplyattributestorange">editorInfo.ace_performDocumentApplyAttributesToRange()</a></li>
+<li><a href="#editorinfo_editorinfoace_getauthorinfos">editorInfo.ace_getAuthorInfos()</a></li>
+<li><a href="#editorinfo_editorinfoace_performdocumentreplacerangestart-end-newtext">editorInfo.ace_performDocumentReplaceRange(start, end, newText)</a></li>
+<li><a href="#editorinfo_editorinfoace_performdocumentreplacecharrangestartchar-endchar-newtext">editorInfo.ace_performDocumentReplaceCharRange(startChar, endChar, newText)</a></li>
+<li><a href="#editorinfo_editorinfoace_renumberlistlinenum">editorInfo.ace_renumberList(lineNum)</a></li>
+<li><a href="#editorinfo_editorinfoace_doreturnkey">editorInfo.ace_doReturnKey()</a></li>
+<li><a href="#editorinfo_editorinfoace_isblockelementelement">editorInfo.ace_isBlockElement(element)</a></li>
+<li><a href="#editorinfo_editorinfoace_getlinelisttypelinenum">editorInfo.ace_getLineListType(lineNum)</a></li>
+<li><a href="#editorinfo_editorinfoace_caretline">editorInfo.ace_caretLine()</a></li>
+<li><a href="#editorinfo_editorinfoace_caretcolumn">editorInfo.ace_caretColumn()</a></li>
+<li><a href="#editorinfo_editorinfoace_caretdocchar">editorInfo.ace_caretDocChar()</a></li>
+<li><a href="#editorinfo_editorinfoace_iswordchar">editorInfo.ace_isWordChar(?)</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+
+  <div id="apicontent">
+    <h1 id="editorInfo_editorinfo">editorInfo</h1>
+<h2 id="editorInfo_editorinfoace_replacerangestart-end-text">editorInfo.ace_replaceRange(start, end, text)</h2>
+<p>This function replaces a range (from <code>start</code> to <code>end</code>) with <code>text</code>.</p>
+<h2 id="editorInfo_editorinfoace_getrep">editorInfo.ace_getRep()</h2>
+<p>Returns the <code>rep</code> object.</p>
+<h2 id="editorInfo_editorinfoace_getauthor">editorInfo.ace_getAuthor()</h2>
+<h2 id="editorInfo_editorinfoace_incallstack">editorInfo.ace_inCallStack()</h2>
+<h2 id="editorInfo_editorinfoace_incallstackifnecessary">editorInfo.ace_inCallStackIfNecessary(?)</h2>
+<h2 id="editorInfo_editorinfoace_focus">editorInfo.ace_focus(?)</h2>
+<h2 id="editorInfo_editorinfoace_importtext">editorInfo.ace_importText(?)</h2>
+<h2 id="editorInfo_editorinfoace_importatext">editorInfo.ace_importAText(?)</h2>
+<h2 id="editorInfo_editorinfoace_exporttext">editorInfo.ace_exportText(?)</h2>
+<h2 id="editorInfo_editorinfoace_editorchangedsize">editorInfo.ace_editorChangedSize(?)</h2>
+<h2 id="editorInfo_editorinfoace_setonkeypress">editorInfo.ace_setOnKeyPress(?)</h2>
+<h2 id="editorInfo_editorinfoace_setonkeydown">editorInfo.ace_setOnKeyDown(?)</h2>
+<h2 id="editorInfo_editorinfoace_setnotifydirty">editorInfo.ace_setNotifyDirty(?)</h2>
+<h2 id="editorInfo_editorinfoace_dispose">editorInfo.ace_dispose(?)</h2>
+<h2 id="editorInfo_editorinfoace_getformattedcode">editorInfo.ace_getFormattedCode(?)</h2>
+<h2 id="editorInfo_editorinfoace_seteditablebool">editorInfo.ace_setEditable(bool)</h2>
+<h2 id="editorInfo_editorinfoace_execcommand">editorInfo.ace_execCommand(?)</h2>
+<h2 id="editorInfo_editorinfoace_callwithacefn-callstack-normalize">editorInfo.ace_callWithAce(fn, callStack, normalize)</h2>
+<h2 id="editorInfo_editorinfoace_setpropertykey-value">editorInfo.ace_setProperty(key, value)</h2>
+<h2 id="editorInfo_editorinfoace_setbasetexttxt">editorInfo.ace_setBaseText(txt)</h2>
+<h2 id="editorInfo_editorinfoace_setbaseattributedtextatxt-apooljsonobj">editorInfo.ace_setBaseAttributedText(atxt, apoolJsonObj)</h2>
+<h2 id="editorInfo_editorinfoace_applychangestobasec-optauthor-apooljsonobj">editorInfo.ace_applyChangesToBase(c, optAuthor, apoolJsonObj)</h2>
+<h2 id="editorInfo_editorinfoace_prepareuserchangeset">editorInfo.ace_prepareUserChangeset()</h2>
+<h2 id="editorInfo_editorinfoace_applypreparedchangesettobase">editorInfo.ace_applyPreparedChangesetToBase()</h2>
+<h2 id="editorInfo_editorinfoace_setuserchangenotificationcallbackf">editorInfo.ace_setUserChangeNotificationCallback(f)</h2>
+<h2 id="editorInfo_editorinfoace_setauthorinfoauthor-info">editorInfo.ace_setAuthorInfo(author, info)</h2>
+<h2 id="editorInfo_editorinfoace_setauthorselectionrangeauthor-start-end">editorInfo.ace_setAuthorSelectionRange(author, start, end)</h2>
+<h2 id="editorInfo_editorinfoace_getunhandlederrors">editorInfo.ace_getUnhandledErrors()</h2>
+<h2 id="editorInfo_editorinfoace_getdebugpropertyprop">editorInfo.ace_getDebugProperty(prop)</h2>
+<h2 id="editorInfo_editorinfoace_fastincorp">editorInfo.ace_fastIncorp(?)</h2>
+<h2 id="editorInfo_editorinfoace_iscaret">editorInfo.ace_isCaret(?)</h2>
+<h2 id="editorInfo_editorinfoace_getlineandcharforpoint">editorInfo.ace_getLineAndCharForPoint(?)</h2>
+<h2 id="editorInfo_editorinfoace_performdocumentapplyattributestocharrange">editorInfo.ace_performDocumentApplyAttributesToCharRange(?)</h2>
+<h2 id="editorInfo_editorinfoace_setattributeonselectionattribute-enabled">editorInfo.ace_setAttributeOnSelection(attribute, enabled)</h2>
+<p>Sets an attribute on current range.
+Example: `call.editorInfo.ace_setAttributeOnSelection(&quot;turkey::balls&quot;, true); // turkey is the attribute here, balls is the value
+Notes: to remove the attribute pass enabled as false</p>
+<h2 id="editorInfo_editorinfoace_toggleattributeonselection">editorInfo.ace_toggleAttributeOnSelection(?)</h2>
+<h2 id="editorInfo_editorinfoace_getattributeonselectionattribute-prevchar">editorInfo.ace_getAttributeOnSelection(attribute, prevChar)</h2>
+<p>Returns a boolean if an attribute exists on a selected range.
+prevChar value should be true if you want to get the previous Character attribute instead of the current selection for example
+if the caret is at position 0,1 (after first character) it&#39;s probable you want the attributes on the character at 0,0
+The attribute should be the string name of the attribute applied to the selection IE subscript
+Example usage: Apply the activeButton Class to a button if an attribute is on a highlighted/selected caret position or range.
+Example <code>var isItThere = documentAttributeManager.getAttributeOnSelection(&quot;turkey::balls&quot;, true);</code></p>
+<p>See the ep_subscript plugin for an example of this function in action.
+Notes: Does not work on first or last character of a line.  Suffers from a race condition if called with aceEditEvent.</p>
+<h2 id="editorInfo_editorinfoace_performselectionchange">editorInfo.ace_performSelectionChange(?)</h2>
+<h2 id="editorInfo_editorinfoace_doindentoutdent">editorInfo.ace_doIndentOutdent(?)</h2>
+<h2 id="editorInfo_editorinfoace_doundoredo">editorInfo.ace_doUndoRedo(?)</h2>
+<h2 id="editorInfo_editorinfoace_doinsertunorderedlist">editorInfo.ace_doInsertUnorderedList(?)</h2>
+<h2 id="editorInfo_editorinfoace_doinsertorderedlist">editorInfo.ace_doInsertOrderedList(?)</h2>
+<h2 id="editorInfo_editorinfoace_performdocumentapplyattributestorange">editorInfo.ace_performDocumentApplyAttributesToRange()</h2>
+<h2 id="editorInfo_editorinfoace_getauthorinfos">editorInfo.ace_getAuthorInfos()</h2>
+<p>Returns an info object about the author. Object key = author_id and info includes author&#39;s bg color value.
+Use to define your own authorship.</p>
+<h2 id="editorInfo_editorinfoace_performdocumentreplacerangestart-end-newtext">editorInfo.ace_performDocumentReplaceRange(start, end, newText)</h2>
+<p>This function replaces a range (from [x1,y1] to [x2,y2]) with <code>newText</code>.</p>
+<h2 id="editorInfo_editorinfoace_performdocumentreplacecharrangestartchar-endchar-newtext">editorInfo.ace_performDocumentReplaceCharRange(startChar, endChar, newText)</h2>
+<p>This function replaces a range (from y1 to y2) with <code>newText</code>.</p>
+<h2 id="editorInfo_editorinfoace_renumberlistlinenum">editorInfo.ace_renumberList(lineNum)</h2>
+<p>If you delete a line, calling this method will fix the line numbering.</p>
+<h2 id="editorInfo_editorinfoace_doreturnkey">editorInfo.ace_doReturnKey()</h2>
+<p>Forces a return key at the current caret position.</p>
+<h2 id="editorInfo_editorinfoace_isblockelementelement">editorInfo.ace_isBlockElement(element)</h2>
+<p>Returns true if your passed element is registered as a block element</p>
+<h2 id="editorInfo_editorinfoace_getlinelisttypelinenum">editorInfo.ace_getLineListType(lineNum)</h2>
+<p>Returns the line&#39;s html list type.</p>
+<h2 id="editorInfo_editorinfoace_caretline">editorInfo.ace_caretLine()</h2>
+<p>Returns X position of the caret.</p>
+<h2 id="editorInfo_editorinfoace_caretcolumn">editorInfo.ace_caretColumn()</h2>
+<p>Returns Y position of the caret.</p>
+<h2 id="editorInfo_editorinfoace_caretdocchar">editorInfo.ace_caretDocChar()</h2>
+<p>Returns the Y offset starting from [x=0,y=0]</p>
+<h2 id="editorInfo_editorinfoace_iswordchar">editorInfo.ace_isWordChar(?)</h2>
+
+  </div>
+
+</body>
+</html>
+
