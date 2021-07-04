@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Skins - Etherpad v1.8.14 Manual &amp; Documentation</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="apidoc" id="api-section-skins">
+  <header id="header">
+    <h1>Etherpad v1.8.14 Manual &amp; Documentation</h1>
+  </header>
+
+  <div id="toc">
+    <h2>Table of Contents</h2>
+    <ul>
+<li><a href="#skins_skins">Skins</a></li>
+</ul>
+
+  </div>
+
+  <div id="apicontent">
+    <h1 id="skins_skins">Skins</h1>
+<p>You can customize Etherpad appearance using skins.
+A skin is a directory located under <code>static/skins/&lt;skin_name&gt;</code>, with the following contents:</p>
+<ul>
+<li><code>index.js</code>: javascript that will be run in <code>/</code></li>
+<li><code>index.css</code>: stylesheet affecting <code>/</code></li>
+<li><code>pad.js</code>: javascript that will be run in <code>/p/:padid</code></li>
+<li><code>pad.css</code>: stylesheet affecting <code>/p/:padid</code></li>
+<li><code>timeslider.js</code>: javascript that will be run in <code>/p/:padid/timeslider</code></li>
+<li><code>timeslider.css</code>: stylesheet affecting <code>/p/:padid/timeslider</code></li>
+<li><code>favicon.ico</code>: overrides the default favicon</li>
+<li><code>robots.txt</code>: overrides the default <code>robots.txt</code></li>
+</ul>
+<p>You can choose a skin changing the parameter <code>skinName</code> in <code>settings.json</code>.</p>
+<p>Since Etherpad <strong>1.7.5</strong>, two skins are included:</p>
+<ul>
+<li><code>no-skin</code>: an empty skin, leaving the default Etherpad appearance unchanged, that you can use as a guidance to develop your own.</li>
+<li><code>colibris</code>: a new, experimental skin, that will become the default in Etherpad 2.0.</li>
+</ul>
+
+  </div>
+
+</body>
+</html>
+
