@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Docker - Etherpad v1.8.16 Manual &amp; Documentation</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="apidoc" id="api-section-docker">
+  <header id="header">
+    <h1>Etherpad v1.8.16 Manual &amp; Documentation</h1>
+  </header>
+
+  <div id="toc">
+    <h2>Table of Contents</h2>
+    <ul>
+<li><a href="#docker_docker">Docker</a><ul>
+<li><a href="#docker_downloading-from-docker-hub">Downloading from Docker Hub</a></li>
+<li><a href="#docker_build-a-personalized-container">Build a personalized container</a><ul>
+<li><a href="#docker_rebuilding-with-custom-settings">Rebuilding with custom settings</a></li>
+<li><a href="#docker_rebuilding-including-some-plugins">Rebuilding including some plugins</a></li>
+<li><a href="#docker_rebuilding-including-export-functionality-for-docpdfodt">Rebuilding including export functionality for DOC/PDF/ODT</a><ul>
+<li><a href="#docker_via-abiword">Via Abiword</a></li>
+<li><a href="#docker_via-libreoffice">Via Libreoffice</a></li>
+</ul>
+</li>
+<li><a href="#docker_examples">Examples</a></li>
+</ul>
+</li>
+<li><a href="#docker_running-your-instance">Running your instance:</a></li>
+<li><a href="#docker_options-available-by-default">Options available by default</a><ul>
+<li><a href="#docker_general">General</a></li>
+<li><a href="#docker_database">Database</a></li>
+<li><a href="#docker_pad-options">Pad Options</a></li>
+<li><a href="#docker_shortcuts">Shortcuts</a></li>
+<li><a href="#docker_skins">Skins</a></li>
+<li><a href="#docker_logging">Logging</a></li>
+<li><a href="#docker_advanced">Advanced</a></li>
+<li><a href="#docker_examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+
+  <div id="apicontent">
+    <h1 id="docker_docker">Docker</h1>
+<p>The official Docker image is available on <a href="https://hub.docker.com/r/etherpad/etherpad">https://hub.docker.com/r/etherpad/etherpad</a>.</p>
+<h2 id="docker_downloading-from-docker-hub">Downloading from Docker Hub</h2>
+<p>If you are ok downloading a <a href="https://hub.docker.com/r/etherpad/etherpad">prebuilt image from Docker Hub</a>, these are the commands:</p>
+<pre><code class="language-bash"># gets the latest published version
+docker pull etherpad/etherpad
+
+# gets a specific version
+docker pull etherpad/etherpad:1.8.0
+</code></pre>
+<h2 id="docker_build-a-personalized-container">Build a personalized container</h2>
+<p>If you want to use a personalized settings file, <strong>you will have to rebuild your image</strong>.
+All of the following instructions are as a member of the <code>docker</code> group.
+By default, the Etherpad Docker image is built and run in <code>production</code> mode: no development dependencies are installed, and asset bundling speeds up page load time.</p>
+<h3 id="docker_rebuilding-with-custom-settings">Rebuilding with custom settings</h3>
+<p>Edit <code>&lt;BASEDIR&gt;/settings.json.docker</code> at your will. When rebuilding the image, this file will be copied inside your image and renamed to <code>settings.json</code>.</p>
+<p><strong>Each configuration parameter can also be set via an environment variable</strong>, using the syntax <code>&quot;${ENV_VAR}&quot;</code> or <code>&quot;${ENV_VAR:default_value}&quot;</code>. For details, refer to <code>settings.json.template</code>.</p>
+<h3 id="docker_rebuilding-including-some-plugins">Rebuilding including some plugins</h3>
+<p>If you want to install some plugins in your container, it is sufficient to list them in the ETHERPAD_PLUGINS build variable.
+The variable value has to be a space separated, double quoted list of plugin names (see examples).</p>
+<p>Some plugins will need personalized settings. Just refer to the previous section, and include them in your custom <code>settings.json.docker</code>.</p>
+<h3 id="docker_rebuilding-including-export-functionality-for-docpdfodt">Rebuilding including export functionality for DOC/PDF/ODT</h3>
+<p>If you want to be able to export your pads to DOC/PDF/ODT files, you can install
+either Abiword or Libreoffice via setting a build variable.</p>
+<h4 id="docker_via-abiword">Via Abiword</h4>
+<p>For installing Abiword, set the <code>INSTALL_ABIWORD</code> build variable to any value.</p>
+<p>Also, you will need to configure the path to the abiword executable
+via setting the <code>abiword</code> property in <code>&lt;BASEDIR&gt;/settings.json.docker</code> to 
+<code>/usr/bin/abiword</code> or via setting the environment variable  <code>ABIWORD</code> to 
+<code>/usr/bin/abiword</code>.</p>
+<h4 id="docker_via-libreoffice">Via Libreoffice</h4>
+<p>For installing Libreoffice instead, set the <code>INSTALL_SOFFICE</code> build variable
+to any value.</p>
+<p>Also, you will need to configure the path to the libreoffice executable
+via setting the <code>soffice</code> property in <code>&lt;BASEDIR&gt;/settings.json.docker</code> to 
+<code>/usr/bin/soffice</code> or via setting the environment variable  <code>SOFFICE</code> to 
+<code>/usr/bin/soffice</code>.</p>
+<h3 id="docker_examples">Examples</h3>
+<p>Build a Docker image from the currently checked-out code:</p>
+<pre><code class="language-bash">docker build --tag &lt;YOUR_USERNAME&gt;/etherpad .
+</code></pre>
+<p>Include two plugins in the container:</p>
+<pre><code class="language-bash">docker build --build-arg ETHERPAD_PLUGINS=&quot;ep_comments_page ep_author_neat&quot; --tag &lt;YOUR_USERNAME&gt;/etherpad .
+</code></pre>
+<h2 id="docker_running-your-instance">Running your instance:</h2>
+<p>To run your instance:</p>
+<pre><code class="language-bash">docker run --detach --publish &lt;DESIRED_PORT&gt;:9001 &lt;YOUR_USERNAME&gt;/etherpad
+</code></pre>
+<p>And point your browser to <code>http://&lt;YOUR_IP&gt;:&lt;DESIRED_PORT&gt;</code></p>
+<h2 id="docker_options-available-by-default">Options available by default</h2>
+<p>The <code>settings.json.docker</code> available by default allows to control almost every setting via environment variables.</p>
+<h3 id="docker_general">General</h3>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>TITLE</code></td>
+<td>The name of the instance</td>
+<td><code>Etherpad</code></td>
+</tr>
+<tr>
+<td><code>FAVICON</code></td>
+<td>favicon default name, or a fully specified URL to your own favicon</td>
+<td><code>favicon.ico</code></td>
+</tr>
+<tr>
+<td><code>DEFAULT_PAD_TEXT</code></td>
+<td>The default text of a pad</td>
+<td><code>Welcome to Etherpad! This pad text is synchronized as you type, so that everyone viewing this page sees the same text. This allows you to collaborate seamlessly on documents! Get involved with Etherpad at https://etherpad.org</code></td>
+</tr>
+<tr>
+<td><code>IP</code></td>
+<td>IP which etherpad should bind at. Change to <code>::</code> for IPv6</td>
+<td><code>0.0.0.0</code></td>
+</tr>
+<tr>
+<td><code>PORT</code></td>
+<td>port which etherpad should bind at</td>
+<td><code>9001</code></td>
+</tr>
+<tr>
+<td><code>ADMIN_PASSWORD</code></td>
+<td>the password for the <code>admin</code> user (leave unspecified if you do not want to create it)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>USER_PASSWORD</code></td>
+<td>the password for the first user <code>user</code> (leave unspecified if you do not want to create it)</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="docker_database">Database</h3>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>DB_TYPE</code></td>
+<td>a database supported by <a href="https://www.npmjs.com/package/ueberdb2">https://www.npmjs.com/package/ueberdb2</a></td>
+<td>not set, thus will fall back to <code>DirtyDB</code> (please choose one instead)</td>
+</tr>
+<tr>
+<td><code>DB_HOST</code></td>
+<td>the host of the database</td>
+<td></td>
+</tr>
+<tr>
+<td><code>DB_PORT</code></td>
+<td>the port of the database</td>
+<td></td>
+</tr>
+<tr>
+<td><code>DB_NAME</code></td>
+<td>the database name</td>
+<td></td>
+</tr>
+<tr>
+<td><code>DB_USER</code></td>
+<td>a database user with sufficient permissions to create tables</td>
+<td></td>
+</tr>
+<tr>
+<td><code>DB_PASS</code></td>
+<td>the password for the database username</td>
+<td></td>
+</tr>
+<tr>
+<td><code>DB_CHARSET</code></td>
+<td>the character set for the tables (only required for MySQL)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>DB_FILENAME</code></td>
+<td>in case <code>DB_TYPE</code> is <code>DirtyDB</code> or <code>sqlite</code>, the database file.</td>
+<td><code>var/dirty.db</code>, <code>var/etherpad.sq3</code></td>
+</tr>
+</tbody></table>
+<p>If your database needs additional settings, you will have to use a personalized <code>settings.json.docker</code> and rebuild the container (or otherwise put the updated <code>settings.json</code> inside your image).</p>
+<h3 id="docker_pad-options">Pad Options</h3>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>PAD_OPTIONS_NO_COLORS</code></td>
+<td></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>PAD_OPTIONS_SHOW_CONTROLS</code></td>
+<td></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>PAD_OPTIONS_SHOW_CHAT</code></td>
+<td></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>PAD_OPTIONS_SHOW_LINE_NUMBERS</code></td>
+<td></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>PAD_OPTIONS_USE_MONOSPACE_FONT</code></td>
+<td></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>PAD_OPTIONS_USER_NAME</code></td>
+<td></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>PAD_OPTIONS_USER_COLOR</code></td>
+<td></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>PAD_OPTIONS_RTL</code></td>
+<td></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>PAD_OPTIONS_ALWAYS_SHOW_CHAT</code></td>
+<td></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>PAD_OPTIONS_CHAT_AND_USERS</code></td>
+<td></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>PAD_OPTIONS_LANG</code></td>
+<td></td>
+<td><code>en-gb</code></td>
+</tr>
+</tbody></table>
+<h3 id="docker_shortcuts">Shortcuts</h3>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>PAD_SHORTCUTS_ENABLED_ALT_F9</code></td>
+<td>focus on the File Menu and/or editbar</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>PAD_SHORTCUTS_ENABLED_ALT_C</code></td>
+<td>focus on the Chat window</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>PAD_SHORTCUTS_ENABLED_CMD_S</code></td>
+<td>save a revision</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>PAD_SHORTCUTS_ENABLED_CMD_Z</code></td>
+<td>undo/redo</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>PAD_SHORTCUTS_ENABLED_CMD_Y</code></td>
+<td>redo</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>PAD_SHORTCUTS_ENABLED_CMD_I</code></td>
+<td>italic</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>PAD_SHORTCUTS_ENABLED_CMD_B</code></td>
+<td>bold</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>PAD_SHORTCUTS_ENABLED_CMD_U</code></td>
+<td>underline</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>PAD_SHORTCUTS_ENABLED_CMD_H</code></td>
+<td>backspace</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>PAD_SHORTCUTS_ENABLED_CMD_5</code></td>
+<td>strike through</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>PAD_SHORTCUTS_ENABLED_CMD_SHIFT_1</code></td>
+<td>ordered list</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>PAD_SHORTCUTS_ENABLED_CMD_SHIFT_2</code></td>
+<td>shows a gritter popup showing a line author</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>PAD_SHORTCUTS_ENABLED_CMD_SHIFT_L</code></td>
+<td>unordered list</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>PAD_SHORTCUTS_ENABLED_CMD_SHIFT_N</code></td>
+<td>ordered list</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>PAD_SHORTCUTS_ENABLED_CMD_SHIFT_C</code></td>
+<td>clear authorship</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>PAD_SHORTCUTS_ENABLED_DELETE</code></td>
+<td></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>PAD_SHORTCUTS_ENABLED_RETURN</code></td>
+<td></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>PAD_SHORTCUTS_ENABLED_ESC</code></td>
+<td>in mozilla versions 14-19 avoid reconnecting pad</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>PAD_SHORTCUTS_ENABLED_TAB</code></td>
+<td>indent</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>PAD_SHORTCUTS_ENABLED_CTRL_HOME</code></td>
+<td>scroll to top of pad</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>PAD_SHORTCUTS_ENABLED_PAGE_UP</code></td>
+<td></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>PAD_SHORTCUTS_ENABLED_PAGE_DOWN</code></td>
+<td></td>
+<td><code>true</code></td>
+</tr>
+</tbody></table>
+<h3 id="docker_skins">Skins</h3>
+<p>You can use the UI skin variants builder at <code>/p/test#skinvariantsbuilder</code></p>
+<p>For the colibris skin only, you can choose how to render the three main containers:</p>
+<ul>
+<li>toolbar (top menu with icons)</li>
+<li>editor (containing the text of the pad)</li>
+<li>background (area outside of editor, mostly visible when using page style)</li>
+</ul>
+<p>For each of the 3 containers you can choose 4 color combinations:</p>
+<ul>
+<li>super-light</li>
+<li>light</li>
+<li>dark</li>
+<li>super-dark</li>
+</ul>
+<p>For the editor container, you can also make it full width by adding <code>full-width-editor</code> variant (by default editor is rendered as a page, with a max-width of 900px).</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>SKIN_NAME</code></td>
+<td>either <code>no-skin</code>, <code>colibris</code> or an existing directory under <code>src/static/skins</code></td>
+<td><code>colibris</code></td>
+</tr>
+<tr>
+<td><code>SKIN_VARIANTS</code></td>
+<td>multiple skin variants separated by spaces</td>
+<td><code>super-light-toolbar super-light-editor light-background</code></td>
+</tr>
+</tbody></table>
+<h3 id="docker_logging">Logging</h3>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>LOGLEVEL</code></td>
+<td>valid values are <code>DEBUG</code>, <code>INFO</code>, <code>WARN</code> and <code>ERROR</code></td>
+<td><code>INFO</code></td>
+</tr>
+<tr>
+<td><code>DISABLE_IP_LOGGING</code></td>
+<td>Privacy: disable IP logging</td>
+<td><code>false</code></td>
+</tr>
+</tbody></table>
+<h3 id="docker_advanced">Advanced</h3>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>SHOW_SETTINGS_IN_ADMIN_PAGE</code></td>
+<td>hide/show the settings.json in admin page</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>TRUST_PROXY</code></td>
+<td>set to <code>true</code> if you are using a reverse proxy in front of Etherpad (for example: Traefik for SSL termination via Let&#39;s Encrypt). This will affect security and correctness of the logs if not done</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>IMPORT_MAX_FILE_SIZE</code></td>
+<td>maximum allowed file size when importing a pad, in bytes.</td>
+<td><code>52428800</code> (50 MB)</td>
+</tr>
+<tr>
+<td><code>IMPORT_EXPORT_MAX_REQ_PER_IP</code></td>
+<td>maximum number of import/export calls per IP.</td>
+<td><code>10</code></td>
+</tr>
+<tr>
+<td><code>IMPORT_EXPORT_RATE_LIMIT_WINDOW</code></td>
+<td>the call rate for import/export requests will be estimated in this time window (in milliseconds)</td>
+<td><code>90000</code></td>
+</tr>
+<tr>
+<td><code>COMMIT_RATE_LIMIT_DURATION</code></td>
+<td>duration of the rate limit window for commits by individual users/IPs (in seconds)</td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><code>COMMIT_RATE_LIMIT_POINTS</code></td>
+<td>maximum number of changes per IP to allow during the rate limit window</td>
+<td><code>10</code></td>
+</tr>
+<tr>
+<td><code>SUPPRESS_ERRORS_IN_PAD_TEXT</code></td>
+<td>Should we suppress errors from being visible in the default Pad Text?</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>REQUIRE_SESSION</code></td>
+<td>If this option is enabled, a user must have a session to access pads. This effectively allows only group pads to be accessed.</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>EDIT_ONLY</code></td>
+<td>Users may edit pads but not create new ones. Pad creation is only via the API. This applies both to group pads and regular pads.</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>MINIFY</code></td>
+<td>If true, all css &amp; js will be minified before sending to the client. This will improve the loading performance massively, but makes it difficult to debug the javascript/css</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>MAX_AGE</code></td>
+<td>How long may clients use served javascript code (in seconds)? Not setting this may cause problems during deployment. Set to 0 to disable caching.</td>
+<td><code>21600</code> (6 hours)</td>
+</tr>
+<tr>
+<td><code>ABIWORD</code></td>
+<td>Absolute path to the Abiword executable. Abiword is needed to get advanced import/export features of pads. Setting it to null disables Abiword and will only allow plain text and HTML import/exports.</td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td><code>SOFFICE</code></td>
+<td>This is the absolute path to the soffice executable. LibreOffice can be used in lieu of Abiword to export pads. Setting it to null disables LibreOffice exporting.</td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td><code>TIDY_HTML</code></td>
+<td>Path to the Tidy executable. Tidy is used to improve the quality of exported pads. Setting it to null disables Tidy.</td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td><code>ALLOW_UNKNOWN_FILE_ENDS</code></td>
+<td>Allow import of file types other than the supported ones: txt, doc, docx, rtf, odt, html &amp; htm</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>REQUIRE_AUTHENTICATION</code></td>
+<td>This setting is used if you require authentication of all users. Note: &quot;/admin&quot; always requires authentication.</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>REQUIRE_AUTHORIZATION</code></td>
+<td>Require authorization by a module, or a user with is_admin set, see below.</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>AUTOMATIC_RECONNECTION_TIMEOUT</code></td>
+<td>Time (in seconds) to automatically reconnect pad when a &quot;Force reconnect&quot; message is shown to user. Set to 0 to disable automatic reconnection.</td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td><code>FOCUS_LINE_PERCENTAGE_ABOVE</code></td>
+<td>Percentage of viewport height to be additionally scrolled. e.g. 0.5, to place caret line in the middle of viewport, when user edits a line above of the viewport. Set to 0 to disable extra scrolling</td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td><code>FOCUS_LINE_PERCENTAGE_BELOW</code></td>
+<td>Percentage of viewport height to be additionally scrolled. e.g. 0.5, to place caret line in the middle of viewport, when user edits a line below of the viewport. Set to 0 to disable extra scrolling</td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td><code>FOCUS_LINE_PERCENTAGE_ARROW_UP</code></td>
+<td>Percentage of viewport height to be additionally scrolled when user presses arrow up in the line of the top of the viewport. Set to 0 to let the scroll to be handled as default by Etherpad</td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td><code>FOCUS_LINE_DURATION</code></td>
+<td>Time (in milliseconds) used to animate the scroll transition. Set to 0 to disable animation</td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td><code>FOCUS_LINE_CARET_SCROLL</code></td>
+<td>Flag to control if it should scroll when user places the caret in the last line of the viewport</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>SOCKETIO_MAX_HTTP_BUFFER_SIZE</code></td>
+<td>The maximum size (in bytes) of a single message accepted via Socket.IO. If a client sends a larger message, its connection gets closed to prevent DoS (memory exhaustion) attacks.</td>
+<td><code>10000</code></td>
+</tr>
+<tr>
+<td><code>LOAD_TEST</code></td>
+<td>Allow Load Testing tools to hit the Etherpad Instance. WARNING: this will disable security on the instance.</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>DUMP_ON_UNCLEAN_EXIT</code></td>
+<td>Enable dumping objects preventing a clean exit of Node.js. WARNING: this has a significant performance impact.</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>EXPOSE_VERSION</code></td>
+<td>Expose Etherpad version in the web interface and in the Server http header. Do not enable on production machines.</td>
+<td><code>false</code></td>
+</tr>
+</tbody></table>
+<h3 id="docker_examples-1">Examples</h3>
+<p>Use a Postgres database, no admin user enabled:</p>
+<pre><code class="language-shell">docker run -d \
+    --name etherpad         \
+    -p 9001:9001            \
+    -e &#39;DB_TYPE=postgres&#39;   \
+    -e &#39;DB_HOST=db.local&#39;   \
+    -e &#39;DB_PORT=4321&#39;       \
+    -e &#39;DB_NAME=etherpad&#39;   \
+    -e &#39;DB_USER=dbusername&#39; \
+    -e &#39;DB_PASS=mypassword&#39; \
+    etherpad/etherpad
+</code></pre>
+<p>Run enabling the administrative user <code>admin</code>:</p>
+<pre><code class="language-shell">docker run -d \
+    --name etherpad \
+    -p 9001:9001 \
+    -e &#39;ADMIN_PASSWORD=supersecret&#39; \
+    etherpad/etherpad
+</code></pre>
+<p>Run a test instance running DirtyDB on a persistent volume:</p>
+<pre><code>docker run -d \
+    -v etherpad_data:/opt/etherpad-lite/var \
+    -p 9001:9001 \
+    etherpad/etherpad
+</code></pre>
+
+  </div>
+
+</body>
+</html>
+
