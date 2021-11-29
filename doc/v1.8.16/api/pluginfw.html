@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plugin Framework - Etherpad v1.8.16 Manual &amp; Documentation</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="apidoc" id="api-section-pluginfw">
+  <header id="header">
+    <h1>Etherpad v1.8.16 Manual &amp; Documentation</h1>
+  </header>
+
+  <div id="toc">
+    <h2>Table of Contents</h2>
+    <ul>
+<li><a href="#pluginfw_plugin-framework">Plugin Framework</a><ul>
+<li><a href="#pluginfw_pluginsupdate">plugins.update</a></li>
+<li><a href="#pluginfw_hookscallall">hooks.callAll</a></li>
+<li><a href="#pluginfw_hooksacallall">hooks.aCallAll</a></li>
+<li><a href="#pluginfw_">...</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+
+  <div id="apicontent">
+    <h1 id="pluginfw_plugin-framework">Plugin Framework</h1>
+<p><code>require(&quot;ep_etherpad-lite/static/js/plugingfw/plugins&quot;)</code></p>
+<h2 id="pluginfw_pluginsupdate">plugins.update</h2>
+<p><code>require(&quot;ep_etherpad-lite/static/js/plugingfw/plugins&quot;).update()</code> will use npm
+to list all installed modules and read their ep.json files, registering the
+contained hooks. A hook registration is a pair of a hook name and a function
+reference (filename for require() plus function name)</p>
+<h2 id="pluginfw_hookscallall">hooks.callAll</h2>
+<p><code>require(&quot;ep_etherpad-lite/static/js/plugingfw/hooks&quot;).callAll(&quot;hook_name&quot;, {argname:value})</code> will call all hook functions registered for <code>hook_name</code> with
+<code>{argname:value}</code>.</p>
+<h2 id="pluginfw_hooksacallall">hooks.aCallAll</h2>
+<p>?</p>
+<h2 id="pluginfw_">...</h2>
+
+  </div>
+
+</body>
+</html>
+
