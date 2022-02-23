@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Hooks - Etherpad v1.8.17 Manual &amp; Documentation</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="apidoc" id="api-section-hooks_overview">
+  <header id="header">
+    <h1>Etherpad v1.8.17 Manual &amp; Documentation</h1>
+  </header>
+
+  <div id="toc">
+    <h2>Table of Contents</h2>
+    <ul>
+<li><a href="#hooks_overview_hooks">Hooks</a><ul>
+<li><a href="#hooks_overview_registered-hook-functions">Registered hook functions</a><ul>
+<li><a href="#hooks_overview_arguments">Arguments</a></li>
+<li><a href="#hooks_overview_expected-behavior">Expected behavior</a></li>
+<li><a href="#hooks_overview_return-values">Return values</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+
+  <div id="apicontent">
+    <h1 id="hooks_overview_hooks">Hooks</h1>
+<p>A hook function is registered with a hook via the plugin&#39;s <code>ep.json</code> file. See
+the Plugins section for details. A hook may have many registered functions from
+different plugins.</p>
+<p>Some hooks call their registered functions one at a time until one of them
+returns a value. Others always call all of their registered functions and
+combine the results (if applicable).</p>
+<h2 id="hooks_overview_registered-hook-functions">Registered hook functions</h2>
+<p>Note: The documentation in this section applies to every hook unless the
+hook-specific documentation says otherwise.</p>
+<h3 id="hooks_overview_arguments">Arguments</h3>
+<p>Hook functions are called with three arguments:</p>
+<ol>
+<li><code>hookName</code> - The name of the hook being invoked.</li>
+<li><code>context</code> - An object with some relevant information about the context of the
+call. See the hook-specific documentation for details.</li>
+<li><code>cb</code> - For asynchronous operations this callback can be called to signal
+completion and optionally provide a return value. The callback takes a single
+argument, the meaning of which depends on the hook (see the &quot;Return values&quot;
+section for general information that applies to most hooks). This callback
+always returns <code>undefined</code>.</li>
+</ol>
+<h3 id="hooks_overview_expected-behavior">Expected behavior</h3>
+<p>The presence of a callback parameter suggests that every hook function can run
+asynchronously. While that is the eventual goal, there are some legacy hooks
+that expect their hook functions to provide a value synchronously. For such
+hooks, the hook functions must do one of the following:</p>
+<ul>
+<li>Call the callback with a non-Promise value (<code>undefined</code> is acceptable) and
+return <code>undefined</code>, in that order.</li>
+<li>Return a non-Promise value other than <code>undefined</code> (<code>null</code> is acceptable) and
+never call the callback. Note that <code>async</code> functions <em>always</em> return a
+Promise, so they must never be used for synchronous hooks.</li>
+<li>Only have two parameters (<code>hookName</code> and <code>context</code>) and return any non-Promise
+value (<code>undefined</code> is acceptable).</li>
+</ul>
+<p>For hooks that permit asynchronous behavior, the hook functions must do one or
+more of the following:</p>
+<ul>
+<li>Return <code>undefined</code> and call the callback, in either order.</li>
+<li>Return something other than <code>undefined</code> (<code>null</code> is acceptable) and never call
+the callback. Note that <code>async</code> functions <em>always</em> return a Promise, so they
+must never call the callback.</li>
+<li>Only have two parameters (<code>hookName</code> and <code>context</code>).</li>
+</ul>
+<p>Note that the acceptable behaviors for asynchronous hook functions is a superset
+of the acceptable behaviors for synchronous hook functions.</p>
+<p>WARNING: The number of parameters is determined by examining
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/length">Function.length</a>,
+which does not count <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters">default
+parameters</a>
+or <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters">&quot;rest&quot;
+parameters</a>.
+To avoid problems, do not use default or rest parameters when defining hook
+functions.</p>
+<h3 id="hooks_overview_return-values">Return values</h3>
+<p>A hook function can provide a value to Etherpad in one of the following ways:</p>
+<ul>
+<li>Pass the desired value as the first argument to the callback.</li>
+<li>Return the desired value directly. The value must not be <code>undefined</code> unless
+the hook function only has two parameters. (Hook functions with three
+parameters that want to provide <code>undefined</code> should instead use the callback.)</li>
+<li>For hooks that permit asynchronous behavior, return a Promise that resolves to
+the desired value.</li>
+<li>For hooks that permit asynchronous behavior, pass a Promise that resolves to
+the desired value as the first argument to the callback.</li>
+</ul>
+<p>Examples:</p>
+<pre><code class="language-javascript">exports.exampleOne = (hookName, context, callback) =&gt; {
+  return &#39;valueOne&#39;;
+};
+
+exports.exampleTwo = (hookName, context, callback) =&gt; {
+  callback(&#39;valueTwo&#39;);
+  return;
+};
+
+// ONLY FOR HOOKS THAT PERMIT ASYNCHRONOUS BEHAVIOR
+exports.exampleThree = (hookName, context, callback) =&gt; {
+  return new Promise(&#39;valueThree&#39;);
+};
+
+// ONLY FOR HOOKS THAT PERMIT ASYNCHRONOUS BEHAVIOR
+exports.exampleFour = (hookName, context, callback) =&gt; {
+  callback(new Promise(&#39;valueFour&#39;));
+  return;
+};
+
+// ONLY FOR HOOKS THAT PERMIT ASYNCHRONOUS BEHAVIOR
+exports.exampleFive = async (hookName, context) =&gt; {
+  // Note that this function is async, so it actually returns a Promise that
+  // is resolved to &#39;valueFive&#39;.
+  return &#39;valueFive&#39;;
+};
+</code></pre>
+<p>Etherpad collects the values provided by the hook functions into an array,
+filters out all <code>undefined</code> values, then flattens the array one level.
+Flattening one level makes it possible for a hook function to behave as if it
+were multiple separate hook functions.</p>
+<p>For example: Suppose a hook has eight registered functions that return the
+following values: <code>1</code>, <code>[2]</code>, <code>[&#39;3a&#39;, &#39;3b&#39;]</code> <code>[[4]]</code>, <code>undefined</code>,
+<code>[undefined]</code>, <code>[]</code>, and <code>null</code>. The value returned to the caller of the hook is
+<code>[1, 2, &#39;3a&#39;, &#39;3b&#39;, [4], undefined, null]</code>.</p>
+
+  </div>
+
+</body>
+</html>
+
