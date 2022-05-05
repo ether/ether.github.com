@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Changeset Library - Etherpad v1.8.18 Manual &amp; Documentation</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="apidoc" id="api-section-changeset_library">
+  <header id="header">
+    <h1>Etherpad v1.8.18 Manual &amp; Documentation</h1>
+  </header>
+
+  <div id="toc">
+    <h2>Table of Contents</h2>
+    <ul>
+<li><a href="#changeset_library_changeset-library">Changeset Library</a><ul>
+<li><a href="#changeset_library_changeset">Changeset</a></li>
+<li><a href="#changeset_library_attribute-pool">Attribute Pool</a></li>
+<li><a href="#changeset_library_further-reading">Further Reading</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+
+  <div id="apicontent">
+    <h1 id="changeset_library_changeset-library">Changeset Library</h1>
+<p>The <a href="https://github.com/ether/etherpad-lite/blob/develop/src/static/js/Changeset.js">changeset
+library</a>
+provides tools to create, read, and apply changesets.</p>
+<h2 id="changeset_library_changeset">Changeset</h2>
+<pre><code class="language-javascript">const Changeset = require(&#39;ep_etherpad-lite/static/js/Changeset&#39;);
+</code></pre>
+<p>A changeset describes the difference between two revisions of a document. When a
+user edits a pad, the browser generates and sends a changeset to the server,
+which relays it to the other users and saves a copy (so that every past revision
+is accessible).</p>
+<p>A transmitted changeset looks like this:</p>
+<pre><code>&#39;Z:z&gt;1|2=m=b*0|1+1$\n&#39;
+</code></pre>
+<h2 id="changeset_library_attribute-pool">Attribute Pool</h2>
+<pre><code class="language-javascript">const AttributePool = require(&#39;ep_etherpad-lite/static/js/AttributePool&#39;);
+</code></pre>
+<p>Changesets do not include any attribute key–value pairs. Instead, they use
+numeric identifiers that reference attributes kept in an <a href="https://github.com/ether/etherpad-lite/blob/develop/src/static/js/AttributePool.js">attribute
+pool</a>.
+This attribute interning reduces the transmission overhead of attributes that
+are used many times.</p>
+<p>There is one attribute pool per pad, and it includes every current and
+historical attribute used in the pad.</p>
+<h2 id="changeset_library_further-reading">Further Reading</h2>
+<p>Detailed information about the changesets &amp; Easysync protocol:</p>
+<ul>
+<li><a href="https://github.com/ether/etherpad-lite/blob/develop/doc/easysync/easysync-notes.pdf">Easysync Protocol</a></li>
+<li><a href="https://github.com/ether/etherpad-lite/blob/develop/doc/easysync/easysync-full-description.pdf">Etherpad and EasySync Technical Manual</a></li>
+</ul>
+
+  </div>
+
+</body>
+</html>
+
