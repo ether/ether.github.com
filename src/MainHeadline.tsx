@@ -1,4 +1,5 @@
 import gif from './assets/img/etherpad_demo.gif'
+import {LazyLoadImage} from "react-lazy-load-image-component";
 export const MainHeadline = () => {
     return <div className="content primary showcase">
         <div className="wrap">
@@ -7,7 +8,7 @@ export const MainHeadline = () => {
                 really <strong>real-time</strong>.</h1>
         </div>
 
-        <div className="demo"><img src={gif} alt=""/></div>
+        <div className="demo"><LazyLoadImage src={gif} alt="Show the editor and how fast you can collaborate with other people online."/></div>
 
         <div className="overview-bar">
             <div className="item"><i className="fa fa-cogs"></i><a href="https://static.etherpad.org/" about="_blank">290

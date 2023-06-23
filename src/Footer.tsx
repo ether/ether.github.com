@@ -1,4 +1,5 @@
 import footerLogo from './assets/img/logo.svg'
+import {LazyLoadImage} from "react-lazy-load-image-component";
 
 
 const CCC_ATTR ={
@@ -17,9 +18,10 @@ export const Footer = ()=>{
                     licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-sa/3.0/">Creative
                         Commons Attribution-ShareAlike 3.0 Unported License</a>.</p>
                 <p>Bitcoin public address: 198uyayMFVHUmrcuzWKFSMAkmwfkQgQEXj</p>
+                <p>Thanks to <a href={"https://github.com/seballot"} target="_blank">@seballot</a> for the redesign</p>
             </div>
 
-            <img className="logo" src={footerLogo}/>
+            <LazyLoadImage className="logo" src={footerLogo}/>
         </div>
     </div>
 }

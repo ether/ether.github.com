@@ -1,9 +1,10 @@
 import brandSvg from './assets/img/brand.svg';
 import {useCallback, useEffect, useState} from "react";
+import {LazyLoadImage} from "react-lazy-load-image-component";
 export const Header = () => {
     const [hash, setHash] = useState<string>(window.location.hash)
 
-    
+
     const hashChangeHandler = useCallback(() => {
         setHash(window.location.hash);
     }, []);
@@ -38,7 +39,7 @@ export const Header = () => {
 
     return <div id="header">
         <div className="wrap">
-            <a href="#"><img className="logo" src={brandSvg} alt="etherpad logo"/> </a>
+            <a href="#"><LazyLoadImage className="logo" src={brandSvg} alt="etherpad logo"/> </a>
             <div id="nav">
                 <ul>
                     <li><a onClick={()=>navigateToElement('#about')} title="about">About</a></li>

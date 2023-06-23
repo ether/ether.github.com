@@ -6,9 +6,9 @@ export const GetInTouchContact = ()=>{
         </div>
         <div className="content">
             <ul className="links wrap">
-                <li><a href="https://discord.gg/daEjfhw">Discord</a></li>
-                <li><a href="https://twitter.com/etherpadorg">Twitter: @EtherpadOrg</a></li>
-                <li><a href="mailto:contact@etherpad.org">Email contact@etherpad.org</a></li>
+                <li><a target="_blank" href="https://discord.gg/daEjfhw">Discord</a></li>
+                <li><a target="_blank" href="https://twitter.com/etherpadorg">Twitter: @EtherpadOrg</a></li>
+                <li><a target="_blank" href="mailto:contact@etherpad.org">Email contact@etherpad.org</a></li>
             </ul>
         </div>
     </div>

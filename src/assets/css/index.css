@@ -241,7 +241,7 @@ ul.links li {
 }
 
 /* tibit */
-ul.links li.bd-tib-btn a {
+ul.links li.bd-tib-btn a, a {
   cursor: pointer;
 }
 ul.links li.bd-tib-btn .posttib,
