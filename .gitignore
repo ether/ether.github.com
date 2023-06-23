@@ -1,2 +1,7 @@
 tools/node_modules/
+node_modules/
+dist/
+.idea/
+package-lock.json
+
 .idea/
