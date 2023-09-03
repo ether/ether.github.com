@@ -13,7 +13,7 @@
 
 /* 1pc <- 0,423cm*/
 
-html, body {
+html, body, #root {
   font-family: 'Quicksand',sans-serif;
   color: #313b4a;
   height: 100%;
@@ -117,6 +117,7 @@ div#header div#mobile-nav li a:active {
 
 div#header div#nav li a:hover,
 div#header div#nav li a:focus,
+div#header div#nav li a[class="active"],
 div#header div#mobile-nav li a:hover,
 div#header div#mobile-nav li a:focus {
   color: #65d09b;
@@ -240,7 +241,7 @@ ul.links li {
 }
 
 /* tibit */
-ul.links li.bd-tib-btn a {
+ul.links li.bd-tib-btn a, a {
   cursor: pointer;
 }
 ul.links li.bd-tib-btn .posttib,
@@ -309,7 +310,7 @@ div#footer img.logo {
 */
 
 @media screen and (max-width: 800px) {
-  html, body {
+  html, body,#root  {
     font-size: 13px;
   }
   .wrap {
