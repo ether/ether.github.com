@@ -31,6 +31,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Cache npm packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./node_modules
+          key: npm-${{ hashFiles('package-lock.json') }}
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Setup Node.js Environment
