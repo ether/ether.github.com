@@ -14,6 +14,6 @@ export const LINUX_MAC_DOWNLOAD = PATH_TO_GITHUB +`/archive/v${CURRENT_VERSION}.
 export const PATH_TO_WIKI = PATH_TO_GITHUB+"/wiki"
 export const PATH_TO_ISSUES = PATH_TO_GITHUB+"/issues"
 
-export const DOC_PAGE = `/doc/v${CURRENT_VERSION}/`
+export const DOC_PAGE = `/doc/v${CURRENT_VERSION}/index.html`
 
 export const GITHUB_HELP = "https://help.github.com"

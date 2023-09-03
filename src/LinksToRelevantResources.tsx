@@ -5,12 +5,11 @@ export const LinksToRelevantResources = () => {
         <div className="wrap">
             <ul className="links">
                 <li><a href={PATH_TO_BLOG} target="_blank">Blog</a></li>
-                <li><a href={PATH_TO_GITHUB}>GitHub repository</a></li>
-                <li><a href={PATH_TO_GITHUB+"/wiki/Sites-That-Run-Etherpad"}>List of public
-                    instances</a></li>
-                <li><a href={PATH_TO_ISSUES}>Issue tracker</a></li>
-                <li><a href={PATH_TO_WIKI}>Wiki</a></li>
-                <li><a href={DOC_PAGE}>Documentation <small>v${CURRENT_VERSION}</small></a></li>
+                <li><a href={PATH_TO_GITHUB} target="_blank">GitHub repository</a></li>
+                <li><a href={PATH_TO_GITHUB+"/wiki/Sites-That-Run-Etherpad"} target="_blank">List of public instances</a></li>
+                <li><a href={PATH_TO_ISSUES} target="_blank">Issue tracker</a></li>
+                <li><a href={PATH_TO_WIKI} target="_blank">Wiki</a></li>
+                <li><a target="_blank" href={DOC_PAGE}>Documentation <small>v{CURRENT_VERSION}</small></a></li>
             </ul>
         </div>
     </div>
