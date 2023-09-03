@@ -1,6 +1,5 @@
 import { version } from './assets/version.json';
 
-console.log(">"+version+"<")
 export const CURRENT_VERSION = version
 export const PATH_TO_BLOG = "https://blog.etherpad.org"
 export const PATH_TO_GITHUB = "https://github.com/ether/etherpad-lite"
