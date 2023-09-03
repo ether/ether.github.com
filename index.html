@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta name="globalsign-domain-verification" content="9buOUAsm68lg97yJaT2W5IBeTkSrlGbOrsVwziHjIw" />
 <meta charset="utf-8">
@@ -22,174 +22,27 @@ This iconic web font was used extensively around the site.
 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
 <link rel="shortcut icon" href="favicon.ico" />
-<link type="text/css" rel="stylesheet" href="css/reset.css" />
-<link type="text/css" rel="stylesheet" href="css/font-awesome.css" />
-<link type="text/css" rel="stylesheet" href="css/index.css" />
+<link type="text/css" rel="stylesheet" href="/css/reset.css" />
+<link type="text/css" rel="stylesheet" href="/css/font-awesome.css" />
+<link type="text/css" rel="stylesheet" href="/css/index.css" />
 
-<meta name="google-site-verification" content="bVuuj6GwPO2TG1ZmB67XFvKxM0YSMrQIw5rYcG5RwVw" />
-</head>
-<body>
-  <div id="header">
-    <div class="wrap">
-      <a href="#"><img class="logo" src="img/brand.svg" alt="etherpad logo"> </a>
-      <div id="nav">
-        <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#download">Download</a></li>
-          <li><a href="#contribute">Contribute</a></li>
-          <li><a href="#links">Links</a></li>
-          <li><a href="#contact">Contact</a></li>
-       </ul>
-      </div>
-      <div id="mobile-nav">
-        <ul>
-          <li><a href="#about"><i class="fa fa-info-circle large"></i></a></li>
-          <li><a href="#download"><i class="fa fa-download"></i></a></li>
-          <li><a href="#contribute"><i class="fa fa-wrench"></i></a></li>
-          <li><a href="#links"><i class="fa fa-external-link-square-alt"></i></a></li>
-          <li><a href="#contact"><i class="fa fa-envelope"></i></a></li>
-       </ul>
-      </div>
-    </div>
-  </div>
+    <meta name="google-site-verification" content="bVuuj6GwPO2TG1ZmB67XFvKxM0YSMrQIw5rYcG5RwVw" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script type="text/javascript">
 
-  <div class="main-container">
+        const _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-19303815-1']);
+        _gaq.push(['_trackPageview']);
 
-    <div class="content primary showcase">
-      <div class="wrap">
-        <h1><strong>Etherpad</strong> is a highly customizable <strong>open source</strong> online <strong>editor</strong> providing collaborative editing in really <strong>real-time</strong>.</h1>
-      </div>
+        (function() {
+          const ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' === document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          const s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
 
-      <div class="demo"><img src="img/etherpad_demo.gif" alt="" /></div>
-
-      <div class="overview-bar">
-        <div class="item"><i class="fa fa-cogs"></i><a href="https://static.etherpad.org/" about="_blank">290 Plugins</a></div>
-        <div class="item"><i class="fa fa-language"></i>105 Languages</div>
-        <div class="item"><i class="fa fa-server"></i>Thousands of Instances</div>
-        <div class="item"><i class="fa fa-users"></i>Millions of users</div>
-      </div>
-    </div>
-
-    <a class="scroll-point" name="about"></a>
-    <div class="content wrap">
-      <h2>Collaborating in really real-time</h2>
-
-      <h5 class="subheading">No more sending your stuff back and forth via email, just set up a pad, share the link and start collaborating!</h5>
-
-      <!-- <div class="button small" style="margin-bottom: 25pt; position:relative; top:-10pt;"><a target="_blank" href="https://beta.etherpad.org"><i class="fa fa-fire"></i>Try it now!</a><br></div> -->
-
-      <p>Etherpad allows you to edit documents collaboratively in real-time, much like a live multi-player editor that runs in your browser. Write articles, press releases, to-do lists, etc. together with your friends, fellow students or colleagues, all working on the same document at the same time.</p>
-      <p>All instances provide access to all data through a well-documented API and support import/export to many major data exchange formats. And if the built-in feature set isn't enough for you, there's tons of plugins that allow you to customize your instance to suit your needs.</p>
-
-      <p>You don't need to set up a server and install Etherpad in order to use it. Just <a href="#links">pick</a> one of the publicly available instances that friendly people from everywhere around the world have set up. Alternatively, you can set up your own instance by following our <a href="https://github.com/ether/etherpad-lite#installation">installation guide</a>.</p>
-    </div>
-
-    <a class="scroll-point" name="customize"></a>
-    <div class="content wrap">
-      <h2>Add Functionalities</h2>
-      Etherpad is very customizable through plugins. Instructions can be found in the <a href="https://github.com/ether/etherpad-lite/wiki/Available-Plugins" target="_blank">plugin wiki article</a>
-      <p class="full-features-demo">
-        <img src="img/etherpad_full_features.png"/>
-      </p>
-    </div>
-
-    <div class="highlight">
-      <a class="scroll-point" name="download"></a>
-      <div class="content wrap">
-        <h2>Download Version 1.9.2</h2>
-        <p>Also, see our <a href="https://github.com/ether/etherpad-lite#installation">installation instructions</a>.</p>
-        <a class="download-button" href="https://github.com/ether/etherpad-lite/archive/v1.9.2.zip"><i class="fa fa-download"></i>Linux/Mac</a>
-        <a class="download-button" href="https://github.com/ether/etherpad-lite/releases/download/v1.9.2/etherpad-lite-win.zip"><i class="fa fa-download"></i>Windows</a>
-      </div>
-    </div>
-
-    <a class="scroll-point" name="contribute"></a>
-    <div class="content wrap">
-      <h2><i class="fa fa-wrench"></i> Contribute</h2>
-      <p>Etherpad is an open source project. Lots of passionate, helpful individuals have joined and voluntarily contributed every single bit throughout this project: From this website through the documentation to the very core of the application. So, if you like Etherpad and would like to give back some love, we'd like to see <em>your</em> contributions! It doesn't matter how familiar you are with real-time applications, or whether you know how to write programs for Node.js. There are plenty of ways to be helpful!</p>
-      <p>One of the first things you should do is actually use Etherpad, and get to know it - read about it, evangelise it, and engage with the wider community. You can also translate the user interface to your mother tongue or learn how to write plugins. Be creative!</p>
-      <p>If you'd like to help, <a href="#contact">get in touch</a>! Also, <a href="https://github.com/ether/etherpad-lite/wiki">the wiki</a> is always a valuable resource.</p>
-
-      <h5>Development workflow</h5>
-      <p>The main development happens on <a href="https://github.com/ether/etherpad-lite">GitHub</a>. To contribute, <a href="https://help.github.com/fork-a-repo/">fork</a> the <a href="https://github.com/ether/etherpad-lite">main repo</a>, branch off a <a href="https://www.google.com/search?q=git+feature+branches">feature branch</a> from <code>develop</code>, make your changes and <a href="https://git-scm.com/docs/git-commit">commit</a> them, <a href="https://git-scm.com/docs/git-push">push</a> to your fork and submit a <a href="https://help.github.com/send-pull-requests/">pull request</a> for <code>ether/develop</code>.</p>
-      <p>Once in a while we merge <code>develop</code> into <code>master</code>, which results in a new release. This means you will always find the latest stable version in the <code>master</code> branch.</p>
-
-    </div>
-
-    <div class="content wrap">
-      <h2><i class="fa fa-paint-brush"></i> Customize Appearance</h2>
-      <img class="skin-variant-demo" src="img/etherpad_skin_variants.gif"/>
-    </div>
-
-    <a class="scroll-point" name="links"></a>
-    <div class="content wrap">
-      <h2><i class="fa fa-external-link-square-alt"></i> Links</h2>
-    </div>
-    <div class="content">
-      <div class="wrap">
-        <ul class="links">
-          <li><a href="https://blog.etherpad.org" target="_blank">Blog</a></li>
-          <li><a href="https://github.com/ether/etherpad-lite">GitHub repository</a></li>
-          <li><a href="https://github.com/ether/etherpad-lite/wiki/Sites-That-Run-Etherpad">List of public instances</a></li>
-          <li><a href="https://github.com/ether/etherpad-lite/issues">Issue tracker</a></li>
-          <li><a href="https://github.com/ether/etherpad-lite/wiki">Wiki</a></li>
-          <li><a href="doc/v1.9.2/">Documentation <small>v1.9.2</small></a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="highlight">
-      <a class="scroll-point" name="contact"></a>
-      <div class="content wrap">
-        <h2><i class="fa fa-envelope"></i> Get in touch</h2>
-      </div>
-      <div class="content">
-        <ul class="links wrap">
-          <li><a href="https://discord.gg/daEjfhw">Discord</a></li>
-          <li><a href="https://twitter.com/etherpadorg">Twitter: @EtherpadOrg</a></li>
-          <li><a href="mailto:contact@etherpad.org">Email contact@etherpad.org</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <a class="scroll-point" name="thanks"></a>
-    <div class="content wrap">
-      <h2><i class="fa fa-heart"></i> Thanks</h2>
-      <p>Many individuals, companies and organizations have contributed to Etherpad. We'd like to thank them all!</p>
-      <p>Additionally, our thanks go out to the tens of thousands of developers and organizations who have created all the modules we depend on or contributed in some way to our ability to provide Etherpad as open source.</p>
-      <p>We'd also like to thank you. You, who've been making Etherpad what it is, if you've been developing awesome features or plugins, whether you're running an instance or you're just one of our diligent users.</p>
-      <p>Thank you!</p>
-    </div>
-
-    <div id="footer">
-      <div class="wrap">
-
-        <div class="footer-content">
-          <p>Copyright &copy; The&nbsp;Etherpad&nbsp;Foundation.</p>
-          <p>Design &copy; The Apache Software Foundation, adapted by Marcel Klehr — Licensed under the <a rel="license" href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a></p>
-          <p>The Etherpad logos by <span xmlns:cc="https://creativecommons.org/ns#" property="cc:attributionName">Marcel Klehr</span> are licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.</p>
-          <p>Bitcoin public address: 198uyayMFVHUmrcuzWKFSMAkmwfkQgQEXj</p>
-
-        </div>
-
-        <img class="logo" src="img/logo.svg"/>
-      </div>
-    </div>
-  </div>
-
-<script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-19303815-1']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
-
-</body>
+    </script>
+  </body>
 </html>
