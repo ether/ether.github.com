@@ -4,10 +4,10 @@ import {faDiscord, faTwitter} from '@fortawesome/free-brands-svg-icons'
 export const GetInTouchContact = ()=>{
 
     const goToPage = (page:string)=>{
-        window.open(page, '_blank')!.focus();
+        window.open(page, '_blank')?.focus();
     }
 
-    return <div className="highlight">
+    return <div className="highlight dark:bg-gray-600">
         <a className="scroll-point" id="contact"></a>
         <div className="content wrap">
             <h2 className="text-3xl text-primary font-bold mb-4 mt-16 flex items-center">

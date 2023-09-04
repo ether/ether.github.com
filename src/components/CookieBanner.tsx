@@ -1,5 +1,5 @@
 import {createPortal} from "react-dom";
-import {TRACKING_ID} from "./Constants.ts";
+import {TRACKING_ID} from "../Constants.ts";
 import {useEffect, useState} from "react";
 import {initialize, pageview} from "react-ga";
 
@@ -39,5 +39,5 @@ export const CookieBanner = ()=>{
                 <button className="rounded bg-blue-600 p-2 self-center" onClick={()=>setCookiesAccepted(true)}>Accept cookies</button>
             </div>
         </div>
-    , document.getElementById('banner')!)
+    , document!.getElementById('banner')!)
 }

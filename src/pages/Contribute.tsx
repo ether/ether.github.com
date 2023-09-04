@@ -1,8 +1,8 @@
-import {GITHUB_HELP, PATH_TO_GITHUB, PATH_TO_WIKI} from "./Constants.ts";
+import {GITHUB_HELP, PATH_TO_GITHUB, PATH_TO_WIKI} from "../Constants.ts";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faWrench} from "@fortawesome/free-solid-svg-icons";
 export const Contribute = ()=>{
-    return <div className="content wrap">
+    return <div className="content wrap dark:text-gray-400">
         <h2 className="text-3xl text-primary font-bold mb-4 mt-16 flex items-center">
             <FontAwesomeIcon icon={faWrench} className="mr-4"/>Contribute</h2>
         <p>Etherpad is an open source project. Lots of passionate, helpful individuals have joined and voluntarily
@@ -16,7 +16,7 @@ export const Contribute = ()=>{
         <p>If you'd like to help, <a href="#contact">get in touch</a>! Also, <a target="_blank"
             href={PATH_TO_WIKI}>the wiki</a> is always a valuable resource.</p>
 
-        <h5 className="text-xl font-bold mb-5">Development workflow</h5>
+        <h5 className="text-xl font-bold mb-5 dark:text-white">Development workflow</h5>
         <p>The main development happens on <a href={PATH_TO_GITHUB}>GitHub</a>. To
             contribute, <a target="_blank" href={GITHUB_HELP+"/fork-a-repo/"}>fork</a> the <a target="_blank"
                 href={PATH_TO_GITHUB}>main repo</a>, branch off a <a target="_blank"

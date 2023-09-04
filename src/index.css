@@ -17,11 +17,11 @@
 
 /* 1pc <- 0,423cm*/
 
-html, body, #root{
-  @apply h-full w-full overflow-hidden flex flex-col;
+html, body, #root > div{
+  @apply h-full w-full flex flex-col;
 }
 
-html, body, #root {
+html, body, #root >div {
   font-family: 'Quicksand',sans-serif;
   color: #313b4a;
   font-size: 17px;
@@ -60,7 +60,6 @@ div#header div#mobile-nav li {
 div#header div#nav li a,
 div#header div#nav li a:active {
   transition: color .1s;
-  color: #555;
   font-size: 1rem;
   line-height: 2rem;
   padding: 0 1pc;
@@ -69,7 +68,6 @@ div#header div#nav li a:active {
 div#header div#mobile-nav li a,
 div#header div#mobile-nav li a:active {
   transition: color .1s;
-  color: #555;
   font-size: 1.3rem;
   margin-left: 1.3rem;
   text-decoration: none;
@@ -270,7 +268,7 @@ div#footer img.logo {
 */
 
 @media screen and (max-width: 800px) {
-  html, body,#root  {
+  html, body,#root > div  {
     font-size: 13px;
   }
   h1 {
