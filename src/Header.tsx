@@ -1,9 +1,11 @@
 import brandSvg from './assets/img/brand.svg';
-import {useCallback, useEffect, useState} from "react";
-import {LazyLoadImage} from "react-lazy-load-image-component";
+import {Suspense, useCallback, useEffect, useState} from "react";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faBars} from "@fortawesome/free-solid-svg-icons";
+import {MobileDrawer} from "./MobileDrawer.tsx";
 export const Header = () => {
     const [hash, setHash] = useState<string>(window.location.hash)
-
+    const [mobileDrawerOpen, setMobileDrawerOpen] = useState<boolean>(false)
 
     const hashChangeHandler = useCallback(() => {
         setHash(window.location.hash);
@@ -26,7 +28,6 @@ export const Header = () => {
                 for (let i = 0; i < elements.length; i++) {
                     elements[i].classList.remove("active")
                 }
-                console.log(location.hash.slice(1))
                 document.querySelector("[title='"+hash.slice(1)+"']")?.classList.add("active")
                 const element = document.getElementById(hash.slice(1))
                 if(element){
@@ -37,27 +38,29 @@ export const Header = () => {
         ,[hash])
 
 
-    return <div id="header">
-        <div className="wrap">
-            <a href="#"><LazyLoadImage className="logo" src={brandSvg} alt="etherpad logo"/> </a>
+    return <><div id="header" className="text-white border-b-[1pt] border-solid border-[#efefef] p-4 w-full">
+        <div className="wrap flex items-center">
+            <a href="#">
+                <Suspense>
+                <img className="logo h-8" src={brandSvg} alt="etherpad logo"/>
+                </Suspense>
+            </a>
+
             <div id="nav">
                 <ul>
                     <li><a onClick={()=>navigateToElement('#about')} title="about">About</a></li>
                     <li><a onClick={()=>navigateToElement('#download')} title="download">Download</a></li>
                     <li><a onClick={()=>navigateToElement('#contribute')} title="contribute">Contribute</a></li>
                     <li><a onClick={()=>navigateToElement("#links")} title="links">Links</a></li>
-                    <li><a onClick={()=>navigateToElement('contact')} title="contact">Contact</a></li>
+                    <li><a onClick={()=>navigateToElement('#contact')} title="contact">Contact</a></li>
                 </ul>
             </div>
             <div id="mobile-nav">
-                <ul>
-                    <li><a href="#about"><i className="fa fa-info-circle large"></i></a></li>
-                    <li><a href="#download"><i className="fa fa-download"></i></a></li>
-                    <li><a href="#contribute"><i className="fa fa-wrench"></i></a></li>
-                    <li><a href="#links"><i className="fa fa-external-link-square-alt"></i></a></li>
-                    <li><a href="#contact"><i className="fa fa-envelope"></i></a></li>
-                </ul>
+                <FontAwesomeIcon icon={faBars} className="float-right text-gray-500 text-3xl" onClick={()=>setMobileDrawerOpen(!mobileDrawerOpen)}/>
+
             </div>
         </div>
     </div>
+    <MobileDrawer isOpen={mobileDrawerOpen} setOpen={setMobileDrawerOpen}/>
+</>
 }
