@@ -1,4 +1,4 @@
-import { version } from './assets/version.json';
+import { version } from '../package.json';
 
 export const CURRENT_VERSION = version
 export const PATH_TO_BLOG = "https://blog.etherpad.org"
