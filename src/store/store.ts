@@ -1,5 +1,14 @@
 import {create} from "zustand";
 
+
+export type FileNotPresentMetaData = {
+    version: string,
+    os: string,
+    url: string,
+    latestRelease: GHRelease,
+}
+
+
 export type GHRelease = {
     url: string,
     assets_url: string,
@@ -82,7 +91,11 @@ type StoreType = {
     selectVersionWindow: boolean,
     setSelectVersionWindow: (selectVersionWindow: boolean) => void,
     releases: GHRelease[],
-    setReleases: (releases: GHRelease[]) => void
+    setReleases: (releases: GHRelease[]) => void,
+    fileNotPresentDialog: boolean,
+    openFileNotPresentDialog: (fileNotPresentDialog: boolean) => void,
+    fileNotPresentMetaData: FileNotPresentMetaData | undefined,
+    setFileNotPresentMetaData: (fileNotPresentMetaData: FileNotPresentMetaData) => void,
 }
 
 const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -117,5 +130,17 @@ export const useUIStore = create<StoreType>((set) => ({
         return {
             releases
         }
+    }),
+    fileNotPresentDialog: false,
+    openFileNotPresentDialog: (fileNotPresentDialog: boolean) => set(() => {
+        return {
+            fileNotPresentDialog
+        }
+    }),
+    fileNotPresentMetaData:undefined,
+    setFileNotPresentMetaData: (fileNotPresentMetaData: FileNotPresentMetaData) => set(() => {
+      return {
+            fileNotPresentMetaData
+      }
     })
 }))

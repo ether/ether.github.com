@@ -1,8 +1,9 @@
 import * as Dialog from '../components/StyledModal.tsx';
-import {GHAsset, GHRelease, useUIStore} from "../store/store.ts";
+import {GHRelease, useUIStore} from "../store/store.ts";
 import {useEffect} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faDownload, faLink} from "@fortawesome/free-solid-svg-icons";
+import {downloadFile} from "../utils/utils.ts";
 export const SelectVersionModal = ()=>{
     const selectedVersionWindow = useUIStore(state => state.selectVersionWindow)
     const setSelectVersionWindow = useUIStore(state => state.setSelectVersionWindow)
@@ -27,16 +28,7 @@ export const SelectVersionModal = ()=>{
         })
     }
 
-    const downloadFile = (asset: GHAsset, release: GHRelease)=>{
-        const link = document.createElement("a");
-        // If you don't know the name or want to use
-        // the webserver default set name = ''
-        link.setAttribute('download', release.name+'-'+asset.name);
-        link.href = asset.browser_download_url;
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-    }
+
 
     const openDoc = (version:string)=>{
         if(version.startsWith('v')){
@@ -66,7 +58,7 @@ export const SelectVersionModal = ()=>{
                             <td className="text-center pt-2">{release.tag_name}</td>
                             <td className="text-center pt-2">{formatDate(release.published_at)}</td>
                             <td className="flex gap-3 flex-wrap pt-2">{release.assets.map(a=><div className="bg-secondary dark:bg-secondary-dark rounded-2xl pl-5 p-1 flex gap-2">{a.name}
-                                <FontAwesomeIcon className="mr-5 cursor-pointer self-center" icon={faDownload} title={a.name} onClick={()=>downloadFile(a, release)}/></div>)}</td>
+                                <FontAwesomeIcon className="mr-5 cursor-pointer self-center" icon={faDownload} title={a.name} onClick={()=>downloadFile(a.browser_download_url)}/></div>)}</td>
                             <td className="pt-2"><img alt="Logos of release" className="h-10 rounded-full" title={release.author.login} src={release.author.avatar_url}/></td>
                             <th><FontAwesomeIcon icon={faLink} className="cursor-pointer" onClick={()=>openDoc(release.tag_name)}/></th>
                         </tr>
