@@ -1,4 +1,4 @@
-import footerLogo from './assets/img/logo.svg'
+import footerLogo from '../assets/img/logo.svg'
 import {Suspense} from "react";
 
 

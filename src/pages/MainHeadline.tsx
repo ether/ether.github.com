@@ -1,11 +1,11 @@
-import gif from './assets/img/etherpad_demo.gif'
+import gif from '../assets/img/etherpad_demo.gif'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCogs, faLanguage, faServer, faUsers} from "@fortawesome/free-solid-svg-icons";
 import {Suspense} from "react";
 export const MainHeadline = () => {
     return <div className="content primary showcase">
         <div className="wrap">
-            <h1 className="font-normal ml-0 mr-0 mb-4 text-[2.5rem] mt-16"><strong>Etherpad</strong> is a highly customizable <strong>open
+            <h1 className="font-normal ml-0 mr-0 mb-4 text-[2.5rem] mt-16 dark:text-white"><strong>Etherpad</strong> is a highly customizable <strong>open
                 source</strong> online <strong>editor</strong> providing collaborative editing in
                 really <strong>real-time</strong>.</h1>
         </div>
@@ -16,7 +16,7 @@ export const MainHeadline = () => {
             </Suspense>
         </div>
 
-        <div className="overview-bar">
+        <div className="overview-bar dark:bg-gray-600 dark:text-white">
             <div className="item">
                 <FontAwesomeIcon icon={faCogs} className="mr-2"/>
                 <a href="https://static.etherpad.org/" target="_blank" className="underline">290
