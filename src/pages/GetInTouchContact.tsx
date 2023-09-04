@@ -7,8 +7,8 @@ export const GetInTouchContact = ()=>{
         window.open(page, '_blank')?.focus();
     }
 
-    return <div className="highlight dark:bg-gray-600">
-        <a className="scroll-point" id="contact"></a>
+    return <div className="highlight dark:bg-gray-600"  id="contact">
+        <a className="scroll-point"></a>
         <div className="content wrap">
             <h2 className="text-3xl text-primary font-bold mb-4 mt-16 flex items-center">
                 <FontAwesomeIcon icon={faEnvelope} className="mr-4"/>Get in touch</h2>
