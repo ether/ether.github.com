@@ -12,10 +12,12 @@ import {CustomizeAppearance} from "./pages/CustomizeAppearance.tsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faExternalLink} from "@fortawesome/free-solid-svg-icons";
 import {CookieBanner} from "./components/CookieBanner.tsx";
+import {SelectVersionModal} from "./components/SelectVersionModal.tsx";
 export const App = ()=> {
 
     return (
         <div className="dark:bg-gray-800">
+            <SelectVersionModal/>
             <CookieBanner/>
             <div className="sticky top-0 z-50">
                 <div className=" relative top-0">
@@ -29,6 +31,7 @@ export const App = ()=> {
                 <a className="scroll-point" id="customize"></a>
                 <AddFunctionalities/>
                 <CustomizeAppearance/>
+                <a className="scroll-point" id="download"></a>
                 <DownloadLatestVersion/>
                 <a className="scroll-point" id="contribute"></a>
                 <Contribute/>
