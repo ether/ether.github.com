@@ -1,6 +1,8 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faInfoCircle, faDownload, faWrench, faExternalLink, faContactCard} from '@fortawesome/free-solid-svg-icons'
 import {FC} from "react";
+import {ThemeToggler} from "./ThemeToggler.tsx";
+import {useUIStore} from "../store/store.ts";
 
 type MobileDrawerProps = {
     isOpen: boolean,
@@ -8,6 +10,7 @@ type MobileDrawerProps = {
 }
 
 export const MobileDrawer:FC<MobileDrawerProps> = ({isOpen, setOpen}) => {
+    const toggleTheme = useUIStore(state=>state.toggleDarkMode)
     const navigateToElement = (elementId: string)=>{
         location.hash = elementId
         setOpen(false)
@@ -15,27 +18,31 @@ export const MobileDrawer:FC<MobileDrawerProps> = ({isOpen, setOpen}) => {
 
     return <div className={` ${!isOpen?'h-0  overflow-hidden':' h-[100vh]'} w-full bg-transparent md:hidden z-10 absolute pointer-events-none`}
                 onClick={()=>setOpen(false)}>
-        <div className="flex justify-center p-2 overflow-auto  bg-secondary pointer-events-auto">
-            <div className="grid grid-cols-[auto_1fr] gap-2 w-1/5 text-2xl">
-                <div className="contents">
+        <div className="flex justify-center p-2 overflow-auto  bg-secondary pointer-events-auto  dark:bg-secondary-dark dark:text-white">
+            <div className="grid grid-cols-[auto_1fr] gap-2 w-fit text-2xl">
+                <div className="contents"  onClick={()=>navigateToElement('about')}>
                         <FontAwesomeIcon icon={faInfoCircle} className="self-center"/>
-                        <a onClick={()=>navigateToElement('about')} title="about">About</a>
+                        <a title="about">About</a>
                 </div>
-                <div className="contents">
+                <div className="contents"  onClick={()=>navigateToElement('download')}>
                     <FontAwesomeIcon icon={faDownload} className="self-center"/>
-                    <a onClick={()=>navigateToElement('download')} title="download">Download</a>
+                    <a title="download">Download</a>
                 </div>
-                <div className="contents">
+                <div className="contents"  onClick={()=>navigateToElement('contribute')}>
                         <FontAwesomeIcon icon={faWrench} className="self-center"/>
-                        <a onClick={()=>navigateToElement('contribute')} title="contribute">Contribute</a>
+                        <a title="contribute">Contribute</a>
                 </div>
-                <div className="contents">
+                <div className="contents" onClick={()=>navigateToElement('links')}>
                     <FontAwesomeIcon icon={faExternalLink} className="self-center"/><a
-                onClick={()=>navigateToElement('links')} title="links">Links</a>
+                 title="links">Links</a>
                 </div>
-                <div className="contents">
+                <div className="contents" onClick={()=>navigateToElement('contact')}>
                         <FontAwesomeIcon icon={faContactCard} className="self-center"/><a
-                    onClick={()=>navigateToElement('contact')} title="contact">Contact</a>
+                     title="contact">Contact</a>
+                </div>
+                <div className="contents cursor-pointer" onClick={toggleTheme}>
+                    <ThemeToggler/>
+                    <span>Toggle Theme</span>
                 </div>
             </div>
         </div>

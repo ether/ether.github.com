@@ -1,24 +1,26 @@
-import {Header} from "./Header.tsx";
-import {MainHeadline} from "./MainHeadline.tsx";
-import {RealTimeCollaboration} from "./RealTimeCollaboration.tsx";
-import {DownloadLatestVersion} from "./DownloadLatestVersion.tsx";
-import {Contribute} from "./Contribute.tsx";
-import {LinksToRelevantResources} from "./LinksToRelevantResources.tsx";
-import {GetInTouchContact} from "./GetInTouchContact.tsx";
-import {Thanking} from "./Thanking.tsx";
-import {Footer} from "./Footer.tsx";
-import {AddFunctionalities} from "./AddFunctionalities.tsx";
-import {CustomizeAppearance} from "./CustomizeAppearance.tsx";
+import {Header} from "./pages/Header.tsx";
+import {MainHeadline} from "./pages/MainHeadline.tsx";
+import {RealTimeCollaboration} from "./pages/RealTimeCollaboration.tsx";
+import {DownloadLatestVersion} from "./pages/DownloadLatestVersion.tsx";
+import {Contribute} from "./pages/Contribute.tsx";
+import {LinksToRelevantResources} from "./pages/LinksToRelevantResources.tsx";
+import {GetInTouchContact} from "./pages/GetInTouchContact.tsx";
+import {Thanking} from "./pages/Thanking.tsx";
+import {Footer} from "./components/Footer.tsx";
+import {AddFunctionalities} from "./pages/AddFunctionalities.tsx";
+import {CustomizeAppearance} from "./pages/CustomizeAppearance.tsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faExternalLink} from "@fortawesome/free-solid-svg-icons";
-import {CookieBanner} from "./CookieBanner.tsx";
+import {CookieBanner} from "./components/CookieBanner.tsx";
 export const App = ()=> {
 
     return (
-        <>
+        <div className="dark:bg-gray-800">
             <CookieBanner/>
-            <div className="relative">
-            <Header/>
+            <div className="sticky top-0 z-50">
+                <div className=" relative top-0">
+                    <Header/>
+                </div>
             </div>
             <div className="main-container">
                 <MainHeadline/>
@@ -41,6 +43,6 @@ export const App = ()=> {
                 <Thanking/>
                 <Footer/>
             </div>
-        </>
+        </div>
     )
 }

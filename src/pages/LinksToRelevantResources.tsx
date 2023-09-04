@@ -1,4 +1,4 @@
-import {CURRENT_VERSION, DOC_PAGE, PATH_TO_BLOG, PATH_TO_GITHUB, PATH_TO_ISSUES, PATH_TO_WIKI} from "./Constants.ts";
+import {CURRENT_VERSION, DOC_PAGE, PATH_TO_BLOG, PATH_TO_GITHUB, PATH_TO_ISSUES, PATH_TO_WIKI} from "../Constants.ts";
 
 export const LinksToRelevantResources = () => {
     return <div className="content">

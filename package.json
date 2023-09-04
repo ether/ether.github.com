@@ -22,6 +22,7 @@
     "react-router-hash-link": "^2.4.3"
   },
   "devDependencies": {
+    "zustand": "^4.4.1",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "@types/react-lazy-load-image-component": "^1.5.3",

@@ -1,4 +1,4 @@
-import skinVariant from './assets/img/etherpad_skin_variants.gif'
+import skinVariant from '../assets/img/etherpad_skin_variants.gif'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPaintBrush} from "@fortawesome/free-solid-svg-icons";
 import {Suspense} from "react";
