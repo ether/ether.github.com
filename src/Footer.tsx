@@ -1,5 +1,5 @@
 import footerLogo from './assets/img/logo.svg'
-import {LazyLoadImage} from "react-lazy-load-image-component";
+import {Suspense} from "react";
 
 
 const CCC_ATTR ={
@@ -8,8 +8,7 @@ const CCC_ATTR ={
 
 export const Footer = ()=>{
     return <div id="footer">
-        <div className="wrap">
-
+        <div className="wrap sm:pl-2 sm:pr-2">
             <div className="footer-content">
                 <p>Copyright &copy; The&nbsp;Etherpad&nbsp;Foundation.</p>
                 <p>Design &copy; The Apache Software Foundation, adapted by Marcel Klehr — Licensed under the <a
@@ -18,10 +17,13 @@ export const Footer = ()=>{
                     licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-sa/3.0/">Creative
                         Commons Attribution-ShareAlike 3.0 Unported License</a>.</p>
                 <p>Bitcoin public address: 198uyayMFVHUmrcuzWKFSMAkmwfkQgQEXj</p>
-                <p>Thanks to <a href={"https://github.com/seballot"} target="_blank">@seballot</a> for the redesign</p>
+                <p>Thanks to <a href={"https://github.com/seballot"} target="_blank">@seballot</a> and
+                    <a href="https://github.com/SamTV12345" target={"_blank"}> @SamTV12345</a> for the redesign</p>
             </div>
 
-            <LazyLoadImage className="logo" src={footerLogo}/>
+            <Suspense>
+                <img alt="Logo of the footer showing a transmission mast" className="logo" src={footerLogo}/>
+            </Suspense>
         </div>
     </div>
 }

@@ -1,8 +1,13 @@
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faHandshake} from "@fortawesome/free-solid-svg-icons";
+
 export const RealTimeCollaboration = ()=>{
     return <div className="content wrap">
-        <h2>Collaborating in really real-time</h2>
+        <h2 className="text-3xl text-primary font-bold mb-4 mt-16 flex items-center">
+            <FontAwesomeIcon icon={faHandshake} className="mr-4"/>
+            Collaborating in really real-time</h2>
 
-        <h5 className="subheading">No more sending your stuff back and forth via email, just set up a pad, share the
+        <h5 className="subheading text-xl font-bold mb-5">No more sending your stuff back and forth via email, just set up a pad, share the
             link and start collaborating!</h5>
         <p>Etherpad allows you to edit documents collaboratively in real-time, much like a live multi-player editor that
             runs in your browser. Write articles, press releases, to-do lists, etc. together with your friends, fellow
