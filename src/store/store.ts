@@ -1,4 +1,5 @@
 import {create} from "zustand";
+import {Plugins} from "./Plugin.ts";
 
 
 export type FileNotPresentMetaData = {
@@ -6,6 +7,8 @@ export type FileNotPresentMetaData = {
     os: string,
     url: string,
     latestRelease: GHRelease,
+    plugins: Plugins,
+    setPlugins: (plugins: Plugins) => void,
 }
 
 
@@ -96,6 +99,8 @@ type StoreType = {
     openFileNotPresentDialog: (fileNotPresentDialog: boolean) => void,
     fileNotPresentMetaData: FileNotPresentMetaData | undefined,
     setFileNotPresentMetaData: (fileNotPresentMetaData: FileNotPresentMetaData) => void,
+    plugins: Plugins,
+    setPlugins: (plugins: Plugins) => void,
 }
 
 const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -142,5 +147,7 @@ export const useUIStore = create<StoreType>((set) => ({
       return {
             fileNotPresentMetaData
       }
-    })
+    }),
+    plugins: {},
+    setPlugins: (plugins: Plugins) => set(plugins)
 }))
