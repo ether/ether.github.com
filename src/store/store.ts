@@ -6,9 +6,7 @@ export type FileNotPresentMetaData = {
     version: string,
     os: string,
     url: string,
-    latestRelease: GHRelease,
-    plugins: Plugins,
-    setPlugins: (plugins: Plugins) => void,
+    latestRelease: GHRelease
 }
 
 
