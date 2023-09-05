@@ -13,39 +13,55 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faExternalLink} from "@fortawesome/free-solid-svg-icons";
 import {CookieBanner} from "./components/CookieBanner.tsx";
 import {SelectVersionModal} from "./components/SelectVersionModal.tsx";
+import {Outlet} from "react-router";
+
+
+export const RootElement = ()=>{
+    return <div className="dark:bg-gray-800">
+        <SelectVersionModal/>
+        <CookieBanner/>
+        <div className="sticky top-0 z-50">
+            <div className=" relative top-0">
+                <Header/>
+            </div>
+        </div>
+        <div className="main-container">
+        <Outlet/>
+        </div>
+    </div>
+}
+
+
+
+
+
+
 export const App = ()=> {
 
     return (
-        <div className="dark:bg-gray-800">
-            <SelectVersionModal/>
-            <CookieBanner/>
-            <div className="sticky top-0 z-50">
-                <div className=" relative top-0">
-                    <Header/>
-                </div>
+        <>
+            <MainHeadline/>
+            <a className="scroll-point" id="about"></a>
+            <RealTimeCollaboration/>
+            <a className="scroll-point" id="customize"></a>
+            <AddFunctionalities/>
+            <CustomizeAppearance/>
+            <a className="scroll-point" id="download"></a>
+            <DownloadLatestVersion/>
+            <a className="scroll-point" id="contribute"></a>
+            <Contribute/>
+            <a className="scroll-point" id="links"></a>
+            <div className="content wrap">
+                <h2 className="text-3xl text-primary font-bold mb-4 mt-16 flex items-center">
+                    <FontAwesomeIcon icon={faExternalLink} className="mr-4"/>Links</h2>
             </div>
-            <div className="main-container">
-                <MainHeadline/>
-                <a className="scroll-point" id="about"></a>
-                <RealTimeCollaboration/>
-                <a className="scroll-point" id="customize"></a>
-                <AddFunctionalities/>
-                <CustomizeAppearance/>
-                <a className="scroll-point" id="download"></a>
-                <DownloadLatestVersion/>
-                <a className="scroll-point" id="contribute"></a>
-                <Contribute/>
-                <a className="scroll-point" id="links"></a>
-                <div className="content wrap">
-                    <h2 className="text-3xl text-primary font-bold mb-4 mt-16 flex items-center">
-                        <FontAwesomeIcon icon={faExternalLink} className="mr-4"/>Links</h2>
-                </div>
-                <LinksToRelevantResources/>
-                <GetInTouchContact/>
-                <a className="scroll-point" id="thanks"></a>
-                <Thanking/>
-                <Footer/>
-            </div>
-        </div>
+            <LinksToRelevantResources/>
+            <GetInTouchContact/>
+            <a className="scroll-point" id="thanks"></a>
+            <Thanking/>
+            <Footer/>
+        </>
     )
 }
+
+
