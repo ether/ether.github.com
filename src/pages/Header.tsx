@@ -11,11 +11,8 @@ export const Header = () => {
 
     const navigateToElement = (elementId: string)=>{
         document.getElementById(elementId)?.scrollIntoView({block: "start", inline: "nearest"})
-        navigate('#'+elementId)
+        navigate('/#'+elementId)
     }
-
-
-
 
     return <><div id="header" className="text-white border-b-[1pt] border-solid border-[#efefef] p-4 w-full bg-white dark:bg-secondary-dark">
         <div className="wrap flex items-center">

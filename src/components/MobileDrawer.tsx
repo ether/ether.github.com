@@ -1,6 +1,6 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faInfoCircle, faDownload, faWrench, faExternalLink, faContactCard} from '@fortawesome/free-solid-svg-icons'
-import {FC} from "react";
+import {FC, useEffect} from "react";
 import {ThemeToggler} from "./ThemeToggler.tsx";
 import {useUIStore} from "../store/store.ts";
 import {useNavigate} from "react-router-dom";
@@ -15,8 +15,18 @@ export const MobileDrawer:FC<MobileDrawerProps> = ({isOpen, setOpen}) => {
     const navigate = useNavigate()
     const navigateToElement = (elementId: string)=>{
         document.getElementById(elementId)?.scrollIntoView({block: "start", inline: "nearest"})
-        navigate('#'+elementId)
+        navigate('/#'+elementId)
     }
+
+    useEffect(() => {
+        /*
+         * Scroll to the element if the url contains a hash at the very end.
+         */
+        const hash = window.location.hash
+        const lastHash = hash.lastIndexOf('#')
+        const lastSlash = hash.lastIndexOf('/')
+        lastHash>lastSlash && navigateToElement(hash.substring(lastHash+1))
+    }, []);
 
     return <div className={` ${!isOpen?'h-0  overflow-hidden':' h-[100vh]'} w-full bg-transparent md:hidden z-10 absolute pointer-events-none`}
                 onClick={()=>setOpen(false)}>
