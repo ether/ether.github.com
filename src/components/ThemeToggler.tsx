@@ -2,12 +2,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMoon, faSun} from "@fortawesome/free-solid-svg-icons";
 import {useUIStore} from "../store/store.ts";
 import {useEffect} from "react";
+import {handleManualThemeChange} from "../utils/ThemeChanger.ts";
 
-export const handleManualThemeChange = ()=>{
-    const newState = !useUIStore.getState().isDarkMode
-    useUIStore.getState().toggleDarkMode()
-    localStorage.setItem('isDarkMode', newState.toString())
-}
 
 export const ThemeToggler = ()=>{
     const darkMode = useUIStore(state=>state.isDarkMode)

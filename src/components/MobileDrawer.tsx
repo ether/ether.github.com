@@ -3,6 +3,7 @@ import {faInfoCircle, faDownload, faWrench, faExternalLink, faContactCard} from 
 import {FC} from "react";
 import {ThemeToggler} from "./ThemeToggler.tsx";
 import {useUIStore} from "../store/store.ts";
+import {useNavigate} from "react-router-dom";
 
 type MobileDrawerProps = {
     isOpen: boolean,
@@ -11,9 +12,10 @@ type MobileDrawerProps = {
 
 export const MobileDrawer:FC<MobileDrawerProps> = ({isOpen, setOpen}) => {
     const toggleTheme = useUIStore(state=>state.toggleDarkMode)
+    const navigate = useNavigate()
     const navigateToElement = (elementId: string)=>{
-        location.hash = elementId
-        setOpen(false)
+        document.getElementById(elementId)?.scrollIntoView({block: "start", inline: "nearest"})
+        navigate('#'+elementId)
     }
 
     return <div className={` ${!isOpen?'h-0  overflow-hidden':' h-[100vh]'} w-full bg-transparent md:hidden z-10 absolute pointer-events-none`}

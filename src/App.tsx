@@ -31,11 +31,6 @@ export const RootElement = ()=>{
     </div>
 }
 
-
-
-
-
-
 export const App = ()=> {
 
     return (
