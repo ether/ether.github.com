@@ -1,42 +1,18 @@
 import brandSvg from '../assets/img/brand.svg';
-import {Suspense, useCallback, useEffect, useState} from "react";
+import {Suspense, useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBars} from "@fortawesome/free-solid-svg-icons";
 import {MobileDrawer} from "../components/MobileDrawer.tsx";
 import {ThemeToggler} from "../components/ThemeToggler.tsx";
+import {useNavigate} from "react-router-dom";
 export const Header = () => {
-    const [hash, setHash] = useState<string>(window.location.hash)
     const [mobileDrawerOpen, setMobileDrawerOpen] = useState<boolean>(false)
-
-    const hashChangeHandler = useCallback(() => {
-        setHash(window.location.hash);
-    }, []);
+    const navigate = useNavigate()
 
     const navigateToElement = (elementId: string)=>{
-        location.hash = elementId
+        document.getElementById(elementId)?.scrollIntoView({block: "start", inline: "nearest"})
+        navigate('#'+elementId)
     }
-
-    useEffect(() => {
-        window.addEventListener('hashchange', hashChangeHandler);
-        return () => {
-            window.removeEventListener('hashchange', hashChangeHandler);
-        };
-    }, []);
-
-    useEffect(()=> {
-            if(location.hash && location.hash.length>0){
-                const elements = document.getElementsByClassName("active")
-                for (let i = 0; i < elements.length; i++) {
-                    elements[i].classList.remove("active")
-                }
-                document.querySelector("[title='"+hash.slice(1)+"']")?.classList.add("active")
-                const element = document.getElementById(hash.slice(1))
-                if(element){
-                    element.scrollIntoView({block: "start", inline: "nearest"})
-                }
-            }
-        }
-        ,[hash])
 
 
 
@@ -51,11 +27,11 @@ export const Header = () => {
 
             <div id="nav">
                 <ul>
-                    <li><a className="text-[#555] dark:text-white" onClick={()=>navigateToElement('#about')} title="about">About</a></li>
-                    <li><a className="text-[#555] dark:text-white" onClick={()=>navigateToElement('#download')} title="download">Download</a></li>
-                    <li><a className="text-[#555] dark:text-white" onClick={()=>navigateToElement('#contribute')} title="contribute">Contribute</a></li>
-                    <li><a className="text-[#555] dark:text-white" onClick={()=>navigateToElement("#links")} title="links">Links</a></li>
-                    <li><a className="text-[#555] dark:text-white" onClick={()=>navigateToElement('#contact')} title="contact">Contact</a></li>
+                    <li><a className="text-[#555] dark:text-white" onClick={()=>navigateToElement('about')} title="about">About</a></li>
+                    <li><a className="text-[#555] dark:text-white" onClick={()=>navigateToElement('download')} title="download">Download</a></li>
+                    <li><a className="text-[#555] dark:text-white" onClick={()=>navigateToElement('contribute')} title="contribute">Contribute</a></li>
+                    <li><a className="text-[#555] dark:text-white" onClick={()=>navigateToElement("links")} title="links">Links</a></li>
+                    <li><a className="text-[#555] dark:text-white" onClick={()=>navigateToElement('contact')} title="contact">Contact</a></li>
                     <li className="dark:bg-secondary-dark"><ThemeToggler/></li>
                 </ul>
             </div>
