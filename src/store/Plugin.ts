@@ -10,6 +10,7 @@ export type Plugin = {
     keywords: string[],
     image: string,
     readme: string,
+    license: string
 }
 
 export type PluginMetaData = {
