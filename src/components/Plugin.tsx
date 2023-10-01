@@ -1,4 +1,4 @@
-import {PluginMetaData, Plugin, PluginResponse} from "../store/Plugin.ts";
+import {PluginMetaData, Plugin} from "../store/Plugin.ts";
 import {FC} from "react";
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
@@ -29,7 +29,7 @@ const renderMarkdown = (text: string) => {
 
 export const PluginCom: FC<PluginProps> = ({plugins, index})=>{
     const pluginResp = useUIStore(state=>state.plugins)
-    const setPlugins = useUIStore(state=>state.setPlugins)
+    //const setPlugins = useUIStore(state=>state.setPlugins)
 
     const loadNextPage = ()=> {
     /*        fetch('/api/plugins')
@@ -55,7 +55,7 @@ export const PluginCom: FC<PluginProps> = ({plugins, index})=>{
         <div>{plugins.description}</div>
         <div className="flex gap-10">
             {plugins.image&&<img alt={"Image of "+plugins.name} className="w-60 object-contain" src={plugins.image}/>}
-            {plugins.readme&&<div className="w-full line-clamp-5" dangerouslySetInnerHTML={renderMarkdown(plugins.readme)}></div>}
+            {plugins.readme&&<div className="w-full line-clamp-5 readme-of-plugin" dangerouslySetInnerHTML={renderMarkdown(plugins.readme)}></div>}
         </div>
         <div className="mt-5 flex">
             <PluginAuthorComp name={plugins.author} email={plugins.author_email}/>

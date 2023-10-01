@@ -302,3 +302,23 @@ div#footer img.logo {
     opacity: 1;
   }
 }
+
+.readme-of-plugin h1 {
+  @apply text-primary text-xl font-bold mb-4;
+}
+
+.readme-of-plugin h2 {
+  @apply font-bold mb-4;
+}
+
+.readme-of-plugin code, .readme-of-plugin pre {
+    @apply text-sm p-1 rounded-sm dark:bg-gray-700 bg-gray-200 overflow-hidden;
+}
+
+.readme-of-plugin {
+  @apply overflow-hidden;
+}
+
+.readme-of-plugin a {
+    @apply text-primary;
+}
