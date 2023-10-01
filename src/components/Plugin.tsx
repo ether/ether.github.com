@@ -32,10 +32,9 @@ export const PluginCom: FC<PluginProps> = ({plugins, index})=>{
     const setPlugins = useUIStore(state=>state.setPlugins)
 
     const loadNextPage = ()=> {
-        console.log("Loading next page")
-        fetch('/api/plugins')
+    /*        fetch('/api/plugins')
             .then(response => response.json())
-            .then((data: PluginResponse) => setPlugins(data))
+            .then((data: PluginResponse) => setPlugins(data))*/
     }
 
     return  <div className="dark:text-white border-[1px] p-2 rounded">
@@ -64,7 +63,7 @@ export const PluginCom: FC<PluginProps> = ({plugins, index})=>{
             <span className="mr-5">License: {plugins.license? plugins.license: '--'}</span>
             <span className="flex gap-3">
             {
-                plugins.keywords.length>0 && plugins.keywords.map((k,i)=><Chip key={plugins.name+i} index={i}>{k}</Chip>)
+                plugins.keywords.trim().length>0 && plugins.keywords.split(",").map((k,i)=><Chip key={plugins.name+i} index={i}>{k}</Chip>)
             }
             </span>
         </div>

@@ -6,6 +6,8 @@ import {faSearch} from "@fortawesome/free-solid-svg-icons";
 import {PluginCom} from "../components/Plugin.tsx";
 import * as Checkbox from '@radix-ui/react-checkbox';
 import {CheckIcon} from "../components/CheckIcon.tsx";
+import {useDebounce} from "../utils/useDebounce.ts";
+import axios, {AxiosResponse} from "axios";
 
 export const PluginViewer = () => {
     const setPlugin = useUIStore(state => state.setPlugins)
@@ -14,11 +16,26 @@ export const PluginViewer = () => {
     const setPluginSearchTerm = useUIStore(state => state.setPluginSearchTerm)
     const [officalOnly, setOfficalOnly] = useState<boolean>(false)
 
+    function performSearch() {
+        axios.get('/api/plugins', {
+          params: {
+                query: pluginSearchTerm,
+                official: officalOnly
+          }
+        })
+            .then((data: AxiosResponse<PluginResponse>) => {
+                setPlugin(data.data)
+            })
+    }
+
     useEffect(() => {
-        fetch('/api/plugins')
-            .then(response => response.json())
-            .then((data: PluginResponse) => setPlugin(data))
+        performSearch();
     }, []);
+
+
+    useDebounce(()=>{
+        performSearch();
+    },1000,[pluginSearchTerm, officalOnly])
 
     return <div className="ml-5 mr-5 flex items-center flex-col">
         <div className="w-full md:w-3/4">
@@ -30,15 +47,15 @@ export const PluginViewer = () => {
             For more information about Etherpad visit https://etherpad.org.
         </span>
             <h2 className="text-3xl text-primary">Plugins ({plugins?.metadata.total_count})</h2>
-            <div className="flex gap-5">
-                <Checkbox.Root className="w-8 h-8 border-[1px] border-white p-2 grid place-items-center" checked={officalOnly}
+            <div className="flex items-center gap-5">
+                <Checkbox.Root className="w-5 h-5 border-[1px] border-white p-2 flex items-center justify-center" checked={officalOnly}
                                onCheckedChange={()=>setOfficalOnly(!officalOnly)} id="c1">
                     <Checkbox.Indicator className="text-white">
                             <CheckIcon/>
                     </Checkbox.Indicator>
                 </Checkbox.Root>
-                <label className="Label" htmlFor="c1">
-                    Accept terms and conditions.
+                <label className="text-white" htmlFor="c1">
+                    Only official plugins
                 </label>
             </div>
             <div className="mt-5 mb-5 relative flex self-center w-full">
