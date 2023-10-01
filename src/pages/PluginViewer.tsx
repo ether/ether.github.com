@@ -48,9 +48,9 @@ export const PluginViewer = () => {
         </span>
             <h2 className="text-3xl text-primary">Plugins ({plugins?.metadata.total_count})</h2>
             <div className="flex items-center gap-5">
-                <Checkbox.Root className="w-5 h-5 border-[1px] border-white p-2 flex items-center justify-center" checked={officalOnly}
+                <Checkbox.Root className="w-5 h-5 p-2 flex items-center justify-center data-[state=unchecked]:bg-gray-600 data-[state=unchecked]:rounded-full" checked={officalOnly}
                                onCheckedChange={()=>setOfficalOnly(!officalOnly)} id="c1">
-                    <Checkbox.Indicator className="text-white">
+                    <Checkbox.Indicator className=" text-white bg-primary rounded-full p-1">
                             <CheckIcon/>
                     </Checkbox.Indicator>
                 </Checkbox.Root>
