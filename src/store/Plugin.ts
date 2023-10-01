@@ -7,7 +7,7 @@ export type Plugin = {
     author_email: string,
     official: boolean,
     popularity_score: number,
-    keywords: string[],
+    keywords: string,
     image: string,
     readme: string,
     license: string
