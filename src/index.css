@@ -322,3 +322,7 @@ div#footer img.logo {
 .readme-of-plugin a {
     @apply text-primary;
 }
+
+#banner {
+  @apply sticky bottom-0
+}
