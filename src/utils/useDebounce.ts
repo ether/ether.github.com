@@ -14,7 +14,7 @@ export const useDebounce = (
     useMemo(()=>{
         if(isFirstRender.current){
             isFirstRender.current = false
-            return
+            return ""
         }
 
         render()
