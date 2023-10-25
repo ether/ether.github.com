@@ -17,7 +17,7 @@ export const Footer = ()=>{
                     licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-sa/3.0/">Creative
                         Commons Attribution-ShareAlike 3.0 Unported License</a>.</p>
                 <p>Bitcoin public address: 198uyayMFVHUmrcuzWKFSMAkmwfkQgQEXj</p>
-                <p>Thanks to <a href={"https://github.com/seballot"} target="_blank">@seballot</a> and
+                <p>Thanks to <a href="https://github.com/seballot" target="_blank">@seballot</a> and
                     <a href="https://github.com/SamTV12345" target={"_blank"}> @SamTV12345</a> for the redesign</p>
             </div>
 
