@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Redirecting to latest doc...</title>
+</head>
+<body>
+<script>
+    window.onload = ()=>{
+        fetch("https://api.github.com/repos/ether/etherpad-lite/releases/latest")
+            .then(c=>c.json())
+            .then(c=>{
+                const remainingPath = window.location.href.substring(window.location.href.indexOf("latest")+6)
+                window.location.href = `/doc/${c.tag_name}${remainingPath}`
+            })
+    }
+</script>
+</body>
+</html>
