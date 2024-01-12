@@ -24,8 +24,8 @@ dependencies:
     specifier: ^1.0.5
     version: 1.0.5(@types/react-dom@18.2.18)(@types/react@18.2.45)(react-dom@18.2.0)(react@18.2.0)
   axios:
-    specifier: ^1.6.2
-    version: 1.6.2
+    specifier: ^1.6.5
+    version: 1.6.5
   javascript-time-ago:
     specifier: ^2.5.9
     version: 2.5.9
@@ -1372,8 +1372,8 @@ packages:
       postcss-value-parser: 4.2.0
     dev: true
 
-  /axios@1.6.2:
-    resolution: {integrity: sha512-7i24Ri4pmDRfJTR7LDBhsOTtcm+9kjX5WiY1X3wIisx6G9So3pfMkEiU7emUBe46oceVImccTEM3k6C5dbVW8A==}
+  /axios@1.6.5:
+    resolution: {integrity: sha512-Ii012v05KEVuUoFWmMW/UQv9aRIc3ZwkWDcM+h5Il8izZCtRVpDUfwpoFf7eOtajT3QiGR4yDUx7lPqHJULgbg==}
     dependencies:
       follow-redirects: 1.15.4
       form-data: 4.0.0
