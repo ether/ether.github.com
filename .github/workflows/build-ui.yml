@@ -31,22 +31,34 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Cache npm packages
-        uses: actions/cache@v3
-        with:
-          path: |
-            ./node_modules
-          key: npm-${{ hashFiles('package-lock.json') }}
       - name: Setup Pages
         uses: actions/configure-pages@v3
-      - name: Setup Node.js Environment
-        uses: actions/setup-node@v2.5.2
+      -
+        uses: actions/setup-node@v4
         with:
-          node-version: 18.15.0
-      - name: Install app dependencies
-        run: npm install
-      - name: Build app
-        run: npm run build
+          node-version: 21
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        with:
+          version: 8
+          run_install: false
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+      - uses: actions/cache@v4
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      - name: Only install direct dependencies
+        run: pnpm config set auto-install-peers false
+      - name: Install dependencies
+        run: pnpm install
+      - name: Build
+        run: pnpm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
