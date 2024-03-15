@@ -13,7 +13,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faExternalLink} from "@fortawesome/free-solid-svg-icons";
 import {CookieBanner} from "./components/CookieBanner.tsx";
 import {SelectVersionModal} from "./components/SelectVersionModal.tsx";
-import {Outlet} from "react-router";
+import {Outlet} from "react-router-dom";
 
 
 export const RootElement = ()=>{

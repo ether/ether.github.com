@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import {App, RootElement} from './App.tsx'
 import './index.css'
 import {createHashRouter, RouterProvider} from "react-router-dom";
-import {createRoutesFromElements, Route} from "react-router";
+import {createRoutesFromElements, Route} from "react-router-dom";
 import {PluginViewer} from "./pages/PluginViewer.tsx";
 
 
