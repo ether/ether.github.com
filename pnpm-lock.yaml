@@ -33,8 +33,8 @@ importers:
         specifier: ^2.5.10
         version: 2.5.10
       marked:
-        specifier: ^12.0.2
-        version: 12.0.2
+        specifier: ^13.0.2
+        version: 13.0.2
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -1295,8 +1295,8 @@ packages:
     resolution: {integrity: sha512-9hp3Vp2/hFQUiIwKo8XCeFVnrg8Pk3TYNPIR7tJADKi5YfcF7vEaK7avFHTlSy3kOKYaJQaalfEo6YuXdceBOQ==}
     engines: {node: 14 || >=16.14}
 
-  marked@12.0.2:
-    resolution: {integrity: sha512-qXUm7e/YKFoqFPYPa3Ukg9xlI5cyAtGmyEIzMfW//m6kXwCy2Ps9DYf5ioijFKQ8qyuscrHoY04iJGctu2Kg0Q==}
+  marked@13.0.2:
+    resolution: {integrity: sha512-J6CPjP8pS5sgrRqxVRvkCIkZ6MFdRIjDkwUwgJ9nL2fbmM6qGQeB2C16hi8Cc9BOzj6xXzy0jyi0iPIfnMHYzA==}
     engines: {node: '>= 18'}
     hasBin: true
 
@@ -2877,7 +2877,7 @@ snapshots:
 
   lru-cache@10.2.2: {}
 
-  marked@12.0.2: {}
+  marked@13.0.2: {}
 
   merge2@1.4.1: {}
 
