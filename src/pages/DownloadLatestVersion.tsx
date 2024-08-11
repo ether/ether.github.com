@@ -1,29 +1,20 @@
-import {CURRENT_VERSION, INSTALLATION_LINK, LINUX_MAC_DOWNLOAD, WINDOWS_DOWNLOAD} from "../Constants.ts";
+import {CURRENT_VERSION, INSTALLATION_LINK, LINUX_MAC_DOWNLOAD} from "../Constants.ts";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faDownload} from "@fortawesome/free-solid-svg-icons";
 import {GHRelease, useUIStore} from "../store/store.ts";
 import {faWindows, faApple, faLinux} from '@fortawesome/free-brands-svg-icons'
 import {downloadFile} from "../utils/utils.ts";
 import {FileNotPresentDialog} from "../components/FileNotPresentDialog.tsx";
+
 export const DownloadLatestVersion = ()=>{
     const changeSelectedVersionWindowOpen = useUIStore(state => state.setSelectVersionWindow)
-    const setFileNotPresentMetada = useUIStore(state => state.setFileNotPresentMetaData)
-    const setFileNotPresentDialog = useUIStore(state => state.openFileNotPresentDialog)
 
-    const downloadFileChecked = async (url: string, os: string, version: string) => {
+
+
+    const downloadFileChecked = async () => {
         const response: GHRelease = await fetch("https://api.github.com/repos/ether/etherpad-lite/releases/latest")
             .then(response => response.json())
-        if(response.tag_name.includes(version) && response.assets.some(a=>a.browser_download_url.includes(url))) {
-            downloadFile(url)
-        } else {
-            setFileNotPresentMetada({
-                url,
-                os,
-                version,
-                latestRelease: response
-            })
-            setFileNotPresentDialog(true)
-        }
+        downloadFile(response.zipball_url)
     }
 
 
@@ -41,7 +32,7 @@ export const DownloadLatestVersion = ()=>{
                 <FontAwesomeIcon icon={faApple} className="mr-2 text-xl"/>
                 Linux/Mac</a>
             <a className="download-button"
-               onClick={()=>downloadFileChecked(WINDOWS_DOWNLOAD, "Windows", CURRENT_VERSION)}><FontAwesomeIcon icon={faWindows} className="mr-2 text-xl"/>
+               onClick={()=>downloadFileChecked()}><FontAwesomeIcon icon={faWindows} className="mr-2 text-xl"/>
                 Windows</a>
             <br/>
             <small className="dark:text-white">Looking for <button onClick={()=>changeSelectedVersionWindowOpen(true)} className="text-primary">older releases</button>?</small>
