@@ -15,7 +15,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@radix-ui/react-checkbox": "^1.1.1",
-    "@radix-ui/react-dialog": "^1.0.5",
+    "@radix-ui/react-dialog": "^1.1.1",
     "axios": "^1.6.8",
     "javascript-time-ago": "^2.5.10",
     "marked": "^13.0.2",
