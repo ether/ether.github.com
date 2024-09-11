@@ -9,7 +9,7 @@ export const LinksToRelevantResources = () => {
                 <li><a href={PATH_TO_GITHUB+"/wiki/Sites-That-Run-Etherpad"} target="_blank" className="underline">List of public instances</a></li>
                 <li><a href={PATH_TO_ISSUES} target="_blank" className="underline">Issue tracker</a></li>
                 <li><a href={PATH_TO_WIKI} target="_blank" className="underline">Wiki</a></li>
-                <li><a target="_blank" href={DOC_PAGE} className="underline">Documentation <small className="text-sm">v{CURRENT_VERSION}</small></a></li>
+                <li><a target="_blank" href={DOC_PAGE} className="underline">Documentation</a></li>
             </ul>
         </div>
     </div>
