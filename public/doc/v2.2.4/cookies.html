@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<title>Plugin Framework</title>
+<title>Cookies</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,38 +438,100 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_plugin_framework">Plugin Framework</h2>
+<h2 id="_cookies">Cookies</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>require("ep_etherpad-lite/static/js/plugingfw/plugins")</code></p>
+<p>Cookies used by Etherpad.</p>
 </div>
-<div class="sect2">
-<h3 id="_plugins_update">plugins.update</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sample value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Domain</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Path</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Expires/max-age</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Http-only</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Secure</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Usage description</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">express_sid</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">s%3A7yCNjRmTW8ylGQ53I2IhOwYF9&#8230;&#8203;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">example.org</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Session</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Session ID of the <a href="https://expressjs.com">Express web framework</a>. When Etherpad is behind a reverse proxy, and an administrator wants to use session stickiness, he may use this cookie. If you are behind a reverse proxy, please remember to set <code>trustProxy: true</code> in <code>settings.json</code>. Set in <a href="https://github.com/ether/etherpad-lite/blob/01497aa399690e44393e91c19917d11d025df71b/src/node/hooks/express/webaccess.js#L131">webaccess.js#L131</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">language</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">en</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">example.org</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Session</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The language of the UI (e.g.: <code>en-GB</code>, <code>it</code>). Set in <a href="https://github.com/ether/etherpad-lite/blob/01497aa399690e44393e91c19917d11d025df71b/src/static/js/pad_editor.js#L111">pad_editor.js#L111</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">prefs / prefsHttp</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">%7B%22epThemesExtTheme%22&#8230;&#8203;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">example.org</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/p</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">year 3000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Client-side preferences (e.g.: font family, chat always visible, show authorship colors, &#8230;&#8203;). Set in <a href="https://github.com/ether/etherpad-lite/blob/01497aa399690e44393e91c19917d11d025df71b/src/static/js/pad_cookie.js#L49">pad_cookie.js#L49</a>. <code>prefs</code> is used if Etherpad is accessed over HTTPS, <code>prefsHttp</code> if accessed over HTTP. For more info see <a href="https://github.com/ether/etherpad-lite/issues/3179" class="bare">https://github.com/ether/etherpad-lite/issues/3179</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">token</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">t.tFzkihhhBf4xKEpCK3PU</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">example.org</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">60 days</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A random token representing the author, of the form <code>t.randomstring_of_lenght_20</code>. The random string is generated by the client, at <a href="https://github.com/ether/etherpad-lite/blob/01497aa399690e44393e91c19917d11d025df71b/src/static/js/pad.js#L55-L66">pad.js#L55-L66</a>. This cookie is always set by the client at <a href="https://github.com/ether/etherpad-lite/blob/01497aa399690e44393e91c19917d11d025df71b/src/static/js/pad.js#L153-L158">pad.js#L153-L158</a> without any solicitation from the server. It is used for all the pads accessed via the web UI (not used for the HTTP API). On the server side, its value is accessed at <a href="https://github.com/ether/etherpad-lite/blob/01497aa399690e44393e91c19917d11d025df71b/src/node/db/SecurityManager.js#L33">SecurityManager.js#L33</a>.</p></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
-<p><code>require("ep_etherpad-lite/static/js/plugingfw/plugins").update()</code> will use npm
-to list all installed modules and read their ep.json files, registering the
-contained hooks. A hook registration is a pair of a hook name and a function
-reference (filename for require() plus function name)</p>
+<p>For more info, visit the related discussion at <a href="https://github.com/ether/etherpad-lite/issues/3563" class="bare">https://github.com/ether/etherpad-lite/issues/3563</a>.</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_hooks_callall">hooks.callAll</h3>
 <div class="paragraph">
-<p><code>require("ep_etherpad-lite/static/js/plugingfw/hooks").callAll("hook_name",
-{argname:value})</code> will call all hook functions registered for <code>hook_name</code> with
-<code>{argname:value}</code>.</p>
+<p>Etherpad HTTP API clients may make use (if they choose so) to send another cookie:</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_hooks_acallall">hooks.aCallAll</h3>
-<div class="paragraph">
-<p>?</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="">&#8230;&#8203;</h3>
-
-</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sample value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Domain</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Usage description</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sessionID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">s.1c70968b333b25476a2c7bdd0e0bed17</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>

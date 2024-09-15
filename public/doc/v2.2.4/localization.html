@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<title>Plugin Framework</title>
+<title>Localization</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,37 +438,196 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_plugin_framework">Plugin Framework</h2>
+<h2 id="_localization">Localization</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>require("ep_etherpad-lite/static/js/plugingfw/plugins")</code></p>
+<p>Etherpad provides a multi-language user interface, that&#8217;s apart from your users' content, so users from different countries can collaborate on a single document, while still having the user interface displayed in their mother tongue.</p>
 </div>
 <div class="sect2">
-<h3 id="_plugins_update">plugins.update</h3>
+<h3 id="_translating">Translating</h3>
 <div class="paragraph">
-<p><code>require("ep_etherpad-lite/static/js/plugingfw/plugins").update()</code> will use npm
-to list all installed modules and read their ep.json files, registering the
-contained hooks. A hook registration is a pair of a hook name and a function
-reference (filename for require() plus function name)</p>
+<p>We rely on <a href="https://translatewiki.net" class="bare">https://translatewiki.net</a> to handle the translation process for us, so if you&#8217;d like to help&#8230;&#8203;</p>
 </div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Sign up at <a href="https://translatewiki.net" class="bare">https://translatewiki.net</a></p>
+</li>
+<li>
+<p>Visit our <a href="https://translatewiki.net/wiki/Translating:Etherpad_lite">TWN project page</a></p>
+</li>
+<li>
+<p>Click on <code>Translate Etherpad lite interface</code></p>
+</li>
+<li>
+<p>Choose a target language, you&#8217;d like to translate our interface to, and hit <code>Fetch</code></p>
+</li>
+<li>
+<p>Start translating!</p>
+</li>
+</ol>
 </div>
-<div class="sect2">
-<h3 id="_hooks_callall">hooks.callAll</h3>
 <div class="paragraph">
-<p><code>require("ep_etherpad-lite/static/js/plugingfw/hooks").callAll("hook_name",
-{argname:value})</code> will call all hook functions registered for <code>hook_name</code> with
-<code>{argname:value}</code>.</p>
+<p>Translations will be send back to us regularly and will eventually appear in the next release.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_hooks_acallall">hooks.aCallAll</h3>
+<h3 id="_implementation">Implementation</h3>
+<div class="sect3">
+<h4 id="_server_side">Server-side</h4>
 <div class="paragraph">
-<p>?</p>
+<p><code>/src/locales</code> contains files for all supported languages which contain the translated strings. Translation files are simple <code>*.json</code> files and look like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "pad.modals.connected": "Connecté.",
+  "pad.modals.uderdup": "Ouvrir dans une nouvelle fenêtre.",
+  "pad.toolbar.unindent.title": "Dèsindenter",
+  "pad.toolbar.undo.title": "Annuler (Ctrl-Z)",
+  "timeslider.pageTitle": "{{appTitle}} Curseur temporel",
+  ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Each translation consists of a key (the id of the string that is to be translated) and the translated string. Terms in curly braces must not be touched but left as they are, since they represent a dynamically changing part of the string like a variable. Imagine a message welcoming a user: <code>Welcome, {{userName}}!</code> would be translated as <code>Ahoy, {{userName}}!</code> in pirate.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_client_side">Client-side</h4>
+<div class="paragraph">
+<p>We use a <code>language</code> cookie to save your language settings if you change them. If you don&#8217;t, we autodetect your locale using information from your browser. Then, the preferred language is fed into a library called <a href="https://github.com/marcelklehr/html10n.js">html10n.js</a>, which loads the appropriate translations and applies them to our templates. Its features include translation params, pluralization, include rules and a nice javascript API.</p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="">&#8230;&#8203;</h3>
-
+<h3 id="_localizing_plugins">Localizing plugins</h3>
+<div class="sect3">
+<h4 id="_1_mark_the_strings_to_translate">1. Mark the strings to translate</h4>
+<div class="paragraph">
+<p>In the template files of your plugin, change all hardcoded messages/strings&#8230;&#8203;</p>
+</div>
+<div class="paragraph">
+<p>from:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-html" data-lang="html">&lt;option value="0"&gt;Heading 1&lt;/option&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-html" data-lang="html">&lt;option data-l10n-id="ep_heading.h1" value="0"&gt;&lt;/option&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the javascript files of your plugin, change all hardcoded messages/strings&#8230;&#8203;</p>
+</div>
+<div class="paragraph">
+<p>from:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">alert ('Chat');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">alert(window._('pad.chat'));</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_2_create_translate_files_in_the_locales_directory_of_your_plugin">2. Create translate files in the locales directory of your plugin</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>The name of the file must be the language code of the language it contains translations for (see <a href="https://joker-x.github.io/languages4translatewiki/test/">supported lang codes</a>; e.g. en ? English, es ? Spanish&#8230;&#8203;)</p>
+</li>
+<li>
+<p>The extension of the file must be <code>.json</code></p>
+</li>
+<li>
+<p>The default language is English, so your plugin should always provide <code>en.json</code></p>
+</li>
+<li>
+<p>In order to avoid naming conflicts, your message keys should start with the name of your plugin followed by a dot (see below)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>ep_your-plugin/locales/en.json</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "ep_your-plugin.h1": "Heading 1"
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>ep_your-plugin/locales/es.json</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "ep_your-plugin.h1": "Título 1"
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Every time the http server is started, it will auto-detect your messages and merge them automatically with the core messages.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_overwrite_core_messages">Overwrite core messages</h4>
+<div class="paragraph">
+<p>You can overwrite Etherpad&#8217;s core messages in your plugin&#8217;s locale files.
+For example, if you want to replace <code>Chat</code> with <code>Notes</code>, simply add&#8230;&#8203;</p>
+</div>
+<div class="paragraph">
+<p><strong>ep_your-plugin/locales/en.json</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "ep_your-plugin.h1": "Heading 1",
+  "pad.chat": "Notes"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_customization_for_administrators">Customization for Administrators</h3>
+<div class="paragraph">
+<p>As an Etherpad administrator, it is possible to overwrite core messages as well as messages in plugins. These include error messages, labels, and user instructions. Whereas the localization in the source code is in separate files separated by locale, an administrator&#8217;s custom localizations are in <code>settings.json</code> under the <code>customLocaleStrings</code> key, with each locale separated by a sub-key underneath.</p>
+</div>
+<div class="paragraph">
+<p>For example, let&#8217;s say you want to change the text on the "New Pad" button on Etherpad&#8217;s home page. If you look in <code>locales/en.json</code> (or <code>locales/en-gb.json</code>) you&#8217;ll see the key for this text is <code>"index.newPad"</code>. You could add the following to <code>settings.json</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">  "customLocaleStrings": {
+    "fr": {
+      "index.newPad": "Créer un document"
+    },
+    "en-gb": {
+      "index.newPad": "Create a document"
+    },
+    "en": {
+      "index.newPad": "Create a document"
+    }
+  }</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<title>Plugin Framework</title>
+<title>Skins</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,37 +438,55 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_plugin_framework">Plugin Framework</h2>
+<h2 id="_skins">Skins</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>require("ep_etherpad-lite/static/js/plugingfw/plugins")</code></p>
+<p>You can customize Etherpad appearance using skins.
+A skin is a directory located under <code>static/skins/&lt;skin_name&gt;</code>, with the following contents:</p>
 </div>
-<div class="sect2">
-<h3 id="_plugins_update">plugins.update</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><code>index.js</code>: javascript that will be run in <code>/</code></p>
+</li>
+<li>
+<p><code>index.css</code>: stylesheet affecting <code>/</code></p>
+</li>
+<li>
+<p><code>pad.js</code>: javascript that will be run in <code>/p/:padid</code></p>
+</li>
+<li>
+<p><code>pad.css</code>: stylesheet affecting <code>/p/:padid</code></p>
+</li>
+<li>
+<p><code>timeslider.js</code>: javascript that will be run in <code>/p/:padid/timeslider</code></p>
+</li>
+<li>
+<p><code>timeslider.css</code>: stylesheet affecting <code>/p/:padid/timeslider</code></p>
+</li>
+<li>
+<p><code>favicon.ico</code>: overrides the default favicon</p>
+</li>
+<li>
+<p><code>robots.txt</code>: overrides the default <code>robots.txt</code></p>
+</li>
+</ul>
+</div>
 <div class="paragraph">
-<p><code>require("ep_etherpad-lite/static/js/plugingfw/plugins").update()</code> will use npm
-to list all installed modules and read their ep.json files, registering the
-contained hooks. A hook registration is a pair of a hook name and a function
-reference (filename for require() plus function name)</p>
+<p>You can choose a skin changing the parameter <code>skinName</code> in <code>settings.json</code>.</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_hooks_callall">hooks.callAll</h3>
 <div class="paragraph">
-<p><code>require("ep_etherpad-lite/static/js/plugingfw/hooks").callAll("hook_name",
-{argname:value})</code> will call all hook functions registered for <code>hook_name</code> with
-<code>{argname:value}</code>.</p>
+<p>Since Etherpad <strong>1.7.5</strong>, two skins are included:</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_hooks_acallall">hooks.aCallAll</h3>
-<div class="paragraph">
-<p>?</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="">&#8230;&#8203;</h3>
-
+<div class="ulist">
+<ul>
+<li>
+<p><code>no-skin</code>: an empty skin, leaving the default Etherpad appearance unchanged, that you can use as a guidance to develop your own.</p>
+</li>
+<li>
+<p><code>colibris</code>: a new, experimental skin, that will become the default in Etherpad 2.0.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
