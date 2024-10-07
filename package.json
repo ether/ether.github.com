@@ -35,7 +35,7 @@
     "@types/react-lazy-load-image-component": "^1.6.4",
     "@types/sanitize-html": "^2.13.0",
     "@typescript-eslint/eslint-plugin": "^8.5.0",
-    "@typescript-eslint/parser": "^8.2.0",
+    "@typescript-eslint/parser": "^8.8.0",
     "@vitejs/plugin-react-swc": "^3.6.0",
     "autoprefixer": "^10.4.19",
     "clsx": "^2.1.1",
