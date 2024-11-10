@@ -39,7 +39,7 @@ export const CookieBanner = ()=>{
     return <Dialog.Root
     open={cookiesAccepted === undefined}
     ><Dialog.Portal>
-        <Dialog.Content className="sticky bottom-0 bg-gray-800 p-5 text-white grid grid-cols-[1fr_auto] pointer-events-none">
+        <Dialog.Content className="sticky bottom-0 bg-gray-800 p-5 text-white grid grid-cols-[auto_1fr_auto] pointer-events-none">
             <Dialog.Title></Dialog.Title>
             <span className="self-center">This page uses Google analytics to track page visits.
                 Are you okay with that?</span>
