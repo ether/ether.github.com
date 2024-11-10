@@ -1,9 +1,11 @@
+'use client'
 import * as Dialog from '../components/StyledModal.tsx';
 import {GHRelease, useUIStore} from "../store/store.ts";
 import {useEffect} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faDownload, faLink} from "@fortawesome/free-solid-svg-icons";
 import {downloadFile} from "../utils/utils.ts";
+import Link from "next/link";
 export const SelectVersionModal = ()=>{
     const selectedVersionWindow = useUIStore(state => state.selectVersionWindow)
     const setSelectVersionWindow = useUIStore(state => state.setSelectVersionWindow)
@@ -68,17 +70,9 @@ export const SelectVersionModal = ()=>{
         })
     }
 
-
-
-    const openDoc = (version:string)=>{
-        if(version.startsWith('v')){
-            version = version.substring(1)
-        }
-        window.open(`/doc/v${version}/index.html`)
-    }
-
     return <Dialog.Dialog open={selectedVersionWindow} onOpenChange={()=>setSelectVersionWindow(!selectedVersionWindow)}>
         <Dialog.DialogContent className="bg-white dark:bg-gray-700 dark:text-white overflow-auto max-h-96 max-w-7xl">
+            <Dialog.DialogTitle>Past version of etherpad</Dialog.DialogTitle>
             <h2>Past versions of etherpad</h2>
             <p>Here you can find past versions of etherpad. We recommend you to use the latest version of etherpad.</p>
             <table>
@@ -94,13 +88,13 @@ export const SelectVersionModal = ()=>{
                 <tbody>
                 {
                     releases.map((release:GHRelease)=>{
-                        return <tr className="">
+                        return <tr className="" key={release.url}>
                             <td className="text-center pt-2">{release.tag_name}</td>
                             <td className="text-center pt-2">{formatDate(release.published_at)}</td>
                             <td className="flex gap-3 flex-wrap pt-2">{release.assets.map(a=><div className="bg-secondary dark:bg-secondary-dark rounded-2xl pl-5 p-1 flex gap-2">{a.name}
                                 <FontAwesomeIcon className="mr-5 cursor-pointer self-center" icon={faDownload} title={a.name} onClick={()=>downloadFile(a.browser_download_url)}/></div>)}</td>
                             <td className="pt-2"><img alt="Logos of release" className="h-10 rounded-full" title={release.author.login} src={release.author.avatar_url}/></td>
-                            <th><FontAwesomeIcon icon={faLink} className="cursor-pointer" onClick={()=>openDoc(release.tag_name)}/></th>
+                            <th><Link target="_blank" href={`/doc/v${release.tag_name}/index.html`}><FontAwesomeIcon icon={faLink} className="cursor-pointer"/></Link></th>
                         </tr>
                     })
                 }

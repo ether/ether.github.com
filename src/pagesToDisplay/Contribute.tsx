@@ -1,13 +1,10 @@
 import {GITHUB_HELP, PATH_TO_GITHUB, PATH_TO_WIKI} from "../Constants.ts";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faWrench} from "@fortawesome/free-solid-svg-icons";
-import {useNavigate} from "react-router-dom";
+import {ContributePathToWiki} from "../components/ContributePathToWiki.tsx";
+
 export const Contribute = ()=>{
-    const navigate = useNavigate()
-    const navigateToElement = (elementId: string)=>{
-        document.getElementById(elementId)?.scrollIntoView({block: "start", inline: "nearest"})
-        navigate('/#'+elementId)
-    }
+
 
     return <div className="content wrap dark:text-gray-400">
         <h2 className="text-3xl text-primary font-bold mb-4 mt-16 flex items-center">
@@ -20,7 +17,7 @@ export const Contribute = ()=>{
         <p>One of the first things you should do is actually use Etherpad, and get to know it - read about it,
             evangelise it, and engage with the wider community. You can also translate the user interface to your mother
             tongue or learn how to write plugins. Be creative!</p>
-        <p>If you'd like to help, <a onClick={()=>navigateToElement('contact')}>get in touch</a>! Also, <a target="_blank"
+        <p>If you'd like to help, <ContributePathToWiki/>! Also, <a target="_blank"
             href={PATH_TO_WIKI}>the wiki</a> is always a valuable resource.</p>
 
         <h5 className="text-xl font-bold mb-5 dark:text-white">Development workflow</h5>

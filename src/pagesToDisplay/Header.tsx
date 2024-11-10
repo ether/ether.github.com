@@ -1,24 +1,27 @@
+'use client'
 import brandSvg from '../assets/img/brand.svg';
 import {Suspense, useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBars} from "@fortawesome/free-solid-svg-icons";
 import {MobileDrawer} from "../components/MobileDrawer.tsx";
 import {ThemeToggler} from "../components/ThemeToggler.tsx";
-import {useNavigate} from "react-router-dom";
+import {useRouter} from "next/navigation";
+import Image from "next/image";
+
 export const Header = () => {
     const [mobileDrawerOpen, setMobileDrawerOpen] = useState<boolean>(false)
-    const navigate = useNavigate()
+    const navigate = useRouter()
 
     const navigateToElement = (elementId: string)=>{
         document.getElementById(elementId)?.scrollIntoView({block: "start", inline: "nearest"})
-        navigate('/#'+elementId)
+        navigate.push('/#'+elementId)
     }
 
     return <><div id="header" className="text-white border-b-[1pt] border-solid border-[#efefef] p-4 w-full bg-white dark:bg-secondary-dark">
         <div className="wrap flex items-center">
             <a href="#">
                 <Suspense>
-                <img className="logo h-8" src={brandSvg} alt="etherpad logo"/>
+                <Image className="logo h-8 image-logo" src={brandSvg} alt="etherpad logo"/>
                 </Suspense>
             </a>
 

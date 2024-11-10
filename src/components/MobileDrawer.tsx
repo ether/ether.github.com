@@ -1,9 +1,10 @@
+'use client'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faInfoCircle, faDownload, faWrench, faExternalLink, faContactCard} from '@fortawesome/free-solid-svg-icons'
 import {FC, useEffect} from "react";
 import {ThemeToggler} from "./ThemeToggler.tsx";
 import {useUIStore} from "../store/store.ts";
-import {useNavigate} from "react-router-dom";
+import {useRouter} from "next/navigation";
 
 type MobileDrawerProps = {
     isOpen: boolean,
@@ -12,13 +13,14 @@ type MobileDrawerProps = {
 
 export const MobileDrawer:FC<MobileDrawerProps> = ({isOpen, setOpen}) => {
     const toggleTheme = useUIStore(state=>state.toggleDarkMode)
-    const navigate = useNavigate()
+    const navigate = useRouter()
     const navigateToElement = (elementId: string)=>{
         document.getElementById(elementId)?.scrollIntoView({block: "start", inline: "nearest"})
-        navigate('/#'+elementId)
+        navigate.push('/#'+elementId)
     }
 
     useEffect(() => {
+        if (!window) return
         /*
          * Scroll to the element if the url contains a hash at the very end.
          */

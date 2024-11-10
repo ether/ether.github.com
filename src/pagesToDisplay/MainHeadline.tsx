@@ -12,7 +12,7 @@ export const MainHeadline = () => {
 
         <div className="demo justify-center flex">
             <Suspense>
-                <img src={gif} alt="Show the editor and how fast you can collaborate with other people online."/>
+                <img src={gif.src} alt="Show the editor and how fast you can collaborate with other people online."/>
             </Suspense>
         </div>
 

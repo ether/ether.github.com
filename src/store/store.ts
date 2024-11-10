@@ -103,10 +103,9 @@ type StoreType = {
     setPluginSearchTerm: (pluginSearchTerm: string) => void
 }
 
-const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
 
 export const useUIStore = create<StoreType>((set) => ({
-    isDarkMode: prefersDarkMode,
+    isDarkMode: true,
     toggleDarkMode: () => set(state => {
         document.documentElement.classList.toggle('dark')
         return {

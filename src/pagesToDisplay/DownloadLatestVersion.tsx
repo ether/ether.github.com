@@ -1,5 +1,7 @@
+'use client'
 import {CURRENT_VERSION, INSTALLATION_LINK, LINUX_MAC_DOWNLOAD} from "../Constants.ts";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+
 import {faDownload} from "@fortawesome/free-solid-svg-icons";
 import {GHRelease, useUIStore} from "../store/store.ts";
 import {faWindows, faApple, faLinux} from '@fortawesome/free-brands-svg-icons'
@@ -8,8 +10,6 @@ import {FileNotPresentDialog} from "../components/FileNotPresentDialog.tsx";
 
 export const DownloadLatestVersion = ()=>{
     const changeSelectedVersionWindowOpen = useUIStore(state => state.setSelectVersionWindow)
-
-
 
     const downloadFileChecked = async () => {
         const response: GHRelease = await fetch("https://api.github.com/repos/ether/etherpad-lite/releases/latest")

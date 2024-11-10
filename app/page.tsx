@@ -1,22 +1,20 @@
-import {Header} from "./pages/Header.tsx";
-import {MainHeadline} from "./pages/MainHeadline.tsx";
-import {RealTimeCollaboration} from "./pages/RealTimeCollaboration.tsx";
-import {DownloadLatestVersion} from "./pages/DownloadLatestVersion.tsx";
-import {Contribute} from "./pages/Contribute.tsx";
-import {LinksToRelevantResources} from "./pages/LinksToRelevantResources.tsx";
-import {GetInTouchContact} from "./pages/GetInTouchContact.tsx";
-import {Thanking} from "./pages/Thanking.tsx";
-import {Footer} from "./components/Footer.tsx";
-import {AddFunctionalities} from "./pages/AddFunctionalities.tsx";
-import {CustomizeAppearance} from "./pages/CustomizeAppearance.tsx";
+import {SelectVersionModal} from "../src/components/SelectVersionModal.tsx";
+import {CookieBanner} from "../src/components/CookieBanner.tsx";
+import {Header} from "../src/pagesToDisplay/Header.tsx";
+import {MainHeadline} from "../src/pagesToDisplay/MainHeadline.tsx";
+import {RealTimeCollaboration} from "../src/pagesToDisplay/RealTimeCollaboration.tsx";
+import {AddFunctionalities} from "../src/pagesToDisplay/AddFunctionalities.tsx";
+import {CustomizeAppearance} from "../src/pagesToDisplay/CustomizeAppearance.tsx";
+import {DownloadLatestVersion} from "../src/pagesToDisplay/DownloadLatestVersion.tsx";
+import {Contribute} from "../src/pagesToDisplay/Contribute.tsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faExternalLink} from "@fortawesome/free-solid-svg-icons";
-import {CookieBanner} from "./components/CookieBanner.tsx";
-import {SelectVersionModal} from "./components/SelectVersionModal.tsx";
-import {Outlet} from "react-router-dom";
+import {LinksToRelevantResources} from "../src/pagesToDisplay/LinksToRelevantResources.tsx";
+import {GetInTouchContact} from "../src/pagesToDisplay/GetInTouchContact.tsx";
+import {Thanking} from "../src/pagesToDisplay/Thanking.tsx";
+import {Footer} from "../src/components/Footer.tsx";
 
-
-export const RootElement = ()=>{
+export default function Page() {
     return <div className="dark:bg-gray-800">
         <SelectVersionModal/>
         <CookieBanner/>
@@ -26,15 +24,6 @@ export const RootElement = ()=>{
             </div>
         </div>
         <div className="main-container">
-        <Outlet/>
-        </div>
-    </div>
-}
-
-export const App = ()=> {
-
-    return (
-        <>
             <MainHeadline/>
             <a className="scroll-point" id="about"></a>
             <RealTimeCollaboration/>
@@ -55,8 +44,6 @@ export const App = ()=> {
             <a className="scroll-point" id="thanks"></a>
             <Thanking/>
             <Footer/>
-        </>
-    )
+        </div>
+    </div>
 }
-
-

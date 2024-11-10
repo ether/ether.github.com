@@ -10,12 +10,13 @@ export const ThemeToggler = ()=>{
     const setDarkMode = useUIStore(state=>state.setDarkMode)
 
     useEffect(() => {
+        if (typeof window === 'undefined') return
         const isDarkMode = localStorage.getItem('isDarkMode')
         if(isDarkMode != null){
             setDarkMode(isDarkMode === 'true')
         }
         else{
-            setDarkMode(darkMode)
+            setDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches)
         }
     }, []);
 

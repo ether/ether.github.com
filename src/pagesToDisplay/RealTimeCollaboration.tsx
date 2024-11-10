@@ -1,13 +1,10 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faHandshake} from "@fortawesome/free-solid-svg-icons";
-import {useNavigate} from "react-router-dom";
+
+import {RealTimeCollaborationLink} from "../components/RealTimeCollaborationLink.tsx";
 
 export const RealTimeCollaboration = ()=>{
-    const navigate = useNavigate()
-    const navigateToElement = (elementId: string)=>{
-        document.getElementById(elementId)?.scrollIntoView({block: "start", inline: "nearest"})
-        navigate('/#'+elementId)
-    }
+
     return <div className="content wrap">
         <h2 className="text-3xl text-primary font-bold mb-4 mt-16 flex items-center">
             <FontAwesomeIcon icon={faHandshake} className="mr-4"/>
@@ -23,7 +20,7 @@ export const RealTimeCollaboration = ()=>{
             that allow you to customize your instance to suit your needs.</p>
 
         <p className="dark:text-gray-400">You don't need to set up a server and install Etherpad in order to use it. Just
-            <a onClick={()=>navigateToElement('links')}> pick</a> one
+            <RealTimeCollaborationLink/> one
             of the publicly available instances that friendly people from everywhere around the world have set up.
             Alternatively, you can set up your own instance by following our <a
                 href="https://github.com/ether/etherpad-lite#installation">installation guide</a>.</p>

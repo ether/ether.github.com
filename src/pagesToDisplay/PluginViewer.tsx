@@ -1,3 +1,4 @@
+'use client'
 import {PluginResponse} from "../store/Plugin.ts";
 import {useUIStore} from "../store/store.ts";
 import {useEffect, useState} from "react";

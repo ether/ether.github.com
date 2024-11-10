@@ -1,5 +1,6 @@
 import footerLogo from '../assets/img/logo.svg'
 import {Suspense} from "react";
+import Image from "next/image";
 
 
 const CCC_ATTR ={
@@ -22,7 +23,7 @@ export const Footer = ()=>{
             </div>
 
             <Suspense>
-                <img alt="Logo of the footer showing a transmission mast" className="logo" src={footerLogo}/>
+                <Image alt="Logo of the footer showing a transmission mast" className="logo" src={footerLogo}/>
             </Suspense>
         </div>
     </div>

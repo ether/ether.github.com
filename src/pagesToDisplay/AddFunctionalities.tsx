@@ -14,7 +14,7 @@ export const AddFunctionalities = ()=>{
         </span>
         <p className="full-features-demo">
             <Suspense>
-                <img src={full_features} alt="Linus Torvalds and Edward Snowden winking into the camera from a collaborate Etherpad. The document reads 'So many plugins can be added to the original instance"/>
+                <img src={full_features.src} alt="Linus Torvalds and Edward Snowden winking into the camera from a collaborate Etherpad. The document reads 'So many plugins can be added to the original instance"/>
             </Suspense>
         </p>
     </div>
