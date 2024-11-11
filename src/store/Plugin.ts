@@ -40,7 +40,8 @@ export type PluginResponseVal = {
     author: {
         name: string,
         email: string
-    }
+    },
+    image?: string
 }
 
 

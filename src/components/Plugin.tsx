@@ -26,9 +26,9 @@ export const PluginCom: FC<PluginProps> = ({plugins, averageDownload}) => {
         const sanitizedHtml = sanitizeHtml(unsafeHtml)
         return {__html: sanitizedHtml}
     }
-    const popularityScore = useMemo(() => (plugins.downloads / (averageDownload*100*100)), [plugins.downloads, averageDownload])
+    const popularityScore = useMemo(() => (plugins.downloads / (averageDownload)), [plugins.downloads, averageDownload])
 
-    return <div className="dark:text-white border-[1px] p-2 rounded">
+    return <div className="text-gray-400 border-[1px] p-2 rounded">
         <div className="flex">
             <div className="text-3xl text-primary flex gap-3">
                 <a target={"_blank"} href={'https://www.npmjs.org/package/' + plugins.name}>{plugins.name}</a>
@@ -55,12 +55,15 @@ export const PluginCom: FC<PluginProps> = ({plugins, averageDownload}) => {
             <PluginAuthorComp name={plugins.author.name} email={plugins.author.email}/>
             <span className="flex-grow"></span>
             <span className="mr-5">License: {plugins.license ? plugins.license : '--'}</span>
-            <span className="flex gap-3">
+        </div>
+        <div className="flex">
+            <div className="flex-grow"></div>
+        <div className="flex gap-3 self-end">
             {
                 plugins.keywords && plugins.keywords.map((k, i) => <Chip
                     key={plugins.name + i} index={i}>{k}</Chip>)
             }
-            </span>
+        </div>
         </div>
     </div>
 }
