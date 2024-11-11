@@ -26,7 +26,7 @@ export const PluginCom: FC<PluginProps> = ({plugins, averageDownload}) => {
         const sanitizedHtml = sanitizeHtml(unsafeHtml)
         return {__html: sanitizedHtml}
     }
-    const popularityScore = useMemo(() => (plugins.downloads / averageDownload), [plugins.downloads, averageDownload])
+    const popularityScore = useMemo(() => (plugins.downloads / (averageDownload*100*100)), [plugins.downloads, averageDownload])
 
     return <div className="dark:text-white border-[1px] p-2 rounded">
         <div className="flex">

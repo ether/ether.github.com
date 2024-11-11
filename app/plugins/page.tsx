@@ -34,7 +34,8 @@ export default function PluginViewer() {
     }, [plugins])
     const filteredPlugins = useMemo(()=>{
         if (!plugins) return plugins
-        let average = 0
+        let totalNum = 0
+        let highestDownload = 0
 
         const entry: PluginMappedResponseVal[] = Object.entries(plugins).filter((plugin) => {
             if (officalOnly && plugin[1].official == false) {
@@ -49,7 +50,10 @@ export default function PluginViewer() {
                 }
             }
 
-            average += plugin[1].downloads
+            totalNum += plugin[1].downloads
+            if (plugin[1].downloads > highestDownload) {
+                highestDownload = plugin[1].downloads
+            }
 
             return true
         }).map(plugin=> {
@@ -60,8 +64,7 @@ export default function PluginViewer() {
             } satisfies PluginMappedResponseVal
         })
 
-        average = average / entry.length
-        setDownloadAveragePercentage(average)
+        setDownloadAveragePercentage(highestDownload / totalNum)
         entry.sort(function (a, b) {
         if (sortKey === 'newest') {
             if (a.time === undefined) {
