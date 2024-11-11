@@ -1,5 +1,5 @@
 import {create} from "zustand";
-import {PluginResponse} from "./Plugin.ts";
+import {PluginResponse, ServerStats} from "./Plugin.ts";
 
 
 export type FileNotPresentMetaData = {
@@ -100,7 +100,8 @@ type StoreType = {
     plugins: PluginResponse | undefined,
     setPlugins: (plugins: PluginResponse) => void,
     pluginSearchTerm: string,
-    setPluginSearchTerm: (pluginSearchTerm: string) => void
+    setPluginSearchTerm: (pluginSearchTerm: string) => void,
+    serverStats: ServerStats | undefined
 }
 
 
@@ -154,5 +155,6 @@ export const useUIStore = create<StoreType>((set) => ({
     pluginSearchTerm: "",
     setPluginSearchTerm: (pluginSearchTerm: string) => set({
         pluginSearchTerm
-    })
+    }),
+    serverStats: undefined,
 }))

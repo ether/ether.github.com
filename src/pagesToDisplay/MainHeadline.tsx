@@ -2,6 +2,7 @@ import gif from '../assets/img/etherpad_demo.gif'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCogs, faLanguage, faServer, faUsers} from "@fortawesome/free-solid-svg-icons";
 import {Suspense} from "react";
+import Link from "next/link";
 export const MainHeadline = () => {
     return <div className="content primary showcase">
         <div className="wrap">
@@ -19,8 +20,8 @@ export const MainHeadline = () => {
         <div className="overview-bar dark:bg-gray-600 dark:text-white">
             <div className="item">
                 <FontAwesomeIcon icon={faCogs} className="mr-2"/>
-                <a href="https://static.etherpad.org/" target="_blank" className="underline">290
-                Plugins</a></div>
+                <Link href="/plugins" target="_blank" className="underline">290
+                Plugins</Link></div>
             <div className="item">
                 <FontAwesomeIcon icon={faLanguage} className="mr-2"/>
                 105 Languages</div>
