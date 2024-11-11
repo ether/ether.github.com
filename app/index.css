@@ -316,7 +316,7 @@ div#footer img.logo {
 }
 
 .readme-of-plugin code, .readme-of-plugin pre {
-    @apply text-sm p-1 rounded-sm dark:bg-gray-700 bg-gray-200 overflow-hidden;
+    @apply text-sm p-1 rounded-sm bg-gray-700 overflow-hidden;
 }
 
 .readme-of-plugin {
@@ -329,4 +329,14 @@ div#footer img.logo {
 
 #banner {
   @apply sticky bottom-0
+}
+
+@layer base {
+  :root {
+        --radius: 0.5rem;
+    }
+}
+
+[aria-current="page"] {
+  @apply bg-primary bg-none;
 }
