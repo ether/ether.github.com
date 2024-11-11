@@ -59,6 +59,7 @@ jobs:
         run: pnpm run build
         env:
           NODE_ENV: production
+          NEXT_PUBLIC_API_URL: https://static.etherpad.org
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
