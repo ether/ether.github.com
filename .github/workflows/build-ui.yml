@@ -57,6 +57,8 @@ jobs:
         run: pnpm install
       - name: Build
         run: pnpm run build
+        env:
+          NODE_ENV: production
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
