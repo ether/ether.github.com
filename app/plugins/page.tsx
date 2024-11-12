@@ -9,7 +9,7 @@ import {PluginsList} from "../../src/pagesToDisplay/PluginsList";
 import {PluginsFooter} from "../../src/pagesToDisplay/PluginsFooter";
 
 
-const productionURL = "https://static.etherpad.org"
+const productionURL = ""//"https://static.etherpad.org"
 
 export default function PluginViewer() {
 

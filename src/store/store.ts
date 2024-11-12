@@ -215,10 +215,31 @@ export const useUIStore = create<StoreType>((set, getState) => ({
     },
     currentPage: 0,
     setCurrentPage: (currentPage: number) => set({currentPage}),
-    setOfficialOnly: (officialOnly: boolean) => set({pluginData: {
-        ...getState().pluginData!,
-        filterOfficial: officialOnly
-        }}),
+    setOfficialOnly: (officialOnly: boolean) => {
+        console.log('officialOnly', officialOnly)
+        if (officialOnly) {
+            const filteredPlugins = getState().filteredPlugins.flat(1).filter((plugin) => {
+                return plugin.official
+            })
+            const chunkSize = 30;
+            const chunks = [];
+            for (let i = 0; i < filteredPlugins!.length; i += chunkSize) {
+                const chunk = filteredPlugins!.slice(i, i + chunkSize);
+                chunks.push(chunk);
+            }
+            set({
+                filteredPlugins: chunks
+            })
+        }
+
+
+        set({
+            pluginData: {
+                ...getState().pluginData!,
+                filterOfficial: officialOnly
+            }
+        })
+    },
     setSortKey: (sortKey: string) => {
         const newList = getState().filteredPlugins.flat(1).toSorted((a,b)=> {
             if (sortKey === 'newest') {

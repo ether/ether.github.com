@@ -26,13 +26,11 @@ export const PluginViewerHeader = ()=> {
         </div>
         <h2 className="text-3xl text-primary">Plugins ({plugins?.list.length})</h2>
         <div className="flex gap-5 border-t-[1px] border-b-[1px] border-gray-600 pt-2 pb-2">
-            <span>
-                <Checkbox className="text-white bg-primary data-[state=checked]:bg-primary" checked={pluginData?.filterOfficial}
+                <Checkbox className="text-white bg-primary data-[state=checked]:bg-primary border-none self-center" checked={pluginData?.filterOfficial}
                           onCheckedChange={() => setOfficalOnly(!pluginData?.filterOfficial)} id="c1"/>
                 <label className="text-white ml-2 mt-auto text-2xl" htmlFor="c1">
                     Only official plugins
                 </label>
-            </span>
             <span className="text-white mt-auto text-2xl">Sort by:</span>
             <Select onValueChange={(v: string) => {
                 setSortKey(v);
