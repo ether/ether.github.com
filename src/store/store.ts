@@ -1,5 +1,5 @@
 import {create} from "zustand";
-import {PluginResponse, ServerStats} from "./Plugin.ts";
+import {PluginResponseVal, ServerStats} from "./Plugin.ts";
 
 
 export type FileNotPresentMetaData = {
@@ -85,6 +85,19 @@ export type GHAsset = {
     browser_download_url: string
 }
 
+
+type PluginData = {
+    list: PluginResponseVal[],
+    keywords: [],
+    searchKeyword: string,
+    downloadMaxCount: number,
+    downloadCount: number,
+    downloadAverageCount: number,
+    sortKey: string,
+    filterOfficial: boolean,
+    lastModified: number|null
+} | undefined
+
 type StoreType = {
     isDarkMode: boolean,
     toggleDarkMode: () => void,
@@ -97,15 +110,20 @@ type StoreType = {
     openFileNotPresentDialog: (fileNotPresentDialog: boolean) => void,
     fileNotPresentMetaData: FileNotPresentMetaData | undefined,
     setFileNotPresentMetaData: (fileNotPresentMetaData: FileNotPresentMetaData) => void,
-    plugins: PluginResponse | undefined,
-    setPlugins: (plugins: PluginResponse) => void,
     pluginSearchTerm: string,
     setPluginSearchTerm: (pluginSearchTerm: string) => void,
-    serverStats: ServerStats | undefined
+    serverStats: ServerStats | undefined,
+    pluginData: PluginData,
+    setPluginData: (pluginData: PluginData) => void,
+    filteredPlugins: PluginResponseVal[][] // 30 entries per page,
+    currentPage: number,
+    setCurrentPage: (currentPage: number) => void,
+    setOfficialOnly: (officialOnly: boolean) => void,
+    setSortKey: (sortKey: string) => void
 }
 
 
-export const useUIStore = create<StoreType>((set) => ({
+export const useUIStore = create<StoreType>((set, getState) => ({
     isDarkMode: true,
     toggleDarkMode: () => set(state => {
         document.documentElement.classList.toggle('dark')
@@ -148,13 +166,94 @@ export const useUIStore = create<StoreType>((set) => ({
             fileNotPresentMetaData
       }
     }),
-    plugins: undefined,
-    setPlugins: (plugins1: PluginResponse) => set({
-        plugins: plugins1
-    }),
     pluginSearchTerm: "",
-    setPluginSearchTerm: (pluginSearchTerm: string) => set({
-        pluginSearchTerm
-    }),
+    setPluginSearchTerm: (pluginSearchTerm: string) => {
+        if (pluginSearchTerm.trim().length == 0) {
+            const chunkSize = 30;
+            const chunks = [];
+            for (let i = 0; i < getState().pluginData!.list.length; i += chunkSize) {
+                const chunk = getState().pluginData!.list.slice(i, i + chunkSize);
+                chunks.push(chunk);
+            }
+            set({
+                filteredPlugins: chunks
+            })
+        } else {
+            const chunkSize = 30;
+            const chunks = [];
+            const filteredList = getState().pluginData!.list.filter((plugin) => {
+                return plugin.name.toLowerCase().includes(pluginSearchTerm.toLowerCase())
+            })
+            for (let i = 0; i < filteredList.length; i += chunkSize) {
+                const chunk = filteredList.slice(i, i + chunkSize);
+                chunks.push(chunk);
+            }
+            set({
+                filteredPlugins: chunks
+            })
+        }
+
+        set({
+            pluginSearchTerm
+        })
+    },
     serverStats: undefined,
+    pluginData: undefined,
+    filteredPlugins: [],
+
+    setPluginData: (pluginData: PluginData)=>{
+        const chunkSize = 30;
+        const chunks = [];
+        for (let i = 0; i < pluginData!.list.length; i += chunkSize) {
+            const chunk = pluginData!.list.slice(i, i + chunkSize);
+            chunks.push(chunk);
+        }
+        set({
+            pluginData,
+            filteredPlugins: chunks
+        })
+    },
+    currentPage: 0,
+    setCurrentPage: (currentPage: number) => set({currentPage}),
+    setOfficialOnly: (officialOnly: boolean) => set({pluginData: {
+        ...getState().pluginData!,
+        filterOfficial: officialOnly
+        }}),
+    setSortKey: (sortKey: string) => {
+        const newList = getState().filteredPlugins.flat(1).toSorted((a,b)=> {
+            if (sortKey === 'newest') {
+                if (a.created === undefined) {
+                    return 1;
+                } else if (b.created === undefined) {
+                    return -1;
+                }
+                return a.created < b.created ? 1 : -1;
+            } else if (sortKey === 'updated') {
+                if (a.modified === undefined) {
+                    return 1;
+                } else if (b.modified === undefined) {
+                    return -1;
+                }
+                return a.modified < b.modified ? 1 : -1;
+            } else {
+                return a.downloads < b.downloads ? 1 : -1;
+            }
+        })
+
+        const chunkSize = 30;
+        const chunks = [];
+        for (let i = 0; i < newList!.length; i += chunkSize) {
+            const chunk = newList!.slice(i, i + chunkSize);
+            chunks.push(chunk);
+        }
+
+        set({
+            filteredPlugins: chunks
+        })
+
+        set({pluginData: {
+                ...getState().pluginData!,
+                sortKey: sortKey
+            }})
+    }
 }))

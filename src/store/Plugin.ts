@@ -41,7 +41,7 @@ export type PluginResponseVal = {
         name: string,
         email: string
     },
-    image?: string
+    images?: string[]
 }
 
 
