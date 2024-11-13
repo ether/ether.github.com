@@ -8,8 +8,12 @@ import {PluginViewerHeader} from "../../src/pagesToDisplay/PluginViewerHeader";
 import {PluginsList} from "../../src/pagesToDisplay/PluginsList";
 import {PluginsFooter} from "../../src/pagesToDisplay/PluginsFooter";
 
-
-const productionURL = "https://static.etherpad.org"
+let productionURL: string
+if (process.env.NODE_ENV == 'development') {
+    productionURL = ""
+} else {
+    productionURL = "https://static.etherpad.org"
+}
 
 export default function PluginViewer() {
 
