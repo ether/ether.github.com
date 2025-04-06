@@ -40,7 +40,7 @@ jobs:
       - uses: pnpm/action-setup@v3
         name: Install pnpm
         with:
-          version: 8
+          version: 10
           run_install: false
       - name: Get pnpm store directory
         shell: bash
@@ -61,10 +61,10 @@ jobs:
           NODE_ENV: production
           NEXT_PUBLIC_API_URL: https://static.etherpad.org
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
           path: './dist'
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
