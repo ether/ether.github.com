@@ -18,7 +18,7 @@ export const Header = () => {
     }
 
     return <><div id="header" className="text-white border-b-[1pt] border-solid border-[#efefef] p-4 w-full bg-white dark:bg-secondary-dark">
-        <div className="wrap flex items-center">
+        <div className="wrap flex items-center justify-self-center">
             <a href="#">
                 <Suspense>
                 <Image className="logo h-8 image-logo" src={brandSvg} alt="etherpad logo"/>

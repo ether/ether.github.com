@@ -14,15 +14,15 @@ export const GetInTouchContact = ()=>{
             <ul className="flex flex-row flex-wrap gap-3">
                 <Link className="pl-2 pr-2 pt-1 pb-1 bg-primary rounded cursor-pointer grid grid-cols-[auto_auto]" target="_blank" href="https://discord.gg/gGJKrAnDvY">
                     <FontAwesomeIcon icon={faDiscord} className="mr-2 text-white self-center"/>
-                        <span className="!text-white self-center">Discord</span>
+                        <span className="text-white! self-center">Discord</span>
                 </Link>
                 <Link className="pl-2 pr-2 pt-1 pb-1 bg-primary rounded cursor-pointer grid grid-cols-[auto_auto]"  href="https://twitter.com/etherpadorg" target="_blank">
                     <FontAwesomeIcon icon={faTwitter} className="mr-2 text-white mt-1 self-center"/>
-                    <span className="!text-white self-center">@EtherpadOrg</span>
+                    <span className="text-white! self-center">@EtherpadOrg</span>
                 </Link>
                 <Link className="pl-2 pr-2 pt-1 pb-1 bg-primary rounded cursor-pointer grid grid-cols-[auto_auto]" href="mailto:contact@etherpad.org" target="_blank">
                     <FontAwesomeIcon icon={faEnvelope} className="mr-2 text-white self-center"/>
-                    <span className="!text-white self-center">contact@etherpad.org</span>
+                    <span className="text-white! self-center">contact@etherpad.org</span>
                 </Link>
             </ul>
         </div>

@@ -54,7 +54,7 @@ export const PluginCom: FC<PluginProps> = ({plugins}) => {
                 <a target={"_blank"} href={'https://www.npmjs.org/package/' + plugins.name}>{plugins.name}</a>
                 <small className="align-text-bottom text-gray-400 mt-[3px]">{plugins.version}</small>
             </div>
-            <div className="flex-grow"></div>
+            <div className="grow"></div>
             {plugins.time && <div className="mr-5 mt-[0.3rem]">{formatTime(plugins.time)}</div>}
             <div className="w-10 flex items-center mr-2">
                 <div className="w-10 border-[1px] border-white"
@@ -72,11 +72,11 @@ export const PluginCom: FC<PluginProps> = ({plugins}) => {
         </div>
         <div className="mt-5 flex mb-2">
             <PluginAuthorComp name={plugins.author.name} email={plugins.author.email}/>
-            <span className="flex-grow"></span>
+            <span className="grow"></span>
             <span className="mr-5">License: {plugins.license ? plugins.license : '--'}</span>
         </div>
         <div className="flex">
-            <div className="flex-grow"></div>
+            <div className="grow"></div>
         <div className="flex gap-3 self-end">
             {
                 plugins.keywords && plugins.keywords.map((k, i) => <Chip

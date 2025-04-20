@@ -12,11 +12,24 @@ export const ThemeToggler = ()=>{
     useEffect(() => {
         if (typeof window === 'undefined') return
         const isDarkMode = localStorage.getItem('isDarkMode')
-        if(isDarkMode != null){
-            setDarkMode(isDarkMode === 'true')
-        }
-        else{
-            setDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches)
+        if (isDarkMode != null) {
+            const dark = isDarkMode === 'true'
+            if (dark) {
+                document.documentElement.classList.add('dark')
+            } else {
+                console.log('remove dark')
+                document.documentElement.classList.remove('dark')
+            }
+        } else {
+            const dark = window.matchMedia('(prefers-color-scheme: dark)').matches
+            if (dark) {
+                document.documentElement.classList.add('dark')
+            } else {
+                console.log('remove dark')
+                document.documentElement.classList.remove('dark')
+            }
+
+            setDarkMode(dark)
         }
     }, []);
 
