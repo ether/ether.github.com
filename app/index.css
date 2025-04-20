@@ -6,6 +6,7 @@
   --color-primary: #44b492;
   --color-secondary: #f0f0f0;
   --color-secondary-dark: rgba(15, 17, 17, 1);
+  --color-accent: rgb(46, 46, 50);
 
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);

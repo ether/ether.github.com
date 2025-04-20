@@ -22,12 +22,12 @@ export const Contribute = ()=>{
 
         <h5 className="text-xl font-bold mb-5 dark:text-white">Development workflow</h5>
         <p>The main development happens on <a href={PATH_TO_GITHUB}>GitHub</a>. To
-            contribute, <a target="_blank" href={GITHUB_HELP+"/fork-a-repo/"}>fork</a> the <a target="_blank"
+            contribute, <a target="_blank" href={GITHUB_HELP+"/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo"}>fork</a> the <a target="_blank"
                 href={PATH_TO_GITHUB}>main repo</a>, branch off a <a target="_blank"
                 href="https://www.google.com/search?q=git+feature+branches">feature branch</a> from <code>develop</code>,
             make your changes and <a target="_blank" href="https://git-scm.com/docs/git-commit">commit</a> them, <a target="_blank"
                 href="https://git-scm.com/docs/git-push">push</a> to your fork and submit a <a target="_blank"
-                href={GITHUB_HELP+"/send-pull-requests/"}>pull request</a> for <code>ether/develop</code>.</p>
+                href={GITHUB_HELP+"/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request"}>pull request</a> for <code>ether/develop</code>.</p>
         <p>Once in a while we merge <code>develop</code> into <code>master</code>, which results in a new release. This
             means you will always find the latest stable version in the <code>master</code> branch.</p>
     </div>

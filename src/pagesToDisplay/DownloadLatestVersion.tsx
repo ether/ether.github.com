@@ -25,7 +25,7 @@ export const DownloadLatestVersion = ()=>{
                 <FontAwesomeIcon icon={faDownload} className="mr-4 self-baseline text-3xl text-primary"/>
                 <h2 className="text-3xl text-primary font-bold mb-4 mt-16 flex items-center">Download Version {CURRENT_VERSION}</h2>
             </div>
-            <p className="dark:text-gray-400">Also, see our <a href={INSTALLATION_LINK}>installation instructions</a>.
+            <p className="dark:text-gray-400">Also, see our <a href={INSTALLATION_LINK} target="_blank">installation instructions</a>.
             </p>
             <a className="download-button" href={LINUX_MAC_DOWNLOAD}>
                 <FontAwesomeIcon icon={faLinux} className="mr-2 text-xl"/>
