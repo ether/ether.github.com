@@ -31,6 +31,7 @@
     "react-ga": "^3.3.1",
     "react-waypoint": "^10.3.0",
     "sanitize-html": "^2.16.0",
+    "shiki": "^3.3.0",
     "tailwindcss-animate": "^1.0.7",
     "timeago": "^1.6.7"
   },

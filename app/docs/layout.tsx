@@ -10,13 +10,13 @@ export default function({
     <head>
         <meta name="globalsign-domain-verification" content="9buOUAsm68lg97yJaT2W5IBeTkSrlGbOrsVwziHjIw"/>
         <title>Etherpad</title>
-        <link rel="shortcut icon" href="favicon.ico"/>
+        <link rel="shortcut icon" href="/favicon.ico" />
         <meta name="google-site-verification" content="bVuuj6GwPO2TG1ZmB67XFvKxM0YSMrQIw5rYcG5RwVw"/>
     </head>
     <body>
     <div className="flex-row!">
         <DocSidebar/>
-        <div id="root">{children}</div>
+        <div className="max-h-screen overflow-y-auto bg-gray-800 p-5">{children}</div>
     </div>
     </body>
     </html>)
