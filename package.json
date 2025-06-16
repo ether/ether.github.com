@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@saber2pr/types-github-api": "^0.0.9",
-    "@types/node": "^22.14.1",
+    "@types/node": "^24.0.1",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@types/react-lazy-load-image-component": "^1.6.4",
