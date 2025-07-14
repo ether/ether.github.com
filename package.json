@@ -30,7 +30,7 @@
     "react-dom": "^19.1.0",
     "react-ga": "^3.3.1",
     "react-waypoint": "^10.3.0",
-    "sanitize-html": "^2.16.0",
+    "sanitize-html": "^2.17.0",
     "shiki": "^3.3.0",
     "tailwindcss-animate": "^1.0.7",
     "timeago": "^1.6.7"
@@ -41,7 +41,7 @@
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@types/react-lazy-load-image-component": "^1.6.4",
-    "@types/sanitize-html": "^2.15.0",
+    "@types/sanitize-html": "^2.16.0",
     "@typescript-eslint/eslint-plugin": "^8.30.1",
     "@typescript-eslint/parser": "^8.30.1",
     "autoprefixer": "^10.4.21",
