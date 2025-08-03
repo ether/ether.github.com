@@ -1,0 +1,31 @@
+on:
+    schedule:
+        - cron: "0 1 * * *"
+    workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+    contents: read
+    pages: write
+    id-token: write
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Download info.json
+              run: curl -o info.json https://static.etherpad.org/info.json
+            - name: Download plugins
+              run: curl -o plugins.json https://static.etherpad.org/plugins.json
+            - name: Put to assets
+              run: |
+                  mkdir -p assets
+                  mv info.json plugins.json assets/
+            - name: Upload artifact
+              uses: actions/upload-pages-artifact@v3.0.1
+              with:
+                  path: './assets'
+            - name: Deploy to GitHub Pages
+              id: deployment
+              uses: actions/deploy-pages@v4
