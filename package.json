@@ -19,7 +19,7 @@
     "@radix-ui/react-dropdown-menu": "^2.1.15",
     "@radix-ui/react-select": "^2.2.5",
     "@radix-ui/react-slot": "^1.2.3",
-    "@tailwindcss/postcss": "^4.1.4",
+    "@tailwindcss/postcss": "^4.1.11",
     "axios": "^1.8.4",
     "class-variance-authority": "^0.7.1",
     "javascript-time-ago": "^2.5.11",
