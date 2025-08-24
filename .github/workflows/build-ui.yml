@@ -60,6 +60,14 @@ jobs:
         env:
           NODE_ENV: production
           NEXT_PUBLIC_API_URL: https://static.etherpad.org
+      - name: Download info.json
+        run: curl -o info.json https://static.etherpad.org/info.json
+      - name: Download plugins
+        run: curl -o plugins.json https://static.etherpad.org/plugins.json
+      - name: Put to assets
+        run: |
+          mkdir -p dist/assets
+          mv info.json plugins.json dist/assets
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
