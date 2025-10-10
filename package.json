@@ -26,7 +26,7 @@
     "lucide-react": "^0.544.0",
     "marked": "^16.3.0",
     "next": "^15.5.4",
-    "react": "^19.1.0",
+    "react": "^19.2.0",
     "react-dom": "^19.1.0",
     "react-ga": "^3.3.1",
     "react-waypoint": "^10.3.0",
@@ -38,7 +38,7 @@
   "devDependencies": {
     "@saber2pr/types-github-api": "^0.0.9",
     "@types/node": "^24.3.0",
-    "@types/react": "^19.1.2",
+    "@types/react": "^19.2.0",
     "@types/react-dom": "^19.1.2",
     "@types/react-lazy-load-image-component": "^1.6.4",
     "@types/sanitize-html": "^2.16.0",
