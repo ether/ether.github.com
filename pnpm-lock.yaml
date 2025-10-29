@@ -51,8 +51,8 @@ importers:
         specifier: ^0.544.0
         version: 0.544.0(react@19.2.0)
       marked:
-        specifier: ^16.3.0
-        version: 16.3.0
+        specifier: ^16.4.1
+        version: 16.4.1
       next:
         specifier: ^15.5.6
         version: 15.5.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -1616,8 +1616,8 @@ packages:
   magic-string@0.30.17:
     resolution: {integrity: sha512-sNPKHvyjVf7gyjwS4xGTaW/mCnF8wnjtifKBEhxfZ7E/S8tQ0rssrwGNn6q8JH/ohItJfSQp9mBtQYuTlH5QnA==}
 
-  marked@16.3.0:
-    resolution: {integrity: sha512-K3UxuKu6l6bmA5FUwYho8CfJBlsUWAooKtdGgMcERSpF7gcBUrCGsLH7wDaaNOzwq18JzSUDyoEb/YsrqMac3w==}
+  marked@16.4.1:
+    resolution: {integrity: sha512-ntROs7RaN3EvWfy3EZi14H4YxmT6A5YvywfhO+0pm+cH/dnSQRmdAmoFIc3B9aiwTehyk7pESH4ofyBY+V5hZg==}
     engines: {node: '>= 20'}
     hasBin: true
 
@@ -3511,7 +3511,7 @@ snapshots:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  marked@16.3.0: {}
+  marked@16.4.1: {}
 
   math-intrinsics@1.1.0: {}
 
