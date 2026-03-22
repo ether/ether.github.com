@@ -51,8 +51,8 @@ importers:
         specifier: ^0.548.0
         version: 0.548.0(react@19.2.0)
       marked:
-        specifier: ^16.3.0
-        version: 16.3.0
+        specifier: ^17.0.5
+        version: 17.0.5
       next:
         specifier: ^15.5.14
         version: 15.5.14(@babel/core@7.29.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -1733,8 +1733,8 @@ packages:
   magic-string@0.30.17:
     resolution: {integrity: sha512-sNPKHvyjVf7gyjwS4xGTaW/mCnF8wnjtifKBEhxfZ7E/S8tQ0rssrwGNn6q8JH/ohItJfSQp9mBtQYuTlH5QnA==}
 
-  marked@16.3.0:
-    resolution: {integrity: sha512-K3UxuKu6l6bmA5FUwYho8CfJBlsUWAooKtdGgMcERSpF7gcBUrCGsLH7wDaaNOzwq18JzSUDyoEb/YsrqMac3w==}
+  marked@17.0.5:
+    resolution: {integrity: sha512-6hLvc0/JEbRjRgzI6wnT2P1XuM1/RrrDEX0kPt0N7jGm1133g6X7DlxFasUIx+72aKAr904GTxhSLDrd5DIlZg==}
     engines: {node: '>= 20'}
     hasBin: true
 
@@ -3800,7 +3800,7 @@ snapshots:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  marked@16.3.0: {}
+  marked@17.0.5: {}
 
   math-intrinsics@1.1.0: {}
 
