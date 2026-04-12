@@ -20,7 +20,7 @@
     "@radix-ui/react-select": "^2.2.6",
     "@radix-ui/react-slot": "^1.2.3",
     "@tailwindcss/postcss": "^4.2.2",
-    "axios": "^1.13.5",
+    "axios": "^1.15.0",
     "class-variance-authority": "^0.7.1",
     "javascript-time-ago": "^2.6.4",
     "lucide-react": "^0.548.0",
