@@ -17,9 +17,9 @@ export const Footer = ()=>{
                 <p>The Etherpad logos by <span {...CCC_ATTR} property="cc:attributionName">Marcel Klehr</span> are
                     licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-sa/3.0/">Creative
                         Commons Attribution-ShareAlike 3.0 Unported License</a>.</p>
-                <p>Bitcoin public address: 198uyayMFVHUmrcuzWKFSMAkmwfkQgQEXj</p>
                 <p>Thanks to <a href="https://github.com/seballot" target="_blank">@seballot</a> and
                     <a href="https://github.com/SamTV12345" target={"_blank"}> @SamTV12345</a> for the redesign</p>
+                <p className="text-xs opacity-60 mt-2">Bitcoin: 198uyayMFVHUmrcuzWKFSMAkmwfkQgQEXj</p>
             </div>
 
             <Suspense>
