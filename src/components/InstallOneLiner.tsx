@@ -10,17 +10,17 @@ const ONE_LINERS: Record<OS, {label: string; command: string; icon: typeof faLin
     linux: {
         label: 'Linux',
         icon: faLinux,
-        command: 'docker run -d --name etherpad -p 9001:9001 etherpad/etherpad',
+        command: 'curl -fsSL https://raw.githubusercontent.com/ether/etherpad-lite/master/bin/installer.sh | sh',
     },
     mac: {
         label: 'macOS',
         icon: faApple,
-        command: 'docker run -d --name etherpad -p 9001:9001 etherpad/etherpad',
+        command: 'curl -fsSL https://raw.githubusercontent.com/ether/etherpad-lite/master/bin/installer.sh | sh',
     },
     windows: {
         label: 'Windows',
         icon: faWindows,
-        command: 'docker run -d --name etherpad -p 9001:9001 etherpad/etherpad',
+        command: 'irm https://raw.githubusercontent.com/ether/etherpad-lite/master/bin/installer.ps1 | iex',
     },
 };
 
@@ -70,7 +70,7 @@ export const InstallOneLiner = () => {
             </button>
         </div>
         <p className="text-xs text-gray-500 dark:text-gray-400 px-3 pb-3">
-            Needs Docker. Then open <code>http://localhost:9001</code>.{' '}
+            Needs <code>git</code> and Node.js &ge; 20. Then <code>cd etherpad-lite && pnpm run prod</code> and open <code>http://localhost:9001</code>.{' '}
             <a
                 href="https://github.com/ether/etherpad-lite#installation"
                 target="_blank"

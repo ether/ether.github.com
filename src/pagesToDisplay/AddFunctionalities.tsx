@@ -7,7 +7,7 @@ export const AddFunctionalities = ()=>{
     return <div className="content wrap">
         <h2 className="text-3xl text-primary font-bold mb-4 mt-16 flex items-center">
             <FontAwesomeIcon icon={faPlug} className="mr-4"/>
-            Add Functionalities</h2>
+            Add Functionality</h2>
         <span className="dark:text-gray-400">
         Etherpad is very customizable through plugins. Instructions can be found in the <a
         href={ADDITIONAL_PLUGINS} target="_blank">plugin wiki article</a>
