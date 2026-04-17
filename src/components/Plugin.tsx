@@ -55,7 +55,7 @@ export const PluginCom: FC<PluginProps> = ({plugins}) => {
                 <small className="align-text-bottom text-gray-400 mt-[3px]">{plugins.version}</small>
             </div>
             <div className="grow"></div>
-            {plugins.time && <div className="mr-5 mt-[0.3rem]">{formatTime(plugins.time)}</div>}
+            {plugins.modified && <div className="mr-5 mt-[0.3rem]" title={`Last updated ${plugins.modified}`}>{formatTime(plugins.modified)}</div>}
             <div className="w-10 flex items-center mr-2">
                 <div className="w-10 border-[1px] border-white"
                      title={(plugins.downloads) + " downloads"}>
