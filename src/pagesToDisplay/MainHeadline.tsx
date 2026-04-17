@@ -7,16 +7,12 @@ import {InstallOneLiner} from "../components/InstallOneLiner.tsx";
 export const MainHeadline = () => {
     return <div className="content primary showcase">
         <div className="wrap">
-            <h1 className="font-normal ml-0 mr-0 mb-4 text-[2.5rem] mt-16 dark:text-white">
+            <h1 className="font-normal ml-0 mr-0 mb-4 text-[2.3rem] mt-16 dark:text-white">
                 <strong>Etherpad</strong> &mdash; the editor for <strong>documents that matter</strong>.
             </h1>
             <p className="text-xl mb-6 dark:text-gray-300">
                 Real-time collaborative editing where authorship is the default, your server is the only server, and you decide what AI (if any) ever touches your text.
             </p>
-            <div className="flex flex-wrap gap-3 mb-6">
-                <Link href="/about" className="px-4 py-2 bg-primary text-white rounded hover:opacity-90">Read the manifesto &rarr;</Link>
-                <Link href="/why-etherpad" className="px-4 py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white">Why Etherpad &rarr;</Link>
-            </div>
 
             <InstallOneLiner/>
         </div>
