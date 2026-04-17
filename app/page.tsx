@@ -3,6 +3,8 @@ import {CookieBanner} from "../src/components/CookieBanner.tsx";
 import {Header} from "../src/pagesToDisplay/Header.tsx";
 import {MainHeadline} from "../src/pagesToDisplay/MainHeadline.tsx";
 import {RealTimeCollaboration} from "../src/pagesToDisplay/RealTimeCollaboration.tsx";
+import {WhoUsesEtherpad} from "../src/pagesToDisplay/WhoUsesEtherpad.tsx";
+import {AIOnYourTerms} from "../src/pagesToDisplay/AIOnYourTerms.tsx";
 import {AddFunctionalities} from "../src/pagesToDisplay/AddFunctionalities.tsx";
 import {CustomizeAppearance} from "../src/pagesToDisplay/CustomizeAppearance.tsx";
 import {DownloadLatestVersion} from "../src/pagesToDisplay/DownloadLatestVersion.tsx";
@@ -27,6 +29,10 @@ export default function Page() {
             <MainHeadline/>
             <a className="scroll-point" id="about"></a>
             <RealTimeCollaboration/>
+            <a className="scroll-point" id="who"></a>
+            <WhoUsesEtherpad/>
+            <a className="scroll-point" id="ai"></a>
+            <AIOnYourTerms/>
             <a className="scroll-point" id="customize"></a>
             <AddFunctionalities/>
             <CustomizeAppearance/>
