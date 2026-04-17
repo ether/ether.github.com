@@ -38,7 +38,7 @@ export const InstallOneLiner = () => {
         }
     };
 
-    return <div className="mt-4 rounded border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 overflow-hidden max-w-xl">
+    return <div className="my-8 mx-auto p-2 rounded border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 overflow-hidden max-w-xl">
         <div className="flex text-sm">
             {(Object.keys(ONE_LINERS) as OS[]).map((key) => {
                 const active = os === key;
