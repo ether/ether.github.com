@@ -3,6 +3,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCogs, faLanguage, faServer, faUsers} from "@fortawesome/free-solid-svg-icons";
 import {Suspense} from "react";
 import Link from "next/link";
+import {InstallOneLiner} from "../components/InstallOneLiner.tsx";
 export const MainHeadline = () => {
     return <div className="content primary showcase">
         <div className="wrap">
@@ -15,8 +16,9 @@ export const MainHeadline = () => {
             <div className="flex flex-wrap gap-3 mb-6">
                 <Link href="/about" className="px-4 py-2 bg-primary text-white rounded hover:opacity-90">Read the manifesto &rarr;</Link>
                 <Link href="/why-etherpad" className="px-4 py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white">Why Etherpad &rarr;</Link>
-                <a href="https://github.com/ether/etherpad-lite#installation" target="_blank" className="px-4 py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white">Self-host in 5 minutes &rarr;</a>
             </div>
+
+            <InstallOneLiner/>
         </div>
 
         <div className="demo justify-center flex">
@@ -32,23 +34,31 @@ export const MainHeadline = () => {
         <div className="overview-bar dark:bg-gray-600 dark:text-white">
             <div className="item">
                 <FontAwesomeIcon icon={faCogs} className="mr-2"/>
-                <Link href="/plugins" target="_blank" className="underline">290 Plugins</Link>
-                <span className="block text-sm opacity-75">extend without forking</span>
+                <div className="flex flex-col leading-tight">
+                    <Link href="/plugins" target="_blank" className="underline">290 Plugins</Link>
+                    <span className="text-sm opacity-75">extend without forking</span>
+                </div>
             </div>
             <div className="item">
                 <FontAwesomeIcon icon={faLanguage} className="mr-2"/>
-                105 Languages
-                <span className="block text-sm opacity-75">translated by a global community</span>
+                <div className="flex flex-col leading-tight">
+                    <span>105 Languages</span>
+                    <span className="text-sm opacity-75">translated by a global community</span>
+                </div>
             </div>
             <div className="item">
                 <FontAwesomeIcon icon={faServer} className="mr-2"/>
-                Thousands of Instances
-                <span className="block text-sm opacity-75">Raspberry Pis to data centres</span>
+                <div className="flex flex-col leading-tight">
+                    <span>Thousands of Instances</span>
+                    <span className="text-sm opacity-75">Raspberry Pis to data centres</span>
+                </div>
             </div>
             <div className="item">
                 <FontAwesomeIcon icon={faUsers} className="mr-2"/>
-                Millions of Users
-                <span className="block text-sm opacity-75">Wikimedia, governments, schools</span>
+                <div className="flex flex-col leading-tight">
+                    <span>Millions of Users</span>
+                    <span className="text-sm opacity-75">Wikimedia, governments, schools</span>
+                </div>
             </div>
         </div>
     </div>
