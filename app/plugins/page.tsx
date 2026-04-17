@@ -66,6 +66,8 @@ export default function PluginViewer() {
                 }
             }
 
+            list.sort((a, b) => (b.downloads || 0) - (a.downloads || 0))
+
             useUIStore.getState().setPluginData(
                 {
                     downloadCount,
@@ -75,7 +77,7 @@ export default function PluginViewer() {
                     lastModified,
                     keywords: [],
                     searchKeyword: '',
-                    sortKey: 'newest',
+                    sortKey: 'downloads',
                     filterOfficial: false
                 })
         })

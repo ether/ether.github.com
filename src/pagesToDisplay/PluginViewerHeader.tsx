@@ -37,6 +37,7 @@ export const PluginViewerHeader = ()=> {
             }}>
                 <SelectTrigger className="bg-gray-700 text-white border-[1px] w-1/2 pt-1 pl-2">{pluginData?.sortKey}</SelectTrigger>
                 <SelectContent className="bg-gray-700 text-white">
+                    <SelectItem className="bg-gray-700" value="downloads">Downloads</SelectItem>
                     <SelectItem className="bg-gray-700" onClick={() => {
                         setSortKey('created');
                     }} value={"created"}>Created</SelectItem>
