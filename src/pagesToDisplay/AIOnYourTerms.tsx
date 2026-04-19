@@ -25,7 +25,7 @@ export const AIOnYourTerms = () => {
         </p>
 
         <p className="dark:text-gray-400">
-            <a className="underline" href="https://static.etherpad.org" target="_blank">Browse AI plugins &rarr;</a>
+            <a className="underline" href="https://etherpad.org/plugins" target="_blank">Browse AI plugins &rarr;</a>
         </p>
     </div>
 }
