@@ -55,7 +55,7 @@ export default function AboutPage() {
                 <h2 className="text-2xl text-primary font-bold mt-12 mb-4">What you can do</h2>
                 <p className="mb-4">If this matters to you:</p>
                 <ul className="list-disc pl-8 space-y-2 mb-4">
-                    <li><a className="underline" target="_blank" href="https://github.com/ether/etherpad-lite">Run an Etherpad</a> for your team, your organisation, your school, your community.</li>
+                    <li><a className="underline" target="_blank" href="https://github.com/ether/etherpad">Run an Etherpad</a> for your team, your organisation, your school, your community.</li>
                     <li>Contribute &mdash; code, documentation, translations, plugins, time.</li>
                     <li>Tell someone else this exists. A generation of developers and decision-makers grew up after Etherpad&apos;s first wave of fame and have never heard of it. Word of mouth is how this kind of project survives.</li>
                 </ul>
