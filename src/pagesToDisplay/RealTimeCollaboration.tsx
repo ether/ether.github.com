@@ -1,8 +1,6 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFingerprint, faShieldHalved, faPuzzlePiece} from "@fortawesome/free-solid-svg-icons";
 
-import {RealTimeCollaborationLink} from "../components/RealTimeCollaborationLink.tsx";
-
 export const RealTimeCollaboration = ()=>{
 
     return <div className="content wrap">
@@ -39,7 +37,7 @@ export const RealTimeCollaboration = ()=>{
         </div>
 
         <p className="mt-8 dark:text-gray-400">
-            You don&apos;t need to set up a server to try it. <RealTimeCollaborationLink/> one of the publicly available instances run by friendly people around the world &mdash; or set up your own by following our <a className="underline" href="https://github.com/ether/etherpad-lite#installation">installation guide</a>.
+            You don&apos;t need to set up a server to try it. <a className="underline" href="#links">Pick one of the publicly available</a> instances run by friendly people around the world &mdash; or set up your own by following our <a className="underline" href="https://github.com/ether/etherpad-lite#installation">installation guide</a>.
         </p>
     </div>
 }

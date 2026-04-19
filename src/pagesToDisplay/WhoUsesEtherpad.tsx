@@ -18,11 +18,7 @@ export const WhoUsesEtherpad = () => {
             <li><strong>Universities and schools worldwide</strong> &mdash; including jurisdictions where Google Workspace is no longer permitted in education.</li>
             <li><strong>Civic-tech and democratic-deliberation projects</strong> &mdash; citizen assemblies, participatory budgeting, public consultations.</li>
             <li><strong>Newsrooms and investigative journalism teams</strong> &mdash; where authorship and editing history matter for legal and editorial integrity.</li>
-            <li><strong>Tens of thousands of self-hosted instances</strong> &mdash; run by IT teams who chose Etherpad because it is theirs.</li>
+            <li><strong><a className="underline" href="https://scanner.etherpad.org/" target="_blank">Tens of thousands of self-hosted instances</a></strong> &mdash; run by IT teams who chose Etherpad because it is theirs.</li>
         </ul>
-
-        <p className="dark:text-gray-400 mt-4">
-            If your organisation runs Etherpad and would like to be listed publicly, please <a className="underline" href="https://github.com/ether/etherpad-lite/wiki/Sites-That-Run-Etherpad" target="_blank">add it to the wiki</a>.
-        </p>
     </div>
 }
