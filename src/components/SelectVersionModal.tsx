@@ -14,14 +14,14 @@ export const SelectVersionModal = ()=>{
 
     useEffect(() => {
         if(selectedVersionWindow && releases.length === 0){
-            fetch('https://api.github.com/repos/ether/etherpad-lite/releases')
+            fetch('https://api.github.com/repos/ether/etherpad/releases')
                 .then(response => response.json())
                 .then((data: GHRelease[]) => {
                     data.map((release:GHRelease)=>{
                         if (release.assets.length === 0){
                             release.assets = [{
                                 name: 'etherpad-lite-win.zip',
-                                browser_download_url: `https://github.com/ether/etherpad-lite/archive/refs/tags/${release.tag_name}.zip`,
+                                browser_download_url: `https://github.com/ether/etherpad/archive/refs/tags/${release.tag_name}.zip`,
                                 url: '',
                                 id: 0,
                                 node_id: '',

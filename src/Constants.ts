@@ -2,7 +2,7 @@ import { version } from '../package.json';
 
 export const CURRENT_VERSION = version
 export const PATH_TO_BLOG = "https://blog.etherpad.org"
-export const PATH_TO_GITHUB = "https://github.com/ether/etherpad-lite"
+export const PATH_TO_GITHUB = "https://github.com/ether/etherpad"
 
 export const WINDOWS_DOWNLOAD = PATH_TO_GITHUB+`/releases/download/v${CURRENT_VERSION}/etherpad-lite-win.zip`
 

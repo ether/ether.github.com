@@ -7,7 +7,7 @@
 <body>
 <script>
     window.onload = ()=>{
-        fetch("https://api.github.com/repos/ether/etherpad-lite/releases/latest")
+        fetch("https://api.github.com/repos/ether/etherpad/releases/latest")
             .then(c=>c.json())
             .then(c=>{
                 const remainingPath = window.location.href.substring(window.location.href.indexOf("latest")+6)
