@@ -12,7 +12,7 @@ export const DownloadLatestVersion = ()=>{
     const changeSelectedVersionWindowOpen = useUIStore(state => state.setSelectVersionWindow)
 
     const downloadFileChecked = async () => {
-        const response: GHRelease = await fetch("https://api.github.com/repos/ether/etherpad-lite/releases/latest")
+        const response: GHRelease = await fetch("https://api.github.com/repos/ether/etherpad/releases/latest")
             .then(response => response.json())
         downloadFile(response.zipball_url)
     }
