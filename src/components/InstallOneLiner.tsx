@@ -10,17 +10,17 @@ const ONE_LINERS: Record<OS, {label: string; command: string; icon: typeof faLin
     linux: {
         label: 'Linux',
         icon: faLinux,
-        command: 'curl -fsSL https://raw.githubusercontent.com/ether/etherpad/master/bin/installer.sh | sh',
+        command: 'curl -fsSL https://raw.githubusercontent.com/ether/etherpad/develop/bin/installer.sh | sh',
     },
     mac: {
         label: 'macOS',
         icon: faApple,
-        command: 'curl -fsSL https://raw.githubusercontent.com/ether/etherpad/master/bin/installer.sh | sh',
+        command: 'curl -fsSL https://raw.githubusercontent.com/ether/etherpad/develop/bin/installer.sh | sh',
     },
     windows: {
         label: 'Windows',
         icon: faWindows,
-        command: 'irm https://raw.githubusercontent.com/ether/etherpad/master/bin/installer.ps1 | iex',
+        command: 'irm https://raw.githubusercontent.com/ether/etherpad/develop/bin/installer.ps1 | iex',
     },
 };
 
