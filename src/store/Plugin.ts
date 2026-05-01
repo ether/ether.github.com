@@ -24,6 +24,11 @@ export type PluginResponse = {
     [key: string]: PluginResponseVal
 }
 
+export enum CompatibilityStatus {
+    Compatible = 'compatible',
+    Warning = 'warning',
+    Failed = 'failed',
+}
 
 export type PluginResponseVal = {
     name: string,
@@ -41,6 +46,7 @@ export type PluginResponseVal = {
         name: string,
         email: string
     },
+    compatibility?: CompatibilityStatus,
     images?: string[]
 }
 
