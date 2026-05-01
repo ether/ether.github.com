@@ -31,7 +31,7 @@ export const MainHeadline = () => {
             <div className="item">
                 <FontAwesomeIcon icon={faCogs} className="mr-2"/>
                 <div className="flex flex-col leading-tight">
-                    <Link href="/plugins" target="_blank" className="underline">290 Plugins</Link>
+                    <Link href="/plugins" target="_blank" className="underline">200 Plugins</Link>
                     <span className="text-sm opacity-75">extend without forking</span>
                 </div>
             </div>
