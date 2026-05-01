@@ -1,4 +1,4 @@
-import {PluginResponseVal} from "../store/Plugin.ts";
+import {CompatibilityStatus, PluginResponseVal} from "../store/Plugin.ts";
 import {FC, useMemo} from "react";
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
@@ -7,6 +7,7 @@ import * as marked from 'marked'
 import {PluginAuthorComp} from "./PluginAuthorComp.tsx";
 import {Chip} from "./Chip.tsx";
 import {useUIStore} from "@/store/store.ts";
+import {Check, OctagonAlert, TriangleAlert} from "lucide-react";
 type PluginProps = {
     plugins: PluginResponseVal,
     index: number
@@ -46,6 +47,17 @@ export const PluginCom: FC<PluginProps> = ({plugins}) => {
         return downloadStatsStyle
     }, [])
 
+    const renderCompatibilityIndicator = (compatibility: string) => {
+        if (compatibility === CompatibilityStatus.Failed) {
+            return <span title={'Plugin probably not compatible with latest Etherpad version'} style={{color: 'red'}}><OctagonAlert/></span>
+        }
+
+        if (compatibility === CompatibilityStatus.Compatible) {
+            return <span title={'Plugin is compatible with latest Etherpad version'} style={{color: 'green'}}><Check/></span>
+        }
+
+        return <span title={'Plugin might have issues running on latest Etherpad version'} style={{color: 'yellow'}}><TriangleAlert/></span>
+    }
 
 
     return <div className="text-gray-400 border-[1px] p-2 rounded-2xl bg-gray-900 ">
@@ -53,6 +65,7 @@ export const PluginCom: FC<PluginProps> = ({plugins}) => {
             <div className="text-3xl text-primary flex gap-3">
                 <a target={"_blank"} href={'https://www.npmjs.org/package/' + plugins.name}>{plugins.name}</a>
                 <small className="align-text-bottom text-gray-400 mt-[3px]">{plugins.version}</small>
+                {plugins.compatibility && <span className="text-gray-400 mt-[7px]">{renderCompatibilityIndicator(plugins.compatibility)}</span>}
             </div>
             <div className="grow"></div>
             {plugins.modified && <div className="mr-5 mt-[0.3rem]" title={`Last updated ${plugins.modified}`}>{formatTime(plugins.modified)}</div>}
