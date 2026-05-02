@@ -78,6 +78,17 @@ export const PluginCom: FC<PluginProps> = ({plugins}) => {
             </div>
         </div>
         <div>{plugins.description}</div>
+        {plugins.disables && plugins.disables.length > 0 && (
+            <div
+                className="mt-2 px-3 py-2 rounded-md text-sm bg-amber-950/50 border border-amber-800/60 text-amber-200"
+                title="This plugin intentionally removes the listed Etherpad features. See doc/PLUGIN_FEATURE_DISABLES.md."
+            >
+                <span className="font-semibold">Disables: </span>
+                {plugins.disables
+                    .map((tag) => tag.replace(/^@feature:/, ''))
+                    .join(', ')}
+            </div>
+        )}
         <div className="flex gap-10">
             {plugins.images && plugins.images.map((img, i) => <img src={img} className="w-60 object-contain" key={plugins.name + i} alt={"Image of " + plugins.name}/>)}
             {plugins.readme && <div className="w-full line-clamp-5 readme-of-plugin"
