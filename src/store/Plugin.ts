@@ -47,7 +47,23 @@ export type PluginResponseVal = {
         email: string
     },
     compatibility?: CompatibilityStatus,
-    images?: string[]
+    images?: string[],
+    /**
+     * `@feature:*` Playwright tags for core specs that the plugin
+     * intentionally disables. Sourced from the plugin's `ep.json`
+     * `disables` array; see ether/etherpad-lite#7648 and
+     * `doc/PLUGIN_FEATURE_DISABLES.md` for the contract.
+     *
+     * If present and non-empty, the plugin is one whose CI is permitted
+     * to skip specs tagged with these features — but is also required
+     * to make those specs FAIL (i.e. the plugin must actually disable
+     * what it declares). Surfaced in the plugin card so users see what
+     * a plugin removes before installing.
+     *
+     * May be undefined for plugins that don't disable any baseline
+     * feature, which is the common case.
+     */
+    disables?: string[]
 }
 
 
