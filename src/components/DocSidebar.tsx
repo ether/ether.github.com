@@ -32,14 +32,14 @@ export default function () {
             <SubHeading className="text-sm text-gray-500 mt-2" href="/docs/embedParameters">Embed Parameters</SubHeading>
             <SubHeading className="text-sm text-gray-500 mt-2" href="/docs/hooksClientSide">Hooks Client Side</SubHeading>
             <SubHeading className="text-sm text-gray-500 mt-2" href="/docs/hooksServerSide">Hooks Server Side</SubHeading>
-            <SubHeading className="text-sm text-gray-500 mt-2" href="/docs/plugins">Plugins</SubHeading>
+            <SubHeading className="text-sm text-gray-500 mt-2" href="/docs/pluginfw">Plugin framework</SubHeading>
             <SubHeading className="text-sm text-gray-500 mt-2" href="/docs/toolbar">Toolbar</SubHeading>
             <SubHeading className="text-sm text-gray-500 mt-2" href="/docs/httpAPI">HTTP API</SubHeading>
 
              <Hr/>
             <TopHeading className="text-md text-white mt-4">Old Docs</TopHeading>
-            <SubHeading className="text-sm text-gray-500 mt-2" href="/docs/easyDescription">Easync description</SubHeading>
-            <SubHeading className="text-sm text-gray-500 mt-2" href="/docs/easyNotes">Easysync notes</SubHeading>
+            <SubHeading className="text-sm text-gray-500 mt-2" href="/easysync/easysync-full-description.pdf">Easysync description</SubHeading>
+            <SubHeading className="text-sm text-gray-500 mt-2" href="/easysync/easysync-notes.pdf">Easysync notes</SubHeading>
         </div>
     )
 }
