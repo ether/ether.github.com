@@ -1,5 +1,7 @@
 packages:
   - .
+allowBuilds:
+  sharp: true
 onlyBuiltDependencies:
   - '@swc/core'
   - esbuild

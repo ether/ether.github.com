@@ -56,5 +56,9 @@
     "tailwindcss": "^4.1.16",
     "typescript": "^5.8.3",
     "zustand": "^5.0.8"
-  }
+  },
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "packageManager": "pnpm@11.0.6"
 }
