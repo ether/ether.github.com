@@ -70,7 +70,7 @@ export const InstallOneLiner = () => {
             </button>
         </div>
         <p className="text-xs text-gray-500 dark:text-gray-400 px-3 pb-3">
-            Needs <code>git</code> and Node.js &ge; 25. Then <code>cd etherpad && pnpm run prod</code> and open <code>http://localhost:9001</code>.{' '}
+            Needs <code>git</code> and Node.js &ge; 24. Then <code>cd etherpad && pnpm run prod</code> and open <code>http://localhost:9001</code>.{' '}
             <a
                 href="https://github.com/ether/etherpad#installation"
                 target="_blank"
