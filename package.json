@@ -55,7 +55,7 @@
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.16",
     "typescript": "^5.8.3",
-    "zustand": "^5.0.8"
+    "zustand": "^5.0.13"
   },
   "engines": {
     "node": ">=22.13.0"
