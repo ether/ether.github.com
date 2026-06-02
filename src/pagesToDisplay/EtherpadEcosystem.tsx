@@ -3,6 +3,7 @@ import Link from "next/link";
 import type {IconDefinition} from "@fortawesome/fontawesome-svg-core";
 import {
     faCubes,
+    faPlug,
     faDesktop,
     faTerminal,
     faNetworkWired,
@@ -19,11 +20,21 @@ type EcosystemProject = {
     url: string,
     icon: IconDefinition,
     description: string,
+    // Internal routes (e.g. /plugins) use next/link for client-side
+    // navigation; everything else opens the external project in a new tab.
+    internal?: boolean,
 }
 
-// Curated, user-facing companion projects from the Etherpad Foundation.
-// Plugins are deliberately left out — they have their own /plugins page.
+// Curated, user-facing companion projects and resources from the Etherpad
+// Foundation, surfaced alongside the core editor on the homepage.
 const PROJECTS: EcosystemProject[] = [
+    {
+        name: "Plugins",
+        url: "/plugins",
+        icon: faPlug,
+        description: "Hundreds of community plugins add features, themes and integrations. Browse the directory and extend your Etherpad however you like.",
+        internal: true,
+    },
     {
         name: "Desktop & Mobile App",
         url: `${ETHERPAD_ORG}/etherpad-desktop`,
@@ -74,6 +85,20 @@ const PROJECTS: EcosystemProject[] = [
     },
 ]
 
+const CARD_CLASS = "group flex flex-col h-full p-5 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 transition-shadow hover:shadow-md focus:shadow-md no-underline"
+
+const CardBody = ({project}: {project: EcosystemProject}) => <>
+    <div className="flex items-center mb-2">
+        <FontAwesomeIcon icon={project.icon} className="text-2xl text-primary mr-3"/>
+        <span className="text-lg font-bold text-gray-800 dark:text-white group-hover:text-primary">
+            {project.name}
+        </span>
+    </div>
+    <span className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+        {project.description}
+    </span>
+</>
+
 export const EtherpadEcosystem = () => {
     return <div className="content wrap">
         <h2 className="text-3xl text-primary font-bold mb-4 mt-16 flex items-center">
@@ -82,28 +107,26 @@ export const EtherpadEcosystem = () => {
         </h2>
         <p className="dark:text-gray-400">
             Etherpad is more than the editor. The Foundation maintains a family of official
-            apps, clients and tools to help you run, embed and scale Etherpad. Looking for
-            plugins instead? Browse the <Link className="underline" href="/plugins">plugin directory</Link>.
+            apps, clients and tools — plus a large plugin ecosystem — to help you extend, run,
+            embed and scale Etherpad.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
             {PROJECTS.map((project) => (
-                <a
-                    key={project.url}
-                    href={project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex flex-col h-full p-5 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 transition-shadow hover:shadow-md focus:shadow-md no-underline"
-                >
-                    <div className="flex items-center mb-2">
-                        <FontAwesomeIcon icon={project.icon} className="text-2xl text-primary mr-3"/>
-                        <span className="text-lg font-bold text-gray-800 dark:text-white group-hover:text-primary">
-                            {project.name}
-                        </span>
-                    </div>
-                    <span className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-                        {project.description}
-                    </span>
-                </a>
+                project.internal ? (
+                    <Link key={project.url} href={project.url} className={CARD_CLASS}>
+                        <CardBody project={project}/>
+                    </Link>
+                ) : (
+                    <a
+                        key={project.url}
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={CARD_CLASS}
+                    >
+                        <CardBody project={project}/>
+                    </a>
+                )
             ))}
         </div>
     </div>
