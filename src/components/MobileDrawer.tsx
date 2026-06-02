@@ -44,7 +44,7 @@ export const MobileDrawer:FC<MobileDrawerProps> = ({isOpen, setOpen}) => {
                 </div>
                 <div className="contents"  onClick={()=>navigateToElement('ecosystem')}>
                     <FontAwesomeIcon icon={faCubes} className="self-center"/>
-                    <a title="apps and tools">Apps &amp; Tools</a>
+                    <a href="/#ecosystem" onClick={(e)=>{e.preventDefault(); navigateToElement('ecosystem')}} title="apps and tools">Apps &amp; Tools</a>
                 </div>
                 <div className="contents"  onClick={()=>navigateToElement('contribute')}>
                         <FontAwesomeIcon icon={faWrench} className="self-center"/>

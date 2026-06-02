@@ -1,4 +1,5 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import Link from "next/link";
 import type {IconDefinition} from "@fortawesome/fontawesome-svg-core";
 import {
     faCubes,
@@ -89,7 +90,7 @@ export const EtherpadEcosystem = () => {
         <p className="dark:text-gray-400">
             Etherpad is more than the editor. The Foundation maintains a family of official
             apps, clients and tools to help you run, embed and scale Etherpad. Looking for
-            plugins instead? Browse the <a className="underline" href="/plugins">plugin directory</a>.
+            plugins instead? Browse the <Link className="underline" href="/plugins">plugin directory</Link>.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
             {PROJECTS.map((project) => (
