@@ -18,4 +18,9 @@ export const DOC_PAGE = `/doc/v${CURRENT_VERSION}/index.html`
 
 export const GITHUB_HELP = "https://docs.github.com"
 
+// Official companion apps, clients and tools maintained by the Etherpad
+// Foundation alongside the core editor. Plugins are intentionally excluded
+// here — they live on the dedicated /plugins page.
+export const ETHERPAD_ORG = "https://github.com/ether"
+
 export const TRACKING_ID = 'UA-19303815-1'
