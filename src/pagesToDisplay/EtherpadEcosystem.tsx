@@ -40,7 +40,7 @@ const PROJECTS: EcosystemProject[] = [
         name: "pad — Terminal Editor",
         url: `${ETHERPAD_ORG}/pad`,
         icon: faKeyboard,
-        description: "A nano-class terminal text editor. Edit files locally, or join any pad over the network and watch collaborators' edits land live in your terminal.",
+        description: "A nano-class terminal text editor. Edit files locally, or join any pad to collaborate in real time — your edits and everyone else's sync live, right in your terminal.",
     },
     {
         name: "Printing Press",
