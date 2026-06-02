@@ -5,7 +5,6 @@ import {
     faDesktop,
     faTerminal,
     faNetworkWired,
-    faGaugeHigh,
     faDatabase,
     faCode,
     faHouse,
@@ -54,12 +53,6 @@ const PROJECTS: EcosystemProject[] = [
         url: `${ETHERPAD_ORG}/etherpad-proxy`,
         icon: faNetworkWired,
         description: "A reference proxy for Etherpad's real-time Socket.IO traffic — a starting point for inspecting or routing pad messages.",
-    },
-    {
-        name: "Load Testing Tool",
-        url: `${ETHERPAD_ORG}/etherpad-load-test`,
-        icon: faGaugeHigh,
-        description: "Simulate many concurrent users hammering a pad so you can size and tune your instance before going live.",
     },
     {
         name: "Scale Calculator",
