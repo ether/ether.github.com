@@ -7,7 +7,6 @@ import {
     faTerminal,
     faNetworkWired,
     faDatabase,
-    faCode,
     faHouse,
     faCalculator,
     faKeyboard,
@@ -66,12 +65,6 @@ const PROJECTS: EcosystemProject[] = [
         url: `${ETHERPAD_ORG}/ueberDB`,
         icon: faDatabase,
         description: "The database abstraction layer that powers Etherpad — one API over MySQL, PostgreSQL, Redis, MongoDB, SQLite and more.",
-    },
-    {
-        name: "Web Components",
-        url: `${ETHERPAD_ORG}/webcomponents`,
-        icon: faCode,
-        description: "Embed a live Etherpad pad anywhere with a simple custom HTML element — drop it into your own site or app.",
     },
     {
         name: "Home Assistant Add-on",
