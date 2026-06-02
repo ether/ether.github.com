@@ -10,6 +10,8 @@ import {
     faCode,
     faHouse,
     faCalculator,
+    faKeyboard,
+    faRobot,
 } from "@fortawesome/free-solid-svg-icons";
 import {ETHERPAD_ORG} from "../Constants.ts";
 
@@ -34,6 +36,18 @@ const PROJECTS: EcosystemProject[] = [
         url: `${ETHERPAD_ORG}/etherpad-cli`,
         icon: faTerminal,
         description: "Create, read and edit pads straight from your terminal. Great for scripting and automating your Etherpad instance.",
+    },
+    {
+        name: "pad — Terminal Editor",
+        url: `${ETHERPAD_ORG}/pad`,
+        icon: faKeyboard,
+        description: "A nano-class terminal text editor. Edit files locally, or join any pad over the network and watch collaborators' edits land live in your terminal.",
+    },
+    {
+        name: "Printing Press",
+        url: "https://printingpress.dev",
+        icon: faRobot,
+        description: "Agent-native Etherpad tooling — a Go CLI, a Claude Code skill and an MCP server, generated from a spec so AI agents can drive Etherpad.",
     },
     {
         name: "Socket.IO Proxy",
