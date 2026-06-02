@@ -9,6 +9,7 @@ import {
     faDatabase,
     faCode,
     faHouse,
+    faCalculator,
 } from "@fortawesome/free-solid-svg-icons";
 import {ETHERPAD_ORG} from "../Constants.ts";
 
@@ -45,6 +46,12 @@ const PROJECTS: EcosystemProject[] = [
         url: `${ETHERPAD_ORG}/etherpad-load-test`,
         icon: faGaugeHigh,
         description: "Simulate many concurrent users hammering a pad so you can size and tune your instance before going live.",
+    },
+    {
+        name: "Scale Calculator",
+        url: "https://scale.etherpad.org",
+        icon: faCalculator,
+        description: "Estimate the CPU, memory and number of instances your deployment needs for a target number of concurrent users.",
     },
     {
         name: "ueberDB",
