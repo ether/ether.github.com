@@ -8,6 +8,7 @@ import {AIOnYourTerms} from "../src/pagesToDisplay/AIOnYourTerms.tsx";
 import {AddFunctionalities} from "../src/pagesToDisplay/AddFunctionalities.tsx";
 import {CustomizeAppearance} from "../src/pagesToDisplay/CustomizeAppearance.tsx";
 import {DownloadLatestVersion} from "../src/pagesToDisplay/DownloadLatestVersion.tsx";
+import {EtherpadEcosystem} from "../src/pagesToDisplay/EtherpadEcosystem.tsx";
 import {Contribute} from "../src/pagesToDisplay/Contribute.tsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faExternalLink} from "@fortawesome/free-solid-svg-icons";
@@ -38,6 +39,8 @@ export default function Page() {
             <CustomizeAppearance/>
             <a className="scroll-point" id="download"></a>
             <DownloadLatestVersion/>
+            <a className="scroll-point" id="ecosystem"></a>
+            <EtherpadEcosystem/>
             <a className="scroll-point" id="contribute"></a>
             <Contribute/>
             <a className="scroll-point" id="links"></a>

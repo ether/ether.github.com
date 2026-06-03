@@ -1,6 +1,6 @@
 'use client'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faInfoCircle, faDownload, faWrench, faExternalLink, faContactCard} from '@fortawesome/free-solid-svg-icons'
+import {faInfoCircle, faDownload, faWrench, faExternalLink, faContactCard, faCubes} from '@fortawesome/free-solid-svg-icons'
 import {FC, useEffect} from "react";
 import {ThemeToggler} from "./ThemeToggler.tsx";
 import {useUIStore} from "../store/store.ts";
@@ -41,6 +41,10 @@ export const MobileDrawer:FC<MobileDrawerProps> = ({isOpen, setOpen}) => {
                 <div className="contents"  onClick={()=>navigateToElement('download')}>
                     <FontAwesomeIcon icon={faDownload} className="self-center"/>
                     <a title="download">Download</a>
+                </div>
+                <div className="contents"  onClick={()=>navigateToElement('ecosystem')}>
+                    <FontAwesomeIcon icon={faCubes} className="self-center"/>
+                    <a href="/#ecosystem" onClick={(e)=>{e.preventDefault(); navigateToElement('ecosystem')}} title="apps and tools">Apps &amp; Tools</a>
                 </div>
                 <div className="contents"  onClick={()=>navigateToElement('contribute')}>
                         <FontAwesomeIcon icon={faWrench} className="self-center"/>

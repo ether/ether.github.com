@@ -38,6 +38,7 @@ export const Header = () => {
                 <ul>
                     <li><Link className="text-[#555] dark:text-white" href="/about" title="about">About</Link></li>
                     <li><a className="text-[#555] dark:text-white" onClick={()=>navigateToElement('download')} title="download">Download</a></li>
+                    <li><a className="text-[#555] dark:text-white" href="/#ecosystem" onClick={(e)=>{e.preventDefault(); navigateToElement('ecosystem')}} title="apps and tools">Apps &amp; Tools</a></li>
                     <li><a className="text-[#555] dark:text-white" onClick={()=>navigateToElement('contribute')} title="contribute">Contribute</a></li>
                     <li><a className="text-[#555] dark:text-white" onClick={()=>navigateToElement("links")} title="links">Links</a></li>
                     <li><a className="text-[#555] dark:text-white" onClick={()=>navigateToElement('contact')} title="contact">Contact</a></li>
