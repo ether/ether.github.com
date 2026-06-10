@@ -6,6 +6,7 @@ import {
     faPlug,
     faDesktop,
     faTerminal,
+    faShieldHalved,
     faNetworkWired,
     faDatabase,
     faHouse,
@@ -58,6 +59,12 @@ const PROJECTS: EcosystemProject[] = [
         url: "https://printingpress.dev",
         icon: faRobot,
         description: "Agent-native Etherpad tooling — a Go CLI, a Claude Code skill and an MCP server, generated from a spec so AI agents can drive Etherpad.",
+    },
+    {
+        name: "Etherpad Scanner",
+        url: "https://scanner.etherpad.org",
+        icon: faShieldHalved,
+        description: "Security-focused scanner for public Etherpad instances — check whether an instance is healthy, correctly configured and up to date.",
     },
     {
         name: "Socket.IO Proxy",
