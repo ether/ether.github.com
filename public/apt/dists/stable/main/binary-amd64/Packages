@@ -1,0 +1,26 @@
+Package: etherpad
+Architecture: amd64
+Version: 3.3.1-1
+Priority: optional
+Section: web
+Maintainer: Etherpad Foundation <contact@etherpad.org>
+Installed-Size: 373373
+Provides: etherpad-lite
+Pre-Depends: adduser
+Depends: nodejs (>= 24), ca-certificates
+Recommends: libreoffice, curl
+Suggests: postgresql-client, mariadb-client
+Conflicts: etherpad-lite
+Replaces: etherpad-lite
+Filename: pool/main/e/etherpad/etherpad_3.3.1-1_amd64.deb
+Size: 90561542
+MD5sum: b6c5da39d446c50b63361d1d6ab87617
+SHA1: 2774d512184e52e9fdf758d41a774cb6ca009d56
+SHA256: f6446060564cec7ce936cb0ff465738eec9c9e1b62691cf7aa2217dcf951f8c9
+SHA512: 12e4368a231c7e8194a44e820ad7d5eeb5cede067721f4deba6b473c8325b8be73659fb7e7403fe1e053e33382150057b1da7788de5d6ce81b8e0bfadc5e9907
+Homepage: https://etherpad.org
+Description: Etherpad is a real-time collaborative editor for the web.
+ This package installs Etherpad as a systemd service running
+ from /opt/etherpad with configuration in /etc/etherpad.
+License: Apache-2.0
+

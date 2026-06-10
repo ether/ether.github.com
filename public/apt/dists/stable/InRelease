@@ -1,0 +1,43 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Origin: Etherpad
+Label: Etherpad
+Suite: stable
+Codename: stable
+Architectures: amd64 arm64
+Components: main
+Description: Etherpad official apt repository (stable channel)
+Date: Wed, 10 Jun 2026 10:45:15 +0000
+Date: Wed, 10 Jun 2026 10:45:15 +0000
+MD5Sum:
+ 10f7e3ca25394a09d71c1237758262ea              247 Release
+ ff28a5f916c43e5b9fcdbf9d8865cfec              986 main/binary-amd64/Packages
+ 0e17994c39773a177346e951df35c644              647 main/binary-amd64/Packages.gz
+ 38073d82bff40cb8af50c4503f96d65a              986 main/binary-arm64/Packages
+ 0f8053d8b2e806acf528b6b733262395              651 main/binary-arm64/Packages.gz
+SHA1:
+ 1d6a5bd3ca0636dd666ee9b9c630c53152c60809              247 Release
+ 46ef73887157206a8b2e64f6fbabc8542856efd2              986 main/binary-amd64/Packages
+ f95cafbf6935c8b84c7d47140cb14d6871674dd3              647 main/binary-amd64/Packages.gz
+ 91d0aeeeb24511b6c05b0bb8a78d7bed91bd0348              986 main/binary-arm64/Packages
+ 99cecb5bf4abf4ea16379e886ef20327de658946              651 main/binary-arm64/Packages.gz
+SHA256:
+ 73f44d8e1489e8578e1ca07ac698dbd150e7287aa426fcb23db030ec6adae3c2              247 Release
+ da98ee9ce9d98c8506a841bc63f8754cd999c5a1517d2e8e23cdea748832ede2              986 main/binary-amd64/Packages
+ feacca05f7e330309ca0246510656498f26e7795c2ca7d3c6904dd57754b89b7              647 main/binary-amd64/Packages.gz
+ 419c7ddea889a274f7eb95decb7d54a5067b7dd83362552d6337d43242dd5a62              986 main/binary-arm64/Packages
+ 894df8b2ba1397a2784671da65cf35fb060da1bf253f3f7ccadacf4e409d4687              651 main/binary-arm64/Packages.gz
+SHA512:
+ bfc4ce286ba11613f80d9b58a2f339e3755a62e4c04f0127975563335c5ca57e56a19dd949dc6cb6b3b495f5ab18a11e37c9e1dee109f03a5ab15dba03c2b3c7              247 Release
+ b2f4bc78ca4acf29a1bc9dea2f23d7f67529b7343ee2f42b73d76d164d27746b9e99cb269060e6dfc5878a5778912b9d4a397e73a1f2777de2c988abbf9904a7              986 main/binary-amd64/Packages
+ 92e1cd2bebaf5a1609be84ecd4b5b5c5ea3162aaf8f0ff3cd2d21767b2231130acefa7b2a5aba1bb310bfcc62f08d24c12ed58a7283557c92a29029fd58bb4e7              647 main/binary-amd64/Packages.gz
+ c054103b326376b05257a3138e456de3f01cff2080de6559b2fc9720fe2fde4370da806d5026d5be705548c2afb79b24db9d06aa26053c1e144356a841be0f74              986 main/binary-arm64/Packages
+ e3b991db4749e78c3b18659833cfc6e2687a12d044abc35e6533f25b30c517a58ade786fb1cdaf6eefd21dd437396c4d6e838e6ad6f8f822e328f1591b84b926              651 main/binary-arm64/Packages.gz
+-----BEGIN PGP SIGNATURE-----
+
+iHUEARYKAB0WIQRpU/oMZDHzA0fWWwOvDNaH1RpuYwUCailAOwAKCRCvDNaH1Rpu
+Y7lGAQCFJliAtigZQXWIY93R0qoL9R2kNa3+BQLdFbZSoWbVxAD6A4cYbixVld1L
+i9Y5XsLJWK/Q4OGwCOx+3sEMXhZzqg0=
+=50kT
+-----END PGP SIGNATURE-----
