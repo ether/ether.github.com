@@ -43,13 +43,13 @@ test.describe('cookie banner does not block page interaction', () => {
 
     await page.locator('#links').scrollIntoViewIfNeeded()
 
-    // The Blog anchor opens in a new tab (target="_blank"). If pointer
-    // events are blocked we never get a popup event.
-    const blogLink = page.getByRole('link', { name: 'Blog' })
+    // The GitHub repository anchor opens in a new tab (target="_blank"). If
+    // pointer events are blocked we never get a popup event.
+    const githubLink = page.getByRole('link', { name: 'GitHub repository' })
     const popupPromise = context.waitForEvent('page', { timeout: 5_000 })
-    await blogLink.click()
+    await githubLink.click()
     const popup = await popupPromise
-    expect(popup.url()).toContain('blog.etherpad.org')
+    expect(popup.url()).toContain('github.com/ether/etherpad')
     await popup.close()
   })
 })
