@@ -1,7 +1,7 @@
 {
   "name": "ether-docs",
   "private": true,
-  "version": "3.3.2",
+  "version": "3.3.3",
   "type": "module",
   "scripts": {
     "dev": "next dev --turbo",
