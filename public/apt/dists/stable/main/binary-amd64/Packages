@@ -1,10 +1,10 @@
 Package: etherpad
 Architecture: amd64
-Version: 3.3.20-1
+Version: 3.3.21-1
 Priority: optional
 Section: web
 Maintainer: Etherpad Foundation <contact@etherpad.org>
-Installed-Size: 176151
+Installed-Size: 176176
 Provides: etherpad-lite
 Pre-Depends: adduser
 Depends: nodejs (>= 24), ca-certificates
@@ -12,12 +12,12 @@ Recommends: libreoffice, curl
 Suggests: postgresql-client, mariadb-client
 Conflicts: etherpad-lite
 Replaces: etherpad-lite
-Filename: pool/main/e/etherpad/etherpad_3.3.20-1_amd64.deb
-Size: 47806130
-MD5sum: fa2fd5e748196747f4364e40091540ee
-SHA1: 130ccdfed612509bbe80a9c02ee9bcdfc16b0351
-SHA256: c40d38bb28b21c9f02ac026a512023fa7b80e409e017a2c9fbb4e589dac79491
-SHA512: 57268866b6c9741c764f48c8c6cd474219b87e32ca027a732acd4cbdd6dc6bae0bafbe4fd55c816272e4cd860e1752d16abcd73f3d731351eb85e7ea542dfe78
+Filename: pool/main/e/etherpad/etherpad_3.3.21-1_amd64.deb
+Size: 47812586
+MD5sum: 1508c2a8b303c3cf74055f9009a89b27
+SHA1: 27a8deb35c63c6aea8b5c131926f62dd0b4e6be0
+SHA256: 7b9ecbed9c48929f093b2e64346ea460124d87a7d33b6224b84df423372304a7
+SHA512: bfd930cc5e79171c6864fae76e6c6930a700d2d4798f27360b129b7b2eb6cc4ed37f7133b85e543523acca02400362dae7237e273dd4c1e46a9bc8a5b50acba7
 Homepage: https://etherpad.org
 Description: Etherpad is a real-time collaborative editor for the web.
  This package installs Etherpad as a systemd service running
