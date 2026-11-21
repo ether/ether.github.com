@@ -76,7 +76,7 @@ importers:
         version: 4.0.2
       tailwindcss-animate:
         specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@4.2.4)
+        version: 1.0.7(tailwindcss@4.3.2)
       timeago:
         specifier: ^1.6.7
         version: 1.6.7
@@ -130,8 +130,8 @@ importers:
         specifier: ^3.3.1
         version: 3.5.0
       tailwindcss:
-        specifier: ^4.1.16
-        version: 4.2.4
+        specifier: ^4.3.2
+        version: 4.3.2
       typescript:
         specifier: ^5.8.3
         version: 5.9.3
@@ -1916,6 +1916,9 @@ packages:
 
   tailwindcss@4.2.4:
     resolution: {integrity: sha512-HhKppgO81FQof5m6TEnuBWCZGgfRAWbaeOaGT00KOy/Pf/j6oUihdvBpA7ltCeAvZpFhW3j0PTclkxsd4IXYDA==}
+
+  tailwindcss@4.3.2:
+    resolution: {integrity: sha512-WtctNNSH8A9jlMIqxzuYumOHU5uGZyRv0Q5svQl+oEPy5w84YpBxdb7MdqyiSPQge5jTJ6zFQLq0PFygdccSBA==}
 
   tapable@2.3.3:
     resolution: {integrity: sha512-uxc/zpqFg6x7C8vOE7lh6Lbda8eEL9zmVm/PLeTPBRhh1xCgdWaQ+J1CUieGpIfm2HdtsUpRv+HshiasBMcc6A==}
@@ -3747,11 +3750,13 @@ snapshots:
 
   tailwind-merge@3.5.0: {}
 
-  tailwindcss-animate@1.0.7(tailwindcss@4.2.4):
+  tailwindcss-animate@1.0.7(tailwindcss@4.3.2):
     dependencies:
-      tailwindcss: 4.2.4
+      tailwindcss: 4.3.2
 
   tailwindcss@4.2.4: {}
+
+  tailwindcss@4.3.2: {}
 
   tapable@2.3.3: {}
 
